@@ -120,6 +120,7 @@ class Cart
                 if ($value > 0) {
                     $item->set_quantity($value);
                 }
+                //if the value is less than zero, assume the item is not wanted. maybe the application should handle this logic?
                 else {
                     unset($this->_items[$uid]);
                 }
@@ -281,6 +282,7 @@ class Cart
                         $counter += ($item->$method() * $item->get_quantity());
                     }
                 }
+                //if the cumulative quantity is required we do not want to multiply by the quantity like above...
                 else {
                     $counter += $item->get_quantity();
                 }
@@ -442,7 +444,7 @@ class Cart
          * remove keys from the array that are not to be included in the uid hashing process
          * these keys identify supplementary data to the core product data i.e quantity, added_at, meta etc
          */
-        $non_uid_compliant = array('quantity','added_at', 'meta');
+        $non_uid_compliant = array('quantity', 'added_at', 'meta');
         foreach ($non_uid_compliant as $k) {
             if (array_key_exists($k,$item_data)) {
                 unset($item_data[$k]);
