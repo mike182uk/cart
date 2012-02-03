@@ -32,7 +32,7 @@ class Cart
 	 */
 	protected $_config = array();
 
-    //-------------------------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------------------
 
 	/**
 	 * Cart constructor. Sets the carts ID. If the cart is not passed an ID, it is automatically assigned one.
