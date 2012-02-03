@@ -9,7 +9,7 @@ class Cart_Proxy
 	 *
 	 * @static
 	 * @param string $method The name of the method being called
-     * @param array $args The arguments passed to the method
+	 * @param array $args The arguments passed to the method
 	 * @return mixed The response of the proxied method call
 	 */
 	public static function __callStatic($method, $args)

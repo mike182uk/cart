@@ -8,10 +8,10 @@ class InvalidCartConfigException extends \Exception {}
 
 class Cart
 {
-    /**
-     * The items in the cart
-     * @var array
-     */
+	/**
+	 * The items in the cart
+	 * @var array
+	 */
 	protected $_items = array();
 
 	/**
@@ -21,9 +21,9 @@ class Cart
 	protected $_meta = array();
 
 	/**
-     * The id of the cart
-     * @var array
-     */
+	 * The id of the cart
+	 * @var array
+	 */
 	protected $_id = array();
 
 	/**
@@ -56,12 +56,12 @@ class Cart
 
 	//-------------------------------------------------------------------------------------------------------------
 
-    /**
+	/**
 	 * Add an item to the cart. If the item already exists in the cart, it is updated.
-     *
+	 *
 	 * @param array $item_data The data associated with the item
-     * @return string|bool If the item is added or fields other than the quantity are updated the UID is returned,
-     *                     if the item is updated and only the quantity is amended true is returned
+	 * @return string|bool If the item is added or fields other than the quantity are updated the UID is returned,
+	 *                     if the item is updated and only the quantity is amended true is returned
 	 */
 	public function add($item_data)
 	{
@@ -99,17 +99,17 @@ class Cart
 		}
 	}
 
-    //-------------------------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------------------
 
-    /**
-     * Update an item in the cart
-     *
-     * @param $uid The Unique identifier of the item in the cart
-     * @param $key The key of the value to be updated
-     * @param $value The new value
-     * @return bool|mixed If the fields other than the quantity are updated the UID is returned as it is regenerated,
-     *                    if the item is updated and only the quantity is amended true is returned
-     */
+	/**
+	 * Update an item in the cart
+	 *
+	 * @param $uid The Unique identifier of the item in the cart
+	 * @param $key The key of the value to be updated
+	 * @param $value The new value
+	 * @return bool|mixed If the fields other than the quantity are updated the UID is returned as it is regenerated,
+	 *                    if the item is updated and only the quantity is amended true is returned
+	 */
 	public function update($uid, $key, $value)
 	{
 		if ($this->exists($uid)) {
@@ -137,14 +137,14 @@ class Cart
 		}
 	}
 
-    //-------------------------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------------------
 
-    /**
-     * Remove an item from the cart
-     *
-     * @param $uid The Unique identifier of the item in the cart
-     * @return bool If the item was removed true is returned, otherwise false is returned
-     */
+	/**
+	 * Remove an item from the cart
+	 *
+	 * @param $uid The Unique identifier of the item in the cart
+	 * @return bool If the item was removed true is returned, otherwise false is returned
+	 */
 	public function remove($uid)
 	{
 		if ($this->exists($uid)) {
@@ -156,22 +156,22 @@ class Cart
 		}
 	}
 
-    //-------------------------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------------------
 
-    /**
-     * Check an item exists in the cart
-     *
-     * @param $uid The Unique identifier of the item in the cart
-     * @return bool Whether the item exists or not
-     */
+	/**
+	 * Check an item exists in the cart
+	 *
+	 * @param $uid The Unique identifier of the item in the cart
+	 * @return bool Whether the item exists or not
+	 */
 	public function exists($uid)
 	{
 		return array_key_exists($uid,$this->_items);
 	}
 
-    //-------------------------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------------------
 
-    /**
+	/**
 	 * Remove everything out of the cart
 	 */
 	public function clear()
@@ -179,12 +179,12 @@ class Cart
 		$this->_items = array();
 	}
 
-    //-------------------------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------------------
 
-    /**
+	/**
 	 * Get an item from the cart
-     *
-     * @param $uid The Unique identifier of the item in the cart
+	 *
+	 * @param $uid The Unique identifier of the item in the cart
 	 */
 	public function item($uid)
 	{
@@ -196,26 +196,26 @@ class Cart
 		}
 	}
 
-    //-------------------------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------------------
 
-    /**
-     * Get the contents of the cart
-     *
-     * @return array All items in the cart
-     */
+	/**
+	 * Get the contents of the cart
+	 *
+	 * @return array All items in the cart
+	 */
 	public function items()
 	{
 		return $this->_items;
 	}
 
-    //-------------------------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------------------
 
-    /**
-     * Get the cart total
-     *
-     * @param bool $excluding_tax Should the total be returned tax excluded
-     * @return float The total for the cart
-     */
+	/**
+	 * Get the cart total
+	 *
+	 * @param bool $excluding_tax Should the total be returned tax excluded
+	 * @return float The total for the cart
+	 */
 	public function total($excluding_tax = false)
 	{
 		$total =  $excluding_tax ?
@@ -230,13 +230,13 @@ class Cart
 		);
 	}
 
-    //-------------------------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------------------
 
-    /**
-     * Get the cart total tax
-     *
-     * @return float The total tax for the cart
-     */
+	/**
+	 * Get the cart total tax
+	 *
+	 * @return float The total tax for the cart
+	 */
 	public function total_tax()
 	{
 		return number_format(
@@ -247,27 +247,27 @@ class Cart
 		);
 	}
 
-    //-------------------------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------------------
 
-    /**
-     * Get the number of items in the cart
-     *
-     * @param bool $unique ignore item quantities
-     * @return int The item count
-     */
+	/**
+	 * Get the number of items in the cart
+	 *
+	 * @param bool $unique ignore item quantities
+	 * @return int The item count
+	 */
 	public function item_count($unique = false)
 	{
 		return $unique ? count($this->_items) : $this->cumulative_value('quantity');
 	}
 
-    //-------------------------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------------------
 
-    /**
-     * Get the total of a certain value that appears on each item in the cart.
-     *
-     * @param string $key The key of the value
-     * @return int The cumulative value for the passed key
-     */
+	/**
+	 * Get the total of a certain value that appears on each item in the cart.
+	 *
+	 * @param string $key The key of the value
+	 * @return int The cumulative value for the passed key
+	 */
 	public function cumulative_value($key)
 	{
 		$counter = 0;
@@ -290,14 +290,14 @@ class Cart
 		return $counter;
 	}
 
-    //-------------------------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------------------
 
-    /**
-     * Export the cart
-     *
-     * @param bool $include_item_uid Should the items UID be included in the exported item data
-     * @return array The cart data
-     */
+	/**
+	 * Export the cart
+	 *
+	 * @param bool $include_item_uid Should the items UID be included in the exported item data
+	 * @return array The cart data
+	 */
 	public function export($include_item_uid = false)
 	{
 		$cart_data = array(
@@ -318,11 +318,11 @@ class Cart
 
 	//-------------------------------------------------------------------------------------------------------------
 
-    /**
-     * Import a previously saved cart state
-     *
-     * @param array $cart The data associated with the cart to be imported into the cart
-     */
+	/**
+	 * Import a previously saved cart state
+	 *
+	 * @param array $cart The data associated with the cart to be imported into the cart
+	 */
 	public function import($cart)
 	{
 		if (is_array($cart)) {
@@ -407,13 +407,13 @@ class Cart
 	//-------------------------------------------------------------------------------------------------------------
 
 	/**
-     * Used as a catch all for cumulative_* methods. Internally resolves to cumulative_value()
-     *
-     * @param string $method The name of the method being called
-     * @param array $args The arguments passed to the method
-     * @return mixed The response of the cumulative value method call
+	 * Used as a catch all for cumulative_* methods. Internally resolves to cumulative_value()
+	 *
+	 * @param string $method The name of the method being called
+	 * @param array $args The arguments passed to the method
+	 * @return mixed The response of the cumulative value method call
 	 * @throws \BadMethodCallException
-     */
+	 */
 	public function __call($method, $args = array())
 	{
 		//if method starts with the word cumulative_ assume we are wanting to use the cumulative_value method
@@ -428,14 +428,14 @@ class Cart
 
 	//-------------------------------------------------------------------------------------------------------------
 
-    /**
-     * Generate a unique identifier based on the items data. The array is JSON encoded
-     * to get a string representation of the data then md5 hashed to generate a unique
-     * value
-     *
-     * @param array $item_data The items data that will be hashed to generate the UID
-     * @return string The UID
-     */
+	/**
+	 * Generate a unique identifier based on the items data. The array is JSON encoded
+	 * to get a string representation of the data then md5 hashed to generate a unique
+	 * value
+	 *
+	 * @param array $item_data The items data that will be hashed to generate the UID
+	 * @return string The UID
+	 */
 	protected function _generate_uid($item_data)
 	{
 		/*
