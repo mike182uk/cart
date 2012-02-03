@@ -350,7 +350,7 @@ class Cart
      * Save meta data against cart.
      *
      * @param string $key The key to identify the meta data
-     * @param mixed $value The meta data to be saved against the item
+     * @param mixed $value The meta data to be saved against the cart
      */
     public function set_meta($key, $value)
     {
@@ -392,7 +392,7 @@ class Cart
      * meta data with that key is checked for
      *
      * @param bool|string $key The key of the meta data item saved against cart
-     * @return bool Whether the item has meta data saved against it or not
+     * @return bool Whether the cart has meta data saved against it or not
      */
     public function has_meta($key = false)
     {
