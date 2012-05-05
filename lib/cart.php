@@ -99,9 +99,9 @@ class Cart
     /**
      * Update an item in the cart
      *
-     * @param $uid The Unique identifier of the item in the cart
-     * @param $key The key of the value to be updated
-     * @param $value The new value
+     * @param string $uid The Unique identifier of the item in the cart
+     * @param string $key The key of the value to be updated
+     * @param mixed $value The new value
      * @return bool|mixed If the fields other than the quantity are updated the UID is returned as it is regenerated,
      *                    if the item is updated and only the quantity is amended true is returned
      * @throws InvalidCartItemException
@@ -137,7 +137,7 @@ class Cart
     /**
      * Remove an item from the cart
      *
-     * @param $uid The Unique identifier of the item in the cart
+     * @param string $uid The Unique identifier of the item in the cart
      * @return bool If the item was removed true is returned, otherwise false is returned
      */
     public function remove($uid)
@@ -154,7 +154,7 @@ class Cart
     /**
      * Check an item exists in the cart
      *
-     * @param $uid The Unique identifier of the item in the cart
+     * @param string $uid The Unique identifier of the item in the cart
      * @return bool Whether the item exists or not
      */
     public function exists($uid)
@@ -173,7 +173,7 @@ class Cart
     /**
      * Get an item from the cart
      *
-     * @param $uid The Unique identifier of the item in the cart
+     * @param string $uid The Unique identifier of the item in the cart
      * @throws InvalidCartItemException
      */
     public function item($uid)
@@ -335,20 +335,18 @@ class Cart
     /**
      * Retrieve meta data set against a cart
      *
-     * @param $key The key to identify the requested meta data
+     * @param string $key The key to identify the requested meta data
      * @return mixed The meta data retrieved
      */
     public function get_meta($key)
     {
-        if (array_key_exists($key, $this->_meta)) {
-            return $this->_meta[$key];
-        }
+        return array_key_exists($key, $this->_meta) ? $this->_meta[$key] : null;
     }
 
     /**
      * Remove meta data set against a cart
      *
-     * @param $key The key to identify the meta data to be removed
+     * @param string $key The key to identify the meta data to be removed
      * @return mixed The meta data retrieved
      */
     public function remove_meta($key)

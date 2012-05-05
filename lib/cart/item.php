@@ -44,9 +44,7 @@ class Cart_Item
      */
     public function get($key)
     {
-        if (array_key_exists($key,$this->_data)) {
-            return $this->_data[$key];
-        }
+        return array_key_exists($key,$this->_data) ? $this->_data[$key] : null;
     }
 
     /**
@@ -199,20 +197,18 @@ class Cart_Item
     /**
      * Retrieve meta data set against an item
      *
-     * @param $key The key to identify the requested meta data
+     * @param string $key The key to identify the requested meta data
      * @return mixed The meta data retrieved
      */
     public function get_meta($key)
     {
-        if (array_key_exists($key, $this->_data['meta'])) {
-            return $this->_data['meta'][$key];
-        }
+        return array_key_exists($key, $this->_data['meta']) ? $this->_data['meta'][$key] : null;
     }
 
     /**
      * Remove meta data set against an item
      *
-     * @param $key The key to identify the meta data to be removed
+     * @param string $key The key to identify the meta data to be removed
      * @return mixed The meta data retrieved
      */
     public function remove_meta($key)

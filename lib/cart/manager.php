@@ -70,16 +70,16 @@ class Cart_Manager
                 throw new InvalidCartInstanceException('There is no cart instance with the id: ' . $cart_id);
             }
         }
-        else {
-            return static::$_context;
-        }
+
+        return static::$_context;
+
     }
 
     /**
      * Checks to see if there is an instance of a cart with a specific ID
      *
      * @static
-     * @param $cart_id The ID of the cart to check for
+     * @param string $cart_id The ID of the cart to check for
      * @return bool True if the cart instance exists, false otherwise
      */
     public static function cart_instance_available($cart_id)
@@ -92,8 +92,8 @@ class Cart_Manager
      * is returned. Otherwise requested instance is returned
      *
      * @static
-     * @param bool $cart_id The Id of the cart instance to return
-     * @return Object The requested cart instance or the current cart instance in context if no $cart_id provided
+     * @param string|bool $cart_id The Id of the cart instance to return
+     * @return object The requested cart instance or the current cart instance in context if no $cart_id provided
      * @throws InvalidCartInstanceException
      */
     public static function get_cart_instance($cart_id = false)
@@ -207,7 +207,7 @@ class Cart_Manager
      * Save data associated with a cart instance to the configured storage method
      *
      * @static
-     * @param $cart_id The ID of the cart instance
+     * @param string $cart_id The ID of the cart instance
      */
     public static function save_state($cart_id)
     {
@@ -220,7 +220,7 @@ class Cart_Manager
      * Restore data from storage associated with a cart instance
      *
      * @static
-     * @param $cart_id The ID of the cart instance
+     * @param string $cart_id The ID of the cart instance
      */
     public static function restore_state($cart_id)
     {
@@ -234,7 +234,7 @@ class Cart_Manager
      * Clear any saved state associated with a cart instance
      *
      * @static
-     * @param $cart_id The ID of the cart instance
+     * @param string $cart_id The ID of the cart instance
      */
     public static function clear_state($cart_id)
     {
@@ -247,7 +247,7 @@ class Cart_Manager
      * storage driver is valid
      *
      * @static
-     * @param $cart_id The ID of the cart instance
+     * @param string $cart_id The ID of the cart instance
      * @return string The FQN of the storage implementation
      * @throws InvalidStorageImplementationException
      */

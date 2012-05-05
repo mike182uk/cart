@@ -13,9 +13,8 @@ class Cart_Storage_Driver_Session implements Cart_Storage_Interface
     {
         static::init();
 
-        if (isset($_SESSION[$storage_key])) {
-            return $_SESSION[$storage_key];
-        }
+        return isset($_SESSION[$storage_key]) ? $_SESSION[$storage_key] : null;
+
     }
 
     public static function save($storage_key, $data)
