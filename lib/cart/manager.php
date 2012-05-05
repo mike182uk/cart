@@ -42,7 +42,7 @@ class Cart_Manager
         //if there are carts defined in the config
         if (count($config['carts']) > 0) {
             foreach ($config['carts'] as $cart_id => $cart_config) {
-                $cart_config = array_merge($config['cart_defaults'], $cart_config); //merge global config with cart specific config
+                $cart_config = array_merge($config['defaults'], $cart_config); //merge global config with cart specific config
                 static::$_config['carts'][$cart_id] = $cart_config; //update the config
                 static::new_cart_instance($cart_id, $cart_config, true, false);
             }
@@ -198,7 +198,7 @@ class Cart_Manager
             return static::$_config['carts'][$cart_id];
         }
         else {
-            return static::$_config['cart_defaults'];
+            return static::$_config['defaults'];
         }
     }
 

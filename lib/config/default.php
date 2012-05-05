@@ -2,7 +2,7 @@
 
 return array(
 
-    'cart_defaults' => array(
+    'defaults' => array(
         /**
          * The decimal character to be used when formatting numbers
          */
