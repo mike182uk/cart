@@ -28,8 +28,6 @@ class Cart_Manager
      */
     protected static $_config = '';
 
-    //-------------------------------------------------------------------------------------------------------------
-
     /**
      * Initializes the cart manager. Loads in the config and instantiates any carts declared in the config file.
      *
@@ -54,8 +52,6 @@ class Cart_Manager
         }
     }
 
-    //-------------------------------------------------------------------------------------------------------------
-
     /**
      * Sets the current context if a cart ID is supplied, or gets the current context if no cart ID is supplied
      *
@@ -79,8 +75,6 @@ class Cart_Manager
         }
     }
 
-    //-------------------------------------------------------------------------------------------------------------
-
     /**
      * Checks to see if there is an instance of a cart with a specific ID
      *
@@ -92,8 +86,6 @@ class Cart_Manager
     {
         return array_key_exists($cart_id,static::$_instances);
     }
-
-    //-------------------------------------------------------------------------------------------------------------
 
     /**
      * Gets a cart instance. If no $cart_id is passed then the cart in the current context
@@ -113,8 +105,6 @@ class Cart_Manager
             throw new InvalidCartInstanceException('There is no cart instance with the id: ' . $cart_id);
         }
     }
-
-    //-------------------------------------------------------------------------------------------------------------
 
     /**
      * Create a new cart instance
@@ -156,8 +146,6 @@ class Cart_Manager
         }
     }
 
-    //-------------------------------------------------------------------------------------------------------------
-
     /**
      * Destroy a cart instance. If the destroyed cart instance is in the current context, the
      * current context is set to nothing.
@@ -182,8 +170,6 @@ class Cart_Manager
         }
     }
 
-    //-------------------------------------------------------------------------------------------------------------
-
     /**
      * Destroy all cart instances associated with the cart manager. Also clears any saved states unless
      * false is passed.
@@ -197,8 +183,6 @@ class Cart_Manager
             static::destroy_instance($cart_id, $clear_storage);
         }
     }
-
-    //-------------------------------------------------------------------------------------------------------------
 
     /**
      * Get the configuration options specified for a specific cart instance. If not configuration exists
@@ -218,8 +202,6 @@ class Cart_Manager
         }
     }
 
-    //-------------------------------------------------------------------------------------------------------------
-
     /**
      * Save data associated with a cart instance to the configured storage method
      *
@@ -232,8 +214,6 @@ class Cart_Manager
         $driver = static::get_storage_driver(static::get_storage_key($cart_id));
         $driver::save(static::get_storage_key($cart_id), $data);
     }
-
-    //-------------------------------------------------------------------------------------------------------------
 
     /**
      * Restore data from storage associated with a cart instance
@@ -249,8 +229,6 @@ class Cart_Manager
         static::$_instances[$cart_id]->import($data);
     }
 
-    //-------------------------------------------------------------------------------------------------------------
-
     /**
      * Clear any saved state associated with a cart instance
      *
@@ -262,8 +240,6 @@ class Cart_Manager
         $driver = static::get_storage_driver($cart_id);
         $driver::clear(static::get_storage_key($cart_id));
     }
-
-    //-------------------------------------------------------------------------------------------------------------
 
     /**
      * Gets the FQN of the storage implementation associated with a cart instance. Also checks the
@@ -292,8 +268,6 @@ class Cart_Manager
 
         return $driver;
     }
-
-    //-------------------------------------------------------------------------------------------------------------
 
     /**
      * Gets the storage key associated with a cart instances. Takes into account prefix

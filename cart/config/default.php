@@ -33,7 +33,7 @@ return array(
              *
              * i.e session, cookie etc.
              */
-            'driver' => 'session', //session, cookie
+            'driver'=> 'session', //session, cookie
             /**
              * This is prepended to the storage identifier for the cart instance
              */
