@@ -13,12 +13,12 @@ error_reporting(E_ALL);
 @session_start();
 
 //include required classes
-include '../cart/storage/interface.php';
-include '../cart/storage/driver/session.php';
-include '../cart/manager.php';
-include '../cart/proxy.php';
-include '../cart/cart.php';
-include '../cart/item.php';
+include '../lib/cart/storage/interface.php';
+include '../lib/cart/storage/driver/session.php';
+include '../lib/cart/manager.php';
+include '../lib/cart/proxy.php';
+include '../lib/cart/item.php';
+include '../lib/cart.php';
 
 //import namespaces  / set aliases
 use \Cart\Cart_Manager;
@@ -32,7 +32,7 @@ use \Cart\Cart_Proxy as Cart;
  * The first thing to do is load in the config file. This will supply config options for the cart instances
  * in the cart manager. It also initialize any preset carts (including retrieving state)
  */
-$config = include '../cart/config/default.php';
+$config = include '../lib/config/default.php';
 
 Cart_Manager::init($config);
 
