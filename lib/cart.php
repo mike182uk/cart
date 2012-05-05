@@ -37,6 +37,7 @@ class Cart
      *
      * @param bool|string $id The ID assigned to this cart instance
      * @param array $config The configuration options associated with this cart
+     * @throws InvalidCartConfigException
      */
     public function __construct($id = false, $config)
     {
@@ -103,6 +104,7 @@ class Cart
      * @param $value The new value
      * @return bool|mixed If the fields other than the quantity are updated the UID is returned as it is regenerated,
      *                    if the item is updated and only the quantity is amended true is returned
+     * @throws InvalidCartItemException
      */
     public function update($uid, $key, $value)
     {
@@ -172,6 +174,7 @@ class Cart
      * Get an item from the cart
      *
      * @param $uid The Unique identifier of the item in the cart
+     * @throws InvalidCartItemException
      */
     public function item($uid)
     {

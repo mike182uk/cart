@@ -93,7 +93,8 @@ class Cart_Manager
      *
      * @static
      * @param bool $cart_id The Id of the cart instance to return
-     * @return Object
+     * @return Object The requested cart instance or the current cart instance in context if no $cart_id provided
+     * @throws InvalidCartInstanceException
      */
     public static function get_cart_instance($cart_id = false)
     {
@@ -248,7 +249,7 @@ class Cart_Manager
      * @static
      * @param $cart_id The ID of the cart instance
      * @return string The FQN of the storage implementation
-     * @throws InvalidStorageImplementation
+     * @throws InvalidStorageImplementationException
      */
     public static function get_storage_driver($cart_id)
     {

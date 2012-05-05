@@ -11,6 +11,7 @@ class Cart_Proxy
      * @param string $method The name of the method being called
      * @param array $args The arguments passed to the method
      * @return mixed The response of the proxied method call
+     * @throws \BadMethodCallException
      */
     public static function __callStatic($method, $args)
     {

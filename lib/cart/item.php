@@ -65,6 +65,7 @@ class Cart_Item
      * @param string $method The name of the method being called
      * @param array $args The arguments passed to the method
      * @return mixed The response of the get method value method call
+     * @throws \BadMethodCallException
      */
     public function __call($method, $args = array())
     {
