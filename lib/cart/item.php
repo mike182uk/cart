@@ -8,19 +8,19 @@ class Cart_Item
      * Data associated with this item
      * @var array
      */
-    protected $_data;
+    protected $data;
 
     /**
      * Unique identifier for this item
      * @var string
      */
-    protected $_uid;
+    protected $uid;
 
     /**
      * The configuration options associated with this cart item
      * @var array
      */
-    protected $_config;
+    protected $config;
 
     /**
      * Item constructor. Set the items meta data + UID. Also stores a reference to the cart it belongs to
@@ -31,9 +31,9 @@ class Cart_Item
      */
     public function __construct($item_data, $uid, $config)
     {
-        $this->_data = $item_data;
-        $this->_uid = $uid;
-        $this->_config = $config;
+        $this->data = $item_data;
+        $this->uid = $uid;
+        $this->config = $config;
     }
 
     /**
@@ -44,7 +44,7 @@ class Cart_Item
      */
     public function get($key)
     {
-        return array_key_exists($key,$this->_data) ? $this->_data[$key] : null;
+        return array_key_exists($key,$this->data) ? $this->data[$key] : null;
     }
 
     /**
@@ -54,7 +54,7 @@ class Cart_Item
      */
     public function set_quantity($quantity)
     {
-        $this->_data['quantity'] = $quantity;
+        $this->data['quantity'] = $quantity;
     }
 
     /**
@@ -91,9 +91,9 @@ class Cart_Item
 
         return number_format(
             $price,
-            $this->_config['decimal_places'],
-            $this->_config['decimal_point'],
-            $this->_config['thousands_separator']
+            $this->config['decimal_places'],
+            $this->config['decimal_point'],
+            $this->config['thousands_separator']
         );
     }
 
@@ -111,9 +111,9 @@ class Cart_Item
 
         return number_format(
             $price * $this->get_quantity(),
-            $this->_config['decimal_places'],
-            $this->_config['decimal_point'],
-            $this->_config['thousands_separator']
+            $this->config['decimal_places'],
+            $this->config['decimal_point'],
+            $this->config['thousands_separator']
         );
     }
 
@@ -126,9 +126,9 @@ class Cart_Item
     {
         return number_format(
             $this->get_tax(),
-            $this->_config['decimal_places'],
-            $this->_config['decimal_point'],
-            $this->_config['thousands_separator']
+            $this->config['decimal_places'],
+            $this->config['decimal_point'],
+            $this->config['thousands_separator']
         );
     }
 
@@ -141,9 +141,9 @@ class Cart_Item
     {
         return number_format(
             $this->get_tax() * $this->quantity(),
-            $this->_config['decimal_places'],
-            $this->_config['decimal_point'],
-            $this->_config['thousands_separator']
+            $this->config['decimal_places'],
+            $this->config['decimal_point'],
+            $this->config['thousands_separator']
         );
 
     }
@@ -155,7 +155,7 @@ class Cart_Item
      */
     public function quantity()
     {
-        return $this->_data['quantity'];
+        return $this->data['quantity'];
     }
 
     /**
@@ -165,7 +165,7 @@ class Cart_Item
      */
     public function uid()
     {
-        return $this->_uid;
+        return $this->uid;
     }
 
     /**
@@ -176,9 +176,9 @@ class Cart_Item
      */
     public function export($include_uid = false)
     {
-        $item_data = $this->_data;
+        $item_data = $this->data;
         if ($include_uid) {
-            $item_data['uid'] = $this->_uid;
+            $item_data['uid'] = $this->uid;
         }
         return $item_data;
     }
@@ -191,7 +191,7 @@ class Cart_Item
      */
     public function set_meta($key, $value)
     {
-        $this->_data['meta'][$key] = $value;
+        $this->data['meta'][$key] = $value;
     }
 
     /**
@@ -202,7 +202,7 @@ class Cart_Item
      */
     public function get_meta($key)
     {
-        return array_key_exists($key, $this->_data['meta']) ? $this->_data['meta'][$key] : null;
+        return array_key_exists($key, $this->data['meta']) ? $this->data['meta'][$key] : null;
     }
 
     /**
@@ -213,7 +213,7 @@ class Cart_Item
      */
     public function remove_meta($key)
     {
-        unset($this->_data['meta'][$key]);
+        unset($this->data['meta'][$key]);
     }
 
     /**
@@ -226,10 +226,10 @@ class Cart_Item
     public function has_meta($key = false)
     {
         if ($key) {
-            return array_key_exists($key, $this->_data['meta']);
+            return array_key_exists($key, $this->data['meta']);
         }
         else {
-            return count($this->_data['meta']) > 0;
+            return count($this->data['meta']) > 0;
         }
     }
 }

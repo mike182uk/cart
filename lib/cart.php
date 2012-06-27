@@ -12,25 +12,25 @@ class Cart
      * The items in the cart
      * @var array
      */
-    protected $_items = array();
+    protected $items = array();
 
     /**
      * Meta data associated with this cart
      * @var array
      */
-    protected $_meta = array();
+    protected $meta = array();
 
     /**
      * The id of the cart
      * @var array
      */
-    protected $_id = array();
+    protected $id = array();
 
     /**
      * The configuration options associated with this cart
      * @var array
      */
-    protected $_config = array();
+    protected $config = array();
 
     /**
      * Cart constructor. Sets the carts ID. If the cart is not passed an ID, it is automatically assigned one.
@@ -42,14 +42,14 @@ class Cart
     public function __construct($id = false, $config)
     {
         $id or $id = 'cart_' . mktime();
-        $this->_id = $id;
+        $this->id = $id;
 
         if ( ! is_array($config)) {
-            throw new InvalidCartConfigException('Either no configuration options where passed to the cart: ' . $this->_id . ', or the configuration options were not formatted as an array');
+            throw new InvalidCartConfigException('Either no configuration options where passed to the cart: ' . $this->id . ', or the configuration options were not formatted as an array');
         }
         else {
             //do some more checks to make sure correct config items are set etc.
-            $this->_config = $config;
+            $this->config = $config;
         }
     }
 
@@ -81,17 +81,17 @@ class Cart
 
         //if item already exists, simply update the quantity
         if ($this->exists($uid)) {
-            $new_quantity = $this->_items[$uid]->get_quantity() + $item_data['quantity'];
+            $new_quantity = $this->items[$uid]->get_quantity() + $item_data['quantity'];
             return $this->update($uid, 'quantity', $new_quantity);
         }
         //otherwise add as a new item
         else {
             $cart_item_config = array(
-                'decimal_point' => $this->_config['decimal_point'],
-                'decimal_places' => $this->_config['decimal_places'],
-                'thousands_separator' => $this->_config['thousands_separator'],
+                'decimal_point' => $this->config['decimal_point'],
+                'decimal_places' => $this->config['decimal_places'],
+                'thousands_separator' => $this->config['thousands_separator'],
             );
-            $this->_items[$uid] = new Cart_Item($item_data, $uid, $cart_item_config);
+            $this->items[$uid] = new Cart_Item($item_data, $uid, $cart_item_config);
             return $uid;
         }
     }
@@ -109,7 +109,7 @@ class Cart
     public function update($uid, $key, $value)
     {
         if ($this->exists($uid)) {
-            $item =& $this->_items[$uid];
+            $item =& $this->items[$uid];
 
             //if we are only updating the quantity
             if ($key == 'quantity') {
@@ -118,7 +118,7 @@ class Cart
                 }
                 //if the value is less than zero, assume the item is not wanted. maybe the application should handle this logic?
                 else {
-                    unset($this->_items[$uid]);
+                    unset($this->items[$uid]);
                 }
                 return true;
             }
@@ -130,7 +130,7 @@ class Cart
             }
         }
         else {
-            throw new InvalidCartItemException('Cart item does not exist: ' . $uid . ' in the cart instance: ' . $this->_id);
+            throw new InvalidCartItemException('Cart item does not exist: ' . $uid . ' in the cart instance: ' . $this->id);
         }
     }
 
@@ -143,7 +143,7 @@ class Cart
     public function remove($uid)
     {
         if ($this->exists($uid)) {
-            unset($this->_items[$uid]);
+            unset($this->items[$uid]);
             return true;
         }
         else {
@@ -159,7 +159,7 @@ class Cart
      */
     public function exists($uid)
     {
-        return array_key_exists($uid,$this->_items);
+        return array_key_exists($uid,$this->items);
     }
 
     /**
@@ -167,7 +167,7 @@ class Cart
      */
     public function clear()
     {
-        $this->_items = array();
+        $this->items = array();
     }
 
     /**
@@ -179,10 +179,10 @@ class Cart
     public function item($uid)
     {
         if ($this->exists($uid)) {
-            return $this->_items[$uid];
+            return $this->items[$uid];
         }
         else {
-            throw new InvalidCartItemException('Cart item does not exist: ' . $uid . ' in the cart instance: ' . $this->_id);
+            throw new InvalidCartItemException('Cart item does not exist: ' . $uid . ' in the cart instance: ' . $this->id);
         }
     }
 
@@ -193,7 +193,7 @@ class Cart
      */
     public function items()
     {
-        return $this->_items;
+        return $this->items;
     }
 
     /**
@@ -210,9 +210,9 @@ class Cart
 
         return number_format(
             $total,
-            $this->_config['decimal_places'],
-            $this->_config['decimal_point'],
-            $this->_config['thousands_separator']
+            $this->config['decimal_places'],
+            $this->config['decimal_point'],
+            $this->config['thousands_separator']
         );
     }
 
@@ -225,9 +225,9 @@ class Cart
     {
         return number_format(
             $this->cumulative_tax(),
-            $this->_config['decimal_places'],
-            $this->_config['decimal_point'],
-            $this->_config['thousands_separator']
+            $this->config['decimal_places'],
+            $this->config['decimal_point'],
+            $this->config['thousands_separator']
         );
     }
 
@@ -239,7 +239,7 @@ class Cart
      */
     public function item_count($unique = false)
     {
-        return $unique ? count($this->_items) : $this->cumulative_value('quantity');
+        return $unique ? count($this->items) : $this->cumulative_value('quantity');
     }
 
     /**
@@ -251,7 +251,7 @@ class Cart
     public function cumulative_value($key)
     {
         $counter = 0;
-        $items = $this->_items;
+        $items = $this->items;
 
         if (count($items) > 0) {
             foreach ($items as $item) {
@@ -284,11 +284,11 @@ class Cart
             'meta' => array()
         );
 
-        foreach ($this->_items as $item) {
+        foreach ($this->items as $item) {
             $cart_data['items'][] = $item->export($include_item_uid);
         }
 
-        foreach ($this->_meta as $k => $v) {
+        foreach ($this->meta as $k => $v) {
             $cart_data['meta'][$k] = $v;
         }
 
@@ -314,7 +314,7 @@ class Cart
             //import cart meta data
             if (array_key_exists('meta',$cart) && is_array($cart['meta']) && count($cart['meta']) > 0) {
                 foreach ($cart['meta'] as $k => $v) {
-                    $this->_meta[$k] = $v;
+                    $this->meta[$k] = $v;
                 }
             }
 
@@ -329,7 +329,7 @@ class Cart
      */
     public function set_meta($key, $value)
     {
-        $this->_meta[$key] = $value;
+        $this->meta[$key] = $value;
     }
 
     /**
@@ -340,7 +340,7 @@ class Cart
      */
     public function get_meta($key)
     {
-        return array_key_exists($key, $this->_meta) ? $this->_meta[$key] : null;
+        return array_key_exists($key, $this->meta) ? $this->meta[$key] : null;
     }
 
     /**
@@ -351,7 +351,7 @@ class Cart
      */
     public function remove_meta($key)
     {
-        unset($this->_meta[$key]);
+        unset($this->meta[$key]);
     }
 
     /**
@@ -364,10 +364,10 @@ class Cart
     public function has_meta($key = false)
     {
         if ($key) {
-            return array_key_exists($key, $this->_meta);
+            return array_key_exists($key, $this->meta);
         }
         else {
-            return count($this->_meta) > 0;
+            return count($this->meta) > 0;
         }
     }
 

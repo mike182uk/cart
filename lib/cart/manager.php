@@ -14,19 +14,19 @@ class Cart_Manager
      * Available cart instances
      * @var array
      */
-    protected static $_instances = array();
+    protected static $instances = array();
 
     /**
      * The ID of the current cart in context
      * @var string
      */
-    protected static $_context = '';
+    protected static $context = '';
 
     /**
      * The configuration options associated with the carts in the cart manager / cart manager itself
      * @var array
      */
-    protected static $_config = '';
+    protected static $config = '';
 
     /**
      * Initializes the cart manager. Loads in the config and instantiates any carts declared in the config file.
@@ -37,18 +37,18 @@ class Cart_Manager
     public static function init($config)
     {
         //cache passed config options
-        static::$_config = $config;
+        static::$config = $config;
 
         //if there are carts defined in the config
         if (count($config['carts']) > 0) {
             foreach ($config['carts'] as $cart_id => $cart_config) {
                 $cart_config = array_merge($config['defaults'], $cart_config); //merge global config with cart specific config
-                static::$_config['carts'][$cart_id] = $cart_config; //update the config
+                static::$config['carts'][$cart_id] = $cart_config; //update the config
                 static::new_cart_instance($cart_id, $cart_config, true, false);
             }
 
             //set context to first cart in array
-            static::$_context = key($config['carts']);
+            static::$context = key($config['carts']);
         }
     }
 
@@ -63,15 +63,15 @@ class Cart_Manager
     public static function context($cart_id = false)
     {
         if ($cart_id) {
-            if (isset(static::$_instances[$cart_id])) {
-                static::$_context = $cart_id;
+            if (isset(static::$instances[$cart_id])) {
+                static::$context = $cart_id;
             }
             else {
                 throw new InvalidCartInstanceException('There is no cart instance with the id: ' . $cart_id);
             }
         }
 
-        return static::$_context;
+        return static::$context;
 
     }
 
@@ -84,7 +84,7 @@ class Cart_Manager
      */
     public static function cart_instance_available($cart_id)
     {
-        return array_key_exists($cart_id,static::$_instances);
+        return array_key_exists($cart_id,static::$instances);
     }
 
     /**
@@ -98,9 +98,9 @@ class Cart_Manager
      */
     public static function get_cart_instance($cart_id = false)
     {
-        $cart_id or $cart_id = static::$_context;
+        $cart_id or $cart_id = static::$context;
         if (static::cart_instance_available($cart_id)) {
-            return static::$_instances[$cart_id];
+            return static::$instances[$cart_id];
         }
         else {
             throw new InvalidCartInstanceException('There is no cart instance with the id: ' . $cart_id);
@@ -122,7 +122,7 @@ class Cart_Manager
     {
         if (!static::cart_instance_available($cart_id) || $overwrite) {
             $cart_config or $cart_config = static::get_cart_config($cart_id);
-            static::$_instances[$cart_id] = new Cart($cart_id, $cart_config);
+            static::$instances[$cart_id] = new Cart($cart_id, $cart_config);
 
             /*
              * is there storage options associated with this instance of the cart?
@@ -137,10 +137,10 @@ class Cart_Manager
             }
 
             if ($switch_context) {
-                static::$_context = $cart_id;
+                static::$context = $cart_id;
             }
 
-            return static::$_instances[$cart_id];
+            return static::$instances[$cart_id];
         }
         else {
             throw new DuplicateCartInstanceException('There is already a cart instance with the id: ' . $cart_id);
@@ -157,16 +157,16 @@ class Cart_Manager
      */
     public static function destroy_instance($cart_id = false, $clear_storage = true)
     {
-        $cart_id or $cart_id = static::$_context;
+        $cart_id or $cart_id = static::$context;
         if (static::cart_instance_available($cart_id)) {
-            unset(static::$_instances[$cart_id]);
+            unset(static::$instances[$cart_id]);
 
             if ($clear_storage) {
                 static::clear_state($cart_id);
             }
 
-            if (static::$_context == $cart_id) {
-                static::$_context = '';
+            if (static::$context == $cart_id) {
+                static::$context = '';
             }
         }
     }
@@ -180,7 +180,7 @@ class Cart_Manager
      */
     public static function destroy_all_instances($clear_storage = true)
     {
-        foreach (static::$_instances as $cart_id => $cart) {
+        foreach (static::$instances as $cart_id => $cart) {
             static::destroy_instance($cart_id, $clear_storage);
         }
     }
@@ -195,11 +195,11 @@ class Cart_Manager
      */
     public static function get_cart_config($cart_id = '')
     {
-        if (array_key_exists($cart_id,static::$_config['carts'])) {
-            return static::$_config['carts'][$cart_id];
+        if (array_key_exists($cart_id,static::$config['carts'])) {
+            return static::$config['carts'][$cart_id];
         }
         else {
-            return static::$_config['defaults'];
+            return static::$config['defaults'];
         }
     }
 
@@ -211,7 +211,7 @@ class Cart_Manager
      */
     public static function save_state($cart_id)
     {
-        $data = serialize(static::$_instances[$cart_id]->export());
+        $data = serialize(static::$instances[$cart_id]->export());
         $driver = static::get_storage_driver(static::get_storage_key($cart_id));
         $driver::save(static::get_storage_key($cart_id), $data);
     }
@@ -227,7 +227,7 @@ class Cart_Manager
         $driver = static::get_storage_driver($cart_id);
 
         $data = unserialize($driver::restore(static::get_storage_key($cart_id)));
-        static::$_instances[$cart_id]->import($data);
+        static::$instances[$cart_id]->import($data);
     }
 
     /**
