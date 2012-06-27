@@ -154,11 +154,13 @@ class Cart
     /**
      * Check an item exists in the cart
      *
-     * @param string $uid The Unique identifier of the item in the cart
+     * @param array|string $value Either the unique identifier of the item in the cart, or the data array for the item
      * @return bool Whether the item exists or not
      */
-    public function exists($uid)
+    public function exists($value)
     {
+        $uid = (is_array($value)) ? $this->generate_uid($value) : $value;
+
         return array_key_exists($uid,$this->items);
     }
 
