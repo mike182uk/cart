@@ -62,7 +62,7 @@ class Cart
      */
     public function add($item_data)
     {
-        $uid = $this->_generate_uid($item_data);
+        $uid = $this->generate_uid($item_data);
 
         //if item does not have a quantity, set to one
         if ( ! array_key_exists('quantity',$item_data)) {
@@ -399,7 +399,7 @@ class Cart
      * @param array $item_data The items data that will be hashed to generate the UID
      * @return string The UID
      */
-    protected function _generate_uid($item_data)
+    protected function generate_uid($item_data)
     {
         /*
          * remove keys from the array that are not to be included in the uid hashing process
