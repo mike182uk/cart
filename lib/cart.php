@@ -399,7 +399,7 @@ class Cart
      * @param array $item_data The items data that will be hashed to generate the UID
      * @return string The UID
      */
-    protected function generate_uid($item_data)
+    public function generate_uid($item_data)
     {
         /*
          * remove keys from the array that are not to be included in the uid hashing process
