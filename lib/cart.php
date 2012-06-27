@@ -41,7 +41,7 @@ class Cart
      */
     public function __construct($id = false, $config)
     {
-        $id or $id = 'cart_' . mktime();
+        $id or $id = 'cart_' . time();
         $this->id = $id;
 
         if ( ! is_array($config)) {
@@ -71,7 +71,7 @@ class Cart
 
         //save timestamp of when this item was added
         if ( ! array_key_exists('added_at',$item_data)) {
-            $item_data['added_at'] = mktime();
+            $item_data['added_at'] = time();
         }
 
         //set meta data
