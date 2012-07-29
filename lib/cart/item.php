@@ -23,7 +23,7 @@ class Cart_Item
     protected $config;
 
     /**
-     * Item constructor. Set the items meta data + UID. Also stores a reference to the cart it belongs to
+     * Item constructor. Set the items meta data, UID and config options
      *
      * @param array $item_data The meta data associated with this item
      * @param string $uid The unique identifier for this item
