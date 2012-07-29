@@ -16,7 +16,7 @@ class Cart_Proxy
     public static function __callStatic($method, $args)
     {
         $cart = Cart_Manager::get_cart_instance();
-        if (method_exists($cart, $method) || substr($method, 0, 11) == 'cumulative_') {
+        if (method_exists($cart, $method) or substr($method, 0, 11) == 'cumulative_') {
             return call_user_func_array(array($cart, $method), $args);
         }
         else {

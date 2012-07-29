@@ -307,14 +307,14 @@ class Cart
         if (is_array($cart)) {
 
             //import cart items
-            if (array_key_exists('items',$cart) && is_array($cart['items']) && count($cart['items']) > 0) {
+            if (array_key_exists('items',$cart) and is_array($cart['items']) and count($cart['items']) > 0) {
                 foreach ($cart['items'] as $item) {
                     $this->add($item);
                 }
             }
 
             //import cart meta data
-            if (array_key_exists('meta',$cart) && is_array($cart['meta']) && count($cart['meta']) > 0) {
+            if (array_key_exists('meta',$cart) and is_array($cart['meta']) and count($cart['meta']) > 0) {
                 foreach ($cart['meta'] as $k => $v) {
                     $this->meta[$k] = $v;
                 }

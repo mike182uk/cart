@@ -120,7 +120,7 @@ class Cart_Manager
      */
     public static function new_cart_instance($cart_id, $cart_config = false, $overwrite = true, $switch_context = true)
     {
-        if (!static::cart_instance_available($cart_id) || $overwrite) {
+        if (!static::cart_instance_available($cart_id) or $overwrite) {
             $cart_config or $cart_config = static::get_cart_config($cart_id);
             static::$instances[$cart_id] = new Cart($cart_id, $cart_config);
 
