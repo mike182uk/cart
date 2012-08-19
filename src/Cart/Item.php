@@ -56,26 +56,6 @@ class Item
     }
 
     /**
-     * Used as a catch all for get_* methods. Internally resolves to get()
-     *
-     * @param string $method The name of the method being called
-     * @param array $args The arguments passed to the method
-     * @return mixed The response of the get method value method call
-     * @throws \BadMethodCallException
-     */
-    public function __call($method, $args = array())
-    {
-        //if the method starts with get_ ...
-        if (substr($method, 0, 4) == 'get_') {
-            $key = substr(strtolower($method), 4, strlen($method));
-            return $this->get($key);
-        }
-        else {
-            throw new \BadMethodCallException('Invalid method: ' . get_called_class() . '::' . $method);
-        }
-    }
-
-    /**
      * Get price for 1 of this item
      *
      * @param bool $excludingTax Should the single price be returned tax excluded
@@ -84,8 +64,8 @@ class Item
     public function singlePrice($excludingTax = false)
     {
         $price = $excludingTax ?
-                 $this->get_price() :
-                 $this->get_price() + $this->get_tax();
+                 $this->data['price'] :
+                 $this->data['price'] + $this->data['tax'];
 
         return number_format(
             $price,
@@ -104,11 +84,11 @@ class Item
     public function totalPrice($excludingTax = false)
     {
         $price = $excludingTax ?
-                 $this->get_price() :
-                 $this->get_price() + $this->get_tax();
+                 $this->data['price'] :
+                 $this->data['price'] + $this->data['tax'];
 
         return number_format(
-            $price * $this->get_quantity(),
+            $price * $this->data['quantity'],
             $this->config['decimal_places'],
             $this->config['decimal_point'],
             $this->config['thousands_separator']
@@ -123,7 +103,7 @@ class Item
     public function singleTax()
     {
         return number_format(
-            $this->get_tax(),
+            $this->data['tax'],
             $this->config['decimal_places'],
             $this->config['decimal_point'],
             $this->config['thousands_separator']
@@ -138,7 +118,7 @@ class Item
     public function totalTax()
     {
         return number_format(
-            $this->get_tax() * $this->quantity(),
+            $this->data['tax'] * $this->quantity(),
             $this->config['decimal_places'],
             $this->config['decimal_point'],
             $this->config['thousands_separator']

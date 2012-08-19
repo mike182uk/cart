@@ -59,30 +59,30 @@ if (isset($_GET['action'])) {
             $msg = $item_data['quantity'] . ' x ' . $item_data['name'] . (($item_data['quantity'] > 1) ? ' have' : ' has') . ' been added to the cart.';
         break;
         case 'remove':
-            $msg = Cart::item($_GET['item'])->get_name() . ' has been removed from the cart';
+            $msg = Cart::item($_GET['item'])->get('name') . ' has been removed from the cart';
             Cart::remove($_GET['item']);
         break;
         case 'update_quantity':
             $new_quantity = $_POST['quantity'];
             $item = $_GET['item'];
-            $msg = Cart::item($_GET['item'])->get_name() . ' quantity has been updated.';
+            $msg = Cart::item($_GET['item'])->get('name') . ' quantity has been updated.';
             Cart::update($item,'quantity',$new_quantity); //or Cart::item($item)->set_quantity($new_quantity);
         break;
         case 'update_engraving':
             $new_engraving_text = $_POST['engraving_text'];
             $item = $_GET['item'];
             Cart::item($item)->setMeta('engraving_text', $new_engraving_text);
-            $msg = Cart::item($_GET['item'])->get_name() . ' engraving text has been updated.';
+            $msg = Cart::item($_GET['item'])->get('name') . ' engraving text has been updated.';
         break;
         case 'remove_engraving':
             $item = $_GET['item'];
             Cart::item($item)->setMeta('has_engraving', false);
-            $msg = Cart::item($_GET['item'])->get_name() . ' engraving has been removed.';
+            $msg = Cart::item($_GET['item'])->get('name') . ' engraving has been removed.';
         break;
         case 'add_engraving':
             $item = $_GET['item'];
             Cart::item($item)->setMeta('has_engraving', true);
-            $msg = Cart::item($_GET['item'])->get_name() . ' engraving has been added. Use the text box to update.';
+            $msg = Cart::item($_GET['item'])->get('name') . ' engraving has been added. Use the text box to update.';
         break;
         case 'clear':
             $msg = Manager::context() . ' has been cleared.';

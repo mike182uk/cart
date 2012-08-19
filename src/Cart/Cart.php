@@ -79,7 +79,7 @@ class Cart
 
         //if item already exists, simply update the quantity
         if ($this->exists($uid)) {
-            $newQuantity = $this->items[$uid]->get_quantity() + $itemData['quantity'];
+            $newQuantity = $this->items[$uid]->get('quantity') + $itemData['quantity'];
             return $this->update($uid, 'quantity', $newQuantity);
         }
         //otherwise add as a new item
@@ -256,14 +256,13 @@ class Cart
         if (count($items) > 0) {
             foreach ($items as $item) {
                 if ($key !== 'quantity') {
-                    $method = 'get_' . $key;
-                    if (is_numeric($item->$method())) {
-                        $counter += ($item->$method() * $item->get_quantity());
+                    if (is_numeric($item->get($key))) {
+                        $counter += ($item->get($key) * $item->get('quantity'));
                     }
                 }
                 //if the cumulative quantity is required we do not want to multiply by the quantity like above...
                 else {
-                    $counter += $item->get_quantity();
+                    $counter += $item->get('quantity');
                 }
             }
         }

@@ -72,11 +72,11 @@ include 'bootstrap.php';
                     <tbody>
                         <?php foreach (Cart::items() as $item) : ?>
                         <tr>
-                            <td><?php echo $item->get_name(); ?></td>
+                            <td><?php echo $item->get('name'); ?></td>
                             <td class="options">
                                 <?php
-                                if ($item->get_options()) {
-                                    foreach ($item->get_options() as $opt => $val) {
+                                if ($item->get('options')) {
+                                    foreach ($item->get('options') as $opt => $val) {
                                         echo "<strong>" . ucwords($opt) . ":</strong> " . ucwords($val) . "<br />";
                                     }
                                 }
@@ -87,7 +87,7 @@ include 'bootstrap.php';
                             </td>
                             <td class="quantity">
                                 <form action="?action=update_quantity&item=<?php echo $item->uid(); ?>" method="post">
-                                    <input type="text" name="quantity" value="<?php echo $item->get_quantity(); ?>" class="span1" />
+                                    <input type="text" name="quantity" value="<?php echo $item->get('quantity'); ?>" class="span1" />
                                     <input type="submit" value="Update" class="btn" />
                                 </form>
                             </td>
@@ -102,7 +102,7 @@ include 'bootstrap.php';
                         <tr>
                             <td colspan="7" class="engraving-text-row">
                                 <?php if ($item->getMeta('has_engraving')) : ?>
-                                <label>Engraving Text For <strong><?php echo $item->get_name(); ?></strong></label>
+                                <label>Engraving Text For <strong><?php echo $item->get('name'); ?></strong></label>
                                 <form action="?action=update_engraving&item=<?php echo $item->uid() ?>" method="post">
                                     <input type="text" name="engraving_text" value="<?php echo $item->getMeta('engraving_text') ?>" class="span8">
                                     <input type="submit" value="Update Engraving Text" class="btn" />
@@ -110,7 +110,7 @@ include 'bootstrap.php';
                                     <a href="?action=remove_engraving&item=<?php echo $item->uid() ?>">Remove Engraving</a>
                                 </form>
                                 <?php else : ?>
-                                    <a href="?action=add_engraving&item=<?php echo $item->uid() ?>" class="btn">Add Engraving For <strong><?php echo $item->get_name(); ?></strong></a>
+                                    <a href="?action=add_engraving&item=<?php echo $item->uid() ?>" class="btn">Add Engraving For <strong><?php echo $item->get('name'); ?></strong></a>
                                 <?php endif; ?>
                             </td>
                         </tr>
