@@ -10,27 +10,27 @@ interface StorageInterface
      *
      * @static
      * @abstract
-     * @param string $storage_key The string that identifies the data being restored
+     * @param string $storageKey The string that identifies the data being restored
      */
-    public static function restore($storage_key);
+    public static function restore($storageKey);
 
     /**
      * Save a cart instances state
      *
      * @static
      * @abstract
-     * @param string $storage_key The string that identifies the data being saved
+     * @param string $storageKey The string that identifies the data being saved
      * @param string $data The data saved cart state
      */
-    public static function save($storage_key, $data);
+    public static function save($storageKey, $data);
 
     /**
      * Clears a saved cart instance
      *
      * @static
      * @abstract
-     * @param string $storage_key The string that identifies the data that is to be cleared
+     * @param string $storageKey The string that identifies the data that is to be cleared
      */
-    public static function clear($storage_key);
+    public static function clear($storageKey);
 
 }

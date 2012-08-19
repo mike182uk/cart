@@ -7,25 +7,25 @@ class Session implements StorageInterface
         @session_start();
     }
 
-    public static function restore($storage_key)
+    public static function restore($storageKey)
     {
         static::init();
 
-        return isset($_SESSION[$storage_key]) ? $_SESSION[$storage_key] : null;
+        return isset($_SESSION[$storageKey]) ? $_SESSION[$storageKey] : null;
 
     }
 
-    public static function save($storage_key, $data)
+    public static function save($storageKey, $data)
     {
         static::init();
 
-        $_SESSION[$storage_key] = $data;
+        $_SESSION[$storageKey] = $data;
     }
 
-    public static function clear($storage_key)
+    public static function clear($storageKey)
     {
         static::init();
 
-        unset($_SESSION[$storage_key]);
+        unset($_SESSION[$storageKey]);
     }
 }
