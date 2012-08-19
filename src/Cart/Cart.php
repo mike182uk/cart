@@ -46,7 +46,7 @@ class Cart
             throw new InvalidCartConfigException('Either no configuration options where passed to the cart: ' . $this->id . ', or the configuration options were not formatted as an array');
         }
         else {
-            //do some more checks to make sure correct config items are set etc.
+            //@todo: do some more checks to make sure correct config items are set etc.
             $this->config = $config;
         }
     }
@@ -63,17 +63,17 @@ class Cart
         $uid = $this->generateUID($itemData);
 
         //if item does not have a quantity, set to one
-        if ( ! array_key_exists('quantity',$itemData)) {
+        if ( ! array_key_exists('quantity', $itemData)) {
             $itemData['quantity'] = 1;
         }
 
         //save timestamp of when this item was added
-        if ( ! array_key_exists('added_at',$itemData)) {
+        if ( ! array_key_exists('added_at', $itemData)) {
             $itemData['added_at'] = time();
         }
 
         //set meta data
-        if ( ! array_key_exists('meta',$itemData)) {
+        if ( ! array_key_exists('meta', $itemData)) {
             $itemData['meta'] = array();
         }
 
@@ -84,12 +84,12 @@ class Cart
         }
         //otherwise add as a new item
         else {
-            $itemConfig = array(
+            $config = array(
                 'decimal_point' => $this->config['decimal_point'],
                 'decimal_places' => $this->config['decimal_places'],
                 'thousands_separator' => $this->config['thousands_separator'],
             );
-            $this->items[$uid] = new Item($itemData, $uid, $itemConfig);
+            $this->items[$uid] = new Item($itemData, $uid, $config);
             return $uid;
         }
     }
@@ -159,7 +159,7 @@ class Cart
     {
         $uid = (is_array($value)) ? $this->generateUID($value) : $value;
 
-        return array_key_exists($uid,$this->items);
+        return array_key_exists($uid, $this->items);
     }
 
     /**
@@ -273,10 +273,10 @@ class Cart
     /**
      * Export the cart
      *
-     * @param bool $include_item_uid Should the items UID be included in the exported item data
+     * @param bool $includeUID Should the items UID be included in the exported item data
      * @return array The cart data
      */
-    public function export($include_item_uid = false)
+    public function export($includeUID = false)
     {
         $cart_data = array(
             'items' => array(),
@@ -284,7 +284,7 @@ class Cart
         );
 
         foreach ($this->items as $item) {
-            $cart_data['items'][] = $item->export($include_item_uid);
+            $cart_data['items'][] = $item->export($includeUID);
         }
 
         foreach ($this->meta as $k => $v) {
@@ -295,7 +295,7 @@ class Cart
     }
 
     /**
-     * Import a previously saved cart state
+     * Import a previously saved cart
      *
      * @param array $cart The data associated with the cart to be imported into the cart
      */
@@ -304,14 +304,14 @@ class Cart
         if (is_array($cart)) {
 
             //import cart items
-            if (array_key_exists('items',$cart) and is_array($cart['items']) and count($cart['items']) > 0) {
+            if (array_key_exists('items', $cart) and is_array($cart['items']) and count($cart['items']) > 0) {
                 foreach ($cart['items'] as $item) {
                     $this->add($item);
                 }
             }
 
             //import cart meta data
-            if (array_key_exists('meta',$cart) and is_array($cart['meta']) and count($cart['meta']) > 0) {
+            if (array_key_exists('meta', $cart) and is_array($cart['meta']) and count($cart['meta']) > 0) {
                 foreach ($cart['meta'] as $k => $v) {
                     $this->meta[$k] = $v;
                 }
@@ -391,7 +391,6 @@ class Cart
             }
         }
 
-        //hash browns...
         return md5(json_encode($itemData));
     }
 }

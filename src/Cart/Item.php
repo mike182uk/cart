@@ -123,7 +123,6 @@ class Item
             $this->config['decimal_point'],
             $this->config['thousands_separator']
         );
-
     }
 
     /**
