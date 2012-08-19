@@ -32,7 +32,7 @@ use \Cart\Proxy as Cart;
  * The first thing to do is load in the config file. This will supply config options for the cart instances
  * in the cart manager. It also initialize any preset carts (including retrieving state)
  */
-$config = include '../src/config/default.php';
+$config = include 'config/default.php';
 
 Manager::init($config);
 
