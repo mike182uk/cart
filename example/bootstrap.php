@@ -18,7 +18,7 @@ include '../src/Cart/Storage/Session.php';
 include '../src/Cart/Manager.php';
 include '../src/Cart/Proxy.php';
 include '../src/Cart/Item.php';
-include '../src/Cart.php';
+include '../src/Cart/Cart.php';
 
 //import namespaces  / set aliases
 use \Cart\Manager;
@@ -32,7 +32,7 @@ use \Cart\Proxy as Cart;
  * The first thing to do is load in the config file. This will supply config options for the cart instances
  * in the cart manager. It also initialize any preset carts (including retrieving state)
  */
-$config = include '../lib/config/default.php';
+$config = include '../src/config/default.php';
 
 Manager::init($config);
 
