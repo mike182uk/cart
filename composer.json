@@ -1,6 +1,6 @@
 {
     "name": "mike182uk/cart",
-    "description": "A composer compatible PHP >=5.3.0 cart.",
+    "description": "A modern, composer compatible, PHP >=5.3.0 shopping cart",
     "keywords": ["shopping","cart"],
     "authors": [
         {

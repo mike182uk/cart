@@ -1,1 +1,1 @@
-A modern shopping cart solution for PHP 5.3
+A modern, composer compatible, PHP >=5.3.0 shopping cart
