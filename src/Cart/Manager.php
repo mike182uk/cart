@@ -42,7 +42,7 @@ class Manager
             foreach ($config['carts'] as $cartID => $cartConfig) {
                 $cartConfig = array_merge($config['defaults'], $cartConfig); //merge global config with cart specific config
                 static::$config['carts'][$cartID] = $cartConfig; //update the config
-                static::newCartInstance($cartID, $cartConfig, true, false);
+                static::newInstance($cartID, $cartConfig, true, false);
             }
 
             //set context to first cart in array
@@ -80,7 +80,7 @@ class Manager
      * @param string $cartID The ID of the cart to check for
      * @return bool True if the cart instance exists, false otherwise
      */
-    public static function cartInstanceAvailable($cartID)
+    public static function instanceAvailable($cartID)
     {
         return array_key_exists($cartID,static::$instances);
     }
@@ -94,10 +94,10 @@ class Manager
      * @return object The requested cart instance or the current cart instance in context if no $cartID provided
      * @throws InvalidCartInstanceException
      */
-    public static function getCartInstance($cartID = false)
+    public static function getInstance($cartID = false)
     {
         $cartID or $cartID = static::$context;
-        if (static::cartInstanceAvailable($cartID)) {
+        if (static::instanceAvailable($cartID)) {
             return static::$instances[$cartID];
         }
         else {
@@ -116,10 +116,10 @@ class Manager
      * @return mixed The newly created cart instance
      * @throws DuplicateCartInstanceException
      */
-    public static function newCartInstance($cartID, $cartConfig = false, $overwrite = true, $switchContext = true)
+    public static function newInstance($cartID, $cartConfig = false, $overwrite = true, $switchContext = true)
     {
-        if (!static::cartInstanceAvailable($cartID) or $overwrite) {
-            $cartConfig or $cartConfig = static::getCartConfig($cartID);
+        if (!static::instanceAvailable($cartID) or $overwrite) {
+            $cartConfig or $cartConfig = static::getInstanceConfig($cartID);
             static::$instances[$cartID] = new Cart($cartID, $cartConfig);
 
             /*
@@ -156,7 +156,7 @@ class Manager
     public static function destroyInstance($cartID = false, $clearStorage = true)
     {
         $cartID or $cartID = static::$context;
-        if (static::cartInstanceAvailable($cartID)) {
+        if (static::instanceAvailable($cartID)) {
             unset(static::$instances[$cartID]);
 
             if ($clearStorage) {
@@ -191,7 +191,7 @@ class Manager
      * @param string $cartID The ID of the cart instance
      * @return array The cart configuration options
      */
-    public static function getCartConfig($cartID = '')
+    public static function getInstanceConfig($cartID = '')
     {
         if (array_key_exists($cartID,static::$config['carts'])) {
             return static::$config['carts'][$cartID];
@@ -251,7 +251,7 @@ class Manager
      */
     public static function getStorageDriver($cartID)
     {
-        $cartConfig = static::getCartConfig($cartID);
+        $cartConfig = static::getInstanceConfig($cartID);
         $driver = '\Cart\Storage\\' . ucfirst(strtolower($cartConfig['storage']['driver']));
 
         //check driver actually exists
@@ -278,7 +278,7 @@ class Manager
      */
     public static function getStorageKey($cartID)
     {
-        $cartConfig = static::getCartConfig($cartID);
+        $cartConfig = static::getInstanceConfig($cartID);
 
         $storageKey = '';
 
