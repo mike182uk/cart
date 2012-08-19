@@ -86,12 +86,12 @@ class Cart
         }
         //otherwise add as a new item
         else {
-            $cart_item_config = array(
+            $item_config = array(
                 'decimal_point' => $this->config['decimal_point'],
                 'decimal_places' => $this->config['decimal_places'],
                 'thousands_separator' => $this->config['thousands_separator'],
             );
-            $this->items[$uid] = new Cart_Item($item_data, $uid, $cart_item_config);
+            $this->items[$uid] = new Item($item_data, $uid, $item_config);
             return $uid;
         }
     }

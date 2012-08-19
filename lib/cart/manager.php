@@ -8,7 +8,7 @@ class DuplicateCartInstanceException extends \Exception {}
 
 class InvalidStorageImplementationException extends \Exception {}
 
-class Cart_Manager
+class Manager
 {
     /**
      * Available cart instances
@@ -133,7 +133,7 @@ class Cart_Manager
             }
             if ($cart_config['storage']['autosave']) {
                 //register shutdown function for auto save
-                register_shutdown_function(array('\Cart\Cart_Manager', 'save_state'), $cart_id);
+                register_shutdown_function(array('\Cart\Manager', 'save_state'), $cart_id);
             }
 
             if ($switch_context) {
@@ -254,17 +254,17 @@ class Cart_Manager
     public static function get_storage_driver($cart_id)
     {
         $cart_config = static::get_cart_config($cart_id);
-        $driver = '\Cart\Cart_Storage_Driver_' . ucfirst(strtolower($cart_config['storage']['driver']));
+        $driver = '\Cart\Storage\\' . ucfirst(strtolower($cart_config['storage']['driver']));
 
         //check driver actually exists
         if ( ! class_exists($driver)) {
             throw new InvalidStorageImplementationException('The class: ' . $driver . ' does has not been loaded.');
         }
 
-        //check driver implements Cart_Storage_Interface
+        //check driver implements StorageInterface
         $driver_instance = new \ReflectionClass($driver);
-        if ( ! $driver_instance->implementsInterface('\Cart\Cart_Storage_Interface')) {
-            throw new InvalidStorageImplementationException('The class: ' . $driver . ' does not implement the Cart_Storage_Interface.');
+        if ( ! $driver_instance->implementsInterface('\Cart\Storage\StorageInterface')) {
+            throw new InvalidStorageImplementationException('The class: ' . $driver . ' does not implement the StorageInterface.');
         }
 
         return $driver;

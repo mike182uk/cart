@@ -1,11 +1,11 @@
 <?php
 
-namespace Cart;
+namespace Cart\Storage;
 
 /**
  * The base storage interface that must be implemented by all storage methods.
  */
-interface Cart_Storage_Interface
+interface StorageInterface
 {
     /**
      * Restore previously saved state

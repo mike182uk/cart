@@ -2,8 +2,8 @@
 /**
  * Import namespaces and alias cart proxy to cart so can do sexy calls like Cart::items()
  */
-use \Cart\Cart_Manager;
-use \Cart\Cart_Proxy as Cart;
+use \Cart\Manager;
+use \Cart\Proxy as Cart;
 
 /**
  * Bootstrap the cart...
@@ -41,7 +41,7 @@ include 'bootstrap.php';
                                     </ul>
                                 </li>
                             </ul>
-                            <p class="navbar-text pull-right">You are currently viewing cart: <?php echo Cart_Manager::context(); ?> - <?php echo Cart::item_count(); ?> Item(s)</p>
+                            <p class="navbar-text pull-right">You are currently viewing cart: <?php echo Manager::context(); ?> - <?php echo Cart::item_count(); ?> Item(s)</p>
                         </div>
                     </div>
                 </div>

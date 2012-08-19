@@ -2,7 +2,7 @@
 
 namespace Cart;
 
-class Cart_Item
+class Item
 {
     /**
      * Data associated with this item

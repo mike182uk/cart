@@ -2,7 +2,7 @@
 
 namespace Cart;
 
-class Cart_Proxy
+class Proxy
 {
     /**
      * Proxies the method call to the cart instance that is in the current context in the cart manager
@@ -15,7 +15,7 @@ class Cart_Proxy
      */
     public static function __callStatic($method, $args)
     {
-        $cart = Cart_Manager::get_cart_instance();
+        $cart = Manager::get_cart_instance();
         if (method_exists($cart, $method) or substr($method, 0, 11) == 'cumulative_') {
             return call_user_func_array(array($cart, $method), $args);
         }
@@ -33,6 +33,6 @@ class Cart_Proxy
      */
     public static function context($cart_id)
     {
-        return Cart_Manager::get_cart_instance($cart_id);
+        return Manager::get_cart_instance($cart_id);
     }
 }

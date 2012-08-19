@@ -21,8 +21,8 @@ include '../lib/cart/item.php';
 include '../lib/cart.php';
 
 //import namespaces  / set aliases
-use \Cart\Cart_Manager;
-use \Cart\Cart_Proxy as Cart;
+use \Cart\Manager;
+use \Cart\Proxy as Cart;
 
 //-------------------------------------------------------------------------------------------------------------
 
@@ -34,11 +34,11 @@ use \Cart\Cart_Proxy as Cart;
  */
 $config = include '../lib/config/default.php';
 
-Cart_Manager::init($config);
+Manager::init($config);
 
 //set context from session if applicable
 if (isset($_SESSION['cart_context'])) {
-    Cart_Manager::context($_SESSION['cart_context']);
+    Manager::context($_SESSION['cart_context']);
 }
 //-------------------------------------------------------------------------------------------------------------
 
@@ -85,15 +85,15 @@ if (isset($_GET['action'])) {
             $msg = Cart::item($_GET['item'])->get_name() . ' engraving has been added. Use the text box to update.';
         break;
         case 'clear':
-            $msg = Cart_Manager::context() . ' has been cleared.';
-            Cart_Manager::destroy_instance();
+            $msg = Manager::context() . ' has been cleared.';
+            Manager::destroy_instance();
         break;
         case 'switch_cart':
             $_SESSION['cart_context'] = $_GET['cart'];
             $msg = 'Switched to ' . $_GET['cart'] . '.';
         break;
         case 'clear_all_carts':
-            Cart_Manager::destroy_all_instances();
+            Manager::destroy_all_instances();
             $msg = 'All carts have been cleared.';
         break;
         case 'update_merchant_notes':
