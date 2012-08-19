@@ -21,7 +21,7 @@ include '../src/Cart/Item.php';
 include '../src/Cart/Cart.php';
 
 //import namespaces  / set aliases
-use \Cart\Manager;
+use \Cart\Manager as CartManager;
 use \Cart\Proxy as Cart;
 
 //-------------------------------------------------------------------------------------------------------------
@@ -34,11 +34,11 @@ use \Cart\Proxy as Cart;
  */
 $config = include 'config/default.php';
 
-Manager::init($config);
+CartManager::init($config);
 
 //set context from session if applicable
 if (isset($_SESSION['cart_context'])) {
-    Manager::context($_SESSION['cart_context']);
+    CartManager::context($_SESSION['cart_context']);
 }
 //-------------------------------------------------------------------------------------------------------------
 
@@ -54,24 +54,24 @@ if (isset($_GET['action'])) {
 
     switch ($_GET['action']) {
         case 'add':
-            $item_data = $_POST['product'];
-            Cart::add($item_data);
-            $msg = $item_data['quantity'] . ' x ' . $item_data['name'] . (($item_data['quantity'] > 1) ? ' have' : ' has') . ' been added to the cart.';
+            $itemData = $_POST['product'];
+            Cart::add($itemData);
+            $msg = $itemData['quantity'] . ' x ' . $itemData['name'] . (($itemData['quantity'] > 1) ? ' have' : ' has') . ' been added to the cart.';
         break;
         case 'remove':
             $msg = Cart::item($_GET['item'])->get('name') . ' has been removed from the cart';
             Cart::remove($_GET['item']);
         break;
         case 'update_quantity':
-            $new_quantity = $_POST['quantity'];
+            $newQuantity = $_POST['quantity'];
             $item = $_GET['item'];
             $msg = Cart::item($_GET['item'])->get('name') . ' quantity has been updated.';
-            Cart::update($item,'quantity',$new_quantity); //or Cart::item($item)->setQuantity($new_quantity);
+            Cart::update($item,'quantity',$newQuantity); //or Cart::item($item)->setQuantity($newQuantity);
         break;
         case 'update_engraving':
-            $new_engraving_text = $_POST['engraving_text'];
+            $newEngravingText = $_POST['engraving_text'];
             $item = $_GET['item'];
-            Cart::item($item)->setMeta('engraving_text', $new_engraving_text);
+            Cart::item($item)->setMeta('engraving_text', $newEngravingText);
             $msg = Cart::item($_GET['item'])->get('name') . ' engraving text has been updated.';
         break;
         case 'remove_engraving':
@@ -85,15 +85,15 @@ if (isset($_GET['action'])) {
             $msg = Cart::item($_GET['item'])->get('name') . ' engraving has been added. Use the text box to update.';
         break;
         case 'clear':
-            $msg = Manager::context() . ' has been cleared.';
-            Manager::destroyInstance();
+            $msg = CartManager::context() . ' has been cleared.';
+            CartManager::destroyInstance();
         break;
         case 'switch_cart':
             $_SESSION['cart_context'] = $_GET['cart'];
             $msg = 'Switched to ' . $_GET['cart'] . '.';
         break;
         case 'clear_all_carts':
-            Manager::destroyAllInstances();
+            CartManager::destroyAllInstances();
             $msg = 'All carts have been cleared.';
         break;
         case 'update_merchant_notes':
