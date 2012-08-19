@@ -13,7 +13,7 @@ class Proxy
      */
     public static function __callStatic($method, $args)
     {
-        $cart = Manager::get_cart_instance();
+        $cart = Manager::getCartInstance();
         if (method_exists($cart, $method) or substr($method, 0, 11) == 'cumulative_') {
             return call_user_func_array(array($cart, $method), $args);
         }
@@ -26,11 +26,11 @@ class Proxy
      * Return the instance of the cart requested
      *
      * @static
-     * @param string $cart_id The id of the cart
+     * @param string $cartID The id of the cart
      * @return object Cart instance
      */
-    public static function context($cart_id)
+    public static function context($cartID)
     {
-        return Manager::get_cart_instance($cart_id);
+        return Manager::getCartInstance($cartID);
     }
 }

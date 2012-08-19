@@ -54,42 +54,42 @@ class Cart
     /**
      * Add an item to the cart. If the item already exists in the cart, it is updated.
      *
-     * @param array $item_data The data associated with the item
+     * @param array $itemData The data associated with the item
      * @return string|bool If the item is added or fields other than the quantity are updated the UID is returned,
      *                     if the item is updated and only the quantity is amended true is returned
      */
-    public function add($item_data)
+    public function add($itemData)
     {
-        $uid = $this->generate_uid($item_data);
+        $uid = $this->generateUID($itemData);
 
         //if item does not have a quantity, set to one
-        if ( ! array_key_exists('quantity',$item_data)) {
-            $item_data['quantity'] = 1;
+        if ( ! array_key_exists('quantity',$itemData)) {
+            $itemData['quantity'] = 1;
         }
 
         //save timestamp of when this item was added
-        if ( ! array_key_exists('added_at',$item_data)) {
-            $item_data['added_at'] = time();
+        if ( ! array_key_exists('added_at',$itemData)) {
+            $itemData['added_at'] = time();
         }
 
         //set meta data
-        if ( ! array_key_exists('meta',$item_data)) {
-            $item_data['meta'] = array();
+        if ( ! array_key_exists('meta',$itemData)) {
+            $itemData['meta'] = array();
         }
 
         //if item already exists, simply update the quantity
         if ($this->exists($uid)) {
-            $new_quantity = $this->items[$uid]->get_quantity() + $item_data['quantity'];
-            return $this->update($uid, 'quantity', $new_quantity);
+            $newQuantity = $this->items[$uid]->get_quantity() + $itemData['quantity'];
+            return $this->update($uid, 'quantity', $newQuantity);
         }
         //otherwise add as a new item
         else {
-            $item_config = array(
+            $itemConfig = array(
                 'decimal_point' => $this->config['decimal_point'],
                 'decimal_places' => $this->config['decimal_places'],
                 'thousands_separator' => $this->config['thousands_separator'],
             );
-            $this->items[$uid] = new Item($item_data, $uid, $item_config);
+            $this->items[$uid] = new Item($itemData, $uid, $itemConfig);
             return $uid;
         }
     }
@@ -112,7 +112,7 @@ class Cart
             //if we are only updating the quantity
             if ($key == 'quantity') {
                 if ($value > 0) {
-                    $item->set_quantity($value);
+                    $item->setQuantity($value);
                 }
                 //if the value is less than zero, assume the item is not wanted. maybe the application should handle this logic?
                 else {
@@ -122,9 +122,9 @@ class Cart
             }
             //if we are not updating the quantity, we are going to need to update the uid
             else {
-                $item_data = $item->export();
+                $itemData = $item->export();
                 $this->remove($uid);
-                return $this->add($item_data);
+                return $this->add($itemData);
             }
         }
         else {
@@ -157,7 +157,7 @@ class Cart
      */
     public function exists($value)
     {
-        $uid = (is_array($value)) ? $this->generate_uid($value) : $value;
+        $uid = (is_array($value)) ? $this->generateUID($value) : $value;
 
         return array_key_exists($uid,$this->items);
     }
@@ -221,7 +221,7 @@ class Cart
      *
      * @return float The total tax for the cart
      */
-    public function total_tax()
+    public function totalTax()
     {
         return number_format(
             $this->cumulative_tax(),
@@ -237,7 +237,7 @@ class Cart
      * @param bool $unique ignore item quantities
      * @return int The item count
      */
-    public function item_count($unique = false)
+    public function itemCount($unique = false)
     {
         return $unique ? count($this->items) : $this->cumulative_value('quantity');
     }
@@ -327,7 +327,7 @@ class Cart
      * @param string $key The key to identify the meta data
      * @param mixed $value The meta data to be saved against the cart
      */
-    public function set_meta($key, $value)
+    public function setMeta($key, $value)
     {
         $this->meta[$key] = $value;
     }
@@ -338,7 +338,7 @@ class Cart
      * @param string $key The key to identify the requested meta data
      * @return mixed The meta data retrieved
      */
-    public function get_meta($key)
+    public function getMeta($key)
     {
         return array_key_exists($key, $this->meta) ? $this->meta[$key] : null;
     }
@@ -349,7 +349,7 @@ class Cart
      * @param string $key The key to identify the meta data to be removed
      * @return mixed The meta data retrieved
      */
-    public function remove_meta($key)
+    public function removeMeta($key)
     {
         unset($this->meta[$key]);
     }
@@ -361,7 +361,7 @@ class Cart
      * @param bool|string $key The key of the meta data item saved against cart
      * @return bool Whether the cart has meta data saved against it or not
      */
-    public function has_meta($key = false)
+    public function hasMeta($key = false)
     {
         if ($key) {
             return array_key_exists($key, $this->meta);
@@ -396,23 +396,23 @@ class Cart
      * to get a string representation of the data then md5 hashed to generate a unique
      * value
      *
-     * @param array $item_data The items data that will be hashed to generate the UID
+     * @param array $itemData The items data that will be hashed to generate the UID
      * @return string The UID
      */
-    public function generate_uid($item_data)
+    public function generateUID($itemData)
     {
         /*
          * remove keys from the array that are not to be included in the uid hashing process
          * these keys identify supplementary data to the core product data i.e quantity, added_at, meta etc
          */
-        $non_uid_compliant = array('quantity', 'added_at', 'meta');
-        foreach ($non_uid_compliant as $k) {
-            if (array_key_exists($k,$item_data)) {
-                unset($item_data[$k]);
+        $ignoreKeys = array('quantity', 'added_at', 'meta');
+        foreach ($ignoreKeys as $k) {
+            if (array_key_exists($k,$itemData)) {
+                unset($itemData[$k]);
             }
         }
 
         //hash browns...
-        return md5(json_encode($item_data));
+        return md5(json_encode($itemData));
     }
 }

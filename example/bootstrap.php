@@ -71,38 +71,38 @@ if (isset($_GET['action'])) {
         case 'update_engraving':
             $new_engraving_text = $_POST['engraving_text'];
             $item = $_GET['item'];
-            Cart::item($item)->set_meta('engraving_text', $new_engraving_text);
+            Cart::item($item)->setMeta('engraving_text', $new_engraving_text);
             $msg = Cart::item($_GET['item'])->get_name() . ' engraving text has been updated.';
         break;
         case 'remove_engraving':
             $item = $_GET['item'];
-            Cart::item($item)->set_meta('has_engraving', false);
+            Cart::item($item)->setMeta('has_engraving', false);
             $msg = Cart::item($_GET['item'])->get_name() . ' engraving has been removed.';
         break;
         case 'add_engraving':
             $item = $_GET['item'];
-            Cart::item($item)->set_meta('has_engraving', true);
+            Cart::item($item)->setMeta('has_engraving', true);
             $msg = Cart::item($_GET['item'])->get_name() . ' engraving has been added. Use the text box to update.';
         break;
         case 'clear':
             $msg = Manager::context() . ' has been cleared.';
-            Manager::destroy_instance();
+            Manager::destroyInstance();
         break;
         case 'switch_cart':
             $_SESSION['cart_context'] = $_GET['cart'];
             $msg = 'Switched to ' . $_GET['cart'] . '.';
         break;
         case 'clear_all_carts':
-            Manager::destroy_all_instances();
+            Manager::destroyAllInstances();
             $msg = 'All carts have been cleared.';
         break;
         case 'update_merchant_notes':
             $notes = $_POST['merchant_notes'];
-            Cart::set_meta('merchant_notes', $notes);
+            Cart::setMeta('merchant_notes', $notes);
             $msg = 'Note to merchant has been updated';
         break;
         case 'clear_notes':
-            Cart::remove_meta('merchant_notes');
+            Cart::removeMeta('merchant_notes');
             $msg = 'Note to merchant has been cleared';
         break;
     }

@@ -41,7 +41,7 @@ include 'bootstrap.php';
                                     </ul>
                                 </li>
                             </ul>
-                            <p class="navbar-text pull-right">You are currently viewing cart: <?php echo Manager::context(); ?> - <?php echo Cart::item_count(); ?> Item(s)</p>
+                            <p class="navbar-text pull-right">You are currently viewing cart: <?php echo Manager::context(); ?> - <?php echo Cart::itemCount(); ?> Item(s)</p>
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@ include 'bootstrap.php';
 
             <h2>Shopping Cart</h2>
             <div id="cart">
-                <?php if (Cart::item_count() > 0) : ?>
+                <?php if (Cart::itemCount() > 0) : ?>
                 <table class="table" id="cart-table">
                     <thead>
                         <th scope="col">Product</th>
@@ -91,20 +91,20 @@ include 'bootstrap.php';
                                     <input type="submit" value="Update" class="btn" />
                                 </form>
                             </td>
-                            <td class="price">&pound;<?php echo $item->single_price(true); ?></td>
-                            <td class="tax">&pound;<?php echo $item->single_tax(); ?></td>
-                            <td class="total"><strong>&pound;<?php echo $item->total_price(); ?></strong></td>
+                            <td class="price">&pound;<?php echo $item->singlePrice(true); ?></td>
+                            <td class="tax">&pound;<?php echo $item->singleTax(); ?></td>
+                            <td class="total"><strong>&pound;<?php echo $item->totalPrice(); ?></strong></td>
                             <td>
                                 <a href="?action=remove&item=<?php  echo $item->uid(); ?>" class="btn">x</a>
                             </td>
                         </tr>
-                        <?php if ($item->has_meta('has_engraving')) : ?>
+                        <?php if ($item->hasMeta('has_engraving')) : ?>
                         <tr>
                             <td colspan="7" class="engraving-text-row">
-                                <?php if ($item->get_meta('has_engraving')) : ?>
+                                <?php if ($item->getMeta('has_engraving')) : ?>
                                 <label>Engraving Text For <strong><?php echo $item->get_name(); ?></strong></label>
                                 <form action="?action=update_engraving&item=<?php echo $item->uid() ?>" method="post">
-                                    <input type="text" name="engraving_text" value="<?php echo $item->get_meta('engraving_text') ?>" class="span8">
+                                    <input type="text" name="engraving_text" value="<?php echo $item->getMeta('engraving_text') ?>" class="span8">
                                     <input type="submit" value="Update Engraving Text" class="btn" />
                                     <br />
                                     <a href="?action=remove_engraving&item=<?php echo $item->uid() ?>">Remove Engraving</a>
@@ -137,7 +137,7 @@ include 'bootstrap.php';
                         <tr>
                             <td colspan="4"></td>
                             <td><strong>Tax:</strong></td>
-                            <td>&pound;<?php echo Cart::total_tax(); ?></td>
+                            <td>&pound;<?php echo Cart::totalTax(); ?></td>
                             <td></td>
                         </tr>
                         <tr>
@@ -151,7 +151,7 @@ include 'bootstrap.php';
                 <div>
                     <form action="?action=update_merchant_notes" method="post">
                         <label>Leave any notes for the merchant to read here. <a href="?action=clear_notes">Clear Notes</a> </label>
-                        <textarea class="span6" rows="5" name="merchant_notes"><?php echo Cart::get_meta('merchant_notes') ?></textarea>
+                        <textarea class="span6" rows="5" name="merchant_notes"><?php echo Cart::getMeta('merchant_notes') ?></textarea>
                         <input type="submit" class="btn" value="Update Notes" />
 
                     </form>
