@@ -14,7 +14,7 @@ class Proxy
     public static function __callStatic($method, $args)
     {
         $cart = Manager::getInstance();
-        if (method_exists($cart, $method) or substr($method, 0, 11) == 'cumulative_') {
+        if (method_exists($cart, $method)) {
             return call_user_func_array(array($cart, $method), $args);
         }
         else {

@@ -66,7 +66,7 @@ if (isset($_GET['action'])) {
             $new_quantity = $_POST['quantity'];
             $item = $_GET['item'];
             $msg = Cart::item($_GET['item'])->get('name') . ' quantity has been updated.';
-            Cart::update($item,'quantity',$new_quantity); //or Cart::item($item)->set_quantity($new_quantity);
+            Cart::update($item,'quantity',$new_quantity); //or Cart::item($item)->setQuantity($new_quantity);
         break;
         case 'update_engraving':
             $new_engraving_text = $_POST['engraving_text'];
