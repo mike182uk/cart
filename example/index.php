@@ -123,7 +123,7 @@ include 'bootstrap.php';
                             <td><strong>Total Weight:</strong></td>
                             <?php
                             //if over 1000g round up to nearest KG
-                            $weight = Cart::cumulative_weight();
+                            $weight = Cart::getTotal('weight');
                             if ($weight  < 1000) {
                                 $weight_str = $weight . 'g';
                             }
@@ -137,7 +137,7 @@ include 'bootstrap.php';
                         <tr>
                             <td colspan="4"></td>
                             <td><strong>Tax:</strong></td>
-                            <td>&pound;<?php echo Cart::totalTax(); ?></td>
+                            <td>&pound;<?php echo Cart::tax(); ?></td>
                             <td></td>
                         </tr>
                         <tr>

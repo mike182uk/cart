@@ -199,14 +199,14 @@ class Cart
     /**
      * Get the cart total
      *
-     * @param bool $excluding_tax Should the total be returned tax excluded
+     * @param bool $excludingTax Should the total be returned tax excluded
      * @return float The total for the cart
      */
-    public function total($excluding_tax = false)
+    public function total($excludingTax = false)
     {
-        $total =  $excluding_tax ?
-                  $this->cumulative_price() :
-                  $this->cumulative_price() + $this->cumulative_tax();
+        $total =  $excludingTax ?
+                  $this->getTotal('price') :
+                  $this->getTotal('price') + $this->getTotal('tax');
 
         return number_format(
             $total,
@@ -221,10 +221,10 @@ class Cart
      *
      * @return float The total tax for the cart
      */
-    public function totalTax()
+    public function tax()
     {
         return number_format(
-            $this->cumulative_tax(),
+            $this->getTotal('tax'),
             $this->config['decimal_places'],
             $this->config['decimal_point'],
             $this->config['thousands_separator']
@@ -239,16 +239,16 @@ class Cart
      */
     public function itemCount($unique = false)
     {
-        return $unique ? count($this->items) : $this->cumulative_value('quantity');
+        return $unique ? count($this->items) : $this->getTotal('quantity');
     }
 
     /**
      * Get the total of a certain value that appears on each item in the cart.
      *
      * @param string $key The key of the value
-     * @return int The cumulative value for the passed key
+     * @return int The total value for the passed key
      */
-    public function cumulative_value($key)
+    public function getTotal($key)
     {
         $counter = 0;
         $items = $this->items;
@@ -260,7 +260,7 @@ class Cart
                         $counter += ($item->get($key) * $item->get('quantity'));
                     }
                 }
-                //if the cumulative quantity is required we do not want to multiply by the quantity like above...
+                //if the total quantity is required we do not want to multiply by the quantity like above...
                 else {
                     $counter += $item->get('quantity');
                 }
@@ -367,26 +367,6 @@ class Cart
         }
         else {
             return count($this->meta) > 0;
-        }
-    }
-
-    /**
-     * Used as a catch all for cumulative_* methods. Internally resolves to cumulative_value()
-     *
-     * @param string $method The name of the method being called
-     * @param array $args The arguments passed to the method
-     * @return mixed The response of the cumulative value method call
-     * @throws \BadMethodCallException
-     */
-    public function __call($method, $args = array())
-    {
-        //if method starts with the word cumulative_ assume we are wanting to use the cumulative_value method
-        if (substr($method, 0, 11) == 'cumulative_') {
-            $key = substr(strtolower($method), 11, strlen($method));
-            return $this->cumulative_value($key);
-        }
-        else {
-            throw new \BadMethodCallException('Invalid method: ' . get_called_class() . '::' . $method);
         }
     }
 
