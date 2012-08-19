@@ -1,0 +1,17 @@
+{
+    "name": "mike182uk/cart",
+    "description": "A composer compatible PHP >=5.3.0 cart.",
+    "keywords": ["shopping","cart"],
+    "authors": [
+        {
+            "name": "Mike Barrett",
+            "email": "mike182uk@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "psr-0": {"Cart": "src/"}
+    }
+}
