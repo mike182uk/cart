@@ -20,7 +20,7 @@ include '../src/Cart/Proxy.php';
 include '../src/Cart/Item.php';
 include '../src/Cart/Cart.php';
 
-//import namespaces  / set aliases
+//import namespaces / set aliases
 use \Cart\Manager as CartManager;
 use \Cart\Proxy as Cart;
 
