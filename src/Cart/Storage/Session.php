@@ -1,6 +1,4 @@
-<?php
-
-namespace Cart\Storage;
+<?php namespace Cart\Storage;
 
 class Session implements StorageInterface
 {
