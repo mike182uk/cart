@@ -13,12 +13,12 @@ error_reporting(E_ALL);
 @session_start();
 
 //include required classes
-include '../lib/cart/storage/interface.php';
-include '../lib/cart/storage/driver/session.php';
-include '../lib/cart/manager.php';
-include '../lib/cart/proxy.php';
-include '../lib/cart/item.php';
-include '../lib/cart.php';
+include '../lib/Cart/Storage/Interface.php';
+include '../lib/Cart/Storage/Session.php';
+include '../lib/Cart/Manager.php';
+include '../lib/Cart/Proxy.php';
+include '../lib/Cart/Item.php';
+include '../lib/Cart.php';
 
 //import namespaces  / set aliases
 use \Cart\Manager;
