@@ -13,7 +13,7 @@ class Proxy
      */
     public static function __callStatic($method, $args)
     {
-        $cart = Manager::getInstance();
+        $cart = Manager::getCart();
         if (method_exists($cart, $method)) {
             return call_user_func_array(array($cart, $method), $args);
         }
@@ -31,6 +31,6 @@ class Proxy
      */
     public static function context($cartID)
     {
-        return Manager::getInstance($cartID);
+        return Manager::getCart($cartID);
     }
 }
