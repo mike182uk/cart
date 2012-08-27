@@ -23,7 +23,6 @@ require '<path-to-src>/Cart/Cart.php';
 require '<path-to-src>/Cart/Item.php';
 require '<path-to-src>/Cart/Manager.php';
 require '<path-to-src>/Cart/Proxy.php';
-
 ```
 ***Note:*** *All of the code examples in the rest of this document assume you have the above files above included manually or autoloaded. If you are using your own storage component you do not have to include ``<path-to-src>/Cart/Storage/Session.php``*
 
@@ -37,7 +36,7 @@ This package is built out of a few components that work together:
 4. Proxy - Proxies static method calls to a cart instance (the one in the current context)
 5. Storage - Manages persistence of a carts state
 
-The cart can be used with or without the manager component. If you choose not to use the manager component you will have to manage your storage implementation manually and you will not beable to use the proxy (unless you extend and modify yourself).
+The cart component can be used with or without the manager component. If you choose **not** to use the manager component you will have to manage your storage implementation manually and you will not beable to use the proxy component (unless you extend and modify yourself).
 
 The storage component is swapable. If you have a certain way you need to implement state persistence you can do this by implementing the storage interface: ``\Cart\Storage\StorageInterface``.
 
@@ -47,11 +46,11 @@ By default 1 storage component is provided:
 
 ##Using The Cart Manager
 
-This section will guide you through using the cart **with** the cart manager.
+This section will guide you through using the cart component **with** the cart manager component. 9 Times out of the 10 this will be the setup you want to use.
 
 ### Aliases
 
-I recommend aliasing the the manager and proxy components to something a easier to write and reference:
+I recommend aliasing the manager and proxy components to something easier to write and reference:
 
 ```
 use \Cart\Manager as CartManager;
@@ -68,7 +67,7 @@ CartManager::destroyInstance();
 
 ### Configuration
 
-You will need to pass an array of configuration options to the cart managers init method. This kick starts the manager. This should be the first thing you do before you try and use the cart manager. The configuration options would be best saved their own file and included into the script when needed:
+You will need to pass an array of configuration options to the cart managers init method. This kick starts the manager. This should be the first thing you do before you try and use the cart manager. The configuration options would be best saved in their own file and included into the script when needed:
 
 ```
 <?php
@@ -166,7 +165,7 @@ You can define the storage options in the configuration file.
 
 - **autosave** - If set to true, the cart state will be saved automatically with out you having to do anything. If set to false, the state can be saved manually by calling ``CartManager::saveState()``.
 - **driver** - This is the name of the class that contains your storage implementation. This class should implement ``\Cart\Storage\StorageInterface``. If this option is set to a blank string, the cart manager will not attempt to preserve or restore state.
-- **storage_key_prefix**, **storage_key_suffix** - These are strings that will be added to the cart ID, which will be used as the identifier in your storage implementation. *i.e If you are using the session to save the cart state, this would look something like $_SESSION['<cart_storage_prefix><cart_id><cart_storage_suffix>'] or in our example above $_SESSION['cart_Cart-01_instance']*.
+- **storage_key_prefix**, **storage_key_suffix** - These are strings that will be added to the cart ID, which will be used as the identifier in your storage implementation. *i.e If you are using the session to save the cart state, this would look something like ```$_SESSION['<cart_storage_prefix><cart_id><cart_storage_suffix>']``` or in our example above ```$_SESSION['cart_Cart-01_instance']```*.
 
 If you chose to autosave (recommended), internally this is registered as a shutdown function:
 
