@@ -9,7 +9,7 @@ A modern, composer compatible, PHP >=5.3.0 shopping cart
 - Configurable cart and cart items
 - Cart and cart items support meta data
 - Flexible state persistence
-- Namespaced, composer ready, framework independent, PSR-0, PSR-1
+- Namespaced, composer ready, framework independent, PSR-2
 
 ###Prerequisites
 
@@ -17,7 +17,7 @@ A modern, composer compatible, PHP >=5.3.0 shopping cart
 3. This package can be installed using composer or can be integrated manually. If you are not using an autoloader make sure you include all of the php files in the ``src`` directory.
 
 ```
-require '<path-to-src>/Cart/Storage/Interface.php';
+require '<path-to-src>/Cart/Storage/StorageInterface.php';
 require '<path-to-src>/Cart/Storage/Session.php';
 require '<path-to-src>/Cart/Cart.php';
 require '<path-to-src>/Cart/Item.php';
@@ -46,7 +46,7 @@ By default 1 storage component is provided:
 
 ##Using The Cart Manager
 
-This section will guide you through using the cart component **with** the cart manager component. 9 Times out of the 10 this will be the setup you want to use.
+This section will guide you through using the cart component **with** the manager component. 9 Times out of the 10 this will be the setup you want to use.
 
 ### Aliases
 
@@ -71,6 +71,8 @@ You will need to pass an array of configuration options to the cart managers ``i
 
 ```
 <?php
+
+//config.php
 
 return array(
 
@@ -124,7 +126,6 @@ return array(
     'carts' => array(
         'Cart-01' => array(), //will inherit all of the above options
         'Cart-02' => array(),
-        //'cart3' => array()
     )
 
 );
@@ -142,7 +143,7 @@ Internally the cart and cart item components use ``number_format()`` to format c
 
 ### Context
 
-The cart manager can only manage 1 cart instance at a time. This cart will be the cart that is in the current **context**. If you have multiple carts you can switch between them. This is known as switching context. You can control the context using the ``context`` method of the cart manager component:
+The cart manager can only manage 1 cart instance at a time. This cart will be the cart that is in the current **context**. If you have multiple carts you can switch between them. This is known as switching context. You can control the context using the ``context`` method of the manager component:
 
 ```
 CartManager::context('Cart-02'); //switches the context to cart 2. Cart-02 is the ID of the cart as specified in the configuration file.
@@ -176,8 +177,73 @@ If you chose to autosave (recommended), internally this is registered as a shutd
 register_shutdown_function(array('\Cart\Manager', 'saveState'), $cartID);
 ```
 
-The state is restored in the when ``CartManager::init()`` is called.
+The state is restored when ``CartManager::init()`` is called.
 
 ##Not Using The Cart Manager
 
 This section will guide you through using the cart **without** the cart manager.
+
+You can use the cart component without having to use the cart manager. You may want to do this for simpler setups where you do not need all the bells and whistles of the cart manager. The drawbacks to not using the cart manager are:
+
+1. You will have manage state persistance manually
+2. You will not have access to the proxy
+3. You cannot manage multiple cart instances from one central place
+
+### Configuration
+
+You will need to pass an array of configuration options to the carts ``constructor``. This kick starts the cart. This should be the first thing you do before you try and use the cart. The configuration options would be best saved in their own file and included into the script when needed:
+
+```
+<?php
+
+//config.php
+
+return array(
+
+	/**
+	 * The decimal character to be used when formatting numbers
+	 */
+	'decimal_point' => '.',
+	
+	/**
+     * The number of decimal places after a number
+     */
+     'decimal_places' => 2,
+
+    /**
+     * The thousands separator character to be used when formatting numbers
+     */
+     'thousands_separator' => ','
+);
+```
+
+```
+$config = require '<path-to-config>/config.php';
+
+// the carts constructor takes the cart id and the conifg options
+// as arguments. if the cart id is set to false then the cart will 
+// automatically generate an id for this cart instance
+$cart = new \Cart\Cart('cart01', $config);
+```
+
+### Manual State Persistance (Storage)
+
+The cart component has ``import`` and ``export`` methods that you can use to manually control the state of the cart:
+
+```
+// saving cart state using sessions
+$cartState = $cart->export();
+$_SESSION['cart'] = $cartState;
+
+…
+
+// importing cart state using sessions
+$cart->import($_SESSION['cart']);
+
+```
+
+The ``export`` method returns an array of all the of carts items and any meta data stored on the cart.
+
+The ``import`` method expects an array formatted the same as what ``export`` produces.
+
+You are free to use whatever storage implementation you want as long as the data that is being imported is compatible.
