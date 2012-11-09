@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Cart;
 
@@ -31,8 +31,8 @@ class Cart
     /**
      * Cart constructor. Sets the carts ID. If the cart is not passed an ID, it is automatically assigned one.
      *
-     * @param bool|string $id The ID assigned to this cart instance
-     * @param array $config The configuration options associated with this cart
+     * @param  bool|string                          $id     The ID assigned to this cart instance
+     * @param  array                                $config The configuration options associated with this cart
      * @throws Exception\InvalidCartConfigException
      */
     public function __construct($id = false, $config)
@@ -42,8 +42,7 @@ class Cart
 
         if ( ! is_array($config)) {
             throw new Exception\InvalidCartConfigException('Either no configuration options where passed to the cart: ' . $this->id . ', or the configuration options were not formatted as an array');
-        }
-        else {
+        } else {
             //@todo: do some more checks to make sure correct config items are set etc.
             $this->config = $config;
         }
@@ -52,7 +51,7 @@ class Cart
     /**
      * Add an item to the cart. If the item already exists in the cart, it is updated.
      *
-     * @param array $itemData The data associated with the item
+     * @param  array       $itemData The data associated with the item
      * @return string|bool If the item is added or fields other than the quantity are updated the UID is returned,
      *                     if the item is updated and only the quantity is amended true is returned
      */
@@ -78,6 +77,7 @@ class Cart
         //if item already exists, simply update the quantity
         if ($this->exists($uid)) {
             $newQuantity = $this->items[$uid]->get('quantity') + $itemData['quantity'];
+
             return $this->update($uid, 'quantity', $newQuantity);
         }
         //otherwise add as a new item
@@ -88,6 +88,7 @@ class Cart
                 'thousands_separator' => $this->config['thousands_separator'],
             );
             $this->items[$uid] = new Item($itemData, $uid, $config);
+
             return $uid;
         }
     }
@@ -95,9 +96,9 @@ class Cart
     /**
      * Update an item in the cart
      *
-     * @param string $uid The Unique identifier of the item in the cart
-     * @param string $key The key of the value to be updated
-     * @param mixed $value The new value
+     * @param  string     $uid   The Unique identifier of the item in the cart
+     * @param  string     $key   The key of the value to be updated
+     * @param  mixed      $value The new value
      * @return bool|mixed If the fields other than the quantity are updated the UID is returned as it is regenerated,
      *                    if the item is updated and only the quantity is amended true is returned
      * @throws Exception\InvalidCartItemException
@@ -116,16 +117,17 @@ class Cart
                 else {
                     unset($this->items[$uid]);
                 }
+
                 return true;
             }
             //if we are not updating the quantity, we are going to need to update the uid
             else {
                 $itemData = $item->export();
                 $this->remove($uid);
+
                 return $this->add($itemData);
             }
-        }
-        else {
+        } else {
             throw new Exception\InvalidCartItemException('Cart item does not exist: ' . $uid . ' in the cart instance: ' . $this->id);
         }
     }
@@ -133,16 +135,16 @@ class Cart
     /**
      * Remove an item from the cart
      *
-     * @param string $uid The Unique identifier of the item in the cart
-     * @return bool If the item was removed true is returned, otherwise false is returned
+     * @param  string $uid The Unique identifier of the item in the cart
+     * @return bool   If the item was removed true is returned, otherwise false is returned
      */
     public function remove($uid)
     {
         if ($this->exists($uid)) {
             unset($this->items[$uid]);
+
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -150,8 +152,8 @@ class Cart
     /**
      * Check an item exists in the cart
      *
-     * @param array|string $value Either the unique identifier of the item in the cart, or the data array for the item
-     * @return bool Whether the item exists or not
+     * @param  array|string $value Either the unique identifier of the item in the cart, or the data array for the item
+     * @return bool         Whether the item exists or not
      */
     public function exists($value)
     {
@@ -171,15 +173,14 @@ class Cart
     /**
      * Get an item from the cart
      *
-     * @param string $uid The Unique identifier of the item in the cart
+     * @param  string                             $uid The Unique identifier of the item in the cart
      * @throws Exception\InvalidCartItemException
      */
     public function item($uid)
     {
         if ($this->exists($uid)) {
             return $this->items[$uid];
-        }
-        else {
+        } else {
             throw new Exception\InvalidCartItemException('Cart item does not exist: ' . $uid . ' in the cart instance: ' . $this->id);
         }
     }
@@ -197,7 +198,7 @@ class Cart
     /**
      * Get the cart total
      *
-     * @param bool $excludingTax Should the total be returned tax excluded
+     * @param  bool  $excludingTax Should the total be returned tax excluded
      * @return float The total for the cart
      */
     public function total($excludingTax = false)
@@ -232,8 +233,8 @@ class Cart
     /**
      * Get the number of items in the cart
      *
-     * @param bool $unique ignore item quantities
-     * @return int The item count
+     * @param  bool $unique ignore item quantities
+     * @return int  The item count
      */
     public function itemCount($unique = false)
     {
@@ -243,8 +244,8 @@ class Cart
     /**
      * Get the total of a certain value that appears on each item in the cart.
      *
-     * @param string $key The key of the value
-     * @return int The total value for the passed key
+     * @param  string $key The key of the value
+     * @return int    The total value for the passed key
      */
     public function getTotal($key)
     {
@@ -271,7 +272,7 @@ class Cart
     /**
      * Export the cart
      *
-     * @param bool $includeUID Should the items UID be included in the exported item data
+     * @param  bool  $includeUID Should the items UID be included in the exported item data
      * @return array The cart data
      */
     public function export($includeUID = false)
@@ -321,8 +322,8 @@ class Cart
     /**
      * Save meta data against cart.
      *
-     * @param string $key The key to identify the meta data
-     * @param mixed $value The meta data to be saved against the cart
+     * @param string $key   The key to identify the meta data
+     * @param mixed  $value The meta data to be saved against the cart
      */
     public function setMeta($key, $value)
     {
@@ -332,8 +333,8 @@ class Cart
     /**
      * Retrieve meta data set against a cart
      *
-     * @param string $key The key to identify the requested meta data
-     * @return mixed The meta data retrieved
+     * @param  string $key The key to identify the requested meta data
+     * @return mixed  The meta data retrieved
      */
     public function getMeta($key)
     {
@@ -343,8 +344,8 @@ class Cart
     /**
      * Remove meta data set against a cart
      *
-     * @param string $key The key to identify the meta data to be removed
-     * @return mixed The meta data retrieved
+     * @param  string $key The key to identify the meta data to be removed
+     * @return mixed  The meta data retrieved
      */
     public function removeMeta($key)
     {
@@ -355,15 +356,14 @@ class Cart
      * Checks if a cart has meta data saved against it. If a key is passed only the presence of
      * meta data with that key is checked for
      *
-     * @param bool|string $key The key of the meta data item saved against cart
-     * @return bool Whether the cart has meta data saved against it or not
+     * @param  bool|string $key The key of the meta data item saved against cart
+     * @return bool        Whether the cart has meta data saved against it or not
      */
     public function hasMeta($key = false)
     {
         if ($key) {
             return array_key_exists($key, $this->meta);
-        }
-        else {
+        } else {
             return count($this->meta) > 0;
         }
     }
@@ -373,7 +373,7 @@ class Cart
      * to get a string representation of the data then md5 hashed to generate a unique
      * value
      *
-     * @param array $itemData The items data that will be hashed to generate the UID
+     * @param  array  $itemData The items data that will be hashed to generate the UID
      * @return string The UID
      */
     public function generateUID($itemData)

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Cart;
 
@@ -25,9 +25,9 @@ class Item
     /**
      * Item constructor. Set the items meta data, UID and config options
      *
-     * @param array $itemData The meta data associated with this item
-     * @param string $uid The unique identifier for this item
-     * @param array $config The configuration options associated with this cart item
+     * @param array  $itemData The meta data associated with this item
+     * @param string $uid      The unique identifier for this item
+     * @param array  $config   The configuration options associated with this cart item
      */
     public function __construct($itemData, $uid, $config)
     {
@@ -39,8 +39,8 @@ class Item
     /**
      * Get value of a meta data entry
      *
-     * @param string $key The key associated with the meta data entry
-     * @return mixed The requested meta data
+     * @param  string $key The key associated with the meta data entry
+     * @return mixed  The requested meta data
      */
     public function get($key)
     {
@@ -60,7 +60,7 @@ class Item
     /**
      * Get price for 1 of this item
      *
-     * @param bool $excludingTax Should the single price be returned tax excluded
+     * @param  bool  $excludingTax Should the single price be returned tax excluded
      * @return float Price for 1 of item
      */
     public function singlePrice($excludingTax = false)
@@ -80,7 +80,7 @@ class Item
     /**
      * Get items total price
      *
-     * @param bool $excludingTax Should the total price be returned tax excluded
+     * @param  bool  $excludingTax Should the total price be returned tax excluded
      * @return float The total cumulative price for this item
      */
     public function totalPrice($excludingTax = false)
@@ -150,7 +150,7 @@ class Item
     /**
      * Get an item as an array
      *
-     * @param bool $include_uid Should the items UID be included in the exported data
+     * @param  bool  $include_uid Should the items UID be included in the exported data
      * @return array The item data as an array
      */
     public function export($include_uid = false)
@@ -159,14 +159,15 @@ class Item
         if ($include_uid) {
             $itemData['uid'] = $this->uid;
         }
+
         return $itemData;
     }
 
     /**
      * Save meta data against item. Meta data is not used to generate the item UID.
      *
-     * @param string $key The key to identify the meta data
-     * @param mixed $value The meta data to be saved against the item
+     * @param string $key   The key to identify the meta data
+     * @param mixed  $value The meta data to be saved against the item
      */
     public function setMeta($key, $value)
     {
@@ -176,8 +177,8 @@ class Item
     /**
      * Retrieve meta data set against an item
      *
-     * @param string $key The key to identify the requested meta data
-     * @return mixed The meta data retrieved
+     * @param  string $key The key to identify the requested meta data
+     * @return mixed  The meta data retrieved
      */
     public function getMeta($key)
     {
@@ -187,8 +188,8 @@ class Item
     /**
      * Remove meta data set against an item
      *
-     * @param string $key The key to identify the meta data to be removed
-     * @return mixed The meta data retrieved
+     * @param  string $key The key to identify the meta data to be removed
+     * @return mixed  The meta data retrieved
      */
     public function removeMeta($key)
     {
@@ -199,15 +200,14 @@ class Item
      * Checks if an item has meta data saved against it. If a key is passed only the presence of
      * meta data with that key is checked for
      *
-     * @param bool|string $key The key of the meta data item saved against item
-     * @return bool Whether the item has meta data saved against it or not
+     * @param  bool|string $key The key of the meta data item saved against item
+     * @return bool        Whether the item has meta data saved against it or not
      */
     public function hasMeta($key = false)
     {
         if ($key) {
             return array_key_exists($key, $this->data['meta']);
-        }
-        else {
+        } else {
             return count($this->data['meta']) > 0;
         }
     }

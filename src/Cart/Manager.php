@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Cart;
 
@@ -50,8 +50,8 @@ class Manager
      * Sets the current context if a cart ID is supplied, or gets the current context if no cart ID is supplied
      *
      * @static
-     * @param bool|string $cartID If false then the current context is returned, otherwise the current context is set
-     * @return string The current context if this is being retrieved
+     * @param  bool|string                            $cartID If false then the current context is returned, otherwise the current context is set
+     * @return string                                 The current context if this is being retrieved
      * @throws Exception\InvalidCartInstanceException
      */
     public static function context($cartID = false)
@@ -59,8 +59,7 @@ class Manager
         if ($cartID) {
             if (isset(static::$instances[$cartID])) {
                 static::$context = $cartID;
-            }
-            else {
+            } else {
                 throw new Exception\InvalidCartInstanceException('There is no cart instance with the id: ' . $cartID);
             }
         }
@@ -72,8 +71,8 @@ class Manager
      * Checks to see if there is an instance of a cart with a specific ID
      *
      * @static
-     * @param string $cartID The ID of the cart to check for
-     * @return bool True if the cart instance exists, false otherwise
+     * @param  string $cartID The ID of the cart to check for
+     * @return bool   True if the cart instance exists, false otherwise
      */
     public static function cartExists($cartID)
     {
@@ -85,8 +84,8 @@ class Manager
      * is returned. Otherwise requested instance is returned
      *
      * @static
-     * @param string|bool $cartID The Id of the cart instance to return
-     * @return object The requested cart instance or the current cart instance in context if no $cartID provided
+     * @param  string|bool                            $cartID The Id of the cart instance to return
+     * @return object                                 The requested cart instance or the current cart instance in context if no $cartID provided
      * @throws Exception\InvalidCartInstanceException
      */
     public static function getCart($cartID = false)
@@ -95,8 +94,7 @@ class Manager
 
         if (static::cartExists($cartID)) {
             return static::$instances[$cartID];
-        }
-        else {
+        } else {
             throw new Exception\InvalidCartInstanceException('There is no cart instance with the id: ' . $cartID);
         }
     }
@@ -105,11 +103,11 @@ class Manager
      * Create a new cart instance
      *
      * @static
-     * @param string $cartID The ID for the cart instance
-     * @param bool|array $config The configuration options associated with this cart
-     * @param bool $overwrite If the cart instance already exists should if be overwritten
-     * @param bool $switchContext Should the context be switched to this cart instance
-     * @return mixed The newly created cart instance
+     * @param  string                                   $cartID        The ID for the cart instance
+     * @param  bool|array                               $config        The configuration options associated with this cart
+     * @param  bool                                     $overwrite     If the cart instance already exists should if be overwritten
+     * @param  bool                                     $switchContext Should the context be switched to this cart instance
+     * @return mixed                                    The newly created cart instance
      * @throws Exception\DuplicateCartInstanceException
      */
     public static function newCart($cartID, $config = false, $overwrite = true, $switchContext = true)
@@ -136,8 +134,7 @@ class Manager
             }
 
             return static::$instances[$cartID];
-        }
-        else {
+        } else {
             throw new Exception\DuplicateCartInstanceException('There is already a cart instance with the id: ' . $cartID);
         }
     }
@@ -147,7 +144,7 @@ class Manager
      * current context is set to nothing.
      *
      * @static
-     * @param bool $cartID The ID of the cart to be destroyed
+     * @param bool $cartID       The ID of the cart to be destroyed
      * @param bool $clearStorage Should the storage associated with the cart instance be cleared
      */
     public static function destroyCart($cartID = false, $clearStorage = true)
@@ -186,15 +183,14 @@ class Manager
      * for the requested instance, the default cart configuration is returned
      *
      * @static
-     * @param string $cartID The ID of the cart instance
-     * @return array The cart configuration options
+     * @param  string $cartID The ID of the cart instance
+     * @return array  The cart configuration options
      */
     public static function getCartConfig($cartID = '')
     {
         if (array_key_exists($cartID, static::$config['carts'])) {
             return static::$config['carts'][$cartID];
-        }
-        else {
+        } else {
             return static::$config['defaults'];
         }
     }
@@ -243,8 +239,8 @@ class Manager
      * storage driver is valid
      *
      * @static
-     * @param string $cartID The ID of the cart instance
-     * @return string The FQN of the storage implementation
+     * @param  string                                          $cartID The ID of the cart instance
+     * @return string                                          The FQN of the storage implementation
      * @throws Exception\InvalidStorageImplementationException
      */
     public static function getCartStorageDriver($cartID)
@@ -271,7 +267,7 @@ class Manager
      * and suffix set in config
      *
      * @static
-     * @param string $cartID The ID of the cart instance
+     * @param  string $cartID The ID of the cart instance
      * @return string The storage key associated with the cart instance
      */
     public static function getCartStorageKey($cartID)
