@@ -33,7 +33,7 @@ class Cart
      *
      * @param bool|string $id The ID assigned to this cart instance
      * @param array $config The configuration options associated with this cart
-     * @throws InvalidCartConfigException
+     * @throws Exception\InvalidCartConfigException
      */
     public function __construct($id = false, $config)
     {
@@ -41,7 +41,7 @@ class Cart
         $this->id = $id;
 
         if ( ! is_array($config)) {
-            throw new InvalidCartConfigException('Either no configuration options where passed to the cart: ' . $this->id . ', or the configuration options were not formatted as an array');
+            throw new Exception\InvalidCartConfigException('Either no configuration options where passed to the cart: ' . $this->id . ', or the configuration options were not formatted as an array');
         }
         else {
             //@todo: do some more checks to make sure correct config items are set etc.
@@ -100,7 +100,7 @@ class Cart
      * @param mixed $value The new value
      * @return bool|mixed If the fields other than the quantity are updated the UID is returned as it is regenerated,
      *                    if the item is updated and only the quantity is amended true is returned
-     * @throws InvalidCartItemException
+     * @throws Exception\InvalidCartItemException
      */
     public function update($uid, $key, $value)
     {
@@ -126,7 +126,7 @@ class Cart
             }
         }
         else {
-            throw new InvalidCartItemException('Cart item does not exist: ' . $uid . ' in the cart instance: ' . $this->id);
+            throw new Exception\InvalidCartItemException('Cart item does not exist: ' . $uid . ' in the cart instance: ' . $this->id);
         }
     }
 
@@ -172,7 +172,7 @@ class Cart
      * Get an item from the cart
      *
      * @param string $uid The Unique identifier of the item in the cart
-     * @throws InvalidCartItemException
+     * @throws Exception\InvalidCartItemException
      */
     public function item($uid)
     {
@@ -180,7 +180,7 @@ class Cart
             return $this->items[$uid];
         }
         else {
-            throw new InvalidCartItemException('Cart item does not exist: ' . $uid . ' in the cart instance: ' . $this->id);
+            throw new Exception\InvalidCartItemException('Cart item does not exist: ' . $uid . ' in the cart instance: ' . $this->id);
         }
     }
 

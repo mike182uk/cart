@@ -1,5 +1,5 @@
 <?php 
 
-namespace Cart;
+namespace Cart\Exception;
 
 class InvalidStorageImplementationException extends \Exception {}
