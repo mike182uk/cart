@@ -5,7 +5,7 @@ namespace Cart\Storage;
 /**
  * The base storage interface that must be implemented by all storage methods.
  */
-interface Interface
+interface StorageInterface
 {
     /**
      * Restore previously saved state
