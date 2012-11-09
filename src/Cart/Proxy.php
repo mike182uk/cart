@@ -1,4 +1,6 @@
-<?php namespace Cart;
+<?php 
+
+namespace Cart;
 
 class Proxy
 {

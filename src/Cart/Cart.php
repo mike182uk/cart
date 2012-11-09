@@ -1,8 +1,6 @@
-<?php namespace Cart;
+<?php 
 
-class InvalidCartItemException extends \Exception {}
-
-class InvalidCartConfigException extends \Exception {}
+namespace Cart;
 
 class Cart
 {

@@ -1,10 +1,6 @@
-<?php namespace Cart;
+<?php 
 
-class InvalidCartInstanceException extends \Exception {}
-
-class DuplicateCartInstanceException extends \Exception {}
-
-class InvalidStorageImplementationException extends \Exception {}
+namespace Cart;
 
 class Manager
 {

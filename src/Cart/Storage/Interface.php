@@ -1,4 +1,6 @@
-<?php namespace Cart\Storage;
+<?php 
+
+namespace Cart\Storage;
 
 /**
  * The base storage interface that must be implemented by all storage methods.
