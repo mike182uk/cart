@@ -9,7 +9,7 @@ A modern, composer compatible, PHP >=5.3.0 shopping cart
 - Configurable cart and cart items
 - Cart and cart items support meta data
 - Flexible state persistence
-- Namespaced, composer ready, framework independent, PSR-0
+- Namespaced, composer ready, framework independent, PSR-0, PSR-1
 
 ###Prerequisites
 
@@ -60,14 +60,14 @@ use \Cart\Proxy as Cart;
 
 $numOfItmes = Cart::itemCount():
 
-CartManager::destroyInstance();
+CartManager::destroyCart();
 
 ```
 ***Note:*** *The rest of the code examples in this section will assume the above has been done.* 
 
 ### Configuration
 
-You will need to pass an array of configuration options to the cart managers init method. This kick starts the manager. This should be the first thing you do before you try and use the cart manager. The configuration options would be best saved in their own file and included into the script when needed:
+You will need to pass an array of configuration options to the cart managers ``init`` method. This kick starts the manager. This should be the first thing you do before you try and use the cart manager. The configuration options would be best saved in their own file and included into the script when needed:
 
 ```
 <?php
@@ -138,9 +138,11 @@ CartManager::init($config);
 
 From the configuration file you can define multiple cart instances. Each instance can have its own unique set of properties, otherwise it will just inherit from the default options.
 
+Internally the cart and cart item components use ``number_format()`` to format currency values. The configuration options ``decimal_point``, ``decimal_places`` and ``thousands_separator`` all relate to this.
+
 ### Context
 
-The cart manager can only manage 1 cart instance at a time. This cart will be the cart that is in the current context. If you have multiple carts you can switch between them. This is known as switching context. You can control the context using the ``context`` method of the cart manager component:
+The cart manager can only manage 1 cart instance at a time. This cart will be the cart that is in the current **context**. If you have multiple carts you can switch between them. This is known as switching context. You can control the context using the ``context`` method of the cart manager component:
 
 ```
 CartManager::context('Cart-02'); //switches the context to cart 2. Cart-02 is the ID of the cart as specified in the configuration file.
@@ -157,6 +159,7 @@ CartManager::context('Cart-01');
 
 $numOfItemsCart2 = Cart::itemsCount(); //get the number of items in cart 1
 ```
+
 By default ``CartManager::init()`` will set the first cart in the ``carts`` array, in the configuration file, to be the cart in context (in our example above this will be ``Cart-01``);
 
 ### State Persistance (Storage)
