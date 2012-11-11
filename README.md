@@ -868,3 +868,5 @@ $config = array(
 ## Notes
 
 For more information on the inner workings i highly encourage you to take a deeper look at the source code.
+
+There is also an demo provided with this repo. I highly recommend you check this out as well for a real world useage demo.
