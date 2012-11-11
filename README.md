@@ -44,9 +44,9 @@ By default 1 storage component is provided:
 
 1. ``\Cart\Storage\Session`` - persists state using the session
 
-##Using The Cart Manager
+## Setup: Using The Cart Manager
 
-This section will guide you through using the cart component **with** the manager component. 9 Times out of the 10 this will be the setup you want to use.
+This section will guide you through setting up the cart component **with** the manager component. 9 Times out of the 10 this will be the setup you want to use.
 
 ### Aliases
 
@@ -179,9 +179,9 @@ register_shutdown_function(array('\Cart\Manager', 'saveState'), $cartID);
 
 The state is restored when ``CartManager::init()`` is called.
 
-##Not Using The Cart Manager
+##Setup: Not Using The Cart Manager
 
-This section will guide you through using the cart **without** the cart manager.
+This section will guide you through setting up the cart **without** the cart manager.
 
 You can use the cart component without having to use the cart manager. You may want to do this for simpler setups where you do not need all the bells and whistles of the cart manager. The drawbacks to not using the cart manager are:
 
@@ -247,3 +247,311 @@ The ``export`` method returns an array of all the of carts items and any meta da
 The ``import`` method expects an array formatted the same as what ``export`` produces.
 
 You are free to use whatever storage implementation you want as long as the data that is being imported is compatible.
+
+## Useage
+
+### Adding an item to the cart
+
+You define an item with a simple array:
+
+```
+$item = array(
+	'name' => 'Apple Macbook Pro 13 inch Laptop',
+	'sku' => 'B004P8JCY8',
+	'id' => '2',
+	'price' => '824.17',
+	'tax' => '164.83',
+	'weight' => '3900',
+	'quantity' => 1
+);
+
+```
+
+You can have as many or as little properties as required (it is always a good idea to have price, tax and name though). If a quantity is not supplied, the assumed quantity is 1.
+
+The item is then passed to the carts ``add``:
+
+```
+// using the cart manager
+Cart::add($item);
+
+// not using the cart manager
+$cart->add($item);
+```
+
+If an item is added to the cart that has already been added before, the quantity for that item is automatically updated. The same item is not added again, unless its properties are different (i.e has a different price or sku).
+
+Internally each item is assigned a UID (unique identifier) and you will use this to interact with items already in the cart. The carts `add` method returns the UID of the new item that is added:
+
+```
+$itemUID = Cart::add($item);
+
+// $itemUID = 1b5792a046e0597daa4186169adb8d66
+```
+
+### Removing an item from the cart
+
+To remove an item you need to pass the items UID to the carts ``remove`` method:
+
+```
+$uid = '1b5792a046e0597daa4186169adb8d66';
+
+// using the cart manager
+Cart::remove($uid);
+
+// not using the cart manager
+$cart->remove($uid);
+```
+
+### Updating an item in the cart
+
+To update an item you need to pass the items UID, the property to update and the new value of the property to the carts ``update`` method:
+
+```
+$uid = '1b5792a046e0597daa4186169adb8d66';
+
+try {
+	// using the cart manager
+	Cart::update($uid, 'quantity', 10);
+
+	// not using the cart manager
+	$cart->update($uid, 'quantity', 10);
+}
+```
+
+If any property other than the qauntity is changed then the UID will be recalculated:
+
+```
+$uid = '1b5792a046e0597daa4186169adb8d66';
+
+try {
+	$uid = Cart::update($uid, 'price', '900.00');
+}
+
+// $uid = 35a1699a3471501c6927cb93aa181c88
+
+```
+
+A ``\Cart\Exception\InvalidCartItemException`` exception is thrown if the item you are trying to update does not exist (see below for how to check if an item exists).
+
+**Tip:** You can also remove an item from the cart by setting its quantity to zero using the ``update`` method.
+
+### Checking if an item exists in the cart
+
+You can check if an item exists in cart using the carts ``exists`` method:
+
+```
+$uid = '1b5792a046e0597daa4186169adb8d66';
+
+// using the cart manager
+$itemExists = Cart::exists($uid);
+
+// not using the cart manager
+$itemExists = $cart->exists($uid);
+
+```
+
+You can also pass an item array to the ``exists`` method:
+
+```
+$item = array(
+	'name' => 'Apple Macbook Pro 13 inch Laptop',
+	'sku' => 'B004P8JCY8',
+	'id' => '2',
+	'price' => '824.17',
+	'tax' => '164.83',
+	'weight' => '3900',
+	'quantity' => 1
+);
+
+if (Cart::exists($item))
+{
+	//...
+}
+
+```
+
+You may want to use this to check if an item has already been added to the cart before trying to add it.
+
+### Getting the total number of items in the cart
+
+```
+// using the cart manager
+Cart::itemCount();
+
+// not using the cart manager
+$cart->itemCount();
+```
+
+You can also get the total **unique** number of items in the cart (quantity is ignored) by passing ``true`` to the carts ``itemCount`` method:
+
+```
+Cart::itemCount(true);
+```
+
+### Getting items in the cart
+
+The carts ``items`` method returns an array of ``\Cart\Item`` objects:
+
+```
+// using the cart manager
+$items = Cart::items();
+
+// not using the cart manager
+$items = $cart->items();
+```
+
+If you just want 1 item you can use the carts ``item`` method:
+
+```
+$uid = '1b5792a046e0597daa4186169adb8d66';
+
+try {
+	// using the cart manager
+	$item = Cart::item($uid);
+
+	// not using the cart manager
+	$item = $cart->item($uid);
+}
+```
+The carts ``item`` method throws a ``\Exception\InvalidCartItemException`` exception if the item does not exist in the cart.
+
+### Getting the total cart value
+
+The carts ``total`` method returns the total value of the cart. This returns the total value **including** tax. You can return the total without tax by passing ``true`` as a parameter:
+
+```
+// using the cart manager
+$total = Cart::total();
+$totalExcludingTax = Cart::total(true);
+
+// not using the cart manager
+$total = $cart->total();
+$totalExcludingTax = $cart->total(true);
+```
+
+To just get the total tax you can use the ``tax`` method:
+
+```
+// using the cart manager
+$tax = Cart::tax();
+
+// not using the cart manager
+$tax = $cart->tax();
+```
+
+### Getting cart totals
+
+If the items in the cart have countable properties (weight etc.) you can use the carts ``getTotal`` method to get the carts total value for this property:
+
+```
+// using the cart manager
+$totalWeight = Cart::getTotal('weight');
+
+// not using the cart manager
+$totalWeight = $cart->getTotal('weight');
+```
+
+Internally the carts ``itemCount``, ``total`` and ``tax`` methods use this method.
+
+The carts ``getTotal`` method can be used in other ways - i.e to check if the cart has any discounted items:
+
+```
+$item1 = array(
+	'name' => 'Apple Macbook Pro 13 inch Laptop',
+	'sku' => 'B004P8JCY8',
+	'id' => '2',
+	'price' => '824.17',
+	'tax' => '164.83',
+	'weight' => '3900',
+	'quantity' => 1
+);
+
+$item2 = array(
+	'name' => 'Apple Macbook Pro 13 inch Laptop - Discounted',
+	'sku' => 'B004P8JCY8',
+	'id' => '2',
+	'price' => '724.17',
+	'tax' => '164.83',
+	'weight' => '3900',
+	'quantity' => 1,
+	'discounted' => 1
+);
+
+$item2 = array(
+	'name' => 'Apple Macbook Pro 13 inch Laptop - Heavily Discounted',
+	'sku' => 'B004P8JCY8',
+	'id' => '2',
+	'price' => '624.17',
+	'tax' => '164.83',
+	'weight' => '3900',
+	'quantity' => 1,
+	'discounted' => 1
+);
+
+Cart::add($item1);
+Cart::add($item2);
+
+$hasDiscounts = Cart::getTotal('discounted') > 0; // will be true as 2 items have the discounted property
+
+if ($hasDiscounts)
+{
+    //...
+}
+```
+
+### Clearing the cart
+
+```
+// using the cart manager
+Cart::destroyCart();
+
+// not using the cart manager
+$cart->clear();
+```
+
+### Cart Meta Data
+
+You store meta data on the cart. This can be useful for things like recording a customers checkout message, or keeping track of applied discounts etc.
+
+##### Setting meta data
+
+```
+// using the cart manager
+Cart::setMeta('checkout_message', 'This is a checkout message');
+
+// not using the cart manager
+$cart->setMeta('checkout_message', 'This is a checkout message');
+```
+
+##### Retreiving meta data
+
+```
+// using the cart manager
+$checkoutMessage = Cart::getMeta('checkout_message');
+
+// not using the cart manager
+$cart->getMeta('checkout_message');
+```
+
+##### Removing meta data
+
+```
+// using the cart manager
+Cart::removeMeta('checkout_message');
+
+// not using the cart manager
+$cart->removeMeta('checkout_message');
+```
+
+You can also check if the cart has meta data set against it using the ``hasMeta`` method. You can pass a key to this method to check if a specific piece of meta data exists:
+
+```
+// using the cart manager
+$hasMeta = Cart::hasMeta();
+$hasCheckoutMessage = Cart::hasMeta('checkout_message');
+
+// not using the cart manager
+$hasMeta = Cart->hasMeta();
+$hasCheckoutMessage = $cart->hasMeta('checkout_message');
+```
