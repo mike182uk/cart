@@ -8,6 +8,7 @@ A modern, composer compatible, PHP >=5.3.0 shopping cart
 - Handles one or several cart instances (via cart manager)
 - Configurable cart and cart items
 - Cart and cart items support meta data
+- Importable / Exportable carts
 - Flexible state persistence
 - Namespaced, composer ready, framework independent, PSR-2
 
@@ -38,7 +39,7 @@ This package is built out of a few components that work together:
 
 The cart component can be used with or without the manager component. If you choose **not** to use the manager component you will have to manage your storage implementation manually and you will not beable to use the proxy component (unless you extend and modify yourself).
 
-The storage component is swapable. If you have a certain way you need to implement state persistence you can do this by implementing the storage interface: ``\Cart\Storage\StorageInterface``.
+The storage component is swapable. If you have a certain way you need to implement state persistence you can do this by implementing the storage interface: ``\Cart\Storage\StorageInterface`` (see [custom state persistence](#custom-state-persistence)).
 
 By default 1 storage component is provided:
 
@@ -65,7 +66,7 @@ CartManager::destroyCart();
 ```
 ***Note:*** *The rest of the code examples in this section will assume the above has been done.* 
 
-### Configuration
+### <a id="configuration"></a> Configuration
 
 You will need to pass an array of configuration options to the cart managers ``init`` method. This kick starts the manager. This should be the first thing you do before you try and use the cart manager. The configuration options would be best saved in their own file and included into the script when needed:
 
@@ -141,7 +142,7 @@ From the configuration file you can define multiple cart instances. Each instanc
 
 Internally the cart and cart item components use ``number_format()`` to format currency values. The configuration options ``decimal_point``, ``decimal_places`` and ``thousands_separator`` all relate to this.
 
-### Context
+### <a id="context"></a>Context
 
 The cart manager can only manage 1 cart instance at a time. This cart will be the cart that is in the current **context**. If you have multiple carts you can switch between them. This is known as switching context. You can control the context using the ``context`` method of the manager component:
 
@@ -510,7 +511,7 @@ Cart::destroyCart();
 $cart->clear();
 ```
 
-### Cart Meta Data
+### <a id="cart-meta-data"></a>Cart Meta Data
 
 You store meta data on the cart. This can be useful for things like recording a customers checkout message, or keeping track of applied discounts etc.
 
@@ -543,6 +544,7 @@ Cart::removeMeta('checkout_message');
 // not using the cart manager
 $cart->removeMeta('checkout_message');
 ```
+##### Has meta data
 
 You can also check if the cart has meta data set against it using the ``hasMeta`` method. You can pass a key to this method to check if a specific piece of meta data exists:
 
@@ -552,6 +554,317 @@ $hasMeta = Cart::hasMeta();
 $hasCheckoutMessage = Cart::hasMeta('checkout_message');
 
 // not using the cart manager
-$hasMeta = Cart->hasMeta();
+$hasMeta = $cart->hasMeta();
 $hasCheckoutMessage = $cart->hasMeta('checkout_message');
 ```
+
+### Importing / Exporting Carts
+
+The cart has ``import`` and ``export`` methods that you can use:
+
+```
+// using the cart manager
+
+$cartState = Cart::export();
+$_SESSION['cart'] = $cartState;
+
+// importing cart state using sessions
+Cart::import($_SESSION['cart']);
+
+// not using the cart manager
+
+// saving cart state using sessions
+$cartState = $cart->export();
+$_SESSION['cart'] = $cartState;
+
+// importing cart state using sessions
+$cart->import($_SESSION['cart']);
+
+```
+
+The ``export`` method returns an array of all the of carts items and any meta data stored on the cart.
+
+The ``import`` method expects an array formatted the same as what ``export`` produces.
+
+### Cart Items
+
+The cart items are instances of ``\Cart\Item`` and expose methods for interacting with them:
+
+##### Getting a property
+
+```
+try {
+
+	$item = Cart::item($uid);
+	
+	$itemName = $item->get('name');
+	$itemSKU = $item->get('sku');
+}
+```
+
+##### Getting the UID
+
+```
+$cartItems = Cart::items();
+
+foreach ($cartItems as $item)
+{
+	$uid = $item->uid();
+}
+```
+
+##### Getting the quantity
+
+```
+try {
+
+	$item = Cart::item($uid);
+	
+	$itemQauntity = $item->quantity();
+	// or
+	$itemQauntity = $item->get('quantity');
+}
+```
+
+##### Updating the quantity
+
+You can update an items quantity via the item itself using the items ``setQuantity`` method:
+
+```
+try {
+	Cart::item($uid)->setQuantity(10);
+}
+```
+
+This is the same as doing:
+
+```
+try {
+	Cart::update($uid, 'quantity', 10);
+}
+```
+
+##### Getting the price
+
+The items ``totalPrice`` method returns the total value of the item (taking into account quantity). This returns the total value **including** tax. You can return the total value without tax by passing ``true`` as a parameter:
+
+```
+try {
+	$item = Cart::item($uid);
+	$itemPrice = $item->totalPrice();
+	$itemPriceExcludingTax = $item->totalPrice(true);
+}
+```
+
+To just get the items total tax you can use the ``totalTax`` method:
+
+```
+try {
+	$item = Cart::item($uid);
+	$itemTax = $item->totalTax();
+}
+```
+
+You may want to get just the single price or single tax value for an item, this can be done with the items ``singlePrice`` and ``singleTax`` methods:
+
+```
+try {
+	$item = Cart::item($uid);
+	$itemSinglePrice = $item->singlePrice();
+	$itemSinglePriceExcludingTax = $item->singlePrice(true);
+	$itemSingleTax = $item->singleTax();
+}
+```
+##### Meta data
+
+Cart items also support meta data in the same way the cart does (see [above](#cart-meta-data)):
+
+```
+try {
+	$item = Cart::item($uid);
+	
+	// set meta
+	$item->setMeta('engraving_text', 'Some engraving text here!');
+	
+	// get meta
+	$engravingText = $item->getMeta('engraving_text');
+	
+	// remove meta
+	$item->removeMeta('engraving_text');
+	
+	// has meta
+	if ($item->hasMeta()) 
+	{
+		//...
+	}
+}
+```
+##### Export
+
+You can export an item using the items ``export`` method. This method returns an array of the items properties and meta data. You can also pass true to the ``export`` method to have the items UID includeded in the export:
+
+```
+try {
+	$item = Cart::item($uid);
+	
+	$data = $item->export();
+	$dataWithUID = $item->export(true);
+}
+```
+
+### Get a cart instance (Cart Manager Only)
+
+You can retrieve a cart instance from the cart manager using the ``getCart`` method. If you do not supply a cart id the cart in the current context (see [context section above](#context)) will be returned. If the cart does not exist a ``\Cart\Exception\InvalidCartInstanceException`` exception is thrown:
+
+```
+try {
+	$cartId = 'cart01';
+
+	// get cart with the ID 'cart01'
+	$cart01 = CartManager::getCart($cartId);
+
+	// gets the cart in the current context
+	$currentCart = CartManager::getCart();
+}
+```
+
+### Checking a cart exists (Cart Manager Only)
+
+You can check if a cart exists using the cart managers ``exists`` method:
+
+```
+$cartId = 'cart01';
+
+if (CartManager::exists($cartId))
+{
+	//...
+}
+```
+
+### Destroy a cart instance (Cart Manager Only)
+
+You can destroy a cart instance using the cart managers ``destroyCart`` method:
+
+```
+$cartId = 'cart01';
+
+CartManager::destroyCart($cartId);
+```
+
+If a cart id is not passed then the cart in the current context will be destroyed.
+
+When a cart is destroyed it is removed from the cart manager and its saved state is cleared (via the state persitence handler). If you do not want to clear the carts state you can pass a second parameter of ``true`` to the ``destroyCart`` method:
+
+```
+$cartId = 'cart01';
+
+// cart will be destroyed in the cart manager but its state will be saved
+CartManager::destroyCart($cartId, true);
+```
+
+You can destroy all carts managed by the cart manager using the ``destroyAllCarts`` method. You can preserve the carts saved state by passing a second parameter of ``true``:
+
+```
+CartManager::destroyAllCarts();
+
+// all carts will be destroyed in the cart manager but there state will be saved 
+CartManager::destroyAllCarts();
+```
+
+### Create a new cart instance (Cart Manager Only)
+
+You can create a new cart instance using the cart managers ``newCart`` method. This method takes 4 parameters:
+
+1. ``$cartId`` - The ID for this cart
+2. ``$config`` - The configuration options for this cart. If false is passed for this parameter the default configuration options will be used (see [configuration section above](#configuration))
+3. ``$overwrite`` - Boolean to indicate if a cart with same ID exists, whether it should be overwritten or not
+4. ``$switchContext`` - Once the new cart has been created should the current cart context be switched to this cart
+
+##### Simple create a new cart
+```
+CartManager::newCart('cart02');
+```
+##### Create a new cart with custom config
+
+```
+$config = array(
+        'decimal_point' => '.',
+        'decimal_places' => 2,
+        'thousands_separator' => ',',
+        'storage' => array(
+            'autosave' => true,
+            'driver'=> 'cookie',
+            'storage_key_prefix' => 'cart_',
+            'storage_key_suffix' => '_instance'
+        )
+    ),
+
+);
+
+CartManager::newCart('cart02', $config);
+```
+##### Create a new cart but dont overwrite exisiting cart
+
+``newCart`` throws an ``\Cart\Exception\DuplicateCartInstanceException`` exception if ``$overwrite`` is set to false and the cart exists:
+
+```
+try {
+	CartManager::newCart('cart02', false, false);
+}
+```
+
+### Cart state persistance / restoration
+
+You can manually for a cart to save its state using the ``saveCartState`` method:
+
+```
+$cartId = 'cart01';
+
+CartManager::saveCartState($cartId);
+```
+
+You can also manually restore state for a cart using the ``restoreCartState`` method:
+
+```
+$cartId = 'cart01';
+
+CartManager::restoreCartState($cartId);
+```
+
+## <a id="custom-state-persistence"></a>Custom State Persistence
+
+You can create your own custom state persistence component by extending ``\Cart\Storage\StorageInterface``:
+
+```
+namespace Cart\Storage;
+
+class CustomStorage extends StorageInterface
+{
+	//...
+}
+```
+
+Your custom component must be stored: ``<path-to-src>/Cart/Storage/``.
+
+The file must be named after the name of the class: ``<path-to-src>/Cart/Storage/CustomStorage.php``;
+
+In the config you just need to set the storage driver to be your custom component:
+
+```
+$config = array(
+        'decimal_point' => '.',
+        'decimal_places' => 2,
+        'thousands_separator' => ',',
+        'storage' => array(
+            'autosave' => true,
+            'driver'=> 'CustomStorage',
+            'storage_key_prefix' => 'cart_',
+            'storage_key_suffix' => '_instance'
+        )
+    ),
+);
+```
+
+## Notes
+
+For more information on the inner workings i highly encourage you to take a deeper look at the source code.
