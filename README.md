@@ -31,11 +31,11 @@ require '<path-to-src>/Cart/Proxy.php';
 
 This package is built out of a few components that work together:
 
-1. Cart Item - Item that will be stored in the cart
-2. Cart - Stores cart items
-3. Manager - Manages multiple cart instances + state persistence
-4. Proxy - Proxies static method calls to a cart instance (the one in the current context)
-5. Storage - Manages persistence of a carts state
+1. **Cart Item** - Item that will be stored in the cart
+2. **Cart** - Stores cart items
+3. **Manager** - Manages multiple cart instances + state persistence
+4. **Proxy** - Proxies static method calls to a cart instance (the one in the current context)
+5. **Storage** - Manages persistence of a carts state
 
 The cart component can be used with or without the manager component. If you choose **not** to use the manager component you will have to manage your storage implementation manually and you will not beable to use the proxy component (unless you extend and modify yourself).
 
@@ -59,7 +59,7 @@ use \Cart\Proxy as Cart;
 
 // this will enable you make calls like:
 
-$numOfItmes = Cart::itemCount():
+$numOfItems = Cart::itemCount():
 
 CartManager::destroyCart();
 ```
@@ -152,11 +152,11 @@ The cart proxy component makes use of the cart manager to retrieve the current c
 ```php
 CartManager::context('Cart-02'); //switches the context to cart 2
 
-$numOfItemsCart1 = Cart::itemsCount(); //get the number of items in cart 2
+$numOfItemsCart2 = Cart::itemsCount(); //get the number of items in cart 2
 
 CartManager::context('Cart-01');
 
-$numOfItemsCart2 = Cart::itemsCount(); //get the number of items in cart 1
+$numOfItemsCart1 = Cart::itemsCount(); //get the number of items in cart 1
 ```
 
 By default ``CartManager::init()`` will set the first cart in the ``carts`` array, in the configuration file, to be the cart in context (in our example above this will be ``Cart-01``);
