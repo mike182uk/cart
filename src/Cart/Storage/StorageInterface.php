@@ -3,7 +3,7 @@
 namespace Cart\Storage;
 
 /**
- * The base storage interface that must be implemented by all storage methods.
+ * Base storage interface that must be implemented by all storage methods
  */
 interface StorageInterface
 {
@@ -12,7 +12,7 @@ interface StorageInterface
      *
      * @static
      * @abstract
-     * @param string $storageKey The string that identifies the data being restored
+     * @param string $storageKey String that identifies the data being restored
      */
     public static function restore($storageKey);
 
@@ -21,8 +21,8 @@ interface StorageInterface
      *
      * @static
      * @abstract
-     * @param string $storageKey The string that identifies the data being saved
-     * @param string $data       The data saved cart state
+     * @param string $storageKey String that identifies the data being saved
+     * @param string $data       Data to save
      */
     public static function save($storageKey, $data);
 
@@ -31,8 +31,7 @@ interface StorageInterface
      *
      * @static
      * @abstract
-     * @param string $storageKey The string that identifies the data that is to be cleared
+     * @param string $storageKey String that identifies the data that is to be cleared
      */
     public static function clear($storageKey);
-
 }

@@ -2,6 +2,8 @@
 
 namespace Cart\Storage;
 
+use Cart\Storage\StorageInterface;
+
 class Session implements StorageInterface
 {
     public static function init()
@@ -14,7 +16,6 @@ class Session implements StorageInterface
         static::init();
 
         return isset($_SESSION[$storageKey]) ? $_SESSION[$storageKey] : null;
-
     }
 
     public static function save($storageKey, $data)

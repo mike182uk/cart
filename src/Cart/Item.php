@@ -6,18 +6,21 @@ class Item
 {
     /**
      * Data associated with this item
+     *
      * @var array
      */
     protected $data;
 
     /**
      * Unique identifier for this item
+     *
      * @var string
      */
     protected $uid;
 
     /**
      * The configuration options associated with this cart item
+     *
      * @var array
      */
     protected $config;
@@ -25,9 +28,9 @@ class Item
     /**
      * Item constructor. Set the items meta data, UID and config options
      *
-     * @param array  $itemData The meta data associated with this item
-     * @param string $uid      The unique identifier for this item
-     * @param array  $config   The configuration options associated with this cart item
+     * @param array  $itemData Meta data associated with this item
+     * @param string $uid      Unique identifier for this item
+     * @param array  $config   Configuration options associated with this cart item
      */
     public function __construct($itemData, $uid, $config)
     {
@@ -39,8 +42,8 @@ class Item
     /**
      * Get value of a meta data entry
      *
-     * @param  string $key The key associated with the meta data entry
-     * @return mixed  The requested meta data
+     * @param  string $key Key associated with the meta data entry
+     * @return mixed  Requested meta data
      */
     public function get($key)
     {
@@ -50,7 +53,7 @@ class Item
     /**
      * Set the items quantity
      *
-     * @param int $quantity The new quantity for the item
+     * @param int $quantity New quantity for the item
      */
     public function setQuantity($quantity)
     {
@@ -81,7 +84,7 @@ class Item
      * Get items total price
      *
      * @param  bool  $excludingTax Should the total price be returned tax excluded
-     * @return float The total cumulative price for this item
+     * @return float Total aggregate price for this item
      */
     public function totalPrice($excludingTax = false)
     {
@@ -115,7 +118,7 @@ class Item
     /**
      * Get items total tax
      *
-     * @return float The total cumulative tax for this item
+     * @return float Total aggregate tax for this item
      */
     public function totalTax()
     {
@@ -130,7 +133,7 @@ class Item
     /**
      * Get items quantity
      *
-     * @return int The quantity of the item
+     * @return int Quantity of the item
      */
     public function quantity()
     {
@@ -140,7 +143,7 @@ class Item
     /**
      * Get items UID
      *
-     * @return int The UID of the item
+     * @return int UID of the item
      */
     public function uid()
     {
@@ -150,13 +153,13 @@ class Item
     /**
      * Get an item as an array
      *
-     * @param  bool  $include_uid Should the items UID be included in the exported data
-     * @return array The item data as an array
+     * @param  bool  $includeUID Should the items UID be included in the exported data
+     * @return array Item data as an array
      */
-    public function export($include_uid = false)
+    public function export($includeUID = false)
     {
         $itemData = $this->data;
-        if ($include_uid) {
+        if ($includeUID) {
             $itemData['uid'] = $this->uid;
         }
 
@@ -166,8 +169,8 @@ class Item
     /**
      * Save meta data against item. Meta data is not used to generate the item UID.
      *
-     * @param string $key   The key to identify the meta data
-     * @param mixed  $value The meta data to be saved against the item
+     * @param string $key   Key to identify the meta data
+     * @param mixed  $value Meta data to be saved against the item
      */
     public function setMeta($key, $value)
     {
@@ -177,8 +180,8 @@ class Item
     /**
      * Retrieve meta data set against an item
      *
-     * @param  string $key The key to identify the requested meta data
-     * @return mixed  The meta data retrieved
+     * @param  string $key Key to identify the requested meta data
+     * @return mixed  Item Meta data
      */
     public function getMeta($key)
     {
@@ -188,8 +191,8 @@ class Item
     /**
      * Remove meta data set against an item
      *
-     * @param  string $key The key to identify the meta data to be removed
-     * @return mixed  The meta data retrieved
+     * @param  string $key Key to identify the meta data to be removed
+     * @return mixed  Item Meta data
      */
     public function removeMeta($key)
     {
@@ -200,8 +203,8 @@ class Item
      * Checks if an item has meta data saved against it. If a key is passed only the presence of
      * meta data with that key is checked for
      *
-     * @param  bool|string $key The key of the meta data item saved against item
-     * @return bool        Whether the item has meta data saved against it or not
+     * @param  bool|string $key Key of the meta data item saved against item
+     * @return bool        Whether the item has the meta data saved against it or not
      */
     public function hasMeta($key = false)
     {
