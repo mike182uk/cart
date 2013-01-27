@@ -2,7 +2,8 @@
 /**
  * Import namespaces and alias cart proxy to cart so can do sexy calls like Cart::items()
  */
-use \Cart\Manager as CartManager;
+use \Cart\Facade\Manager as CartManager;
+use \Cart\Manager as CartManagerInstance;
 use \Cart\Proxy as Cart;
 
 /**

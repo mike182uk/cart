@@ -2,6 +2,8 @@
 
 namespace Cart;
 
+use Cart\Facade\Manager as CartManager;
+
 class Proxy
 {
     /**
@@ -15,7 +17,7 @@ class Proxy
      */
     public static function __callStatic($method, $args)
     {
-        $cart = Manager::getCart();
+        $cart = CartManager::getCart();
         if (method_exists($cart, $method)) {
             return call_user_func_array(array($cart, $method), $args);
         } else {
@@ -32,6 +34,6 @@ class Proxy
      */
     public static function context($cartID)
     {
-        return Manager::getCart($cartID);
+        return CartManager::getCart($cartID);
     }
 }

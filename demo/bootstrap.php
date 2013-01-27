@@ -15,13 +15,15 @@ error_reporting(E_ALL);
 //include required classes
 include '../src/Cart/Storage/StorageInterface.php';
 include '../src/Cart/Storage/Session.php';
+include '../src/Cart/Facade/Manager.php';
 include '../src/Cart/Manager.php';
 include '../src/Cart/Proxy.php';
 include '../src/Cart/Item.php';
 include '../src/Cart/Cart.php';
 
 //import namespaces / set aliases
-use \Cart\Manager as CartManager;
+use \Cart\Facade\Manager as CartManager;
+use \Cart\Manager as CartManagerInstance;
 use \Cart\Proxy as Cart;
 
 //-------------------------------------------------------------------------------------------------------------
@@ -34,7 +36,9 @@ use \Cart\Proxy as Cart;
  */
 $config = include 'config/default.php';
 
-CartManager::init($config);
+$cartManager = new CartManagerInstance($config);
+
+CartManager::init($cartManager);
 
 //set context from session if applicable
 if (isset($_SESSION['cart_context'])) {

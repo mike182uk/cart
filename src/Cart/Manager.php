@@ -8,19 +8,19 @@ class Manager
      * Available cart instances
      * @var array
      */
-    protected static $instances = array();
+    protected $instances = array();
 
     /**
      * The ID of the current cart in context
      * @var string
      */
-    protected static $context = '';
+    protected $context = '';
 
     /**
      * The configuration options associated with the carts in the cart manager / cart manager itself
      * @var array
      */
-    protected static $config = '';
+    protected $config = '';
 
     /**
      * Initializes the cart manager. Loads in the config and instantiates any carts declared in the config file.
@@ -28,21 +28,21 @@ class Manager
      * @static
      * @param array $config The configuration options associated with this cart manager
      */
-    public static function init($config)
+    public function __construct($config)
     {
         //cache passed config options
-        static::$config = $config;
+        $this->config = $config;
 
         //if there are carts defined in the config
         if (count($config['carts']) > 0) {
             foreach ($config['carts'] as $cartID => $cartConfig) {
                 $cartConfig = array_merge($config['defaults'], $cartConfig); //merge global config with cart specific config
-                static::$config['carts'][$cartID] = $cartConfig; //update the config
-                static::newCart($cartID, $cartConfig, true, false);
+                $this->config['carts'][$cartID] = $cartConfig; //update the config
+                $this->newCart($cartID, $cartConfig, true, false);
             }
 
             //set context to first cart in array
-            static::$context = key($config['carts']);
+            $this->context = key($config['carts']);
         }
     }
 
@@ -54,17 +54,17 @@ class Manager
      * @return string                                 The current context if this is being retrieved
      * @throws Exception\InvalidCartInstanceException
      */
-    public static function context($cartID = false)
+    public function context($cartID = false)
     {
         if ($cartID) {
-            if (isset(static::$instances[$cartID])) {
-                static::$context = $cartID;
+            if (isset($this->instances[$cartID])) {
+                $this->context = $cartID;
             } else {
                 throw new Exception\InvalidCartInstanceException('There is no cart instance with the id: ' . $cartID);
             }
         }
 
-        return static::$context;
+        return $this->context;
     }
 
     /**
@@ -74,9 +74,9 @@ class Manager
      * @param  string $cartID The ID of the cart to check for
      * @return bool   True if the cart instance exists, false otherwise
      */
-    public static function cartExists($cartID)
+    public function cartExists($cartID)
     {
-        return array_key_exists($cartID,static::$instances);
+        return array_key_exists($cartID,$this->instances);
     }
 
     /**
@@ -88,12 +88,12 @@ class Manager
      * @return object                                 The requested cart instance or the current cart instance in context if no $cartID provided
      * @throws Exception\InvalidCartInstanceException
      */
-    public static function getCart($cartID = false)
+    public function getCart($cartID = false)
     {
-        $cartID or $cartID = static::$context;
+        $cartID or $cartID = $this->context;
 
-        if (static::cartExists($cartID)) {
-            return static::$instances[$cartID];
+        if ($this->cartExists($cartID)) {
+            return $this->instances[$cartID];
         } else {
             throw new Exception\InvalidCartInstanceException('There is no cart instance with the id: ' . $cartID);
         }
@@ -110,30 +110,30 @@ class Manager
      * @return mixed                                    The newly created cart instance
      * @throws Exception\DuplicateCartInstanceException
      */
-    public static function newCart($cartID, $config = false, $overwrite = true, $switchContext = true)
+    public function newCart($cartID, $config = false, $overwrite = true, $switchContext = true)
     {
-        if (!static::cartExists($cartID) or $overwrite) {
+        if (!$this->cartExists($cartID) or $overwrite) {
 
-            $config or $config = static::getCartConfig($cartID);
-            static::$instances[$cartID] = new Cart($cartID, $config);
+            $config or $config = $this->getCartConfig($cartID);
+            $this->instances[$cartID] = new Cart($cartID, $config);
 
             /*
              * is there storage options associated with this instance of the cart?
              * if so we need to retrieve any saved data
              */
             if ($config['storage']['driver']) {
-                static::restoreCartState($cartID);
+                $this->restoreCartState($cartID);
             }
             if ($config['storage']['autosave']) {
                 //register shutdown function for auto save
-                register_shutdown_function(array('\Cart\Manager', 'saveCartState'), $cartID);
+                register_shutdown_function(array($this, 'saveCartState'), $cartID);
             }
 
             if ($switchContext) {
-                static::$context = $cartID;
+                $this->context = $cartID;
             }
 
-            return static::$instances[$cartID];
+            return $this->instances[$cartID];
         } else {
             throw new Exception\DuplicateCartInstanceException('There is already a cart instance with the id: ' . $cartID);
         }
@@ -147,19 +147,19 @@ class Manager
      * @param bool $cartID       The ID of the cart to be destroyed
      * @param bool $clearStorage Should the storage associated with the cart instance be cleared
      */
-    public static function destroyCart($cartID = false, $clearStorage = true)
+    public function destroyCart($cartID = false, $clearStorage = true)
     {
-        $cartID or $cartID = static::$context;
+        $cartID or $cartID = $this->context;
 
-        if (static::cartExists($cartID)) {
-            unset(static::$instances[$cartID]);
+        if ($this->cartExists($cartID)) {
+            unset($this->instances[$cartID]);
 
             if ($clearStorage) {
-                static::clearCartState($cartID);
+                $this->clearCartState($cartID);
             }
 
-            if (static::$context == $cartID) {
-                static::$context = '';
+            if ($this->context == $cartID) {
+                $this->context = '';
             }
         }
     }
@@ -171,10 +171,10 @@ class Manager
      * @static
      * @param bool $clearStorage Should the storage associated with a cart instance be cleared
      */
-    public static function destroyAllCarts($clearStorage = true)
+    public function destroyAllCarts($clearStorage = true)
     {
-        foreach (static::$instances as $cartID => $cart) {
-            static::destroyCart($cartID, $clearStorage);
+        foreach ($this->instances as $cartID => $cart) {
+            $this->destroyCart($cartID, $clearStorage);
         }
     }
 
@@ -186,12 +186,12 @@ class Manager
      * @param  string $cartID The ID of the cart instance
      * @return array  The cart configuration options
      */
-    public static function getCartConfig($cartID = '')
+    public function getCartConfig($cartID = '')
     {
-        if (array_key_exists($cartID, static::$config['carts'])) {
-            return static::$config['carts'][$cartID];
+        if (array_key_exists($cartID, $this->config['carts'])) {
+            return $this->config['carts'][$cartID];
         } else {
-            return static::$config['defaults'];
+            return $this->config['defaults'];
         }
     }
 
@@ -201,11 +201,11 @@ class Manager
      * @static
      * @param string $cartID The ID of the cart instance
      */
-    public static function saveCartState($cartID)
+    public function saveCartState($cartID)
     {
-        $data = serialize(static::$instances[$cartID]->export());
-        $driver = static::getCartStorageDriver(static::getCartStorageKey($cartID));
-        $driver::save(static::getCartStorageKey($cartID), $data);
+        $data = serialize($this->instances[$cartID]->export());
+        $driver = $this->getCartStorageDriver($this->getCartStorageKey($cartID));
+        $driver::save($this->getCartStorageKey($cartID), $data);
     }
 
     /**
@@ -214,12 +214,12 @@ class Manager
      * @static
      * @param string $cartID The ID of the cart instance
      */
-    public static function restoreCartState($cartID)
+    public function restoreCartState($cartID)
     {
-        $driver = static::getCartStorageDriver($cartID);
+        $driver = $this->getCartStorageDriver($cartID);
 
-        $data = unserialize($driver::restore(static::getCartStorageKey($cartID)));
-        static::$instances[$cartID]->import($data);
+        $data = unserialize($driver::restore($this->getCartStorageKey($cartID)));
+        $this->instances[$cartID]->import($data);
     }
 
     /**
@@ -228,10 +228,10 @@ class Manager
      * @static
      * @param string $cartID The ID of the cart instance
      */
-    public static function clearCartState($cartID)
+    public function clearCartState($cartID)
     {
-        $driver = static::getCartStorageDriver($cartID);
-        $driver::clear(static::getCartStorageKey($cartID));
+        $driver = $this->getCartStorageDriver($cartID);
+        $driver::clear($this->getCartStorageKey($cartID));
     }
 
     /**
@@ -243,9 +243,9 @@ class Manager
      * @return string                                          The FQN of the storage implementation
      * @throws Exception\InvalidStorageImplementationException
      */
-    public static function getCartStorageDriver($cartID)
+    public function getCartStorageDriver($cartID)
     {
-        $config = static::getCartConfig($cartID);
+        $config = $this->getCartConfig($cartID);
         $driver = '\Cart\Storage\\' . $config['storage']['driver'];
 
         //check driver actually exists
@@ -270,9 +270,9 @@ class Manager
      * @param  string $cartID The ID of the cart instance
      * @return string The storage key associated with the cart instance
      */
-    public static function getCartStorageKey($cartID)
+    public function getCartStorageKey($cartID)
     {
-        $config = static::getCartConfig($cartID);
+        $config = $this->getCartConfig($cartID);
 
         $storageKey = '';
 
