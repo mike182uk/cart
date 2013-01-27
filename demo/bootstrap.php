@@ -2,11 +2,11 @@
 /*
  * Bootstrap the cart
  *
- * Set a few configuration options, include the necessary files and import / alias the cart namespace
+ * Set a few configuration options, include the necessary files and import / alias the cart namespaces
  */
 
 //error reporting - so we can see if we f*ck up
-ini_set('display_errors',1);
+ini_set('display_errors', true);
 error_reporting(E_ALL);
 
 //we will use sessions to preserve cart context, and to show action messages
@@ -16,8 +16,8 @@ error_reporting(E_ALL);
 include '../src/Cart/Storage/StorageInterface.php';
 include '../src/Cart/Storage/Session.php';
 include '../src/Cart/Facade/Manager.php';
-include '../src/Cart/Manager.php';
 include '../src/Cart/Facade/Cart.php';
+include '../src/Cart/Manager.php';
 include '../src/Cart/Item.php';
 include '../src/Cart/Cart.php';
 
@@ -26,7 +26,7 @@ use \Cart\Facade\Manager as CartManager;
 use \Cart\Facade\Cart as Cart;
 use \Cart\Manager as CartManagerInstance;
 
-//-------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 
 /**
  * Initialize the cart manager
@@ -34,18 +34,22 @@ use \Cart\Manager as CartManagerInstance;
  * The first thing to do is load in the config file. This will supply config options for the cart instances
  * in the cart manager. It also initialize any preset carts (including retrieving state)
  */
+
+// get the config
 $config = include 'config/default.php';
 
+// instantiate a cart manager
 $cartManager = new CartManagerInstance($config);
 
+// pass the cart manager instance to the cart manager facade
 CartManager::init($cartManager);
 
-//set context from session if applicable
+// set cart context from the session if applicable
 if (isset($_SESSION['cart_context'])) {
     CartManager::context($_SESSION['cart_context']);
 }
 
-//-------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 
 /**
  * Cart Actions

@@ -1,6 +1,6 @@
 <?php
 /**
- * Import namespaces and alias cart proxy to cart so can do sexy calls like Cart::items()
+ * Import namespaces and alias the cart facade to Cart so can do sexy calls like Cart::items()
  */
 use \Cart\Facade\Manager as CartManager;
 use \Cart\Facade\Cart as Cart;
@@ -11,7 +11,7 @@ use \Cart\Manager as CartManagerInstance;
  */
 include 'bootstrap.php';
 
-//-------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 ?>
 <!doctype html>
 <html>
