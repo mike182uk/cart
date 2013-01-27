@@ -34,8 +34,8 @@ class Item
      */
     public function __construct($itemData, $uid, $config)
     {
-        $this->data = $itemData;
-        $this->uid = $uid;
+        $this->data   = $itemData;
+        $this->uid    = $uid;
         $this->config = $config;
     }
 

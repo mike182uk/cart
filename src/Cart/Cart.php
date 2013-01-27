@@ -26,7 +26,7 @@ class Cart
      *
      * @var array
      */
-    protected $id = array();
+    protected $id = '';
 
     /**
      * Configuration options associated with this cart
@@ -90,8 +90,8 @@ class Cart
         // otherwise add as a new item
         else {
             $config = array(
-                'decimal_point' => $this->config['decimal_point'],
-                'decimal_places' => $this->config['decimal_places'],
+                'decimal_point'       => $this->config['decimal_point'],
+                'decimal_places'      => $this->config['decimal_places'],
                 'thousands_separator' => $this->config['thousands_separator'],
             );
 
