@@ -242,7 +242,7 @@ class Manager
     public function getCartStorageDriver($cartID)
     {
         $config = $this->getCartConfig($cartID);
-        $driver = '\Cart\Storage\\' . $config['storage']['driver'];
+        $driver = $config['storage']['driver'];
 
         // check driver actually exists
         if ( ! class_exists($driver)) {

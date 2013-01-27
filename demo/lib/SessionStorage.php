@@ -1,10 +1,8 @@
 <?php
 
-namespace Cart\Storage;
-
 use Cart\Storage\StorageInterface;
 
-class Session implements StorageInterface
+class SessionStorage implements StorageInterface
 {
     public static function init()
     {

@@ -28,12 +28,9 @@ return array(
              */
             'autosave' => true,
             /**
-             * The name of the driver to use. This should be the name of the file handling the
-             * storage driver in the storage/driver directory
-             *
-             * i.e session, cookie etc.
+             * The FQN of the class handling the storage implementation
              */
-            'driver'=> 'session', //session, cookie
+            'driver'=> 'SessionStorage',
             /**
              * This is prepended to the storage identifier for the cart instance
              */

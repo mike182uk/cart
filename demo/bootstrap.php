@@ -13,13 +13,18 @@ error_reporting(E_ALL);
 @session_start();
 
 //include required classes
-include '../src/Cart/Storage/StorageInterface.php';
-include '../src/Cart/Storage/Session.php';
+include '../src/Cart/Exception/DuplicateCartInstanceException.php';
+include '../src/Cart/Exception/InvalidCartConfigException.php';
+include '../src/Cart/Exception/InvalidCartInstanceException.php';
+include '../src/Cart/Exception/InvalidCartItemException.php';
+include '../src/Cart/Exception/InvalidStorageImplementationException.php';
 include '../src/Cart/Facade/Manager.php';
 include '../src/Cart/Facade/Cart.php';
 include '../src/Cart/Manager.php';
 include '../src/Cart/Item.php';
 include '../src/Cart/Cart.php';
+include '../src/Cart/Storage/StorageInterface.php';
+include 'lib/SessionStorage.php';
 
 //import namespaces / set aliases
 use \Cart\Facade\Manager as CartManager;
