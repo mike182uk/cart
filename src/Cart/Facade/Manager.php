@@ -16,7 +16,7 @@ class Manager
     /**
      * Initialises the cart manager facade
      *
-     * @param  CartManager $cartManager Cart manager instance
+     * @param  \Cart\Manager $cartManager Cart manager instance
      * @return void
      */
     public static function init(CartManager $cartManager)
@@ -26,16 +26,18 @@ class Manager
 
     /**
      * Proxy a static method call to the cart manager instance
-     * @param  string $method Method name
-     * @param  array $args Arguments to pass to method
+     *
+     * @param  string                  $method Method name
+     * @param  array                   $args   Arguments to pass to method
      * @return mixed
+     * @throws \BadMethodCallException
      */
     public static function __callStatic($method, $args)
     {
         if (method_exists(static::$cartManager, $method)) {
             return call_user_func_array(array(static::$cartManager, $method), $args);
         } else {
-            throw new \BadMethodCallException('Invalid method: ' . get_called_class() . '::' . $method);
+            throw new \BadMethodCallException(sprintf('Method: %s::%s does not exist', get_called_class(), $method));
         }
     }
 }
