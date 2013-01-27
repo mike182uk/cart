@@ -1,19 +1,17 @@
 <?php
 
-namespace Cart;
+namespace Cart\Facade;
 
 use Cart\Facade\Manager as CartManager;
 
-class Proxy
+class Cart
 {
     /**
-     * Proxies the method call to the cart instance that is in the current context in the cart manager
+     * Proxy a static method call to the cart instance that is in the current context in the cart manager
      *
-     * @static
-     * @param  string                  $method The name of the method being called
-     * @param  array                   $args   The arguments passed to the method
-     * @return mixed                   The response of the proxied method call
-     * @throws \BadMethodCallException
+     * @param  string $method Method name
+     * @param  array $args Arguments to pass to method
+     * @return mixed
      */
     public static function __callStatic($method, $args)
     {

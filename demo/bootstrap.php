@@ -17,14 +17,14 @@ include '../src/Cart/Storage/StorageInterface.php';
 include '../src/Cart/Storage/Session.php';
 include '../src/Cart/Facade/Manager.php';
 include '../src/Cart/Manager.php';
-include '../src/Cart/Proxy.php';
+include '../src/Cart/Facade/Cart.php';
 include '../src/Cart/Item.php';
 include '../src/Cart/Cart.php';
 
 //import namespaces / set aliases
 use \Cart\Facade\Manager as CartManager;
+use \Cart\Facade\Cart as Cart;
 use \Cart\Manager as CartManagerInstance;
-use \Cart\Proxy as Cart;
 
 //-------------------------------------------------------------------------------------------------------------
 
