@@ -4,7 +4,6 @@
  */
 use \Cart\Facade\Manager as CartManager;
 use \Cart\Facade\Cart as Cart;
-use \Cart\Manager as CartManagerInstance;
 
 /**
  * Bootstrap the cart...
