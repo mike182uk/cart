@@ -1,6 +1,6 @@
 #Cart
 
-A modern, composer compatible, PHP >=5.3.0 shopping cart
+A modern PHP >=5.3.0 shopping cart
 
 ###Features
 
@@ -10,40 +10,29 @@ A modern, composer compatible, PHP >=5.3.0 shopping cart
 - Cart and cart items support meta data
 - Importable / Exportable carts
 - Flexible state persistence
-- Namespaced, composer ready, framework independent, PSR-2
 
 ###Prerequisites
 
 1. PHP >=5.3.0
 3. This package can be installed using composer or can be integrated manually. If you are not using an autoloader make sure you include all of the php files in the ``src`` directory.
 
-```php
-require '<path-to-src>/Cart/Storage/StorageInterface.php';
-require '<path-to-src>/Cart/Storage/Session.php';
-require '<path-to-src>/Cart/Cart.php';
-require '<path-to-src>/Cart/Item.php';
-require '<path-to-src>/Cart/Manager.php';
-require '<path-to-src>/Cart/Proxy.php';
-```
-***Note:*** *All of the code examples in the rest of this document assume you have the above files above included manually or autoloaded. If you are using your own storage component you do not have to include ``<path-to-src>/Cart/Storage/Session.php``*
+***Note:*** *All of the code examples in the rest of this document assume you have the required files above included manually or autoloaded.*
 
 ###Architecture
 
 This package is built out of a few components that work together:
 
-1. **Cart Item** - Item that will be stored in the cart
-2. **Cart** - Stores cart items
+1. **Cart** - Stores cart items
+2. **Cart Item** - Item that will be stored in the cart
 3. **Manager** - Manages multiple cart instances + state persistence
-4. **Proxy** - Proxies static method calls to a cart instance (the one in the current context)
-5. **Storage** - Manages persistence of a carts state
+4. **Storage** - Manages persistence of a carts state
+5. **Manager / Cart Facades** - Facades that provide static access to the cart manager or a cart instance.
 
-The cart component can be used with or without the manager component. If you choose **not** to use the manager component you will have to manage your storage implementation manually and you will not beable to use the proxy component (unless you extend and modify yourself).
+The cart component can be used with or without the manager component. If you choose **not** to use the manager component you will have to manage your storage implementation manually and you will not beable to use the facades (unless you extend and modify yourself).
 
 The storage component is swapable. If you have a certain way you need to implement state persistence you can do this by implementing the storage interface: ``\Cart\Storage\StorageInterface`` (see [custom state persistence](#custom-state-persistence)).
 
-By default 1 storage component is provided:
-
-1. ``\Cart\Storage\Session`` - persists state using the session
+***Note:*** *Check out the demo for an example of how to implement a custom storage component.*
 
 ## Setup: Using The Cart Manager
 
@@ -51,11 +40,11 @@ This section will guide you through setting up the cart component **with** the m
 
 ### Aliases
 
-I recommend aliasing the manager and proxy components to something easier to write and reference:
+I recommend aliasing the manager and cart facades to something easier to write and reference:
 
 ```php
-use \Cart\Manager as CartManager;
-use \Cart\Proxy as Cart;
+use \Cart\Facade\Manager as CartManager;
+use \Cart\Facade\Cart as Cart;
 
 // this will enable you make calls like:
 
@@ -67,7 +56,7 @@ CartManager::destroyCart();
 
 ### <a id="configuration"></a> Configuration
 
-You will need to pass an array of configuration options to the cart managers ``init`` method. This kick starts the manager. This should be the first thing you do before you try and use the cart manager. The configuration options would be best saved in their own file and included into the script when needed:
+You will need to pass an array of configuration options to the cart managers constructor. The configuration options would be best saved in their own file and included into the script when needed:
 
 ```php
 //config.php
@@ -100,12 +89,9 @@ return array(
              */
             'autosave' => true,
             /**
-             * The name of the driver to use. This should be the name of the file handling the
-             * storage driver in the storage/driver directory
-             *
-             * i.e session, cookie etc.
+             * The FQN of the class handling the storage implementation
              */
-            'driver'=> 'session', //session, cookie
+            'driver'=> 'SessionStorage',
             /**
              * This is prepended to the storage identifier for the cart instance
              */
@@ -124,20 +110,33 @@ return array(
     'carts' => array(
         'Cart-01' => array(), //will inherit all of the above options
         'Cart-02' => array(),
+        //'cart3' => array()
     )
-
+    
 );
 ```
 
 ```php
+use \Cart\Manager;
+
 $config = include '<path-to-config>/config.php';
 
-CartManager::init($config);
+$cartManager = new Cart\Manager($config);
 ```
 
 From the configuration file you can define multiple cart instances. Each instance can have its own unique set of properties, otherwise it will just inherit from the default options.
 
 Internally the cart and cart item components use ``number_format()`` to format currency values. The configuration options ``decimal_point``, ``decimal_places`` and ``thousands_separator`` all relate to this.
+
+### Cart Manager Facade
+
+To start using the cart manager facade you need to pass the cart manager instance to the ``init`` method of the cart manager facade:
+
+```php
+$cartManager = new Cart\Manager($config);
+
+CartManager::init($cartManager);
+```
 
 ### <a id="context"></a>Context
 
@@ -172,10 +171,10 @@ You can define the storage options in the configuration file.
 If you chose to autosave (recommended), internally this is registered as a shutdown function:
 
 ```php
-register_shutdown_function(array('\Cart\Manager', 'saveState'), $cartID);
+register_shutdown_function(array($this, 'saveState'), $cartID);
 ```
 
-The state is restored when ``CartManager::init()`` is called.
+The state is restored when the cart manager is instantiated.
 
 ##Setup: Not Using The Cart Manager
 
@@ -184,7 +183,7 @@ This section will guide you through setting up the cart **without** the cart man
 You can use the cart component without having to use the cart manager. You may want to do this for simpler setups where you do not need all the bells and whistles of the cart manager. The drawbacks to not using the cart manager are:
 
 1. You will have manage state persistance manually
-2. You will not have access to the proxy
+2. You will not beable to use the cart facade
 3. You cannot manage multiple cart instances from one central place
 
 ### Configuration
@@ -787,7 +786,7 @@ $config = array(
         'thousands_separator' => ',',
         'storage' => array(
             'autosave' => true,
-            'driver'=> 'cookie',
+            'driver'=> 'CookieStorage',
             'storage_key_prefix' => 'cart_',
             'storage_key_suffix' => '_instance'
         )
@@ -837,10 +836,6 @@ class CustomStorage extends StorageInterface
 	//...
 }
 ```
-
-Your custom component must be stored: ``<path-to-src>/Cart/Storage/``.
-
-The file must be named after the name of the class: ``<path-to-src>/Cart/Storage/CustomStorage.php``;
 
 In the config you just need to set the storage driver to be your custom component:
 
