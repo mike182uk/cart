@@ -1,5 +1,5 @@
 {
-    "name": "cart",
+    "name": "mike182uk/cart",
     "description" : "A flexible and modern shopping cart package",
     "license": "MIT",
     "authors": [
@@ -18,5 +18,10 @@
         "psr-0": {
             "Cart": "src"
         }
-    }
+    },
+    "keywords": [
+        "shopping",
+        "cart",
+        "utility"
+    ]
 }
