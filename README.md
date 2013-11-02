@@ -1,5 +1,7 @@
 # Cart
 
+[![Build Status](https://secure.travis-ci.org/mike182uk/cart.png)](http://travis-ci.org/mike182uk/cart)
+
 A flexible and modern shopping cart package.
 
 ## Installation
@@ -14,15 +16,13 @@ A flexible and modern shopping cart package.
 }
 ```
 
-
 ## Usage
 
-### Car
+### Cart
 
 #### Create a new cart
 
 To create a new cart instance you must pass an id and a storage implementation to the cart constructor:
-
 
 ```php
 use Cart;
@@ -37,7 +37,6 @@ $cart = new Cart($id, $cartSessionStore);
 The storage implementation must implement `Cart\StoreInterface`.
 
 The id is used for saving / restoring cart state via the storage implementation.
-
 
 #### Add an item to the cart
 
@@ -127,7 +126,6 @@ $cart->save();
 ```
 
 This will save the current cart items and cart id to the store.
-
 
 Restore the cart using the `restore` method.
 
@@ -269,7 +267,6 @@ If no price is passed to the cart item constructor, the price is set to `0.00` b
 
 If no tax is passed to the cart item constructor, the tax is set to `0.00` by default.
 
-
 #### Cart Item ID
 
 Each cart has a unique ID. This ID is generated using the properties set on the cart item. You can get the cart item ID using the method `getId` or by accessing the property `id`.
@@ -394,10 +391,10 @@ Array will be structured like:
 array(
 	'id' => 'e4df90d236966195b49b0f01f5ce360a356bc76b', // cart item unique id
 	'data' => array(
-		''name' => 'Macbook Pro',
+		'name' => 'Macbook Pro',
 		'sku' => 'MBP8GB',
-		'price' => 1200
-		
+		'price' => 1200,
+
 		// ... other cart item properties
 	)
 )
