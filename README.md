@@ -10,6 +10,8 @@ A flexible and modern shopping cart package.
 
 ### Composer
 
+Add this package as a dependency in your `composer.json`.
+
 ```js
 {
 	"require" : {
