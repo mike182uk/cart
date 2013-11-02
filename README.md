@@ -6,7 +6,7 @@
 To create a new cart instance you must pass an id and a storage implementation to the cart constructor:
 
 
-```
+```php
 use Cart;
 use Cart\Store\Native\SessionStore;
 
@@ -26,7 +26,7 @@ The id is used for saving / restoring cart state via the storage implementation.
 
 Use the `add` method to add an item to the cart. A valid `\Cart\CartItem` must be passed to this method.
 
-```
+```php
 use Cart\CartItem;
 
 $item = new CartItem;
@@ -45,7 +45,7 @@ If the item already exists in the cart, the quantity of the existing item will b
 
 Remove an item from the cart by passing the item id to the `remove` method.
 
-```
+```php
 $cart->remove('e4df90d236966195b49b0f01f5ce360a356bc76b');
 ```
 
@@ -53,7 +53,7 @@ $cart->remove('e4df90d236966195b49b0f01f5ce360a356bc76b');
 
 To update a propery of an item in the cart use the `update` method. You will need to pass the cart item id, the name of the property to update and the new value. This method will return the item id (in case it has changed due to the update).
 
-```
+```php
 $newId = $cart->update('e4df90d236966195b49b0f01f5ce360a356bc76b', 'price', 959.99);
 ```
 
@@ -61,7 +61,7 @@ $newId = $cart->update('e4df90d236966195b49b0f01f5ce360a356bc76b', 'price', 959.
 
 Retrieve an item from the cart by its id use the `get` method. If the item does not exist `null` is returned.
 
-```
+```php
 $item = $cart->get('e4df90d236966195b49b0f01f5ce360a356bc76b');
 
 if ($item) {
@@ -73,7 +73,7 @@ if ($item) {
 
 Retrieve all items in the cart using the `all` method. This will return an array of all the items in the cart.
 
-```
+```php
 $cartItems = $cart->all();
 
 if (count($cartItems) > 0) {
@@ -87,7 +87,7 @@ if (count($cartItems) > 0) {
 
 Determine if an item exists in the cart using the `has` method. Returns `true` or `false`.
 
-```
+```php
 if ($cart->has('e4df90d236966195b49b0f01f5ce360a356bc76b')) {
 	// ...
 }
@@ -97,7 +97,7 @@ if ($cart->has('e4df90d236966195b49b0f01f5ce360a356bc76b')) {
 
 Clear the cart using the `clear` method.
 
-```
+```php
 $cart->clear();
 ```
 This will also clear the saved state for this cart in the store.
@@ -106,7 +106,7 @@ This will also clear the saved state for this cart in the store.
 
 Save the cart using the `save` method.
 
-```
+```php
 $cart->save();
 ```
 
@@ -115,7 +115,7 @@ This will save the current cart items and cart id to the store.
 
 Restore the cart using the `restore` method.
 
-```
+```php
 $cart->restore();
 ```
 
@@ -127,7 +127,7 @@ This will add any stored cart items back to the cart and set the cart id.
 
 Get the total number of unique items in the cart.
 
-```
+```php
 $cart->totalUniqueItems();
 ```
 
@@ -135,7 +135,7 @@ $cart->totalUniqueItems();
 
 Get the total number of items in the cart.
 
-```
+```php
 $cart->totalItems();
 ```
 
@@ -143,13 +143,13 @@ $cart->totalItems();
 
 Get the total price of all the cart items including tax.
 
-```
+```php
 $cart->total();
 ```
 
 You can also get the total price excluding tax by passing `false` as the first parameter.
 
-```
+```php
 $cart->total(false);
 ```
 
@@ -157,7 +157,7 @@ $cart->total(false);
 
 Get the total tax of all the cart items.
 
-```
+```php
 $cart->tax();
 ```
 
@@ -165,13 +165,13 @@ $cart->tax();
 
 Export the cart to an array.
 
-```
+```php
 $cartData = $cart->toArray();
 ```
 
 Array will be structured like:
 
-```
+```php
 array(
 	'id' => 'cart-01', // cart id
 	'items' => array(
@@ -184,7 +184,7 @@ array(
 
 Get the id of the cart.
 
-```
+```php
 $cart->getId();
 ```
 
@@ -192,7 +192,7 @@ $cart->getId();
 
 Get the cart storage implementation.
 
-```
+```php
 $cart->getStore();
 ```
 
@@ -200,7 +200,7 @@ $cart->getStore();
 
 ### Create a new Cart Item
 
-```
+```php
 use Cart\CartItem;
 
 $item = new CartItem;
@@ -217,7 +217,7 @@ $item->options = array(
 
 `Cart\CartItem` implements `ArrayAccess` so properties can be assigned to the cart item as if accessing an array:
 
-```
+```php
 $item = new CartItem;
 
 $item['name'] = 'Macbook Pro';
@@ -232,7 +232,7 @@ $item['options'] = array(
 
 An array of data can also be passed to the cart item constructor to set the cart item properties:
 
-```
+```php
 $itemData = array(
 	'name' => 'Macbook Pro';
 	'sku' => 'MBP8GB';
@@ -258,15 +258,15 @@ If no tax is passed to the cart item constructor, the tax is set to `0.00` by de
 
 Each cart has a unique ID. This ID is generated using the properties set on the cart item. You can get the cart item ID using the method `getId` or by accessing the property `id`.
 
-```
+```php
 $id = $item->getId();
 ```
 
-```
+```php
 $id = $item->id;
 ```
 
-```
+```php
 $id = $item['id'];
 ```
 
@@ -278,17 +278,17 @@ $id = $item['id'];
 
 Get a piece of data set on the cart item.
 
-```
+```php
 $name = $item->get('name');
 ```
 
 This is the same as doing:
 
-```
+```php
 $name = $item['name'];
 ```
 
-```
+```php
 $name = $item->name;
 ```
 
@@ -296,23 +296,23 @@ $name = $item->name;
 
 Set a piece of data on the cart item.
 
-```
+```php
 $item->set('name', 'Macbook Pro');
 ```
 
 This is the same as doing:
 
-```
+```php
 $item['name'] = 'Macbook Pro';
 ```
 
-```
+```php
 $item->name = 'Macbook Pro';
 ```
 
 If you are setting the item quantity, the value must be an integer otherwise an `InvalidArgumentException` is thrown.
 
-```
+```php
 $item->quantity = 1; // ok
 
 $item->quantity = '1' // will throw exception
@@ -320,7 +320,7 @@ $item->quantity = '1' // will throw exception
 
 If you are setting the item price or tax, the value must be numeric otherwise an `InvalidArgumentException` is thrown.
 
-```
+```php
 $item->price = 10.00; // ok
 
 $item->price = '10' // ok
@@ -332,13 +332,13 @@ $item->price = 'ten' // will throw exception
 
 Get the total price of the cart item including tax `((item price + item tax) * quantity)`.
 
-```
+```php
 $item->getTotalPrice();
 ```
 
 You can also get the total price excluding tax `(item price * quantity)` by passing `false` as the first parameter.
 
-```
+```php
 $item->getTotalPrice(true);
 ```
 
@@ -346,13 +346,13 @@ $item->getTotalPrice(true);
 
 Get the single price of the cart item including tax `(item price + item tax)`
 
-```
+```php
 $item->getSinglePrice();
 ```
 
 You can also get the single price excluding tax by passing `false` as the first parameter.
 
-```
+```php
 $item->getSinglePrice(false);
 ```
 
@@ -360,7 +360,7 @@ $item->getSinglePrice(false);
 
 Get the total tax of the cart item `(item tax * quantity)`.
 
-```
+```php
 $item->getTotalTax();
 ```
 
@@ -368,13 +368,13 @@ $item->getTotalTax();
 
 Export the item to an array.
 
-```
+```php
 $itemArr = $item->toArray();
 ```
 
 Array will be structured like:
 
-```
+```php
 array(
 	'id' => 'e4df90d236966195b49b0f01f5ce360a356bc76b', // cart item unique id
 	'data' => array(
@@ -399,7 +399,7 @@ When the `clear` method of the cart is called, the cart id is passed to the `flu
 
 An example native session storage implementation may look like:
 
-```
+```php
 class SessionStore implements StoreInterface
 {
     /**
