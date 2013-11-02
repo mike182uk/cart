@@ -18,7 +18,11 @@ A flexible and modern shopping cart package.
 
 ## Usage
 
-### Cart
+- [Cart](#cart)
+- [Cart Item](#cart-item)
+- [Cart Storage Implementation](#cart-store)
+
+### <a id="cart"></a>Cart
 
 #### Create a new cart
 
@@ -210,7 +214,7 @@ Get the cart storage implementation.
 $cart->getStore();
 ```
 
-### Cart Item
+### <a id="cart-item"></a>Cart Item
 
 #### Create a new Cart Item
 
@@ -400,7 +404,7 @@ array(
 )
 ```
 
-### Cart Storage Implementation
+### <a id="cart-store"></a>Cart Storage Implementation
 
 A cart storage impelentation must impelment `Cart\StoreInterface`.
 
