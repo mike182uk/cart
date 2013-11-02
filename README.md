@@ -1,3 +1,19 @@
+# Cart
+
+A flexible and modern shopping cart package.
+
+## Installation
+
+### Composer
+
+```js
+{
+	"require" : {
+		"mike182uk/cart" : "2.0"
+	}
+}
+```
+
 
 ## Cart
 
@@ -14,7 +30,6 @@ $id = 'cart-01';
 $cartSessionStore = new SessionStore();
 
 $cart = new Cart($id, $cartSessionStore);
-
 ```
 
 The storage implementation must implement `Cart\StoreInterface`.
@@ -36,7 +51,6 @@ $item->price = 1200;
 $item->tax = 200;
 
 $cart->add($item);
-
 ```
 
 If the item already exists in the cart, the quantity of the existing item will be updated to include the quantity of the item being added.
