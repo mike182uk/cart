@@ -1,8 +1,10 @@
-# Cart
-
-[![Build Status](https://secure.travis-ci.org/mike182uk/cart.png)](http://travis-ci.org/mike182uk/cart)
+# Cart [![Build Status](https://secure.travis-ci.org/mike182uk/cart.png)](http://travis-ci.org/mike182uk/cart)
 
 A flexible and modern shopping cart package.
+
+## Prerequisites
+
+- PHP >=5.3.0
 
 ## Installation
 
