@@ -1,8 +1,8 @@
 <?php
 
-use Cart\SessionStore;
+use Cart\Store\Native\SessionStore;
 
-class SessionStoreTest extends PHPUnit_Framework_TestCase
+class NativeSessionStoreTest extends PHPUnit_Framework_TestCase
 {
     public function testGet()
     {

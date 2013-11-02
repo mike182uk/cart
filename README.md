@@ -8,7 +8,7 @@ To create a new cart instance you must pass an id and a storage implementation t
 
 ```
 use Cart;
-use Cart\SessionStore;
+use Cart\Store\Native\SessionStore;
 
 $id = 'cart-01';
 $cartSessionStore = new SessionStore();
@@ -397,7 +397,7 @@ When the `restore` method of the cart is called, the cart id is passed to the `g
 
 When the `clear` method of the cart is called, the cart id is passed to the `flush` method of the storage impelementation.
 
-An example Session storage implementation may look like:
+An example native session storage implementation may look like:
 
 ```
 class SessionStore implements StoreInterface
