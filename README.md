@@ -15,7 +15,7 @@ Add this package as a dependency in your `composer.json`.
 ```js
 {
 	"require" : {
-		"mike182uk/cart" : "2.0"
+		"mike182uk/cart" : "v2.0.0"
 	}
 }
 ```
