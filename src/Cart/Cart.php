@@ -248,7 +248,9 @@ class Cart implements Arrayable
     public function restore()
     {
         $state = $this->store->get($this->id);
-
+            if (!is_string($state)) {
+                return;
+            }
         $data = unserialize($state);
 
         $this->id = $data['id'];
