@@ -80,6 +80,8 @@ To update a propery of an item in the cart use the `update` method. You will nee
 $newId = $cart->update('e4df90d236966195b49b0f01f5ce360a356bc76b', 'price', 959.99);
 ```
 
+If you try and update an item that does not exist in the cart a `InvalidArgumentException` will be thrown.
+
 #### Retrieve an item in the cart
 
 Retrieve an item from the cart by its id use the `get` method. If the item does not exist `null` is returned.
@@ -138,17 +140,12 @@ This will save the current cart items and cart id to the store.
 Restore the cart using the `restore` method.
 
 ```php
-try {
-    $cart->restore();
-}
-catch (Cart\CartRestoreException) {
-   // ...
-}
+$cart->restore();
 ```
 
 This will add any stored cart items back to the cart and set the cart id. If there is a problem restoring the cart a `Cart\CartRestoreException` will be thrown. This will only happen if:
 
-- the saved data is unserializable 
+- the saved data is unserializable
 - the unserialized data is invalid (not an array)
 - the cart id is not present in the unserialized data
 - the cart items are not present in the unserialized data
