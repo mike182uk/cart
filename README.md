@@ -15,7 +15,7 @@ Add this package as a dependency in your `composer.json`.
 ```js
 {
 	"require" : {
-		"mike182uk/cart" : "v2.0.0"
+		"mike182uk/cart" : "v2.1.0"
 	}
 }
 ```
@@ -48,7 +48,7 @@ The id is used for saving / restoring cart state via the storage implementation.
 
 #### Add an item to the cart
 
-Use the `add` method to add an item to the cart. A valid `\Cart\CartItem` must be passed to this method.
+Use the `add` method to add an item to the cart. A valid `Cart\CartItem` must be passed to this method.
 
 ```php
 use Cart\CartItem;
