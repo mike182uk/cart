@@ -138,10 +138,22 @@ This will save the current cart items and cart id to the store.
 Restore the cart using the `restore` method.
 
 ```php
-$cart->restore();
+try {
+    $cart->restore();
+}
+catch (Cart\CartRestoreException) {
+   // ...
+}
 ```
 
-This will add any stored cart items back to the cart and set the cart id.
+This will add any stored cart items back to the cart and set the cart id. If there is a problem restoring the cart a `Cart\CartRestoreException` will be thrown. This will only happen if:
+
+- the saved data is unserializable 
+- the unserialized data is invalid (not an array)
+- the cart id is not present in the unserialized data
+- the cart items are not present in the unserialized data
+- the cart id is invalid (not a string)
+- the cart items are invalid (not an array)
 
 #### Other Cart Methods
 

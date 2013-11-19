@@ -2,6 +2,7 @@ ph<?php
 
 use Cart\Cart;
 use Cart\CartItem;
+use Cart\CartRestoreException;
 use Mockery as m;
 
 class CartTest extends PHPUnit_Framework_TestCase
@@ -336,6 +337,37 @@ class CartTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($cart->totalUniqueItems() == 2);
         $this->assertTrue($cart->has($item1->id));
         $this->assertTrue($cart->has($item2->id));
+    }
+
+    public function testRestoreExceptions()
+    {
+        $exceptionCounter = 0;
+
+        $store = m::mock('Cart\StoreInterface');
+
+        $store
+            ->shouldReceive('get')
+            ->times(6)
+            ->andReturn(
+                '!foo!', // unserializable
+                serialize('bar'), // not array
+                serialize(array('id' => 'foo')), // missing items
+                serialize(array('items' => array())), // missing id
+                serialize(array('id' => array(), 'items' => array())), // invalid id
+                serialize(array('items' => 'foo', 'id' => 'foo')) // invalid items
+            );
+
+        $cart = new Cart('foo', $store);
+
+        for ($i = 1; $i <= 6; $i++) {
+            try {
+                $cart->restore();
+            } catch (CartRestoreException $e) {
+                $exceptionCounter++;
+            }
+        }
+
+        $this->assertEquals($exceptionCounter, 6);
     }
 
     public function getCart()

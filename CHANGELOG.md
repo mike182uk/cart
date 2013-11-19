@@ -3,6 +3,13 @@
 ##2.1.0
 
 - Renamed `Cart\Store\Native\SessionStore` to `Cart\SessionStore`
+- Added more error checking to `Cart::restore`. `Cart\CartRestoreException` is thrown if the cart state cannot be restored due to:
+    - unserializable data
+    - invalid unserialized data (not an array)
+    - missing id
+    - missing items
+    - invalid id (not a string)
+    - invalid items (not an array)
 
 ##2.0.0
 

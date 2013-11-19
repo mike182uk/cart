@@ -5,6 +5,7 @@ namespace Cart;
 use Cart\StoreInterface;
 use Cart\CartItem;
 use Cart\ArrayableInterface as Arrayable;
+use Cart\CartRestoreException;
 use InvalidArgumentException;
 
 class Cart implements Arrayable
@@ -244,18 +245,37 @@ class Cart implements Arrayable
      * Restore the cart from its saved state.
      *
      * @return void
+     * @throws CartRestoreException
      */
     public function restore()
     {
         $state = $this->store->get($this->id);
 
-        $data = unserialize($state);
+        // suppress unserializable error
+        $data = @unserialize($state);
 
-        $this->id = $data['id'];
-        $this->items = array();
+        if ($data === false) {
+            throw new CartRestoreException('Saved cart state is unserializable.');
+        }
 
-        foreach ($data['items'] as $itemArr) {
-            $this->items[] = new CartItem($itemArr);
+        if (is_array($data)) {
+
+            if (!isset($data['id']) || !isset($data['items'])) {
+                throw new CartRestoreException('Missing cart ID or cart items.');
+            }
+
+            if (!is_string($data['id']) || !is_array($data['items'])) {
+                throw new CartRestoreException('Cart ID not a string or cart items not an array.');
+            }
+
+            $this->id = $data['id'];
+            $this->items = array();
+
+            foreach ($data['items'] as $itemArr) {
+                $this->items[] = new CartItem($itemArr);
+            }
+        } else {
+            throw new CartRestoreException('Unserialized data is not an array.');
         }
     }
 
