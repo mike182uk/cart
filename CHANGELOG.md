@@ -1,5 +1,9 @@
 #Changelog
 
+##2.1.0
+
+- Renamed ``Cart\Store\Native\SessionStore`` to ``Cart\SessionStore``
+
 ##2.0.0
 
 - Rewrite from the ground up

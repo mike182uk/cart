@@ -34,7 +34,7 @@ To create a new cart instance you must pass an id and a storage implementation t
 
 ```php
 use Cart;
-use Cart\Store\Native\SessionStore;
+use Cart\SessionStore;
 
 $id = 'cart-01';
 $cartSessionStore = new SessionStore();

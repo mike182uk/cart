@@ -1,6 +1,6 @@
 <?php
 
-namespace Cart\Store\Native;
+namespace Cart;
 
 use Cart\StoreInterface;
 
