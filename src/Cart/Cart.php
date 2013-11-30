@@ -194,18 +194,26 @@ class Cart implements Arrayable
     }
 
     /**
-     * Get the cart total.
+     * Get the cart total including tax.
      *
      * @return float
      */
-    public function total($includeTax = true)
+    public function total()
     {
-        return (float) array_sum(array_map(function($item) use ($includeTax) {
-            if ($includeTax) {
+        return (float) array_sum(array_map(function($item) {
                 return $item->getTotalPrice();
-            } else {
-                return $item->getTotalPriceExcludingTax();
-            }
+        }, $this->items));
+    }
+
+    /**
+     * Get the cart total excluding tax.
+     *
+     * @return float
+     */
+    public function totalExcludingTax($includeTax = true)
+    {
+        return (float) array_sum(array_map(function($item) {
+            return $item->getTotalPriceExcludingTax();
         }, $this->items));
     }
 

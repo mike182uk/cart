@@ -214,7 +214,7 @@ class CartTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(count($cartItems) == 0);
     }
 
-    public function testTotalWithTax()
+    public function testTotal()
     {
         $cart = $this->getCart();
 
@@ -241,7 +241,7 @@ class CartTest extends PHPUnit_Framework_TestCase
         $this->assertSame($total, 42.00);
     }
 
-    public function testTotalWithoutTax()
+    public function testTotalExcludingTax()
     {
         $cart = $this->getCart();
 
@@ -262,7 +262,7 @@ class CartTest extends PHPUnit_Framework_TestCase
         $cart->add($item1);
         $cart->add($item2);
 
-        $total = $cart->total(false);
+        $total = $cart->totalExcludingTax();
 
         $this->assertTrue(is_float($total));
         $this->assertSame($total, 30.00);
