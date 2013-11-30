@@ -201,7 +201,11 @@ class Cart implements Arrayable
     public function total($includeTax = true)
     {
         return (float) array_sum(array_map(function($item) use ($includeTax) {
-            return $item->getTotalPrice($includeTax);
+            if ($includeTax) {
+                return $item->getTotalPrice();
+            } else {
+                return $item->getTotalPriceExcludingTax();
+            }
         }, $this->items));
     }
 

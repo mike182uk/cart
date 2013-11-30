@@ -10,6 +10,10 @@
     - missing items
     - invalid id (not a string)
     - invalid items (not an array)
+- added `getSingleTax` method to `Cart\CartItem`
+- made `getSinglePrice` and `getTotalPrice` methods on `Cart\CartItem` always return price including tax
+- added `getSinglePriceExlcudingTax` and `getTotalPriceExcludingTax` methods on `Cart\CartItem`
+
 
 ##2.0.0
 

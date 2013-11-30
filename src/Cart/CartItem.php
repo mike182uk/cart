@@ -113,34 +113,46 @@ class CartItem implements ArrayAccess, Arrayable
     }
 
     /**
-     * Get the total price of the cart item.
+     * Get the total price of the cart item including tax.
      *
-     * @param  boolean $includeTax
      * @return float
      */
-    public function getTotalPrice($includeTax = true)
+    public function getTotalPrice()
     {
-        if ($includeTax) {
-            $totalPrice = ($this->price + $this->tax) * $this->quantity;
-        } else {
-            $totalPrice = $this->price * $this->quantity;
-        }
-
-        return (float) $totalPrice;
+        return (float) ($this->price + $this->tax) * $this->quantity;
     }
 
     /**
-     * Get the single price of the cart item.
+     * Get the total price of the cart item excluding tax.
      *
-     * @param  boolean $includeTax
      * @return float
      */
-    public function getSinglePrice($includeTax = true)
+    public function getTotalPriceExcludingTax()
     {
-        return (float) ($includeTax ? $this->price + $this->tax : $this->price);
+        return (float) $this->price * $this->quantity;
     }
 
-     /**
+    /**
+     * Get the single price of the cart item including tax.
+     *
+     * @return float
+     */
+    public function getSinglePrice()
+    {
+        return (float) $this->price + $this->tax;
+    }
+
+    /**
+     * Get the single price of the cart item excluding tax.
+     *
+     * @return float
+     */
+    public function getSinglePriceExcludingTax()
+    {
+        return (float) $this->price;
+    }
+
+    /**
      * Get the total tax for the cart item.
      *
      * @return float
@@ -148,6 +160,16 @@ class CartItem implements ArrayAccess, Arrayable
     public function getTotalTax()
     {
         return (float) ($this->tax * $this->quantity);
+    }
+
+    /**
+     * Get the single tax value of the cart item.
+     *
+     * @return float
+     */
+    public function getSingleTax()
+    {
+        return (float) $this->tax;
     }
 
     /**

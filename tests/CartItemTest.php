@@ -132,7 +132,7 @@ class CartItemTest extends PHPUnit_Framework_TestCase
         $this->assertSame($newId, $itemId);
     }
 
-    public function testGetSinglePriceWithTax()
+    public function testGetSinglePrice()
     {
         $item = new CartItem;
 
@@ -145,20 +145,20 @@ class CartItemTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_float($price));
     }
 
-    public function testGetSinglePriceWithoutTax()
+    public function testGetSinglePriceExcludingTax()
     {
         $item = new CartItem;
 
         $item->price = 10.00;
         $item->tax = 5.00;
 
-        $price = $item->getSinglePrice(false);
+        $price = $item->getSinglePriceExcludingTax();
 
         $this->assertEquals(10.00, $price);
         $this->assertTrue(is_float($price));
     }
 
-    public function testGetTotalPriceWithTax()
+    public function testGetTotalPrice()
     {
         $item = new CartItem;
 
@@ -172,7 +172,7 @@ class CartItemTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_float($price));
     }
 
-    public function testGetTotalPriceWithoutTax()
+    public function testGetTotalPriceExcludingTax()
     {
         $item = new CartItem;
 
@@ -180,7 +180,7 @@ class CartItemTest extends PHPUnit_Framework_TestCase
         $item->tax = 5.00;
         $item->quantity = 2;
 
-        $price = $item->getTotalPrice(false);
+        $price = $item->getTotalPriceExcludingTax();
 
         $this->assertEquals(20.00, $price);
         $this->assertTrue(is_float($price));
@@ -196,6 +196,19 @@ class CartItemTest extends PHPUnit_Framework_TestCase
         $tax = $item->getTotalTax();
 
         $this->assertEquals(10.00, $tax);
+        $this->assertTrue(is_float($tax));
+    }
+
+    public function testGetSingleTax()
+    {
+        $item = new CartItem;
+
+        $item->quantity = 2;
+        $item->tax = 5.00;
+
+        $tax = $item->getSingleTax();
+
+        $this->assertEquals(5.00, $tax);
         $this->assertTrue(is_float($tax));
     }
 }
