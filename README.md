@@ -14,9 +14,9 @@ Add this package as a dependency in your `composer.json`.
 
 ```js
 {
-	"require" : {
-		"mike182uk/cart" : "v2.1.0"
-	}
+    "require" : {
+        "mike182uk/cart" : "v2.1.0"
+    }
 }
 ```
 
@@ -90,7 +90,7 @@ Retrieve an item from the cart by its id use the `get` method. If the item does 
 $item = $cart->get('e4df90d236966195b49b0f01f5ce360a356bc76b');
 
 if ($item) {
-	// ...
+    // ...
 }
 ```
 
@@ -102,9 +102,9 @@ Retrieve all items in the cart using the `all` method. This will return an array
 $cartItems = $cart->all();
 
 if (count($cartItems) > 0) {
-	foreach ($cartItems as $item) 	{
-		// ...
-	}
+    foreach ($cartItems as $item) {
+        // ...
+    }
 }
 ```
 
@@ -114,7 +114,7 @@ Determine if an item exists in the cart using the `has` method. Returns `true` o
 
 ```php
 if ($cart->has('e4df90d236966195b49b0f01f5ce360a356bc76b')) {
-	// ...
+    // ...
 }
 ```
 
@@ -178,10 +178,10 @@ Get the total price of all the cart items including tax.
 $cart->total();
 ```
 
-You can also get the total price excluding tax by passing `false` as the first parameter.
+You can get the total excluding tax by using the `totalExcludingTax` method.
 
 ```php
-$cart->total(false);
+$cart->totalExcludingTax();
 ```
 
 ##### tax
@@ -204,10 +204,10 @@ Array will be structured like:
 
 ```php
 array(
-	'id' => 'cart-01', // cart id
-	'items' => array(
-		// cart items as array
-	)
+    'id' => 'cart-01', // cart id
+    'items' => array(
+        // cart items as array
+    )
 )
 ```
 
@@ -241,8 +241,8 @@ $item->sku = 'MBP8GB';
 $item->price = 1200;
 $item->tax = 200;
 $item->options = array(
-	'ram' => '8 GB',
-	'ssd' => '256 GB'
+    'ram' => '8 GB',
+    'ssd' => '256 GB'
 );
 ```
 
@@ -256,8 +256,8 @@ $item['sku'] = 'MBP8GB';
 $item['price'] = 1200;
 $item['tax'] = 200;
 $item['options'] = array(
-	'ram' => '8 GB',
-	'ssd' => '256 GB'
+    'ram' => '8 GB',
+    'ssd' => '256 GB'
 );
 ```
 
@@ -265,14 +265,14 @@ An array of data can also be passed to the cart item constructor to set the cart
 
 ```php
 $itemData = array(
-	'name' => 'Macbook Pro';
-	'sku' => 'MBP8GB';
-	'price' => 1200;
-	'tax' => 200;
-	'options' => array(
-		'ram' => '8 GB',
-		'ssd' => '256 GB'
-	)
+    'name' => 'Macbook Pro';
+    'sku' => 'MBP8GB';
+    'price' => 1200;
+    'tax' => 200;
+    'options' => array(
+        'ram' => '8 GB',
+        'ssd' => '256 GB'
+    )
 );
 
 $item = new CartItem($itemData);
@@ -366,10 +366,10 @@ Get the total price of the cart item including tax `((item price + item tax) * q
 $item->getTotalPrice();
 ```
 
-You can also get the total price excluding tax `(item price * quantity)` by passing `false` as the first parameter.
+You can also get the total price excluding tax `(item price * quantity)` using the `getTotalPriceExcludingTax` method.
 
 ```php
-$item->getTotalPrice(true);
+$item->getTotalPriceExcludingTax();
 ```
 
 ##### getSinglePrice
@@ -380,10 +380,10 @@ Get the single price of the cart item including tax `(item price + item tax)`
 $item->getSinglePrice();
 ```
 
-You can also get the single price excluding tax by passing `false` as the first parameter.
+You can also get the single price excluding tax by using the `getSinglePriceExcludingTax` method.
 
 ```php
-$item->getSinglePrice(false);
+$item->getSinglePriceExcludingTax();
 ```
 
 ##### getTotalTax
@@ -392,6 +392,14 @@ Get the total tax of the cart item `(item tax * quantity)`.
 
 ```php
 $item->getTotalTax();
+```
+
+##### getSingleTax
+
+Get the single tax value of the cart item.
+
+```php
+$item->getSingleTax();
 ```
 
 ##### toArray
@@ -406,14 +414,14 @@ Array will be structured like:
 
 ```php
 array(
-	'id' => 'e4df90d236966195b49b0f01f5ce360a356bc76b', // cart item unique id
-	'data' => array(
-		'name' => 'Macbook Pro',
-		'sku' => 'MBP8GB',
-		'price' => 1200,
+    'id' => 'e4df90d236966195b49b0f01f5ce360a356bc76b', // cart item unique id
+    'data' => array(
+        'name' => 'Macbook Pro',
+        'sku' => 'MBP8GB',
+        'price' => 1200,
 
-		// ... other cart item properties
-	)
+        // ... other cart item properties
+    )
 )
 ```
 
