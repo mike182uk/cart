@@ -10,11 +10,11 @@
     - missing items
     - invalid id (not a string)
     - invalid items (not an array)
-- added `getSingleTax` method to `Cart\CartItem`
-- made `getSinglePrice` and `getTotalPrice` methods on `Cart\CartItem` always return price including tax
-- added `getSinglePriceExlcudingTax` and `getTotalPriceExcludingTax` methods on `Cart\CartItem`
-- made `total` method on `Cart\Cart` always return total including tax
-- added `totalExcludingTax` method on `Cart\Cart`
+- added `Cart\CartItem::getSingleTax`
+- made `Cart\CartItem::getSinglePrice` and `Cart\CartItem::getTotalPrice` always return price including tax
+- added `Cart\CartItem::getSinglePriceExlcudingTax` and `Cart\CartItem::getTotalPriceExcludingTax`
+- made `Cart\Cart::total` always return total including tax
+- added `Cart\Cart::totalExcludingTax`
 
 ##2.0.0
 
