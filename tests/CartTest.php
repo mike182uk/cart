@@ -16,7 +16,7 @@ class CartTest extends PHPUnit_Framework_TestCase
     {
         $cart = $this->getCart();
 
-        $this->assertInstanceOf('Cart\ArrayableInterface', $cart);
+        $this->assertInstanceOf('Cart\Arrayable', $cart);
 
         $cartArr = $cart->toArray();
 

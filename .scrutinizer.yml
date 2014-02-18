@@ -1,0 +1,10 @@
+imports:
+    - php
+tools:
+    php_code_coverage: true
+    php_cs_fixer:
+        config: { level: psr2 }
+        filter:
+            paths: [src]
+before_commands:
+    - "composer install --prefer-source"

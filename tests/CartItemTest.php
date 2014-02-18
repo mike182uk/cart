@@ -8,7 +8,7 @@ class CartItemTest extends PHPUnit_Framework_TestCase
     {
         $item = new CartItem;
 
-        $this->assertInstanceOf('Cart\ArrayableInterface', $item);
+        $this->assertInstanceOf('Cart\Arrayable', $item);
 
         $itemArr = $item->toArray();
 

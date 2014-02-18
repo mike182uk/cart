@@ -2,7 +2,7 @@
 
 namespace Cart;
 
-use Cart\ArrayableInterface as Arrayable;
+use Cart\Arrayable;
 use ArrayAccess;
 use InvalidArgumentException;
 
@@ -75,7 +75,6 @@ class CartItem implements ArrayAccess, Arrayable
         switch ($key) {
             case 'id':
                 return $this->getId();
-            break;
             default:
                 return $this->data[$key];
         }

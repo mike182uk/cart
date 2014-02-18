@@ -4,7 +4,7 @@ namespace Cart;
 
 use Cart\StoreInterface;
 use Cart\CartItem;
-use Cart\ArrayableInterface as Arrayable;
+use Cart\Arrayable;
 use Cart\CartRestoreException;
 use InvalidArgumentException;
 
@@ -210,7 +210,7 @@ class Cart implements Arrayable
      *
      * @return float
      */
-    public function totalExcludingTax($includeTax = true)
+    public function totalExcludingTax()
     {
         return (float) array_sum(array_map(function($item) {
             return $item->getTotalPriceExcludingTax();
