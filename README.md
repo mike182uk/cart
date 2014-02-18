@@ -1,4 +1,8 @@
-# Cart [![Build Status](https://secure.travis-ci.org/mike182uk/cart.png)](http://travis-ci.org/mike182uk/cart)
+# Cart
+[![Build Status](https://secure.travis-ci.org/mike182uk/cart.png)](http://travis-ci.org/mike182uk/cart)
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/mike182uk/cart/badges/quality-score.png?s=400a4f03f3d494434d9240123de352edd89eb52d)](https://scrutinizer-ci.com/g/mike182uk/cart/)
+[![Code Coverage](https://scrutinizer-ci.com/g/mike182uk/cart/badges/coverage.png?s=c7dd3fffa6ed075c7e28d9af54eb88373ba314fd)](https://scrutinizer-ci.com/g/mike182uk/cart/)
+[![Total Downloads](https://poser.pugx.org/mike182uk/cart/downloads.png)](https://packagist.org/packages/mike182uk/cart)
 
 A flexible and modern shopping cart package.
 
@@ -441,10 +445,7 @@ An example native session storage implementation may look like:
 class SessionStore implements StoreInterface
 {
     /**
-     * Retrieve the saved state for a cart instance.
-     *
-     * @param  string $cartId
-     * @return string
+     * {@inheritdoc}
      */
     public function get($cartId)
     {
@@ -452,11 +453,7 @@ class SessionStore implements StoreInterface
     }
 
     /**
-     * Save the state for a cart instance.
-     *
-     * @param  string $cartId
-     * @param  string $data
-     * @return void
+     * {@inheritdoc}
      */
     public function put($cartId, $data)
     {
@@ -464,10 +461,7 @@ class SessionStore implements StoreInterface
     }
 
     /**
-     * Flush the saved state for a cart instance.
-     *
-     * @param  string $cartId
-     * @return void
+     * {@inheritdoc}
      */
     public function flush($cartId)
     {

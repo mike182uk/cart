@@ -2,7 +2,6 @@
 
 namespace Cart;
 
-use Cart\ArrayableInterface as Arrayable;
 use ArrayAccess;
 use InvalidArgumentException;
 
@@ -13,15 +12,14 @@ class CartItem implements ArrayAccess, Arrayable
      *
      * @var array
      */
-    protected $data;
+    private $data;
 
     /**
      * Create a new cart item instance.
      *
-     * @param  array $data
-     * @return void
+     * @param array $data
      */
-    public function __construct($data = array())
+    public function __construct(array $data = array())
     {
         foreach ($data as $k => $v) {
             $this->$k = $v;
@@ -67,7 +65,8 @@ class CartItem implements ArrayAccess, Arrayable
     /**
      * Get a piece of data set on the cart item.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return mixed
      */
     public function get($key)
@@ -75,7 +74,6 @@ class CartItem implements ArrayAccess, Arrayable
         switch ($key) {
             case 'id':
                 return $this->getId();
-            break;
             default:
                 return $this->data[$key];
         }
@@ -84,9 +82,11 @@ class CartItem implements ArrayAccess, Arrayable
     /**
      * Set a piece of data on the cart item.
      *
-     * @param  string                   $key
-     * @param  mixed                    $value
+     * @param string $key
+     * @param mixed  $value
+     *
      * @return string
+     *
      * @throws InvalidArgumentException
      */
     public function set($key, $value)
@@ -188,8 +188,9 @@ class CartItem implements ArrayAccess, Arrayable
     /**
      * Determine if a piece of data is set on the cart item.
      *
-     * @param  string $key
-     * @return bool
+     * @param string $key
+     *
+     * @return boolean
      */
     public function offsetExists($key)
     {
@@ -199,7 +200,8 @@ class CartItem implements ArrayAccess, Arrayable
     /**
      * Get a piece of data set on the cart item.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return mixed
      */
     public function offsetGet($key)
@@ -221,8 +223,7 @@ class CartItem implements ArrayAccess, Arrayable
     /**
      * Unset a piece of data from the cart item.
      *
-     * @param  string $key
-     * @return void
+     * @param string $key
      */
     public function offsetUnset($key)
     {
@@ -232,7 +233,8 @@ class CartItem implements ArrayAccess, Arrayable
     /**
      * Get a piece of data set on the cart item.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return mixed
      */
     public function __get($key)
@@ -254,8 +256,9 @@ class CartItem implements ArrayAccess, Arrayable
     /**
      * Determine if a piece of data is set on the cart item.
      *
-     * @param  string $key
-     * @return bool
+     * @param string $key
+     *
+     * @return boolean
      */
     public function __isset($key)
     {
@@ -265,8 +268,7 @@ class CartItem implements ArrayAccess, Arrayable
     /**
      * Unset a piece of data from the cart item.
      *
-     * @param  string $key
-     * @return void
+     * @param string $key
      */
     public function __unset($key)
     {

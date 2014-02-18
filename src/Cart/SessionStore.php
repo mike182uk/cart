@@ -2,15 +2,10 @@
 
 namespace Cart;
 
-use Cart\StoreInterface;
-
 class SessionStore implements StoreInterface
 {
     /**
-     * Retrieve the saved state for a cart instance.
-     *
-     * @param  string $cartId
-     * @return string
+     * {@inheritdoc}
      */
     public function get($cartId)
     {
@@ -18,11 +13,7 @@ class SessionStore implements StoreInterface
     }
 
     /**
-     * Save the state for a cart instance.
-     *
-     * @param  string $cartId
-     * @param  string $data
-     * @return void
+     * {@inheritdoc}
      */
     public function put($cartId, $data)
     {
@@ -30,10 +21,7 @@ class SessionStore implements StoreInterface
     }
 
     /**
-     * Flush the saved state for a cart instance.
-     *
-     * @param  string $cartId
-     * @return void
+     * {@inheritdoc}
      */
     public function flush($cartId)
     {

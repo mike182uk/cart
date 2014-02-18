@@ -7,7 +7,8 @@ interface StoreInterface
     /**
      * Retrieve the saved state for a cart instance.
      *
-     * @param  string $cartId
+     * @param string $cartId
+     *
      * @return string
      */
     public function get($cartId);
@@ -15,8 +16,9 @@ interface StoreInterface
     /**
      * Save the state for a cart instance.
      *
-     * @param  string $cartId
-     * @param  string $data
+     * @param string $cartId
+     * @param string $data
+     *
      * @return void
      */
     public function put($cartId, $data);
@@ -24,7 +26,8 @@ interface StoreInterface
     /**
      * Flush the saved state for a cart instance.
      *
-     * @param  string $cartId
+     * @param string $cartId
+     *
      * @return void
      */
     public function flush($cartId);
