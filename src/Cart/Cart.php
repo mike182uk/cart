@@ -2,10 +2,6 @@
 
 namespace Cart;
 
-use Cart\StoreInterface;
-use Cart\CartItem;
-use Cart\Arrayable;
-use Cart\CartRestoreException;
 use InvalidArgumentException;
 
 class Cart implements Arrayable
@@ -15,28 +11,27 @@ class Cart implements Arrayable
      *
      * @var string
      */
-    protected $id;
+    private $id;
 
     /**
      * Items in the cart.
      *
      * @var array
      */
-    protected $items = array();
+    private $items = array();
 
     /**
      * Cart storage implementation.
      *
-     * @var \Cart\StoreInterface
+     * @var StoreInterface
      */
-    protected $store;
+    private $store;
 
     /**
      * Create a new cart instance.
      *
-     * @param  string               $id
-     * @param  \Cart\StoreInterface $store
-     * @return void
+     * @param string         $id
+     * @param StoreInterface $store
      */
     public function __construct($id, StoreInterface $store)
     {
@@ -45,9 +40,9 @@ class Cart implements Arrayable
     }
 
     /**
-     * Retrieve the cart storage impelementation.
+     * Retrieve the cart storage implementation.
      *
-     * @return \Cart\StoreInterface
+     * @return StoreInterface
      */
     public function getStore()
     {
@@ -77,8 +72,7 @@ class Cart implements Arrayable
     /**
      * Add an item to the cart.
      *
-     * @param  \Cart\CartItem $cartItem
-     * @return void
+     * @param CartItem $cartItem
      */
     public function add(CartItem $cartItem)
     {
@@ -97,8 +91,7 @@ class Cart implements Arrayable
     /**
      * Remove an item from the cart.
      *
-     * @param  string $itemId
-     * @return void
+     * @param string $itemId
      */
     public function remove($itemId)
     {
@@ -114,10 +107,13 @@ class Cart implements Arrayable
     /**
      * Update an item in the cart.
      *
-     * @param  string $itemId
-     * @param  string $key
-     * @param  mixed  $value
+     * @param string $itemId
+     * @param string $key
+     * @param mixed  $value
+     *
      * @return string
+     *
+     * @throws InvalidArgumentException
      */
     public function update($itemId, $key, $value)
     {
@@ -135,7 +131,8 @@ class Cart implements Arrayable
     /**
      * Retrieve an item from the cart by its id
      *
-     * @param  string $itemId
+     * @param string $itemId
+     *
      * @return mixed
      */
     public function get($itemId)
@@ -146,7 +143,8 @@ class Cart implements Arrayable
     /**
      * Determine if an item exists in the cart.
      *
-     * @param  string  $itemId
+     * @param string $itemId
+     *
      * @return boolean
      */
     public function has($itemId)
@@ -157,7 +155,8 @@ class Cart implements Arrayable
     /**
      * Find an item in the cart.
      *
-     * @param  string $itemId
+     * @param string $itemId
+     *
      * @return mixed
      */
     protected function find($itemId)
@@ -188,7 +187,7 @@ class Cart implements Arrayable
      */
     public function totalItems()
     {
-        return array_sum(array_map(function($item) {
+        return array_sum(array_map(function ($item) {
             return $item->quantity;
         }, $this->items));
     }
@@ -200,7 +199,7 @@ class Cart implements Arrayable
      */
     public function total()
     {
-        return (float) array_sum(array_map(function($item) {
+        return (float) array_sum(array_map(function (CartItem $item) {
                 return $item->getTotalPrice();
         }, $this->items));
     }
@@ -212,7 +211,7 @@ class Cart implements Arrayable
      */
     public function totalExcludingTax()
     {
-        return (float) array_sum(array_map(function($item) {
+        return (float) array_sum(array_map(function (CartItem $item) {
             return $item->getTotalPriceExcludingTax();
         }, $this->items));
     }
@@ -224,15 +223,13 @@ class Cart implements Arrayable
      */
     public function tax()
     {
-        return (float) array_sum(array_map(function($item) {
+        return (float) array_sum(array_map(function (CartItem $item) {
             return $item->getTotalTax();
         }, $this->items));
     }
 
     /**
      * Remove all items from the cart.
-     *
-     * @return void
      */
     public function clear()
     {
@@ -243,8 +240,6 @@ class Cart implements Arrayable
 
     /**
      * Save the cart state.
-     *
-     * @return void
      */
     public function save()
     {
@@ -256,7 +251,6 @@ class Cart implements Arrayable
     /**
      * Restore the cart from its saved state.
      *
-     * @return void
      * @throws CartRestoreException
      */
     public function restore()
@@ -300,7 +294,7 @@ class Cart implements Arrayable
     {
         return array(
             'id' => $this->id,
-            'items' => array_map(function($item) {
+            'items' => array_map(function (CartItem $item) {
                 return $item->toArray();
             }, $this->items)
         );

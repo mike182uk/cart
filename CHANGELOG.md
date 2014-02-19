@@ -5,6 +5,7 @@
 - renamed `Cart\ArrayableInterface` to `Cart\Arrayable`
 - added scrutinizer config
 - fixed scrutinizer recommendations
+- misc comments / code cleanup
 
 ##2.1.0
 
