@@ -18,6 +18,7 @@ interface StoreInterface
      *
      * @param string $cartId
      * @param string $data
+     * @return void
      */
     public function put($cartId, $data);
 
@@ -25,6 +26,7 @@ interface StoreInterface
      * Flush the saved state for a cart instance.
      *
      * @param string $cartId
+     * @return void
      */
     public function flush($cartId);
 }
