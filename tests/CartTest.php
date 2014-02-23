@@ -191,7 +191,7 @@ class CartTest extends PHPUnit_Framework_TestCase
 
     public function testClear()
     {
-        $store = m::mock('Cart\StoreInterface');
+        $store = m::mock('Cart\Storage\Store');
         $store->shouldReceive('flush')->times(1);
 
         $cart = new Cart('foo', $store);
@@ -297,7 +297,7 @@ class CartTest extends PHPUnit_Framework_TestCase
 
     public function testSave()
     {
-        $store = m::mock('Cart\StoreInterface');
+        $store = m::mock('Cart\Storage\Store');
         $store->shouldReceive('put')->times(1);
 
         $cart = new Cart('foo', $store);
@@ -323,7 +323,7 @@ class CartTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $store = m::mock('Cart\StoreInterface');
+        $store = m::mock('Cart\Storage\Store');
         $store
             ->shouldReceive('get')
             ->times(1)
@@ -343,7 +343,7 @@ class CartTest extends PHPUnit_Framework_TestCase
     {
         $exceptionCounter = 0;
 
-        $store = m::mock('Cart\StoreInterface');
+        $store = m::mock('Cart\Storage\Store');
 
         $store
             ->shouldReceive('get')
@@ -372,7 +372,7 @@ class CartTest extends PHPUnit_Framework_TestCase
 
     public function getCart()
     {
-        $store = m::mock('Cart\StoreInterface');
+        $store = m::mock('Cart\Storage\Store');
 
         return new Cart('foo', $store);
     }

@@ -39,7 +39,7 @@ To create a new cart instance you must pass an id and a storage implementation t
 
 ```php
 use Cart;
-use Cart\SessionStore;
+use Cart\Store\SessionStore;
 
 $id = 'cart-01';
 $cartSessionStore = new SessionStore();
@@ -47,7 +47,7 @@ $cartSessionStore = new SessionStore();
 $cart = new Cart($id, $cartSessionStore);
 ```
 
-The storage implementation must implement `Cart\StoreInterface`.
+The storage implementation must implement `Cart\Store`.
 
 The id is used for saving / restoring cart state via the storage implementation.
 
@@ -432,7 +432,7 @@ array(
 
 ### <a id="cart-store"></a>Cart Storage Implementation
 
-A cart storage impelentation must impelment `Cart\StoreInterface`.
+A cart storage impelentation must impelment `Cart\Store`.
 
 When the `save` method of the cart is called, the cart id and serialized cart data is passed to the `put` method of the storage impelementation.
 
@@ -443,7 +443,9 @@ When the `clear` method of the cart is called, the cart id is passed to the `flu
 An example native session storage implementation may look like:
 
 ```php
-class SessionStore implements StoreInterface
+use Cart\Store;
+
+class SessionStore implements Store
 {
     /**
      * {@inheritdoc}

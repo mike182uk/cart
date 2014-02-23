@@ -1,8 +1,10 @@
 <?php
 
-namespace Cart;
+namespace Cart\Storage;
 
-class SessionStore implements StoreInterface
+use Cart\Storage\Store;
+
+class SessionStore implements Store
 {
     /**
      * {@inheritdoc}

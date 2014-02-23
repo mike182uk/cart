@@ -1,8 +1,8 @@
 <?php
 
-namespace Cart;
+namespace Cart\Storage;
 
-interface StoreInterface
+interface Store
 {
     /**
      * Retrieve the saved state for a cart instance.

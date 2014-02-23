@@ -2,6 +2,7 @@
 
 namespace Cart;
 
+use Cart\Storage\Store;
 use InvalidArgumentException;
 
 class Cart implements Arrayable
@@ -23,7 +24,7 @@ class Cart implements Arrayable
     /**
      * Cart storage implementation.
      *
-     * @var StoreInterface
+     * @var Store
      */
     private $store;
 
@@ -31,9 +32,9 @@ class Cart implements Arrayable
      * Create a new cart instance.
      *
      * @param string         $id
-     * @param StoreInterface $store
+     * @param Store $store
      */
-    public function __construct($id, StoreInterface $store)
+    public function __construct($id, Store $store)
     {
         $this->id = $id;
         $this->store = $store;
@@ -42,7 +43,7 @@ class Cart implements Arrayable
     /**
      * Retrieve the cart storage implementation.
      *
-     * @return StoreInterface
+     * @return Store
      */
     public function getStore()
     {

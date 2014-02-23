@@ -1,6 +1,6 @@
 <?php
 
-use Cart\SessionStore;
+use Cart\Storage\SessionStore;
 
 class SessionStoreTest extends PHPUnit_Framework_TestCase
 {
