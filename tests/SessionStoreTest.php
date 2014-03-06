@@ -6,7 +6,7 @@ class SessionStoreTest extends PHPUnit_Framework_TestCase
 {
     public function testGet()
     {
-        $data = array('bar');
+        $data = 'bar';
 
         $store = new SessionStore();
         $store->put('foo', $data);
@@ -16,7 +16,7 @@ class SessionStoreTest extends PHPUnit_Framework_TestCase
 
     public function testPut()
     {
-        $data = array('bar');
+        $data = 'bar';
 
         $store = new SessionStore();
         $store->put('foo', $data);
@@ -27,7 +27,7 @@ class SessionStoreTest extends PHPUnit_Framework_TestCase
     public function testFlush()
     {
         $store = new SessionStore();
-        $store->put('foo', array('bar'));
+        $store->put('foo', 'bar');
 
         $store->flush('foo');
 

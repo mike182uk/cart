@@ -9,7 +9,7 @@ class CookieStoreTest extends PHPUnit_Framework_TestCase
 {
     public function testEncodeAndDecode()
     {
-        $data = array('bar');
+        $data = 'Foo';
         $store = new CookieStore();
         $encodedData = $store->encode($data);
 

@@ -9,9 +9,15 @@
          stopOnFailure="false"
          syntaxCheck="false"
 >
-   <testsuites>
-      <testsuite name="Cart Test Suite">
-         <directory>./tests/</directory>
-      </testsuite>
-   </testsuites>
+    <testsuites>
+        <testsuite name="Cart Test Suite">
+            <directory>./tests/</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src/</directory>
+        </whitelist>
+    </filter>
 </phpunit>

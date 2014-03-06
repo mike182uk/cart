@@ -12,4 +12,4 @@ tools:
     php_pdepend:
         excluded_dirs: [vendor, tests]
     php_analyzer: true
-    external_code_coverage: true
+    php_code_coverage: true

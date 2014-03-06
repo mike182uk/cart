@@ -31,13 +31,13 @@ class CookieStore implements Store
     /**
      * Encode data to be saved in cookie.
      *
-     * @param array $data
+     * @param string $data
      *
      * @return string
      */
     public function encode($data)
     {
-        return base64_encode(serialize($data));
+        return base64_encode($data);
     }
 
     /**
@@ -45,18 +45,18 @@ class CookieStore implements Store
      *
      * @param string $data
      *
-     * @return array
+     * @return string
      */
     public function decode($data)
     {
-        return unserialize(base64_decode($data));
+        return base64_decode($data);
     }
 
     /**
      * Set cookie.
      *
      * @param string $name
-     * @param array  $data
+     * @param string $data
      */
     private function setCookie($name, $data)
     {

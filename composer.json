@@ -18,10 +18,5 @@
         "psr-0": {
             "Cart": "src"
         }
-    },
-    "keywords": [
-        "shopping",
-        "cart",
-        "utility"
-    ]
+    }
 }
