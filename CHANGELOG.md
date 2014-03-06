@@ -1,7 +1,10 @@
 #Changelog
 
-##2.1.1
+##2.2.0
 
+- added `Cart\Store\CookieStore`
+- renamed `Cart\SessionStore` to `Cart\Storage\SessionStore`
+- renamed `Cart\StorageInterface` to `Cart\Storage\Store`
 - renamed `Cart\ArrayableInterface` to `Cart\Arrayable`
 - added scrutinizer config
 - fixed scrutinizer recommendations

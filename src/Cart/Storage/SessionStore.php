@@ -2,8 +2,6 @@
 
 namespace Cart\Storage;
 
-use Cart\Storage\Store;
-
 class SessionStore implements Store
 {
     /**

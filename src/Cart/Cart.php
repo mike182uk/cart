@@ -31,8 +31,8 @@ class Cart implements Arrayable
     /**
      * Create a new cart instance.
      *
-     * @param string         $id
-     * @param Store $store
+     * @param string $id
+     * @param Store  $store
      */
     public function __construct($id, Store $store)
     {

@@ -39,7 +39,7 @@ To create a new cart instance you must pass an id and a storage implementation t
 
 ```php
 use Cart;
-use Cart\Store\SessionStore;
+use Cart\Storage\SessionStore;
 
 $id = 'cart-01';
 $cartSessionStore = new SessionStore();
@@ -47,7 +47,7 @@ $cartSessionStore = new SessionStore();
 $cart = new Cart($id, $cartSessionStore);
 ```
 
-The storage implementation must implement `Cart\Store`.
+The storage implementation must implement `Cart\Storage\Store`.
 
 The id is used for saving / restoring cart state via the storage implementation.
 
@@ -432,15 +432,17 @@ array(
 
 ### <a id="cart-store"></a>Cart Storage Implementation
 
-A cart storage impelentation must impelment `Cart\Store`.
+A cart storage implementation must implement `Cart\Storage\Store`.
 
-When the `save` method of the cart is called, the cart id and serialized cart data is passed to the `put` method of the storage impelementation.
+This package provides 2 basic storage implementations: `Cart\Storage\SessionStore` and `Cart\Storage\CookieStore`.
 
-When the `restore` method of the cart is called, the cart id is passed to the `get` method of the storage impelementation.
+When the `save` method of the cart is called, the cart id and serialized cart data is passed to the `put` method of the storage implementation.
 
-When the `clear` method of the cart is called, the cart id is passed to the `flush` method of the storage impelementation.
+When the `restore` method of the cart is called, the cart id is passed to the `get` method of the storage implementation.
 
-An example native session storage implementation may look like:
+When the `clear` method of the cart is called, the cart id is passed to the `flush` method of the storage implementation.
+
+An example session storage implementation may look like:
 
 ```php
 use Cart\Store;
