@@ -5,6 +5,12 @@ namespace Cart;
 use ArrayAccess;
 use InvalidArgumentException;
 
+/**
+ * @property string $id
+ * @property integer $quantity
+ * @property float $price
+ * @property float $tax
+ */
 class CartItem implements ArrayAccess, Arrayable
 {
     /**
@@ -21,23 +27,16 @@ class CartItem implements ArrayAccess, Arrayable
      */
     public function __construct(array $data = array())
     {
+        $defaults = array(
+            'quantity' => 1,
+            'price' => 0.00,
+            'tax' => 0.00
+        );
+
+        $data = array_merge($defaults, $data);
+
         foreach ($data as $k => $v) {
             $this->$k = $v;
-        }
-
-        // make sure quantity is set
-        if ( ! isset($this->quantity)) {
-            $this->quantity = 1;
-        }
-
-        // make sure price is set
-        if ( ! isset($this->price)) {
-            $this->price = 0.00;
-        }
-
-        // make sure tax is set
-        if ( ! isset($this->tax)) {
-            $this->tax = 0.00;
         }
     }
 
@@ -86,30 +85,53 @@ class CartItem implements ArrayAccess, Arrayable
      * @param mixed  $value
      *
      * @return string
-     *
-     * @throws InvalidArgumentException
      */
     public function set($key, $value)
     {
         switch ($key) {
             case 'quantity':
-                if ( ! is_integer($value)) {
-                    throw new InvalidArgumentException('Quantity must be an integer.');
-                }
+                $this->setCheckTypeInteger($value, $key);
             break;
             case 'price':
             case 'tax':
-                if ( ! is_numeric($value)) {
-                    throw new InvalidArgumentException(sprintf('%s must be numeric', $key));
-                }
+                $this->setCheckIsNumeric($value, $key);
 
                 $value = (float) $value;
-            break;
         }
 
         $this->data[$key] = $value;
 
         return $this->getId();
+    }
+
+    /**
+     * Check the value being set is an integer.
+     *
+     * @param mixed $value
+     * @param string $name
+     *
+     * @throws InvalidArgumentException
+     */
+    private function setCheckTypeInteger($value, $name)
+    {
+        if ( ! is_integer($value)) {
+            throw new InvalidArgumentException(sprintf('%s must be an integer.', $name));
+        }
+    }
+
+    /**
+     * Check the value being set is an integer.
+     *
+     * @param mixed $value
+     * @param string $name
+     *
+     * @throws InvalidArgumentException
+     */
+    private function setCheckIsNumeric($value, $name)
+    {
+        if ( ! is_numeric($value)) {
+            throw new InvalidArgumentException(sprintf('%s must be numeric.', $name));
+        }
     }
 
     /**
@@ -159,7 +181,7 @@ class CartItem implements ArrayAccess, Arrayable
      */
     public function getTotalTax()
     {
-        return (float) ($this->tax * $this->quantity);
+        return (float) $this->tax * $this->quantity;
     }
 
     /**

@@ -17,7 +17,7 @@ class Cart implements Arrayable
     /**
      * Items in the cart.
      *
-     * @var array
+     * @var CartItem[]
      */
     private $items = array();
 
@@ -120,11 +120,11 @@ class Cart implements Arrayable
     {
         $item = $this->find($itemId);
 
-        if ($item) {
-            $item->$key = $value;
-        } else {
+        if (!$item) {
             throw new InvalidArgumentException(sprintf('Item [%s] does not exist in cart.', $itemId));
         }
+
+        $item->$key = $value;
 
         return $item->id;
     }
@@ -160,7 +160,7 @@ class Cart implements Arrayable
      *
      * @return mixed
      */
-    protected function find($itemId)
+    public function find($itemId)
     {
         foreach ($this->items as $item) {
             if ($itemId === $item->id) {
@@ -188,9 +188,11 @@ class Cart implements Arrayable
      */
     public function totalItems()
     {
-        return array_sum(array_map(function ($item) {
-            return $item->quantity;
-        }, $this->items));
+        return array_sum(
+            array_map(function (CartItem $item) {
+                return $item->quantity;
+            }, $this->items)
+        );
     }
 
     /**
@@ -200,9 +202,11 @@ class Cart implements Arrayable
      */
     public function total()
     {
-        return (float) array_sum(array_map(function (CartItem $item) {
+        return (float) array_sum(
+            array_map(function (CartItem $item) {
                 return $item->getTotalPrice();
-        }, $this->items));
+            }, $this->items)
+        );
     }
 
     /**
@@ -212,9 +216,11 @@ class Cart implements Arrayable
      */
     public function totalExcludingTax()
     {
-        return (float) array_sum(array_map(function (CartItem $item) {
-            return $item->getTotalPriceExcludingTax();
-        }, $this->items));
+        return (float) array_sum(
+            array_map(function (CartItem $item) {
+                return $item->getTotalPriceExcludingTax();
+            }, $this->items)
+        );
     }
 
      /**
@@ -224,9 +230,11 @@ class Cart implements Arrayable
      */
     public function tax()
     {
-        return (float) array_sum(array_map(function (CartItem $item) {
-            return $item->getTotalTax();
-        }, $this->items));
+        return (float) array_sum(
+            array_map(function (CartItem $item) {
+                return $item->getTotalTax();
+            }, $this->items)
+        );
     }
 
     /**
@@ -258,31 +266,63 @@ class Cart implements Arrayable
     {
         $state = $this->store->get($this->id);
 
-        // suppress unserializable error
-        $data = @unserialize($state);
+        $data = @unserialize($state); // suppress unserializable error
 
+        $this->restoreCheckType($data);
+        $this->restoreCheckContents($data);
+        $this->restoreCheckContentsType($data);
+
+        $this->id = $data['id'];
+        $this->items = array();
+
+        foreach ($data['items'] as $itemArr) {
+            $this->items[] = new CartItem($itemArr);
+        }
+    }
+
+    /**
+     * Check the data to be restored is of the correct type.
+     *
+     * @param mixed $data
+     *
+     * @throws CartRestoreException
+     */
+    private function restoreCheckType($data)
+    {
         if ($data === false) {
             throw new CartRestoreException('Saved cart state is unserializable.');
         }
 
-        if (is_array($data)) {
-
-            if (!isset($data['id']) || !isset($data['items'])) {
-                throw new CartRestoreException('Missing cart ID or cart items.');
-            }
-
-            if (!is_string($data['id']) || !is_array($data['items'])) {
-                throw new CartRestoreException('Cart ID not a string or cart items not an array.');
-            }
-
-            $this->id = $data['id'];
-            $this->items = array();
-
-            foreach ($data['items'] as $itemArr) {
-                $this->items[] = new CartItem($itemArr);
-            }
-        } else {
+        if (!is_array($data)) {
             throw new CartRestoreException('Unserialized data is not an array.');
+        }
+    }
+
+    /**
+     * Check the contents of the data to be restored contains the correct data.
+     *
+     * @param array $data
+     *
+     * @throws CartRestoreException
+     */
+    private function restoreCheckContents(array $data)
+    {
+        if (!isset($data['id']) || !isset($data['items'])) {
+            throw new CartRestoreException('Missing cart ID or cart items.');
+        }
+    }
+
+    /**
+     * Check the contents of the data to be restored is of the correct type.
+     *
+     * @param array $data
+     *
+     * @throws CartRestoreException
+     */
+    private function restoreCheckContentsType(array $data)
+    {
+        if (!is_string($data['id']) || !is_array($data['items'])) {
+            throw new CartRestoreException('Cart ID not a string or cart items not an array.');
         }
     }
 
