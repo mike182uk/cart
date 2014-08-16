@@ -1,5 +1,9 @@
 #Changelog
 
+##2.2.1
+
+Miscellaneous refactorings
+
 ##2.2.0
 
 - added `Cart\Store\CookieStore`
