@@ -18,7 +18,7 @@ class CartItem implements ArrayAccess, Arrayable
      *
      * @var array
      */
-    private $data;
+    protected $data;
 
     /**
      * Create a new cart item instance.
