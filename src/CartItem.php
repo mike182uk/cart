@@ -4,9 +4,9 @@ namespace Cart;
 
 /**
  * @property string $id
- * @property integer $quantity
- * @property float $price
- * @property float $tax
+ * @property int    $quantity
+ * @property float  $price
+ * @property float  $tax
  */
 class CartItem implements \ArrayAccess, Arrayable
 {
