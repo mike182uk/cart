@@ -2,16 +2,13 @@
 
 namespace Cart;
 
-use ArrayAccess;
-use InvalidArgumentException;
-
 /**
  * @property string $id
  * @property integer $quantity
  * @property float $price
  * @property float $tax
  */
-class CartItem implements ArrayAccess, Arrayable
+class CartItem implements \ArrayAccess, Arrayable
 {
     /**
      * Cart item data.
@@ -110,12 +107,12 @@ class CartItem implements ArrayAccess, Arrayable
      * @param mixed  $value
      * @param string $name
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     private function setCheckTypeInteger($value, $name)
     {
         if (!is_integer($value)) {
-            throw new InvalidArgumentException(sprintf('%s must be an integer.', $name));
+            throw new \InvalidArgumentException(sprintf('%s must be an integer.', $name));
         }
     }
 
@@ -125,12 +122,12 @@ class CartItem implements ArrayAccess, Arrayable
      * @param mixed  $value
      * @param string $name
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     private function setCheckIsNumeric($value, $name)
     {
         if (!is_numeric($value)) {
-            throw new InvalidArgumentException(sprintf('%s must be numeric.', $name));
+            throw new \InvalidArgumentException(sprintf('%s must be numeric.', $name));
         }
     }
 

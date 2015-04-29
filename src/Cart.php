@@ -3,7 +3,6 @@
 namespace Cart;
 
 use Cart\Storage\Store;
-use InvalidArgumentException;
 
 class Cart implements Arrayable
 {
@@ -114,14 +113,14 @@ class Cart implements Arrayable
      *
      * @return string
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function update($itemId, $key, $value)
     {
         $item = $this->find($itemId);
 
         if (!$item) {
-            throw new InvalidArgumentException(sprintf('Item [%s] does not exist in cart.', $itemId));
+            throw new \InvalidArgumentException(sprintf('Item [%s] does not exist in cart.', $itemId));
         }
 
         $item->$key = $value;

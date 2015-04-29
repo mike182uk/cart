@@ -17,8 +17,8 @@
     "fabpot/php-cs-fixer": "~1.0"
   },
   "autoload": {
-    "psr-0": {
-      "Cart": "src"
+    "psr-4": {
+      "Cart\\": "src"
     }
   },
   "config": {
