@@ -63,7 +63,7 @@ class Cart implements Arrayable
     /**
      * Retrieve all of the items in the cart.
      *
-     * @return array
+     * @return CartItem[]
      */
     public function all()
     {
@@ -134,7 +134,7 @@ class Cart implements Arrayable
      *
      * @param string $itemId
      *
-     * @return mixed
+     * @return CartItem|null
      */
     public function get($itemId)
     {
@@ -158,7 +158,7 @@ class Cart implements Arrayable
      *
      * @param string $itemId
      *
-     * @return mixed
+     * @return CartItem|null
      */
     public function find($itemId)
     {
