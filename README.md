@@ -1,9 +1,9 @@
 # Cart
-[![Build Status](https://secure.travis-ci.org/mike182uk/cart.png)](http://travis-ci.org/mike182uk/cart)
-[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/mike182uk/cart/badges/quality-score.png?s=400a4f03f3d494434d9240123de352edd89eb52d)](https://scrutinizer-ci.com/g/mike182uk/cart/)
-[![Code Coverage](https://scrutinizer-ci.com/g/mike182uk/cart/badges/coverage.png?s=c7dd3fffa6ed075c7e28d9af54eb88373ba314fd)](https://scrutinizer-ci.com/g/mike182uk/cart/)
-[![Total Downloads](https://poser.pugx.org/mike182uk/cart/downloads.png)](https://packagist.org/packages/mike182uk/cart)
-[![License](https://poser.pugx.org/mike182uk/cart/license.png)](https://packagist.org/packages/mike182uk/cart)
+[![Build Status](https://img.shields.io/travis/mike182uk/cart.svg?style=flat-square)](http://travis-ci.org/mike182uk/cart)
+[![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/mike182uk/cart.svg?style=flat-square)](https://scrutinizer-ci.com/g/mike182uk/cart/)
+[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/mike182uk/cart.svg?style=flat-square)](https://scrutinizer-ci.com/g/mike182uk/cart/)
+[![Total Downloads](https://img.shields.io/packagist/dt/mike182uk/cart.svg?style=flat-square)](https://packagist.org/packages/mike182uk/cart)
+[![License](https://img.shields.io/github/license/mike182uk/cart.svg?style=flat-square)](https://packagist.org/packages/mike182uk/cart)
 
 A flexible and modern shopping cart package.
 
@@ -17,10 +17,10 @@ A flexible and modern shopping cart package.
 
 Add this package as a dependency in your `composer.json`.
 
-```js
+```json
 {
-    "require" : {
-        "mike182uk/cart" : "v2.1.*"
+    "require": {
+        "mike182uk/cart": "~2.0"
     }
 }
 ```
