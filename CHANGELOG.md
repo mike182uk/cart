@@ -1,5 +1,9 @@
 #Changelog
 
+##2.2.2
+
+Modernize project
+
 ##2.2.1
 
 Miscellaneous refactorings
