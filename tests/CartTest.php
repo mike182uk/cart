@@ -44,7 +44,7 @@ class CartTest extends PHPUnit_Framework_TestCase
     {
         $cart = $this->getCart();
         $item = new CartItem(array(
-            'name' => 'foo'
+            'name' => 'foo',
         ));
 
         // test adding a new item
@@ -65,7 +65,7 @@ class CartTest extends PHPUnit_Framework_TestCase
     {
         $cart = $this->getCart();
         $item = new CartItem(array(
-            'name' => 'foo'
+            'name' => 'foo',
         ));
         $itemId = $item->id;
 
@@ -79,7 +79,7 @@ class CartTest extends PHPUnit_Framework_TestCase
     {
         $cart = $this->getCart();
         $item = new CartItem(array(
-            'name' => 'foo'
+            'name' => 'foo',
         ));
         $itemId = $item->id;
 
@@ -94,7 +94,7 @@ class CartTest extends PHPUnit_Framework_TestCase
     {
         $cart = $this->getCart();
         $item = new CartItem(array(
-            'name' => 'foo'
+            'name' => 'foo',
         ));
         $itemId = $item->id;
 
@@ -107,7 +107,7 @@ class CartTest extends PHPUnit_Framework_TestCase
     {
         $cart = $this->getCart();
         $item = new CartItem(array(
-            'name' => 'foo'
+            'name' => 'foo',
         ));
         $itemId = $item->id;
 
@@ -134,12 +134,12 @@ class CartTest extends PHPUnit_Framework_TestCase
 
         $item1 = new CartItem(array(
             'name' => 'foo',
-            'quantity' => 2
+            'quantity' => 2,
         ));
 
         $item2 = new CartItem(array(
             'name' => 'bar',
-            'quantity' => 1
+            'quantity' => 1,
         ));
 
         $cart->add($item1);
@@ -154,12 +154,12 @@ class CartTest extends PHPUnit_Framework_TestCase
 
         $item1 = new CartItem(array(
             'name' => 'foo',
-            'quantity' => 2
+            'quantity' => 2,
         ));
 
         $item2 = new CartItem(array(
             'name' => 'bar',
-            'quantity' => 1
+            'quantity' => 1,
         ));
 
         $cart->add($item1);
@@ -173,11 +173,11 @@ class CartTest extends PHPUnit_Framework_TestCase
         $cart = $this->getCart();
 
         $item1 = new CartItem(array(
-            'name' => 'foo'
+            'name' => 'foo',
         ));
 
         $item2 = new CartItem(array(
-            'name' => 'bar'
+            'name' => 'bar',
         ));
 
         $cart->add($item1);
@@ -197,11 +197,11 @@ class CartTest extends PHPUnit_Framework_TestCase
         $cart = new Cart('foo', $store);
 
         $item1 = new CartItem(array(
-            'name' => 'foo'
+            'name' => 'foo',
         ));
 
         $item2 = new CartItem(array(
-            'name' => 'bar'
+            'name' => 'bar',
         ));
 
         $cart->add($item1);
@@ -222,14 +222,14 @@ class CartTest extends PHPUnit_Framework_TestCase
             'name' => 'foo',
             'price' => 10.00,
             'tax' => 5.00,
-            'quantity' => 2
+            'quantity' => 2,
         ));
 
         $item2 = new CartItem(array(
             'name' => 'bar',
             'price' => 5.00,
             'tax' => 1.00,
-            'quantity' => 2
+            'quantity' => 2,
         ));
 
         $cart->add($item1);
@@ -249,14 +249,14 @@ class CartTest extends PHPUnit_Framework_TestCase
             'name' => 'foo',
             'price' => 10.00,
             'tax' => 5.00,
-            'quantity' => 2
+            'quantity' => 2,
         ));
 
         $item2 = new CartItem(array(
             'name' => 'bar',
             'price' => 5.00,
             'tax' => 1.00,
-            'quantity' => 2
+            'quantity' => 2,
         ));
 
         $cart->add($item1);
@@ -276,14 +276,14 @@ class CartTest extends PHPUnit_Framework_TestCase
             'name' => 'foo',
             'price' => 10.00,
             'tax' => 5.00,
-            'quantity' => 2
+            'quantity' => 2,
         ));
 
         $item2 = new CartItem(array(
             'name' => 'bar',
             'price' => 5.00,
             'tax' => 1.00,
-            'quantity' => 2
+            'quantity' => 2,
         ));
 
         $cart->add($item1);
@@ -308,19 +308,19 @@ class CartTest extends PHPUnit_Framework_TestCase
     public function testRestore()
     {
         $item1 = new CartItem(array(
-            'name' => 'foo'
+            'name' => 'foo',
         ));
 
         $item2 = new CartItem(array(
-            'name' => 'bar'
+            'name' => 'bar',
         ));
 
         $storeGetReturn = array(
             'id' => 'foo',
             'items' => array(
                 $item1->toArray(),
-                $item2->toArray()
-            )
+                $item2->toArray(),
+            ),
         );
 
         $store = m::mock('Cart\Storage\Store');

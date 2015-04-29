@@ -6,7 +6,7 @@ class CartItemTest extends PHPUnit_Framework_TestCase
 {
     public function testIsArrayable()
     {
-        $item = new CartItem;
+        $item = new CartItem();
 
         $this->assertInstanceOf('Cart\Arrayable', $item);
 
@@ -20,7 +20,7 @@ class CartItemTest extends PHPUnit_Framework_TestCase
 
     public function testSetAndGetData()
     {
-        $item = new CartItem;
+        $item = new CartItem();
 
         $item->name = 'foo';
         $this->assertSame($item->get('name'), 'foo');
@@ -42,7 +42,7 @@ class CartItemTest extends PHPUnit_Framework_TestCase
     {
         $item = new CartItem(array(
             'name' => 'foo',
-            'weight' => '10kg'
+            'weight' => '10kg',
         ));
 
         unset($item['name']);
@@ -60,7 +60,7 @@ class CartItemTest extends PHPUnit_Framework_TestCase
             'name' => 'foo',
             'price' => 10.00,
             'tax' => 1.00,
-            'quantity' => 5
+            'quantity' => 5,
         );
 
         $item = new CartItem($itemData);
@@ -74,7 +74,7 @@ class CartItemTest extends PHPUnit_Framework_TestCase
     public function testConstructorSetsDefaults()
     {
         $itemData = array(
-            'name' => 'foo'
+            'name' => 'foo',
         );
 
         $item = new CartItem($itemData);
@@ -86,7 +86,7 @@ class CartItemTest extends PHPUnit_Framework_TestCase
 
     public function testQuantityMustBeInteger()
     {
-        $item = new CartItem;
+        $item = new CartItem();
 
         $this->setExpectedException('InvalidArgumentException');
 
@@ -95,7 +95,7 @@ class CartItemTest extends PHPUnit_Framework_TestCase
 
     public function testPriceAndTaxMustBeNumeric()
     {
-        $item = new CartItem;
+        $item = new CartItem();
 
         $this->setExpectedException('InvalidArgumentException');
         $item->price = 'ten';
@@ -106,7 +106,7 @@ class CartItemTest extends PHPUnit_Framework_TestCase
 
     public function testPriceAndTaxAreCastToFloats()
     {
-        $item = new CartItem;
+        $item = new CartItem();
 
         $item->price = '10.00';
         $item->tax = '5.00';
@@ -117,14 +117,14 @@ class CartItemTest extends PHPUnit_Framework_TestCase
 
     public function testGettingIdPropertyReturnsItemId()
     {
-        $item = new CartItem;
+        $item = new CartItem();
 
         $this->assertSame($item->getId(), $item->id);
     }
 
     public function testSetReturnsNewId()
     {
-        $item = new CartItem;
+        $item = new CartItem();
 
         $newId = $item->set('name', 'foo');
         $itemId = $item->id;
@@ -134,7 +134,7 @@ class CartItemTest extends PHPUnit_Framework_TestCase
 
     public function testGetSinglePrice()
     {
-        $item = new CartItem;
+        $item = new CartItem();
 
         $item->price = 10.00;
         $item->tax = 5.00;
@@ -147,7 +147,7 @@ class CartItemTest extends PHPUnit_Framework_TestCase
 
     public function testGetSinglePriceExcludingTax()
     {
-        $item = new CartItem;
+        $item = new CartItem();
 
         $item->price = 10.00;
         $item->tax = 5.00;
@@ -160,7 +160,7 @@ class CartItemTest extends PHPUnit_Framework_TestCase
 
     public function testGetTotalPrice()
     {
-        $item = new CartItem;
+        $item = new CartItem();
 
         $item->price = 10.00;
         $item->tax = 5.00;
@@ -174,7 +174,7 @@ class CartItemTest extends PHPUnit_Framework_TestCase
 
     public function testGetTotalPriceExcludingTax()
     {
-        $item = new CartItem;
+        $item = new CartItem();
 
         $item->price = 10.00;
         $item->tax = 5.00;
@@ -188,7 +188,7 @@ class CartItemTest extends PHPUnit_Framework_TestCase
 
     public function testGetTotalTax()
     {
-        $item = new CartItem;
+        $item = new CartItem();
 
         $item->quantity = 2;
         $item->tax = 5.00;
@@ -201,7 +201,7 @@ class CartItemTest extends PHPUnit_Framework_TestCase
 
     public function testGetSingleTax()
     {
-        $item = new CartItem;
+        $item = new CartItem();
 
         $item->quantity = 2;
         $item->tax = 5.00;

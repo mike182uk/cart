@@ -96,7 +96,7 @@ class Cart implements Arrayable
      */
     public function remove($itemId)
     {
-        $items =& $this->items;
+        $items = &$this->items;
 
         foreach ($items as $position => $item) {
             if ($itemId === $item->id) {
@@ -130,7 +130,7 @@ class Cart implements Arrayable
     }
 
     /**
-     * Retrieve an item from the cart by its id
+     * Retrieve an item from the cart by its id.
      *
      * @param string $itemId
      *
@@ -146,11 +146,11 @@ class Cart implements Arrayable
      *
      * @param string $itemId
      *
-     * @return boolean
+     * @return bool
      */
     public function has($itemId)
     {
-        return ! is_null($this->find($itemId));
+        return !is_null($this->find($itemId));
     }
 
     /**
@@ -168,13 +168,13 @@ class Cart implements Arrayable
             }
         }
 
-        return null;
+        return;
     }
 
     /**
      * Get the total number of unique items in the cart.
      *
-     * @return integer
+     * @return int
      */
     public function totalUniqueItems()
     {
@@ -184,7 +184,7 @@ class Cart implements Arrayable
     /**
      * Get the total number of items in the cart.
      *
-     * @return integer
+     * @return int
      */
     public function totalItems()
     {
@@ -223,7 +223,7 @@ class Cart implements Arrayable
         );
     }
 
-     /**
+    /**
      * Get the cart tax.
      *
      * @return float
@@ -337,7 +337,7 @@ class Cart implements Arrayable
             'id' => $this->id,
             'items' => array_map(function (CartItem $item) {
                 return $item->toArray();
-            }, $this->items)
+            }, $this->items),
         );
     }
 }

@@ -4,4 +4,6 @@ namespace Cart;
 
 use Exception;
 
-class CartRestoreException extends Exception {}
+class CartRestoreException extends Exception
+{
+}

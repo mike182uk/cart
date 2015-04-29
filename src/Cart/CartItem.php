@@ -30,7 +30,7 @@ class CartItem implements ArrayAccess, Arrayable
         $defaults = array(
             'quantity' => 1,
             'price' => 0.00,
-            'tax' => 0.00
+            'tax' => 0.00,
         );
 
         $data = array_merge($defaults, $data);
@@ -107,14 +107,14 @@ class CartItem implements ArrayAccess, Arrayable
     /**
      * Check the value being set is an integer.
      *
-     * @param mixed $value
+     * @param mixed  $value
      * @param string $name
      *
      * @throws InvalidArgumentException
      */
     private function setCheckTypeInteger($value, $name)
     {
-        if ( ! is_integer($value)) {
+        if (!is_integer($value)) {
             throw new InvalidArgumentException(sprintf('%s must be an integer.', $name));
         }
     }
@@ -122,14 +122,14 @@ class CartItem implements ArrayAccess, Arrayable
     /**
      * Check the value being set is an integer.
      *
-     * @param mixed $value
+     * @param mixed  $value
      * @param string $name
      *
      * @throws InvalidArgumentException
      */
     private function setCheckIsNumeric($value, $name)
     {
-        if ( ! is_numeric($value)) {
+        if (!is_numeric($value)) {
             throw new InvalidArgumentException(sprintf('%s must be numeric.', $name));
         }
     }
@@ -203,7 +203,7 @@ class CartItem implements ArrayAccess, Arrayable
     {
         return array(
             'id' => $this->getId(),
-            'data' => $this->data
+            'data' => $this->data,
         );
     }
 
@@ -212,7 +212,7 @@ class CartItem implements ArrayAccess, Arrayable
      *
      * @param string $key
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($key)
     {
@@ -280,7 +280,7 @@ class CartItem implements ArrayAccess, Arrayable
      *
      * @param string $key
      *
-     * @return boolean
+     * @return bool
      */
     public function __isset($key)
     {
