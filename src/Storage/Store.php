@@ -9,7 +9,7 @@ interface Store
      *
      * @param string $cartId
      *
-     * @return array
+     * @return string
      */
     public function get($cartId);
 
