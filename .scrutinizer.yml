@@ -8,5 +8,3 @@ checks:
 tools:
   external_code_coverage:
     timeout: 600
-    runs: 4
-  php_code_coverage: false
