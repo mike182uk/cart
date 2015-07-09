@@ -1,6 +1,7 @@
 # Cart
 [![Build Status](https://img.shields.io/travis/mike182uk/cart.svg?style=flat-square)](http://travis-ci.org/mike182uk/cart)
 [![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/mike182uk/cart.svg?style=flat-square)](https://scrutinizer-ci.com/g/mike182uk/cart/)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/1d82048a-1390-42d5-8605-606541e81c98/mini.png)](https://insight.sensiolabs.com/projects/1d82048a-1390-42d5-8605-606541e81c98)
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/mike182uk/cart.svg?style=flat-square)](https://scrutinizer-ci.com/g/mike182uk/cart/)
 [![Total Downloads](https://img.shields.io/packagist/dt/mike182uk/cart.svg?style=flat-square)](https://packagist.org/packages/mike182uk/cart)
 [![License](https://img.shields.io/github/license/mike182uk/cart.svg?style=flat-square)](https://packagist.org/packages/mike182uk/cart)
