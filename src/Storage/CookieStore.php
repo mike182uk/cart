@@ -60,7 +60,7 @@ class CookieStore implements Store
      */
     private function setCookie($name, $data)
     {
-        setcookie($name, $data);
+        setcookie($name, $data, null, '/');
     }
 
     /**
