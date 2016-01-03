@@ -58,6 +58,11 @@ class CartItem implements \ArrayAccess, Arrayable
         return $hash;
     }
 
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
     /**
      * Get a piece of data set on the cart item.
      *
@@ -88,7 +93,7 @@ class CartItem implements \ArrayAccess, Arrayable
         switch ($key) {
             case 'quantity':
                 $this->setCheckTypeInteger($value, $key);
-            break;
+                break;
             case 'price':
             case 'tax':
                 $this->setCheckIsNumeric($value, $key);
@@ -138,7 +143,7 @@ class CartItem implements \ArrayAccess, Arrayable
      */
     public function getTotalPrice()
     {
-        return (float) ($this->price + $this->tax) * $this->quantity;
+        return (float) ($this->getPrice() + $this->tax) * $this->quantity;
     }
 
     /**
@@ -148,7 +153,7 @@ class CartItem implements \ArrayAccess, Arrayable
      */
     public function getTotalPriceExcludingTax()
     {
-        return (float) $this->price * $this->quantity;
+        return (float) $this->getPrice() * $this->quantity;
     }
 
     /**
@@ -158,7 +163,7 @@ class CartItem implements \ArrayAccess, Arrayable
      */
     public function getSinglePrice()
     {
-        return (float) $this->price + $this->tax;
+        return (float) $this->getPrice() + $this->tax;
     }
 
     /**
@@ -168,7 +173,7 @@ class CartItem implements \ArrayAccess, Arrayable
      */
     public function getSinglePriceExcludingTax()
     {
-        return (float) $this->price;
+        return (float) $this->getPrice();
     }
 
     /**
