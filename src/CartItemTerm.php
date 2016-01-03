@@ -8,6 +8,16 @@ class CartItemTerm extends CartItem
 
     protected $product;
 
+    public function setTerm($term)
+    {
+        $this->term = $term;
+    }
+
+    public function setProduct($product)
+    {
+        $this->product = $product;
+    }
+
     public function getPrice()
     {
         return $this->product->getPriceForTerm($this->term);
