@@ -9,6 +9,11 @@ class CartItemTerm extends CartItem
         return $this->data['product']->getPriceForTerm($this->data['term']);
     }
 
+    public function getUnit()
+    {
+        return $this->data['product']->getUnit();
+    }
+
     public function getTitle()
     {
         return $this->data['product']->title;
