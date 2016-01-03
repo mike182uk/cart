@@ -275,7 +275,7 @@ class Cart implements Arrayable
         $this->items = array();
 
         foreach ($data['items'] as $itemArr) {
-            $this->items[] = new CartItem($itemArr);
+            $this->items[] = new CartItemTerm($itemArr);
         }
     }
 

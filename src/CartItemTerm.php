@@ -4,42 +4,39 @@ namespace Cart;
 
 class CartItemTerm extends CartItem
 {
-    protected $term;
-
-    protected $product;
-
-    public function setTerm($term)
-    {
-        $this->term = $term;
-    }
-
-    public function setProduct($product)
-    {
-        $this->product = $product;
-    }
-
     public function getPrice()
     {
-        return $this->product->getPriceForTerm($this->term);
-    }
-
-    public function getSave()
-    {
-        return $this->product->getSaveForTerm($this->term);
-    }
-
-    public function getSavePercent()
-    {
-        return $this->product->getSaveForTerm($this->term);
+        return $this->data['product']->getPriceForTerm($this->data['term']);
     }
 
     public function getTitle()
     {
-        return $this->product->title;
+        return $this->data['product']->title;
     }
 
     public function getDescription()
     {
-        return $this->product->description;
+        return $this->data['product']->description;
     }
+
+    public function getSave()
+    {
+        return $this->data['product']->getSaveForTerm($this->data['term']);
+    }
+
+    public function getSavePercent()
+    {
+        return $this->data['product']->getSavePercentForTerm($this->data['term']);
+    }
+
+    public function getTerms()
+    {
+        return $this->data['product']->billing->terms;
+    }
+
+    public function getClass()
+    {
+        return get_class($this->data['product']);
+    }
+
 }
