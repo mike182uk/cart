@@ -70,12 +70,6 @@ class CartItem implements \ArrayAccess, Arrayable
         switch ($key) {
             case 'id':
                 return $this->getId();
-            case 'price':
-                return $this->data['product']->getPriceForTerm($this->data['term']);
-            case 'title':
-                return $this->data['product']->title;
-            case 'description':
-                return $this->data['product']->description;
             default:
                 return $this->data[$key];
         }
