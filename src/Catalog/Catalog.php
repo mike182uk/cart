@@ -21,9 +21,9 @@ class Catalog implements Arrayable
     public function getCartItem(Product $product)
     {
         $type = str_replace('Cart\Catalog\Product', '', get_class($product));
-        $itemClass = "Cart\\CartItem" . $type;
-        if (!class_exists($itemClass)) {
-            throw new \Exception("Invalid product type given.");
+        $itemClass = "Cart\\CartItem";
+        if (class_exists($itemClass . $type)) {
+            $itemClass .= $type;
         }
 
         $item = new $itemClass();
