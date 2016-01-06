@@ -42,6 +42,9 @@ class Term implements Arrayable
     {
         $price = $this->price;
         $old = $this->old;
+        if($this->hasTrial()) {
+            return $this->price - $this->trial;
+        }
         if ($old > $price) {
             return ($old - $price) * $this->period;
         }
