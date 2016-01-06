@@ -28,6 +28,11 @@ class Product implements Arrayable
         return $this->id;
     }
 
+    public function getGroup()
+    {
+        return $this->group;
+    }
+
     public function getUnit()
     {
         return $this->unit;
@@ -66,7 +71,6 @@ class Product implements Arrayable
             'title'         => $this->title,
             'description'   => $this->description,
             'billing'       => $this->billing->toArray(),
-            'group'         => $this->group,
             '__class'       => get_class($this),
         );
     }
