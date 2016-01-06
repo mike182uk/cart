@@ -205,7 +205,7 @@ class Cart implements Arrayable
             array_map(function (CartItem $item) {
                 return $item->getTotalPrice();
             }, $this->items)
-        );
+        ) + $this->icann();
     }
 
     /**
