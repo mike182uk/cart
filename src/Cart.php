@@ -223,6 +223,20 @@ class Cart implements Arrayable
     }
 
     /**
+     * Get the cart total icann fee.
+     *
+     * @return float
+     */
+    public function icann()
+    {
+        return (float) array_sum(
+            array_map(function (CartItem $item) {
+                return $item->getIcannFee();
+            }, $this->items)
+        );
+    }
+
+    /**
      * Get the cart tax.
      *
      * @return float
