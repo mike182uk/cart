@@ -39,6 +39,14 @@ class CartItemTerm extends CartItem
         return $this->data['product']->billing->terms;
     }
 
+    public function getIcannFee()
+    {
+        if($this->data['product'] instanceof \Hostinger\TaxIcannInterface) {
+            return $this->data['product']->getIcannFee($this->data['term']);
+        }
+        return 0;
+    }
+
     public function getClass()
     {
         return get_class($this->data['product']);
