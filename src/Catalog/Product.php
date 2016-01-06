@@ -1,6 +1,7 @@
 <?php
 
 namespace Cart\Catalog;
+
 use Cart\Arrayable;
 
 class Product implements Arrayable

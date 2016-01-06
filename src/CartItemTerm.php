@@ -2,6 +2,8 @@
 
 namespace Cart;
 
+use Cart\Catalog\TaxIcannInterface;
+
 class CartItemTerm extends CartItem
 {
     public function getPrice()
@@ -41,7 +43,7 @@ class CartItemTerm extends CartItem
 
     public function getIcannFee()
     {
-        if($this->data['product'] instanceof \Hostinger\TaxIcannInterface) {
+        if ($this->data['product'] instanceof TaxIcannInterface) {
             return $this->data['product']->getIcannFee($this->data['term']);
         }
         return 0;
@@ -51,5 +53,4 @@ class CartItemTerm extends CartItem
     {
         return get_class($this->data['product']);
     }
-
 }

@@ -23,5 +23,9 @@
   },
   "config": {
     "bin-dir": "bin"
+  },
+  "scripts": {
+    "fix": "php-cs-fixer fix ./src/  --level=psr2",
+    "test": "phpunit"
   }
 }
