@@ -14,7 +14,7 @@ class Term implements Arrayable
 
     public $renewal = 0.00;
 
-    public $old = 0.00; // fake / original / display
+    public $old = 0.00;
 
     /**
      * Term constructor.
@@ -27,7 +27,7 @@ class Term implements Arrayable
 
     public function hasTrial()
     {
-        return $this->trial >=0 && $this->trial != $this->price;
+        return $this->trial >= 0 && $this->trial != $this->price;
     }
 
     public function getTotalPrice()
@@ -53,6 +53,11 @@ class Term implements Arrayable
 
     public function getSavePercent()
     {
+        if($this->hasTrial()) {
+            $price = $this->getTotalPrice();
+            $old = $this->price * $this->period;
+            return 100 - ($price * 100 / $old) ;
+        }
         if ($this->getSave() != 0) {
             $price = $this->price;
             $old = $this->old;
