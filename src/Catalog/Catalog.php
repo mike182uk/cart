@@ -3,6 +3,7 @@
 namespace Cart\Catalog;
 
 use Cart\Arrayable;
+use Cart\CartItemTerm;
 
 class Catalog implements Arrayable
 {
@@ -14,6 +15,17 @@ class Catalog implements Arrayable
             throw new \InvalidArgumentException('Product not found in catalog');
         }
         return $this->products[$id];
+    }
+
+    public function getCartItem(Product $product)
+    {
+        $item = new CartItemTerm();
+        $item->term = $product->getRandomTerm();
+        $item->product = $product;
+        $item->options = array(
+            'domain' => uniqid() . '.com',
+        );
+        return $item;
     }
 
     public function addProduct(Product $product)
