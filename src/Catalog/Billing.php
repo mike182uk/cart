@@ -24,6 +24,9 @@ class Billing implements Arrayable
 
     public function getRandomTerm()
     {
+        if(empty($this->terms)) {
+            throw new \Exception('Billing terms are note defined');
+        }
         return $this->terms[array_rand($this->terms)];
     }
 

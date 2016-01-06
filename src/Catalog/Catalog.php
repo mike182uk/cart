@@ -4,6 +4,7 @@ namespace Cart\Catalog;
 
 use Cart\Arrayable;
 use Cart\CartItemTerm;
+use Cart\CartItemDomain;
 
 class Catalog implements Arrayable
 {
@@ -19,12 +20,16 @@ class Catalog implements Arrayable
 
     public function getCartItem(Product $product)
     {
-        $item = new CartItemTerm();
+        $type = str_replace('Cart\Catalog\Product', '', get_class($product));
+        $itemClass = "Cart\\CartItem" . $type;
+        if (!class_exists($itemClass)) {
+            throw new \Exception("Invalid product type given.");
+        }
+
+        $item = new $itemClass();
         $item->term = $product->getRandomTerm();
         $item->product = $product;
-        $item->options = array(
-            'domain' => uniqid() . '.com',
-        );
+
         return $item;
     }
 

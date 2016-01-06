@@ -204,6 +204,7 @@ class CartItem implements \ArrayAccess, Arrayable
     public function toArray()
     {
         return array(
+            '__class' => get_class($this),
             'id' => $this->getId(),
             'data' => $this->data,
         );
