@@ -8,6 +8,8 @@ class ProductDomain extends Product implements TaxIcannInterface
 
     protected $unit = TermLexer::UNIT_YEAR;
 
+    protected $group = Group::DOMAINS;
+
     public function getIcannFee(Term $term)
     {
         return TaxIcannInterface::ICANN_FEE * $term->period;

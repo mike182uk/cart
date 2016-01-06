@@ -14,6 +14,8 @@ class Product implements Arrayable
 
     public $billing;
 
+    protected $group = Group::HOSTING;
+
     protected $unit = TermLexer::UNIT_MONTH;
 
     public function __construct()
@@ -64,6 +66,8 @@ class Product implements Arrayable
             'title'         => $this->title,
             'description'   => $this->description,
             'billing'       => $this->billing->toArray(),
+            'group'         => $this->group,
+            '__class'       => get_class($this),
         );
     }
 }

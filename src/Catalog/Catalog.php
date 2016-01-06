@@ -3,8 +3,6 @@
 namespace Cart\Catalog;
 
 use Cart\Arrayable;
-use Cart\CartItemTerm;
-use Cart\CartItemDomain;
 
 class Catalog implements Arrayable
 {
