@@ -4,9 +4,14 @@ namespace Cart\Catalog;
 
 use Cart\Arrayable;
 
-class Billing implements Arrayable
+class Billing implements Arrayable, \IteratorAggregate
 {
     public $terms = array();
+
+    public function getIterator()
+    {
+        return new \ArrayIterator($this->terms);
+    }
 
     /**
      * @param $period
@@ -37,24 +42,12 @@ class Billing implements Arrayable
 
     public function getSaveForTerm(Term $term)
     {
-        $term = $this->getTerm($term->period);
-        $price = $term->price;
-        $old = $term->old;
-        if ($old > $price) {
-            return $old - $price;
-        }
-        return 0;
+        return $this->getTerm($term->period)->getSave();
     }
 
     public function getSavePercentForTerm(Term $term)
     {
-        if ($this->getSaveForTerm($term) != 0) {
-            $term = $this->getTerm($term->period);
-            $price = $term->price;
-            $old = $term->old;
-            return ($old - $price) / $price * 100;
-        }
-        return 0;
+        return $this->getTerm($term->period)->getSavePercent();
     }
 
     public function toArray()
