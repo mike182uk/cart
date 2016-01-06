@@ -209,6 +209,20 @@ class Cart implements Arrayable
     }
 
     /**
+     * Get the cart total savings.
+     *
+     * @return float
+     */
+    public function totalSavings()
+    {
+        return (float) array_sum(
+            array_map(function (CartItem $item) {
+                return $item->getSave();
+            }, $this->items)
+        );
+    }
+
+    /**
      * Get the cart total excluding tax.
      *
      * @return float

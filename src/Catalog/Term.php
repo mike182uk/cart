@@ -25,8 +25,16 @@ class Term implements Arrayable
         $this->period = (int)$period;
     }
 
+    public function hasTrial()
+    {
+        return $this->trial >=0 && $this->trial != $this->price;
+    }
+
     public function getTotalPrice()
     {
+        if($this->hasTrial()) {
+            return ($this->period - 1) * $this->price + $this->trial;
+        }
         return $this->price * $this->period;
     }
 
