@@ -1,19 +1,4 @@
 {
-    "13": {
-        "id": 13,
-        "title": "Free domain",
-        "description": "Free domain",
-        "billing": {
-            "1": {
-                "period": 1,
-                "old": 0,
-                "price": 0,
-                "trial": 0,
-                "renewal": 0
-            }
-        },
-        "__class": "Cart\\Catalog\\ProductDomain"
-    },
     "21": {
         "id": 21,
         "title": "SSL Certificate",
@@ -118,7 +103,7 @@
     },
     "161": {
         "id": 161,
-        "title": "Paket 1",
+        "title": "VPS Package 1",
         "description": "CPU 2.4Ghz, RAM 1GB, SSD 20GB, BW 1000GB",
         "billing": {
             "1": {
@@ -154,7 +139,7 @@
     },
     "162": {
         "id": 162,
-        "title": "Paket 2",
+        "title": "VPS Package 2",
         "description": "CPU 4.8Ghz, RAM 2GB, SSD 40GB, BW 2000GB",
         "billing": {
             "1": {
@@ -190,7 +175,7 @@
     },
     "163": {
         "id": 163,
-        "title": "Paket 3",
+        "title": "VPS Package 3",
         "description": "CPU 7.2Ghz, RAM 3GB, SSD 60GB, BW 3000GB",
         "billing": {
             "1": {
@@ -226,7 +211,7 @@
     },
     "164": {
         "id": 164,
-        "title": "Paket 4",
+        "title": "VPS Package 4",
         "description": "CPU 9.6Ghz, RAM 4GB, SSD 80GB, BW 4000GB",
         "billing": {
             "1": {
@@ -262,7 +247,7 @@
     },
     "166": {
         "id": 166,
-        "title": "Paket 5",
+        "title": "VPS Package 5",
         "description": "CPU 14.4Ghz, RAM 6GB, SSD 120GB, BW 6000GB",
         "billing": {
             "1": {
@@ -298,7 +283,7 @@
     },
     "168": {
         "id": 168,
-        "title": "Paket 6",
+        "title": "VPS Package 6",
         "description": "CPU 19.2Ghz, RAM 8GB, SSD 160GB, BW 8000GB",
         "billing": {
             "1": {
@@ -840,222 +825,6 @@
         "id": ".ch",
         "title": ".ch",
         "description": "Domain Registration",
-        "billing": {
-            "1": {
-                "period": 1,
-                "old": 10,
-                "price": 10,
-                "trial": 0,
-                "renewal": 0
-            },
-            "2": {
-                "period": 2,
-                "old": 10,
-                "price": 9,
-                "trial": 0,
-                "renewal": 0
-            },
-            "3": {
-                "period": 3,
-                "old": 10,
-                "price": 8,
-                "trial": 0,
-                "renewal": 0
-            },
-            "4": {
-                "period": 4,
-                "old": 10,
-                "price": 7,
-                "trial": 0,
-                "renewal": 0
-            }
-        },
-        "__class": "Cart\\Catalog\\ProductDomain"
-    },
-    ".16mb.com": {
-        "id": ".16mb.com",
-        "title": ".16mb.com",
-        "description": "",
-        "billing": {
-            "1": {
-                "period": 1,
-                "old": 10,
-                "price": 10,
-                "trial": 0,
-                "renewal": 0
-            },
-            "2": {
-                "period": 2,
-                "old": 10,
-                "price": 9,
-                "trial": 0,
-                "renewal": 0
-            },
-            "3": {
-                "period": 3,
-                "old": 10,
-                "price": 8,
-                "trial": 0,
-                "renewal": 0
-            },
-            "4": {
-                "period": 4,
-                "old": 10,
-                "price": 7,
-                "trial": 0,
-                "renewal": 0
-            }
-        },
-        "__class": "Cart\\Catalog\\ProductDomain"
-    },
-    ".esy.es": {
-        "id": ".esy.es",
-        "title": ".esy.es",
-        "description": "",
-        "billing": {
-            "1": {
-                "period": 1,
-                "old": 10,
-                "price": 10,
-                "trial": 0,
-                "renewal": 0
-            },
-            "2": {
-                "period": 2,
-                "old": 10,
-                "price": 9,
-                "trial": 0,
-                "renewal": 0
-            },
-            "3": {
-                "period": 3,
-                "old": 10,
-                "price": 8,
-                "trial": 0,
-                "renewal": 0
-            },
-            "4": {
-                "period": 4,
-                "old": 10,
-                "price": 7,
-                "trial": 0,
-                "renewal": 0
-            }
-        },
-        "__class": "Cart\\Catalog\\ProductDomain"
-    },
-    ".96.lt": {
-        "id": ".96.lt",
-        "title": ".96.lt",
-        "description": "",
-        "billing": {
-            "1": {
-                "period": 1,
-                "old": 10,
-                "price": 10,
-                "trial": 0,
-                "renewal": 0
-            },
-            "2": {
-                "period": 2,
-                "old": 10,
-                "price": 9,
-                "trial": 0,
-                "renewal": 0
-            },
-            "3": {
-                "period": 3,
-                "old": 10,
-                "price": 8,
-                "trial": 0,
-                "renewal": 0
-            },
-            "4": {
-                "period": 4,
-                "old": 10,
-                "price": 7,
-                "trial": 0,
-                "renewal": 0
-            }
-        },
-        "__class": "Cart\\Catalog\\ProductDomain"
-    },
-    ".hol.es": {
-        "id": ".hol.es",
-        "title": ".hol.es",
-        "description": "",
-        "billing": {
-            "1": {
-                "period": 1,
-                "old": 10,
-                "price": 10,
-                "trial": 0,
-                "renewal": 0
-            },
-            "2": {
-                "period": 2,
-                "old": 10,
-                "price": 9,
-                "trial": 0,
-                "renewal": 0
-            },
-            "3": {
-                "period": 3,
-                "old": 10,
-                "price": 8,
-                "trial": 0,
-                "renewal": 0
-            },
-            "4": {
-                "period": 4,
-                "old": 10,
-                "price": 7,
-                "trial": 0,
-                "renewal": 0
-            }
-        },
-        "__class": "Cart\\Catalog\\ProductDomain"
-    },
-    ".pe.hu": {
-        "id": ".pe.hu",
-        "title": ".pe.hu",
-        "description": "",
-        "billing": {
-            "1": {
-                "period": 1,
-                "old": 10,
-                "price": 10,
-                "trial": 0,
-                "renewal": 0
-            },
-            "2": {
-                "period": 2,
-                "old": 10,
-                "price": 9,
-                "trial": 0,
-                "renewal": 0
-            },
-            "3": {
-                "period": 3,
-                "old": 10,
-                "price": 8,
-                "trial": 0,
-                "renewal": 0
-            },
-            "4": {
-                "period": 4,
-                "old": 10,
-                "price": 7,
-                "trial": 0,
-                "renewal": 0
-            }
-        },
-        "__class": "Cart\\Catalog\\ProductDomain"
-    },
-    ".890m.com": {
-        "id": ".890m.com",
-        "title": ".890m.com",
-        "description": "",
         "billing": {
             "1": {
                 "period": 1,

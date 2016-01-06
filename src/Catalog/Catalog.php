@@ -4,9 +4,14 @@ namespace Cart\Catalog;
 
 use Cart\Arrayable;
 
-class Catalog implements Arrayable
+class Catalog implements Arrayable, \IteratorAggregate
 {
     public $products = array();
+
+    public function getIterator()
+    {
+        return new \ArrayIterator($this->products);
+    }
 
     public function import(array $array)
     {
