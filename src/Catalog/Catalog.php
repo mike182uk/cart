@@ -8,6 +8,28 @@ class Catalog implements Arrayable
 {
     public $products = array();
 
+    public function import(array $array)
+    {
+        foreach ($array as $id=>$p) {
+            $billing = new Billing();
+            foreach($p['billing'] as $t) {
+                $term = new Term($t['period']);
+                $term->price = $t['price'];
+                $term->old = $t['old'];
+                $term->trial = $t['trial'];
+                $term->renewal = $t['renewal'];
+                $billing->addTerm($term);
+            }
+
+            $product = new $p['__class'];
+            $product->id = $p['id'];
+            $product->title = $p['title'];
+            $product->description = $p['description'];
+            $product->billing = $billing;
+            $this->addProduct($product);
+        }
+    }
+
     public function getProduct($id)
     {
         if (!isset($this->products[$id])) {

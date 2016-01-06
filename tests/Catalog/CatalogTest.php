@@ -17,6 +17,15 @@ class CatalogTest extends PHPUnit_Framework_TestCase
         m::close();
     }
 
+    public function testImport()
+    {
+        $json = __DIR__ . '/../catalog.json';
+        $array = json_decode(file_get_contents($json), true);
+        $catalog = new Catalog();
+        $catalog->import($array);
+        $this->assertEquals($array, $catalog->toArray());
+    }
+
     public function testIsArrayable()
     {
         $catalog = new Catalog();

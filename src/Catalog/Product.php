@@ -67,7 +67,6 @@ class Product implements Arrayable
     {
         return array(
             'id'            => $this->id,
-            'unit'          => $this->unit,
             'title'         => $this->title,
             'description'   => $this->description,
             'billing'       => $this->billing->toArray(),
