@@ -2,7 +2,7 @@
 
 namespace Cart;
 
-class CartItemDomain extends CartItemTerm
+class CartItemDomain extends CartItem
 {
     public function getIcannFee()
     {

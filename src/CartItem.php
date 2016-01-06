@@ -14,6 +14,7 @@ class CartItem implements \ArrayAccess, Arrayable
      * Cart item data.
      *
      * @var array
+     *
      */
     protected $data;
 
@@ -37,6 +38,51 @@ class CartItem implements \ArrayAccess, Arrayable
         }
     }
 
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    public function getIcannFee()
+    {
+        return 0;
+    }
+
+    public function getUnit()
+    {
+        return $this->data['product']->getUnit();
+    }
+
+    public function getTitle()
+    {
+        return $this->data['product']->title;
+    }
+
+    public function getDescription()
+    {
+        return $this->data['product']->description;
+    }
+
+    public function getSave()
+    {
+        return $this->data['product']->getSaveForTerm($this->data['term']);
+    }
+
+    public function getSavePercent()
+    {
+        return $this->data['product']->getSavePercentForTerm($this->data['term']);
+    }
+
+    public function getTerms()
+    {
+        return $this->data['product']->billing->terms;
+    }
+
+    public function getClass()
+    {
+        return get_class($this);
+    }
+
     /**
      * Get the cart item id.
      *
@@ -56,11 +102,6 @@ class CartItem implements \ArrayAccess, Arrayable
         $hash = sha1(serialize($hashData));
 
         return $hash;
-    }
-
-    public function getPrice()
-    {
-        return $this->price;
     }
 
     /**
