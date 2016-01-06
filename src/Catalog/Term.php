@@ -32,7 +32,7 @@ class Term implements Arrayable
 
     public function getTotalPrice()
     {
-        if($this->hasTrial()) {
+        if ($this->hasTrial()) {
             return ($this->period - 1) * $this->price + $this->trial;
         }
         return $this->price * $this->period;

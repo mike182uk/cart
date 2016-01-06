@@ -17,7 +17,7 @@ class Catalog implements Arrayable, \IteratorAggregate
     {
         foreach ($array as $id=>$p) {
             $billing = new Billing();
-            foreach($p['billing'] as $t) {
+            foreach ($p['billing'] as $t) {
                 $term = new Term($t['period']);
                 $term->price = $t['price'];
                 $term->old = $t['old'];

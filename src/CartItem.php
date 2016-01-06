@@ -40,7 +40,7 @@ class CartItem implements \ArrayAccess, Arrayable
 
     public function getPrice()
     {
-        if(!isset($this->data['product'])) {
+        if (!isset($this->data['product'])) {
             return $this->price;
         }
         return $this->data['product']->getPriceForTerm($this->data['term']);
