@@ -83,7 +83,7 @@ class CartItem implements \ArrayAccess, Arrayable
 
     public function getClass()
     {
-        return str_replace('Cart\CartItem', '', get_class($this));
+        return strtolower(str_replace('Cart\CartItem', '', get_class($this)));
     }
 
     /**
