@@ -4,7 +4,7 @@ namespace Cart;
 
 use Cart\Storage\Store;
 
-class Cart implements Arrayable
+class Cart implements Arrayable, \IteratorAggregate
 {
     /**
      * The cart id.
@@ -37,6 +37,11 @@ class Cart implements Arrayable
     {
         $this->id = $id;
         $this->store = $store;
+    }
+
+    public function getIterator()
+    {
+        return new \ArrayIterator($this->items);
     }
 
     /**
