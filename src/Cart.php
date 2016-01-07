@@ -29,6 +29,11 @@ class Cart implements Arrayable, \IteratorAggregate
     private $store;
 
     /**
+     * @var store coupon code
+     */
+    private $coupon;
+
+    /**
      * Create a new cart instance.
      *
      * @param string $id
@@ -75,11 +80,26 @@ class Cart implements Arrayable, \IteratorAggregate
         return $this->items;
     }
 
+    public function removeCoupon()
+    {
+        $this->coupon = null;
+        foreach ($this->items as $item) {
+            $item->removeCoupon();
+        }
+    }
+
     public function applyCoupon(Coupon $coupon)
     {
+        $this->coupon = $coupon->getCode();
+
         foreach ($this->items as $item) {
             $item->applyCoupon($coupon);
         }
+    }
+
+    public function getCoupon()
+    {
+        return $this->coupon;
     }
 
     /**
@@ -313,6 +333,7 @@ class Cart implements Arrayable, \IteratorAggregate
         $this->restoreCheckContentsType($data);
 
         $this->id = $data['id'];
+        $this->coupon = $data['coupon'];
         $this->items = array();
 
         foreach ($data['items'] as $itemArr) {
@@ -375,6 +396,7 @@ class Cart implements Arrayable, \IteratorAggregate
     {
         return array(
             'id' => $this->id,
+            'coupon' => $this->coupon,
             'items' => array_map(function (CartItem $item) {
                 return $item->toArray();
             }, $this->items),

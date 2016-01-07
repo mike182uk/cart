@@ -40,6 +40,11 @@ class CartItem implements \ArrayAccess, Arrayable
         }
     }
 
+    public function removeCoupon()
+    {
+        //@todo
+    }
+
     public function applyCoupon(Coupon $coupon)
     {
         //@todo

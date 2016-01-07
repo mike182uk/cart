@@ -348,6 +348,7 @@ class CartTest extends PHPUnit_Framework_TestCase
 
         $storeGetReturn = array(
             'id' => 'foo',
+            'coupon' => null,
             'items' => array(
                 $item1->toArray(),
                 $item2->toArray(),
