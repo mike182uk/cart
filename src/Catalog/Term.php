@@ -20,7 +20,7 @@ class Term implements Arrayable
      */
     public function __construct($period = 1)
     {
-        $this->period = (int)$period;
+        $this->period = $period;
     }
 
     public function hasTrial()
