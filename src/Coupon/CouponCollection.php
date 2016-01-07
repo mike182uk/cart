@@ -3,10 +3,20 @@
 namespace Cart\Coupon;
 
 use Cart\Arrayable;
+use Cart\Coupon\Coupon;
 
 class CouponCollection implements Arrayable, \IteratorAggregate, \JsonSerializable
 {
     public $coupons = array();
+
+    public function import(array $array)
+    {
+        foreach ($array as $p) {
+            $coupon = new Coupon();
+            $coupon->code = $p['code'];
+            $this->addCoupon($coupon);
+        }
+    }
 
     public function addCoupon(Coupon $coupon)
     {

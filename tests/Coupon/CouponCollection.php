@@ -11,6 +11,19 @@ class CouponCollectionTest extends PHPUnit_Framework_TestCase
         m::close();
     }
 
+    public function testImport()
+    {
+        $json = __DIR__ . '/coupons.json';
+        $array = json_decode(file_get_contents($json), true);
+        $collection = new CouponCollection();
+        $collection->import($array);
+
+        //file_put_contents($json, json_encode($collection, \JSON_PRETTY_PRINT));
+
+        $this->assertEquals($array, $collection->toArray());
+        $this->assertInternalType('array', $collection->toArray());
+    }
+
     public function testIsArrayable()
     {
         $collection = new CouponCollection();
