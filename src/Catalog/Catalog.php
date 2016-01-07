@@ -4,9 +4,14 @@ namespace Cart\Catalog;
 
 use Cart\Arrayable;
 
-class Catalog implements Arrayable, \IteratorAggregate
+class Catalog implements Arrayable, \IteratorAggregate, \JsonSerializable
 {
     public $products = array();
+
+    function jsonSerialize()
+    {
+        return $this->toArray();
+    }
 
     public function getIterator()
     {
@@ -19,10 +24,9 @@ class Catalog implements Arrayable, \IteratorAggregate
             $billing = new Billing();
             foreach ($p['billing'] as $t) {
                 $term = new Term($t['period']);
-                $term->price = $t['price'];
                 $term->old = $t['old'];
                 $term->trial = $t['trial'];
-                $term->renewal = $t['renewal'];
+                $term->price = $t['price'];
                 $billing->addTerm($term);
             }
 

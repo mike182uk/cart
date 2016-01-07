@@ -7,9 +7,8 @@
             "1": {
                 "period": 1,
                 "old": 0,
-                "price": 49,
                 "trial": 0,
-                "renewal": 0
+                "price": 49
             }
         },
         "__class": "Cart\\Catalog\\ProductSsl"
@@ -22,9 +21,8 @@
             "1": {
                 "period": 1,
                 "old": 0,
-                "price": 35,
                 "trial": 0,
-                "renewal": 0
+                "price": 35
             }
         },
         "__class": "Cart\\Catalog\\ProductCpanelHosting"
@@ -37,30 +35,26 @@
             "1": {
                 "period": 1,
                 "old": 10,
-                "price": 10,
                 "trial": 0,
-                "renewal": 0
+                "price": 10
             },
             "2": {
                 "period": 2,
                 "old": 10,
-                "price": 9,
                 "trial": 0,
-                "renewal": 0
+                "price": 9
             },
             "3": {
                 "period": 3,
                 "old": 10,
-                "price": 8,
                 "trial": 0,
-                "renewal": 0
+                "price": 8
             },
             "4": {
                 "period": 4,
                 "old": 10,
-                "price": 7,
                 "trial": 0,
-                "renewal": 0
+                "price": 7
             }
         },
         "__class": "Cart\\Catalog\\ProductSharedHosting"
@@ -73,30 +67,26 @@
             "1": {
                 "period": 1,
                 "old": 10,
-                "price": 10,
                 "trial": 0,
-                "renewal": 0
+                "price": 10
             },
             "2": {
                 "period": 2,
                 "old": 10,
-                "price": 9,
                 "trial": 0,
-                "renewal": 0
+                "price": 9
             },
             "3": {
                 "period": 3,
                 "old": 10,
-                "price": 8,
                 "trial": 0,
-                "renewal": 0
+                "price": 8
             },
             "4": {
                 "period": 4,
                 "old": 10,
-                "price": 7,
                 "trial": 0,
-                "renewal": 0
+                "price": 7
             }
         },
         "__class": "Cart\\Catalog\\ProductSharedHosting"
@@ -109,30 +99,26 @@
             "1": {
                 "period": 1,
                 "old": 10,
-                "price": 10,
                 "trial": 0,
-                "renewal": 0
+                "price": 10
             },
             "2": {
                 "period": 2,
                 "old": 10,
-                "price": 9,
                 "trial": 0,
-                "renewal": 0
+                "price": 9
             },
             "3": {
                 "period": 3,
                 "old": 10,
-                "price": 8,
                 "trial": 0,
-                "renewal": 0
+                "price": 8
             },
             "4": {
                 "period": 4,
                 "old": 10,
-                "price": 7,
                 "trial": 0,
-                "renewal": 0
+                "price": 7
             }
         },
         "__class": "Cart\\Catalog\\ProductVps"
@@ -145,30 +131,26 @@
             "1": {
                 "period": 1,
                 "old": 10,
-                "price": 10,
                 "trial": 0,
-                "renewal": 0
+                "price": 10
             },
             "2": {
                 "period": 2,
                 "old": 10,
-                "price": 9,
                 "trial": 0,
-                "renewal": 0
+                "price": 9
             },
             "3": {
                 "period": 3,
                 "old": 10,
-                "price": 8,
                 "trial": 0,
-                "renewal": 0
+                "price": 8
             },
             "4": {
                 "period": 4,
                 "old": 10,
-                "price": 7,
                 "trial": 0,
-                "renewal": 0
+                "price": 7
             }
         },
         "__class": "Cart\\Catalog\\ProductVps"
@@ -181,30 +163,26 @@
             "1": {
                 "period": 1,
                 "old": 10,
-                "price": 10,
                 "trial": 0,
-                "renewal": 0
+                "price": 10
             },
             "2": {
                 "period": 2,
                 "old": 10,
-                "price": 9,
                 "trial": 0,
-                "renewal": 0
+                "price": 9
             },
             "3": {
                 "period": 3,
                 "old": 10,
-                "price": 8,
                 "trial": 0,
-                "renewal": 0
+                "price": 8
             },
             "4": {
                 "period": 4,
                 "old": 10,
-                "price": 7,
                 "trial": 0,
-                "renewal": 0
+                "price": 7
             }
         },
         "__class": "Cart\\Catalog\\ProductVps"
@@ -217,30 +195,26 @@
             "1": {
                 "period": 1,
                 "old": 10,
-                "price": 10,
                 "trial": 0,
-                "renewal": 0
+                "price": 10
             },
             "2": {
                 "period": 2,
                 "old": 10,
-                "price": 9,
                 "trial": 0,
-                "renewal": 0
+                "price": 9
             },
             "3": {
                 "period": 3,
                 "old": 10,
-                "price": 8,
                 "trial": 0,
-                "renewal": 0
+                "price": 8
             },
             "4": {
                 "period": 4,
                 "old": 10,
-                "price": 7,
                 "trial": 0,
-                "renewal": 0
+                "price": 7
             }
         },
         "__class": "Cart\\Catalog\\ProductVps"
@@ -253,30 +227,26 @@
             "1": {
                 "period": 1,
                 "old": 10,
-                "price": 10,
                 "trial": 0,
-                "renewal": 0
+                "price": 10
             },
             "2": {
                 "period": 2,
                 "old": 10,
-                "price": 9,
                 "trial": 0,
-                "renewal": 0
+                "price": 9
             },
             "3": {
                 "period": 3,
                 "old": 10,
-                "price": 8,
                 "trial": 0,
-                "renewal": 0
+                "price": 8
             },
             "4": {
                 "period": 4,
                 "old": 10,
-                "price": 7,
                 "trial": 0,
-                "renewal": 0
+                "price": 7
             }
         },
         "__class": "Cart\\Catalog\\ProductVps"
@@ -289,30 +259,26 @@
             "1": {
                 "period": 1,
                 "old": 10,
-                "price": 10,
                 "trial": 0,
-                "renewal": 0
+                "price": 10
             },
             "2": {
                 "period": 2,
                 "old": 10,
-                "price": 9,
                 "trial": 0,
-                "renewal": 0
+                "price": 9
             },
             "3": {
                 "period": 3,
                 "old": 10,
-                "price": 8,
                 "trial": 0,
-                "renewal": 0
+                "price": 8
             },
             "4": {
                 "period": 4,
                 "old": 10,
-                "price": 7,
                 "trial": 0,
-                "renewal": 0
+                "price": 7
             }
         },
         "__class": "Cart\\Catalog\\ProductVps"
@@ -325,30 +291,26 @@
             "1": {
                 "period": 1,
                 "old": 10,
-                "price": 10,
                 "trial": 0,
-                "renewal": 0
+                "price": 10
             },
             "2": {
                 "period": 2,
                 "old": 10,
-                "price": 9,
                 "trial": 0,
-                "renewal": 0
+                "price": 9
             },
             "3": {
                 "period": 3,
                 "old": 10,
-                "price": 8,
                 "trial": 0,
-                "renewal": 0
+                "price": 8
             },
             "4": {
                 "period": 4,
                 "old": 10,
-                "price": 7,
                 "trial": 0,
-                "renewal": 0
+                "price": 7
             }
         },
         "__class": "Cart\\Catalog\\ProductDomain"
@@ -360,31 +322,33 @@
         "billing": {
             "1": {
                 "period": 1,
-                "old": 10,
-                "price": 10,
-                "trial": 0,
-                "renewal": 0
+                "old": 14.99,
+                "trial": -1,
+                "price": 12.99
             },
             "2": {
                 "period": 2,
-                "old": 10,
-                "price": 9,
-                "trial": 0,
-                "renewal": 0
+                "old": 14.99,
+                "trial": 2.99,
+                "price": 14.99
             },
             "3": {
                 "period": 3,
-                "old": 10,
-                "price": 8,
-                "trial": 0,
-                "renewal": 0
+                "old": 14.99,
+                "trial": 2.99,
+                "price": 14.99
             },
-            "4": {
-                "period": 4,
-                "old": 10,
-                "price": 7,
-                "trial": 0,
-                "renewal": 0
+            "5": {
+                "period": 5,
+                "old": 14.99,
+                "trial": 2.99,
+                "price": 14.99
+            },
+            "10": {
+                "period": 10,
+                "old": 14.99,
+                "trial": 2.99,
+                "price": 14.99
             }
         },
         "__class": "Cart\\Catalog\\ProductDomain"
@@ -397,30 +361,26 @@
             "1": {
                 "period": 1,
                 "old": 10,
-                "price": 10,
                 "trial": 0,
-                "renewal": 0
+                "price": 10
             },
             "2": {
                 "period": 2,
                 "old": 10,
-                "price": 9,
                 "trial": 0,
-                "renewal": 0
+                "price": 9
             },
             "3": {
                 "period": 3,
                 "old": 10,
-                "price": 8,
                 "trial": 0,
-                "renewal": 0
+                "price": 8
             },
             "4": {
                 "period": 4,
                 "old": 10,
-                "price": 7,
                 "trial": 0,
-                "renewal": 0
+                "price": 7
             }
         },
         "__class": "Cart\\Catalog\\ProductDomain"
@@ -433,30 +393,26 @@
             "1": {
                 "period": 1,
                 "old": 10,
-                "price": 10,
                 "trial": 0,
-                "renewal": 0
+                "price": 10
             },
             "2": {
                 "period": 2,
                 "old": 10,
-                "price": 9,
                 "trial": 0,
-                "renewal": 0
+                "price": 9
             },
             "3": {
                 "period": 3,
                 "old": 10,
-                "price": 8,
                 "trial": 0,
-                "renewal": 0
+                "price": 8
             },
             "4": {
                 "period": 4,
                 "old": 10,
-                "price": 7,
                 "trial": 0,
-                "renewal": 0
+                "price": 7
             }
         },
         "__class": "Cart\\Catalog\\ProductDomain"
@@ -469,30 +425,26 @@
             "1": {
                 "period": 1,
                 "old": 10,
-                "price": 10,
                 "trial": 0,
-                "renewal": 0
+                "price": 10
             },
             "2": {
                 "period": 2,
                 "old": 10,
-                "price": 9,
                 "trial": 0,
-                "renewal": 0
+                "price": 9
             },
             "3": {
                 "period": 3,
                 "old": 10,
-                "price": 8,
                 "trial": 0,
-                "renewal": 0
+                "price": 8
             },
             "4": {
                 "period": 4,
                 "old": 10,
-                "price": 7,
                 "trial": 0,
-                "renewal": 0
+                "price": 7
             }
         },
         "__class": "Cart\\Catalog\\ProductDomain"
@@ -505,30 +457,26 @@
             "1": {
                 "period": 1,
                 "old": 10,
-                "price": 10,
                 "trial": 0,
-                "renewal": 0
+                "price": 10
             },
             "2": {
                 "period": 2,
                 "old": 10,
-                "price": 9,
                 "trial": 0,
-                "renewal": 0
+                "price": 9
             },
             "3": {
                 "period": 3,
                 "old": 10,
-                "price": 8,
                 "trial": 0,
-                "renewal": 0
+                "price": 8
             },
             "4": {
                 "period": 4,
                 "old": 10,
-                "price": 7,
                 "trial": 0,
-                "renewal": 0
+                "price": 7
             }
         },
         "__class": "Cart\\Catalog\\ProductDomain"
@@ -541,30 +489,26 @@
             "1": {
                 "period": 1,
                 "old": 10,
-                "price": 10,
                 "trial": 0,
-                "renewal": 0
+                "price": 10
             },
             "2": {
                 "period": 2,
                 "old": 10,
-                "price": 9,
                 "trial": 0,
-                "renewal": 0
+                "price": 9
             },
             "3": {
                 "period": 3,
                 "old": 10,
-                "price": 8,
                 "trial": 0,
-                "renewal": 0
+                "price": 8
             },
             "4": {
                 "period": 4,
                 "old": 10,
-                "price": 7,
                 "trial": 0,
-                "renewal": 0
+                "price": 7
             }
         },
         "__class": "Cart\\Catalog\\ProductDomain"
@@ -577,30 +521,26 @@
             "1": {
                 "period": 1,
                 "old": 10,
-                "price": 10,
                 "trial": 0,
-                "renewal": 0
+                "price": 10
             },
             "2": {
                 "period": 2,
                 "old": 10,
-                "price": 9,
                 "trial": 0,
-                "renewal": 0
+                "price": 9
             },
             "3": {
                 "period": 3,
                 "old": 10,
-                "price": 8,
                 "trial": 0,
-                "renewal": 0
+                "price": 8
             },
             "4": {
                 "period": 4,
                 "old": 10,
-                "price": 7,
                 "trial": 0,
-                "renewal": 0
+                "price": 7
             }
         },
         "__class": "Cart\\Catalog\\ProductDomain"
@@ -613,30 +553,26 @@
             "1": {
                 "period": 1,
                 "old": 10,
-                "price": 10,
                 "trial": 0,
-                "renewal": 0
+                "price": 10
             },
             "2": {
                 "period": 2,
                 "old": 10,
-                "price": 9,
                 "trial": 0,
-                "renewal": 0
+                "price": 9
             },
             "3": {
                 "period": 3,
                 "old": 10,
-                "price": 8,
                 "trial": 0,
-                "renewal": 0
+                "price": 8
             },
             "4": {
                 "period": 4,
                 "old": 10,
-                "price": 7,
                 "trial": 0,
-                "renewal": 0
+                "price": 7
             }
         },
         "__class": "Cart\\Catalog\\ProductDomain"
@@ -649,30 +585,26 @@
             "1": {
                 "period": 1,
                 "old": 10,
-                "price": 10,
                 "trial": 0,
-                "renewal": 0
+                "price": 10
             },
             "2": {
                 "period": 2,
                 "old": 10,
-                "price": 9,
                 "trial": 0,
-                "renewal": 0
+                "price": 9
             },
             "3": {
                 "period": 3,
                 "old": 10,
-                "price": 8,
                 "trial": 0,
-                "renewal": 0
+                "price": 8
             },
             "4": {
                 "period": 4,
                 "old": 10,
-                "price": 7,
                 "trial": 0,
-                "renewal": 0
+                "price": 7
             }
         },
         "__class": "Cart\\Catalog\\ProductDomain"
@@ -685,30 +617,26 @@
             "1": {
                 "period": 1,
                 "old": 10,
-                "price": 10,
                 "trial": 0,
-                "renewal": 0
+                "price": 10
             },
             "2": {
                 "period": 2,
                 "old": 10,
-                "price": 9,
                 "trial": 0,
-                "renewal": 0
+                "price": 9
             },
             "3": {
                 "period": 3,
                 "old": 10,
-                "price": 8,
                 "trial": 0,
-                "renewal": 0
+                "price": 8
             },
             "4": {
                 "period": 4,
                 "old": 10,
-                "price": 7,
                 "trial": 0,
-                "renewal": 0
+                "price": 7
             }
         },
         "__class": "Cart\\Catalog\\ProductDomain"
@@ -721,30 +649,26 @@
             "1": {
                 "period": 1,
                 "old": 10,
-                "price": 10,
                 "trial": 0,
-                "renewal": 0
+                "price": 10
             },
             "2": {
                 "period": 2,
                 "old": 10,
-                "price": 9,
                 "trial": 0,
-                "renewal": 0
+                "price": 9
             },
             "3": {
                 "period": 3,
                 "old": 10,
-                "price": 8,
                 "trial": 0,
-                "renewal": 0
+                "price": 8
             },
             "4": {
                 "period": 4,
                 "old": 10,
-                "price": 7,
                 "trial": 0,
-                "renewal": 0
+                "price": 7
             }
         },
         "__class": "Cart\\Catalog\\ProductDomain"
@@ -757,30 +681,26 @@
             "1": {
                 "period": 1,
                 "old": 10,
-                "price": 10,
                 "trial": 0,
-                "renewal": 0
+                "price": 10
             },
             "2": {
                 "period": 2,
                 "old": 10,
-                "price": 9,
                 "trial": 0,
-                "renewal": 0
+                "price": 9
             },
             "3": {
                 "period": 3,
                 "old": 10,
-                "price": 8,
                 "trial": 0,
-                "renewal": 0
+                "price": 8
             },
             "4": {
                 "period": 4,
                 "old": 10,
-                "price": 7,
                 "trial": 0,
-                "renewal": 0
+                "price": 7
             }
         },
         "__class": "Cart\\Catalog\\ProductDomain"
@@ -793,30 +713,26 @@
             "1": {
                 "period": 1,
                 "old": 10,
-                "price": 10,
                 "trial": 0,
-                "renewal": 0
+                "price": 10
             },
             "2": {
                 "period": 2,
                 "old": 10,
-                "price": 9,
                 "trial": 0,
-                "renewal": 0
+                "price": 9
             },
             "3": {
                 "period": 3,
                 "old": 10,
-                "price": 8,
                 "trial": 0,
-                "renewal": 0
+                "price": 8
             },
             "4": {
                 "period": 4,
                 "old": 10,
-                "price": 7,
                 "trial": 0,
-                "renewal": 0
+                "price": 7
             }
         },
         "__class": "Cart\\Catalog\\ProductDomain"
@@ -829,30 +745,26 @@
             "1": {
                 "period": 1,
                 "old": 10,
-                "price": 10,
                 "trial": 0,
-                "renewal": 0
+                "price": 10
             },
             "2": {
                 "period": 2,
                 "old": 10,
-                "price": 9,
                 "trial": 0,
-                "renewal": 0
+                "price": 9
             },
             "3": {
                 "period": 3,
                 "old": 10,
-                "price": 8,
                 "trial": 0,
-                "renewal": 0
+                "price": 8
             },
             "4": {
                 "period": 4,
                 "old": 10,
-                "price": 7,
                 "trial": 0,
-                "renewal": 0
+                "price": 7
             }
         },
         "__class": "Cart\\Catalog\\ProductDomain"

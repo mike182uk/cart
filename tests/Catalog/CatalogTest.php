@@ -23,6 +23,9 @@ class CatalogTest extends PHPUnit_Framework_TestCase
         $array = json_decode(file_get_contents($json), true);
         $catalog = new Catalog();
         $catalog->import($array);
+
+        //file_put_contents($json, json_encode($catalog, \JSON_PRETTY_PRINT));
+
         $this->assertEquals($array, $catalog->toArray());
     }
 

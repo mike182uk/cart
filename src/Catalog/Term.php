@@ -12,8 +12,6 @@ class Term implements Arrayable
 
     public $trial = 0.00;
 
-    public $renewal = 0.00;
-
     public $old = 0.00;
 
     /**
@@ -42,7 +40,7 @@ class Term implements Arrayable
     {
         $price = $this->price;
         $old = $this->old;
-        if($this->hasTrial()) {
+        if ($this->hasTrial()) {
             return $this->price - $this->trial;
         }
         if ($old > $price) {
@@ -53,7 +51,7 @@ class Term implements Arrayable
 
     public function getSavePercent()
     {
-        if($this->hasTrial()) {
+        if ($this->hasTrial()) {
             $price = $this->getTotalPrice();
             $old = $this->price * $this->period;
             return 100 - ($price * 100 / $old) ;
@@ -71,9 +69,8 @@ class Term implements Arrayable
         return array(
             'period' => $this->period,
             'old' => $this->old,
-            'price' => $this->price,
             'trial' => $this->trial,
-            'renewal' => $this->renewal,
+            'price' => $this->price,
         );
     }
 }
