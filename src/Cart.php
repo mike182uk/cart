@@ -3,6 +3,7 @@
 namespace Cart;
 
 use Cart\Storage\Store;
+use Cart\Coupon\Coupon;
 
 class Cart implements Arrayable, \IteratorAggregate
 {
@@ -72,6 +73,13 @@ class Cart implements Arrayable, \IteratorAggregate
     public function all()
     {
         return $this->items;
+    }
+
+    public function applyCoupon(Coupon $coupon)
+    {
+        foreach ($this->items as $item) {
+            $item->applyCoupon($coupon);
+        }
     }
 
     /**

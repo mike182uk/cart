@@ -2,6 +2,8 @@
 
 namespace Cart;
 
+use Cart\Coupon\Coupon;
+
 /**
  * @property string $id
  * @property int    $quantity
@@ -36,6 +38,11 @@ class CartItem implements \ArrayAccess, Arrayable
         foreach ($data as $k => $v) {
             $this->$k = $v;
         }
+    }
+
+    public function applyCoupon(Coupon $coupon)
+    {
+        //@todo
     }
 
     public function getPrice()

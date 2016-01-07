@@ -8,7 +8,7 @@ class Catalog implements Arrayable, \IteratorAggregate, \JsonSerializable
 {
     public $products = array();
 
-    function jsonSerialize()
+    public function jsonSerialize()
     {
         return $this->toArray();
     }

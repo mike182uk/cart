@@ -3,6 +3,7 @@
 use Cart\Cart;
 use Cart\CartItem;
 use Cart\CartRestoreException;
+use Cart\Coupon\Coupon;
 use Mockery as m;
 
 class CartTest extends PHPUnit_Framework_TestCase
@@ -10,6 +11,20 @@ class CartTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         m::close();
+    }
+
+    public function testCoupon()
+    {
+        $coupon = new Coupon();
+        $coupon->code = 'BLACK';
+
+        $cart = $this->getCart();
+        $item = new CartItem(array(
+            'name' => 'foo',
+        ));
+        $cart->add($item);
+
+        $cart->applyCoupon($coupon);
     }
 
     public function testIsIterate()
