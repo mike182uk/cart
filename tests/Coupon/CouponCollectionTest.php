@@ -1,5 +1,6 @@
 <?php
 
+use Cart\Cart;
 use Cart\Coupon\Coupon;
 use Cart\Coupon\CouponCollection;
 use Mockery as m;
@@ -9,6 +10,25 @@ class CouponCollectionTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         m::close();
+    }
+
+    public function getCouponsCollection()
+    {
+        $json = __DIR__ . '/coupons.json';
+        $array = json_decode(file_get_contents($json), true);
+        $collection = new CouponCollection();
+        $collection->import($array);
+        return $collection;
+    }
+
+
+    public function testAllCoupons()
+    {
+        $cart = $this->getCart();
+        $coupons = $this->getCouponsCollection();
+        foreach($coupons as $coupon) {
+            $coupon->calculateDiscount($cart);
+        }
     }
 
     public function testImport()
@@ -42,19 +62,26 @@ class CouponCollectionTest extends PHPUnit_Framework_TestCase
         $collection = new CouponCollection();
 
         $coupon = new Coupon();
-        $coupon->code = 'BLACK';
+        $coupon->setCode('BLACK');
         $collection->addCoupon($coupon);
 
         $coupon = new Coupon();
-        $coupon->code = 'CYBER';
+        $coupon->setCode('CYBER');
         $collection->addCoupon($coupon);
 
         $coupon = new Coupon();
-        $coupon->code = 'HANUKA';
+        $coupon->setCode('HANUKA');
         $collection->addCoupon($coupon);
 
         $this->assertInstanceOf('\Cart\Coupon\Coupon', $collection->getCoupon('BLACK'));
         $this->assertInstanceOf('\Cart\Coupon\Coupon', $collection->getCoupon('CYBER'));
         $this->assertInstanceOf('\Cart\Coupon\Coupon', $collection->getCoupon('HANUKA'));
+    }
+
+    public function getCart()
+    {
+        $store = m::mock('Cart\Storage\Store');
+
+        return new Cart('foo', $store);
     }
 }

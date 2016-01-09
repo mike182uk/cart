@@ -13,20 +13,6 @@ class CartTest extends PHPUnit_Framework_TestCase
         m::close();
     }
 
-    public function testCoupon()
-    {
-        $coupon = new Coupon();
-        $coupon->code = 'BLACK';
-
-        $cart = $this->getCart();
-        $item = new CartItem(array(
-            'name' => 'foo',
-        ));
-        $cart->add($item);
-
-        $cart->applyCoupon($coupon);
-    }
-
     public function testIsIterate()
     {
         $cart = $this->getCart();

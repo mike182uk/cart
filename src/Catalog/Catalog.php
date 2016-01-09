@@ -47,7 +47,7 @@ class Catalog implements Arrayable, \IteratorAggregate, \JsonSerializable
         return $this->products[$id];
     }
 
-    public function getCartItem(Product $product)
+    public function getCartItem(Product $product, $data = array())
     {
         $type = str_replace('Cart\Catalog\Product', '', get_class($product));
         $itemClass = "Cart\\CartItem";
@@ -55,7 +55,7 @@ class Catalog implements Arrayable, \IteratorAggregate, \JsonSerializable
             $itemClass .= $type;
         }
 
-        $item = new $itemClass();
+        $item = new $itemClass($data);
         $item->term = $product->getRandomTerm();
         $item->product = $product;
 

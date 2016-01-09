@@ -1,11 +1,80 @@
 [
     {
-        "code": "BLACK"
+        "code": "BLACK",
+        "type": "PercentDiscount",
+        "products": [
+            21,
+            29
+        ],
+        "config": {
+            "percent": 50
+        }
     },
     {
-        "code": "CYBER"
+        "code": "CYBER",
+        "type": "PercentDiscount",
+        "products": [
+            21,
+            29
+        ],
+        "config": {
+            "percent": 25
+        }
     },
     {
-        "code": "HANUKA"
+        "code": "HANUKA",
+        "type": "PercentDiscount",
+        "products": [
+            21,
+            29
+        ],
+        "config": {
+            "percent": 30
+        }
+    },
+    {
+        "code": "50_PERCENT_DISCOUNT",
+        "type": "PercentDiscount",
+        "products": [],
+        "config": {
+            "percent": 50
+        }
+    },
+    {
+        "code": "MINUS_TWO",
+        "type": "AmountDiscount",
+        "products": [],
+        "config": {
+            "amount": 2
+        }
+    },
+    {
+        "code": "BUY_ONE_GET_ONE_FREE",
+        "type": "FreeAddon",
+        "products": [
+            ".com"
+        ],
+        "config": {
+            "addon": ".com"
+        }
+    },
+    {
+        "code": "BUY_ONE_GET_ONE_HALf",
+        "type": "BogoHalf",
+        "products": [
+            ".com"
+        ],
+        "config": {
+            "addon": ".com"
+        }
+    },
+    {
+        "code": "15_PERCENT_OFF_OVER_30",
+        "type": "OverAmount",
+        "products": [],
+        "config": {
+            "over": 30,
+            "percent": 15
+        }
     }
 ]

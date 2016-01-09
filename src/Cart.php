@@ -3,9 +3,8 @@
 namespace Cart;
 
 use Cart\Storage\Store;
-use Cart\Coupon\Coupon;
 
-class Cart implements Arrayable, \IteratorAggregate
+class   Cart implements Arrayable, \IteratorAggregate
 {
     /**
      * The cart id.
@@ -13,6 +12,13 @@ class Cart implements Arrayable, \IteratorAggregate
      * @var string
      */
     private $id;
+
+    /**
+     * Discount amount from total amount of the cart
+     *
+     * @var float
+     */
+    private $discount = 0.00;
 
     /**
      * Items in the cart.
@@ -27,11 +33,6 @@ class Cart implements Arrayable, \IteratorAggregate
      * @var Store
      */
     private $store;
-
-    /**
-     * @var store coupon code
-     */
-    private $coupon;
 
     /**
      * Create a new cart instance.
@@ -78,28 +79,6 @@ class Cart implements Arrayable, \IteratorAggregate
     public function all()
     {
         return $this->items;
-    }
-
-    public function removeCoupon()
-    {
-        $this->coupon = null;
-        foreach ($this->items as $item) {
-            $item->removeCoupon();
-        }
-    }
-
-    public function applyCoupon(Coupon $coupon)
-    {
-        $this->coupon = $coupon->getCode();
-
-        foreach ($this->items as $item) {
-            $item->applyCoupon($coupon);
-        }
-    }
-
-    public function getCoupon()
-    {
-        return $this->coupon;
     }
 
     /**
@@ -333,7 +312,6 @@ class Cart implements Arrayable, \IteratorAggregate
         $this->restoreCheckContentsType($data);
 
         $this->id = $data['id'];
-        $this->coupon = $data['coupon'];
         $this->items = array();
 
         foreach ($data['items'] as $itemArr) {
@@ -396,10 +374,19 @@ class Cart implements Arrayable, \IteratorAggregate
     {
         return array(
             'id' => $this->id,
-            'coupon' => $this->coupon,
             'items' => array_map(function (CartItem $item) {
                 return $item->toArray();
             }, $this->items),
         );
+    }
+
+    public function setDiscount($discount)
+    {
+        $this->discount = $discount;
+    }
+
+    public function getDiscount()
+    {
+        return $this->discount;
     }
 }

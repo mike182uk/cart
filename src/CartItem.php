@@ -2,8 +2,6 @@
 
 namespace Cart;
 
-use Cart\Coupon\Coupon;
-
 /**
  * @property string $id
  * @property int    $quantity
@@ -29,6 +27,7 @@ class CartItem implements \ArrayAccess, Arrayable
     {
         $defaults = array(
             'quantity' => 1,
+            'discount' => 0.00,
             'price' => 0.00,
             'tax' => 0.00,
         );
@@ -40,14 +39,14 @@ class CartItem implements \ArrayAccess, Arrayable
         }
     }
 
-    public function removeCoupon()
+    public function setDiscount($discount)
     {
-        //@todo
+        $this->data['discount'] = (float) $discount;
     }
 
-    public function applyCoupon(Coupon $coupon)
+    public function getDiscount()
     {
-        //@todo
+        return $this->data['discount'];
     }
 
     public function getPrice()
@@ -66,6 +65,11 @@ class CartItem implements \ArrayAccess, Arrayable
     public function getUnit()
     {
         return $this->data['product']->getUnit();
+    }
+
+    public function getProductId()
+    {
+        return $this->data['product']->id;
     }
 
     public function getTitle()

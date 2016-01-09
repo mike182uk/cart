@@ -10,7 +10,7 @@ class Term implements Arrayable
 
     public $price = 0.00;
 
-    public $trial = 0.00;
+    public $trial = -1;
 
     public $old = 0.00;
 

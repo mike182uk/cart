@@ -13,7 +13,14 @@ class CouponCollection implements Arrayable, \IteratorAggregate, \JsonSerializab
     {
         foreach ($array as $p) {
             $coupon = new Coupon();
-            $coupon->code = $p['code'];
+            $coupon->setCode($p['code']);
+            $coupon->setType($p['type']);
+            if(isset($p['products']) && !empty($p['products'])) {
+                $coupon->setProducts($p['products']);
+            }
+            if(isset($p['config']) && !empty($p['config'])) {
+                $coupon->setConfig($p['config']);
+            }
             $this->addCoupon($coupon);
         }
     }
@@ -26,7 +33,7 @@ class CouponCollection implements Arrayable, \IteratorAggregate, \JsonSerializab
     public function getCoupon($code)
     {
         foreach ($this->coupons as $item) {
-            if ($code === $item->code) {
+            if ($code === $item->getCode()) {
                 return $item;
             }
         }
