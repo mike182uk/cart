@@ -10,34 +10,35 @@ class CouponSecondFree implements CouponInterface
     {
         $products = $coupon->getProducts();
         $config   = $coupon->getConfig();
-        $addon = $config['addon'];
-        $multiple = $config['multiple'];
 
         $found = false;
 
+        $eligibleItems = [];
+
         foreach ($cart as &$item) {
-            if ($found == false && array_key_exists($item->getProductId(), $products)) {
-                $found = true;
-                continue;
+            if (array_key_exists($item->getProductId(), $products)) {
+                $found                = true;
+                $hash                 = $this->getHash($item);
+                $eligibleItems[$hash] = 0;
             }
         }
 
-
         if ($found) {
-            $i = 0;
             foreach ($cart as &$item) {
-                if ($item->getProductId() == $addon) {
-                    $i++;
-                    if ($i == 2 || ($multiple && $i % 2 == 0)){
-                        $item->setDiscount($item->getPrice());
-                        if (!$multiple){
-                            break;
-                        }
+                $hash2 = $this->getHash($item);
+                if (array_key_exists($hash2, $eligibleItems)) {
+                    $eligibleItems[$hash2]++;
+                    if ($eligibleItems[$hash2] % 2 == 0) {
+                        $item->setDiscount($item->getTerm()->getTotalPrice());
                     }
                 }
             }
         }
+    }
 
+    private function getHash($item)
+    {
+        return md5($item->getProductId() . "+" . $item->getTerm()->getPeriod());
     }
 
 }

@@ -83,27 +83,20 @@
     "valid_until": ""
   },
   {
-    "code": "BUY_ONE_GET_ONE_FREE",
+    "code": "BUY_ONE_GET_CLONE",
     "type": "SecondFree",
     "products": {
-      ".com": []
+      ".com": [
+        1,
+        6
+      ],
+      "21": [
+        1,
+        2,
+        3
+      ]
     },
     "config": {
-      "addon": ".com",
-      "multiple" : false
-    },
-    "valid_from": null,
-    "valid_until": null
-  },
-  {
-    "code": "BUY_ONE_GET_ONE_FREE_MULTIPLE",
-    "type": "SecondFree",
-    "products": {
-      ".com": []
-    },
-    "config": {
-      "addon": ".com",
-      "multiple" : true
     },
     "valid_from": null,
     "valid_until": null
@@ -115,7 +108,9 @@
       ".com": []
     },
     "config": {
-      "addon": [".com"]
+      "addon": [
+        ".com"
+      ]
     },
     "valid_from": null,
     "valid_until": null
@@ -138,7 +133,10 @@
       "24": []
     },
     "config": {
-      "addon": [".com", "21"]
+      "addon": [
+        ".com",
+        "21"
+      ]
     },
     "valid_from": null,
     "valid_until": null
