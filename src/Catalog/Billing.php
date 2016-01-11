@@ -30,7 +30,7 @@ class Billing implements Arrayable, \IteratorAggregate
     public function getRandomTerm()
     {
         if (empty($this->terms)) {
-            throw new \Exception('Billing terms are note defined');
+            throw new \Exception('Billing terms are not defined');
         }
         return $this->terms[array_rand($this->terms)];
     }
