@@ -89,7 +89,7 @@ class Coupon implements Arrayable
     {
         return $this->validFrom;
     }
-    
+
     /**
      * @param string $validUntil
      */
@@ -108,21 +108,22 @@ class Coupon implements Arrayable
 
     public function calculateDiscount(Cart $cart)
     {
-        $types = array(
+        $types = [
             'PercentDiscount',
             'AmountDiscount',
             'FreeAddon',
             'BogoHalf',
             'OverAmount',
             'SecondFree',
-        );
+        ];
         if (in_array($this->type, $types)) {
             $type = $this->type;
-        } else {
+        }
+        else {
             $type = $types[0];
         }
 
-        $ft = __NAMESPACE__ . '\\Coupon' . $type;
+        $ft   = __NAMESPACE__ . '\\Coupon' . $type;
         $calc = new $ft($cart);
         $calc->calculateDiscount($this, $cart);
     }
@@ -137,5 +138,24 @@ class Coupon implements Arrayable
             'valid_from'  => $this->validFrom,
             'valid_until' => $this->validUntil,
         ];
+    }
+
+    public function isActive()
+    {
+        $time = time();
+
+        if (is_null($this->validFrom) && is_null($this->validUntil)) {
+            return true;
+        }
+
+        if (is_null($this->validFrom)) {
+            return (bool)($time < strtotime($this->validUntil));
+        }
+
+        if (is_null($this->validUntil)) {
+            return (bool)($time > strtotime($this->validFrom));
+        }
+
+        return (bool)(strtotime($this->validFrom) < $time && $time < strtotime($this->validUntil));
     }
 }
