@@ -15,12 +15,22 @@ class CouponCollection implements Arrayable, \IteratorAggregate, \JsonSerializab
             $coupon = new Coupon();
             $coupon->setCode($p['code']);
             $coupon->setType($p['type']);
-            if(isset($p['products']) && !empty($p['products'])) {
+
+            if (isset($p['products']) && !empty($p['products'])) {
                 $coupon->setProducts($p['products']);
             }
-            if(isset($p['config']) && !empty($p['config'])) {
+            if (isset($p['config']) && !empty($p['config'])) {
                 $coupon->setConfig($p['config']);
             }
+
+            if (isset($p['valid_from']) && !empty($p['valid_from'])) {
+                $coupon->setValidFrom($p['valid_from']);
+            }
+
+            if (isset($p['valid_until']) && !empty($p['valid_until'])) {
+                $coupon->setValidUntil($p['valid_until']);
+            }
+
             $this->addCoupon($coupon);
         }
     }

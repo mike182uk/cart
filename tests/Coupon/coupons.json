@@ -1,80 +1,120 @@
 [
-    {
-        "code": "BLACK",
-        "type": "PercentDiscount",
-        "products": [
-            21,
-            29
-        ],
-        "config": {
-            "percent": 50
-        }
+  {
+    "code": "BLACK",
+    "type": "PercentDiscount",
+    "products": {
+      "21": [
+        1,
+        2,
+        3
+      ],
+      "29": [
+        5,
+        6,
+        7
+      ]
     },
-    {
-        "code": "CYBER",
-        "type": "PercentDiscount",
-        "products": [
-            21,
-            29
-        ],
-        "config": {
-            "percent": 25
-        }
+    "config": {
+      "percent": 50
     },
-    {
-        "code": "HANUKA",
-        "type": "PercentDiscount",
-        "products": [
-            21,
-            29
-        ],
-        "config": {
-            "percent": 30
-        }
+    "valid_from": null,
+    "valid_until": null
+  },
+  {
+    "code": "CYBER",
+    "type": "PercentDiscount",
+    "products": {
+      "21": [
+        1,
+        2,
+        3
+      ],
+      "29": [
+        1,
+        2,
+        3
+      ]
     },
-    {
-        "code": "50_PERCENT_DISCOUNT",
-        "type": "PercentDiscount",
-        "products": [],
-        "config": {
-            "percent": 50
-        }
+    "config": {
+      "percent": 25
     },
-    {
-        "code": "MINUS_TWO",
-        "type": "AmountDiscount",
-        "products": [],
-        "config": {
-            "amount": 2
-        }
+    "valid_from": null,
+    "valid_until": null
+  },
+  {
+    "code": "HANUKA",
+    "type": "PercentDiscount",
+    "products": {
+      "21": [
+        1,
+        2,
+        3
+      ],
+      "29": [
+        1,
+        2,
+        3
+      ]
     },
-    {
-        "code": "BUY_ONE_GET_ONE_FREE",
-        "type": "FreeAddon",
-        "products": [
-            ".com"
-        ],
-        "config": {
-            "addon": ".com"
-        }
+    "config": {
+      "percent": 30
     },
-    {
-        "code": "BUY_ONE_GET_ONE_HALf",
-        "type": "BogoHalf",
-        "products": [
-            ".com"
-        ],
-        "config": {
-            "addon": ".com"
-        }
+    "valid_from": null,
+    "valid_until": null
+  },
+  {
+    "code": "50_PERCENT_DISCOUNT",
+    "type": "PercentDiscount",
+    "products": [],
+    "config": {
+      "percent": 50
     },
-    {
-        "code": "15_PERCENT_OFF_OVER_30",
-        "type": "OverAmount",
-        "products": [],
-        "config": {
-            "over": 30,
-            "percent": 15
-        }
-    }
+    "valid_from": null,
+    "valid_until": null
+  },
+  {
+    "code": "MINUS_TWO",
+    "type": "AmountDiscount",
+    "products": [],
+    "config": {
+      "amount": 2
+    },
+    "valid_from": "",
+    "valid_until": ""
+  },
+  {
+    "code": "BUY_ONE_GET_ONE_FREE",
+    "type": "FreeAddon",
+    "products": [
+      ".com"
+    ],
+    "config": {
+      "addon": ".com"
+    },
+    "valid_from": null,
+    "valid_until": null
+  },
+  {
+    "code": "BUY_ONE_GET_ONE_HALf",
+    "type": "BogoHalf",
+    "products": [
+      ".com"
+    ],
+    "config": {
+      "addon": ".com"
+    },
+    "valid_from": null,
+    "valid_until": null
+  },
+  {
+    "code": "15_PERCENT_OFF_OVER_30",
+    "type": "OverAmount",
+    "products": [],
+    "config": {
+      "over": 30,
+      "percent": 15
+    },
+    "valid_from": null,
+    "valid_until": null
+  }
 ]

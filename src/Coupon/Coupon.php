@@ -16,6 +16,10 @@ class Coupon implements Arrayable
 
     private $config = array();
 
+    private $validFrom = null;
+
+    private $validUntil = null;
+
     /**
      * @param string $type
      */
@@ -70,6 +74,38 @@ class Coupon implements Arrayable
         return $this->config;
     }
 
+    /**
+     * @param string $validFrom
+     */
+    public function setValidFrom($validFrom)
+    {
+        $this->validFrom = $validFrom;
+    }
+
+    /**
+     * @return string
+     */
+    public function getValidFrom()
+    {
+        return $this->validFrom;
+    }
+    
+    /**
+     * @param string $validUntil
+     */
+    public function setValidUntil($validUntil)
+    {
+        $this->validUntil = $validUntil;
+    }
+
+    /**
+     * @return string
+     */
+    public function getValidUntil()
+    {
+        return $this->validUntil;
+    }
+
     public function calculateDiscount(Cart $cart)
     {
         $types = array(
@@ -92,11 +128,13 @@ class Coupon implements Arrayable
 
     public function toArray()
     {
-        return array(
-            'code' => $this->code,
-            'type' => $this->type,
-            'products' => $this->products,
-            'config' => $this->config,
-        );
+        return [
+            'code'        => $this->code,
+            'type'        => $this->type,
+            'products'    => $this->products,
+            'config'      => $this->config,
+            'valid_from'  => $this->validFrom,
+            'valid_until' => $this->validUntil,
+        ];
     }
 }

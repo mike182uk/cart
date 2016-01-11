@@ -57,6 +57,11 @@ class CartItem implements \ArrayAccess, Arrayable
         return $this->data['product']->getPriceForTerm($this->data['term']);
     }
 
+    public function getPriceWithDiscount()
+    {
+        return $this->getPrice() - $this->getDiscount();
+    }
+
     public function getIcannFee()
     {
         return 0;
