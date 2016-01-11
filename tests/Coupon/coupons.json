@@ -102,7 +102,7 @@
     "valid_until": null
   },
   {
-    "code": "BUY_ONE_GET_ONE_HALf",
+    "code": "BUY_ONE_GET_ONE_HALF",
     "type": "BogoHalf",
     "products": {
       ".com": []
