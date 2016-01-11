@@ -84,12 +84,26 @@
   },
   {
     "code": "BUY_ONE_GET_ONE_FREE",
-    "type": "FreeAddon",
+    "type": "SecondFree",
     "products": {
       ".com": []
     },
     "config": {
-      "addon": ".com"
+      "addon": ".com",
+      "multiple" : false
+    },
+    "valid_from": null,
+    "valid_until": null
+  },
+  {
+    "code": "BUY_ONE_GET_ONE_FREE_MULTIPLE",
+    "type": "SecondFree",
+    "products": {
+      ".com": []
+    },
+    "config": {
+      "addon": ".com",
+      "multiple" : true
     },
     "valid_from": null,
     "valid_until": null
@@ -101,7 +115,7 @@
       ".com": []
     },
     "config": {
-      "addon": ".com"
+      "addon": [".com"]
     },
     "valid_from": null,
     "valid_until": null
@@ -118,13 +132,13 @@
     "valid_until": null
   },
   {
-    "code": "BUY_HOSTING_GET_DOMAIN_FREE",
+    "code": "BUY_HOSTING_GET_DOMAIN_AND_SSL_FREE",
     "type": "FreeAddon",
     "products": {
-      "23": []
+      "24": []
     },
     "config": {
-      "addon": ".com"
+      "addon": [".com", "21"]
     },
     "valid_from": null,
     "valid_until": null

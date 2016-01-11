@@ -89,7 +89,7 @@ class CartItem implements \ArrayAccess, Arrayable
 
     public function getSave()
     {
-        return $this->data['product']->getSaveForTerm($this->data['term']);
+        return $this->data['product']->getSaveForTerm($this->data['term']) + $this->getDiscount();
     }
 
     public function getSavePercent()

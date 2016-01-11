@@ -4,13 +4,14 @@ namespace Cart\Coupon;
 
 use Cart\Cart;
 
-class CouponFreeAddon implements CouponInterface
+class CouponSecondFree implements CouponInterface
 {
     public function calculateDiscount(Coupon $coupon, Cart $cart)
     {
         $products = $coupon->getProducts();
         $config   = $coupon->getConfig();
-        $addons   = $config['addon'];
+        $addon = $config['addon'];
+        $multiple = $config['multiple'];
 
         $found = false;
 
@@ -21,17 +22,22 @@ class CouponFreeAddon implements CouponInterface
             }
         }
 
+
         if ($found) {
+            $i = 0;
             foreach ($cart as &$item) {
-                if (in_array($item->getProductId(), $addons)) {
-                    $item->setDiscount($item->getPrice());
-
-                    if (($key = array_search($item->getProductId(), $addons)) !== false) {
-                        unset($addons[$key]);
+                if ($item->getProductId() == $addon) {
+                    $i++;
+                    if ($i == 2 || ($multiple && $i % 2 == 0)){
+                        $item->setDiscount($item->getPrice());
+                        if (!$multiple){
+                            break;
+                        }
                     }
-
                 }
             }
         }
+
     }
+
 }

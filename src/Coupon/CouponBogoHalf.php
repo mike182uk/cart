@@ -18,7 +18,7 @@ class CouponBogoHalf implements CouponInterface
                 $found = true;
                 continue;
             }
-            if ($found && $item->getProductId() == $addon) {
+            if ($found && in_array($item->getProductId(), $addon)) {
                 $item->setDiscount($item->getPrice() / 2);
                 break;
             }
