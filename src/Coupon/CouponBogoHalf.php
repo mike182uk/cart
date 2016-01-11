@@ -14,7 +14,7 @@ class CouponBogoHalf implements CouponInterface
 
         $found = false;
         foreach ($cart as &$item) {
-            if ($found == false && in_array($item->getProductId(), $products)) {
+            if ($found == false && array_key_exists($item->getProductId(), $products)) {
                 $found = true;
                 continue;
             }

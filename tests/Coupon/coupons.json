@@ -85,9 +85,9 @@
   {
     "code": "BUY_ONE_GET_ONE_FREE",
     "type": "FreeAddon",
-    "products": [
-      ".com"
-    ],
+    "products": {
+      ".com": []
+    },
     "config": {
       "addon": ".com"
     },
@@ -97,9 +97,9 @@
   {
     "code": "BUY_ONE_GET_ONE_HALf",
     "type": "BogoHalf",
-    "products": [
-      ".com"
-    ],
+    "products": {
+      ".com": []
+    },
     "config": {
       "addon": ".com"
     },
