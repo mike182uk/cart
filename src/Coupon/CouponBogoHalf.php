@@ -24,5 +24,4 @@ class CouponBogoHalf implements CouponInterface
             }
         }
     }
-
 }

@@ -14,7 +14,7 @@ class CouponFreeAddon implements CouponInterface
 
         $found = false;
 
-        foreach ($cart as &$item) {
+        foreach ($cart as $item) {
             if ($found == false && array_key_exists($item->getProductId(), $products)) {
                 $found = true;
                 break;
@@ -29,7 +29,6 @@ class CouponFreeAddon implements CouponInterface
                     if (($key = array_search($item->getProductId(), $addons)) !== false) {
                         unset($addons[$key]);
                     }
-
                 }
             }
         }

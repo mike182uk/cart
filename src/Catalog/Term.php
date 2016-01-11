@@ -12,7 +12,7 @@ class Term implements Arrayable
 
     public $trial = -1;
 
-    public $old = 0.00;
+    public $old = -1;
 
     /**
      * Term constructor.

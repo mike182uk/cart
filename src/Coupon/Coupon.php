@@ -3,7 +3,6 @@
 namespace Cart\Coupon;
 
 use Cart\Arrayable;
-
 use Cart\Cart;
 
 class Coupon implements Arrayable
@@ -118,8 +117,7 @@ class Coupon implements Arrayable
         ];
         if (in_array($this->type, $types)) {
             $type = $this->type;
-        }
-        else {
+        } else {
             $type = $types[0];
         }
 

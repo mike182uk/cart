@@ -15,7 +15,7 @@ class CouponSecondFree implements CouponInterface
 
         $eligibleItems = [];
 
-        foreach ($cart as &$item) {
+        foreach ($cart as $item) {
             if (array_key_exists($item->getProductId(), $products)) {
                 $found                = true;
                 $hash                 = $this->getHash($item);
@@ -40,5 +40,4 @@ class CouponSecondFree implements CouponInterface
     {
         return md5($item->getProductId() . "+" . $item->getTerm()->getPeriod());
     }
-
 }

@@ -56,7 +56,7 @@ class CouponCollection implements Arrayable, \IteratorAggregate, \JsonSerializab
         return new \ArrayIterator($this->coupons);
     }
 
-    function jsonSerialize()
+    public function jsonSerialize()
     {
         return $this->toArray();
     }
