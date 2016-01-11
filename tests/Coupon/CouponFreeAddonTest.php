@@ -145,8 +145,59 @@ class CartCouponFreeAddonTest extends PHPUnit_Framework_TestCase
         $coupon->calculateDiscount($cart);
 
         $items = $cart->all();
-        $this->assertEquals(0, $items[0]->getDiscount());
-        $this->assertEquals(12.99, $items[1]->getDiscount());
+        $this->assertEquals(12.99, $items[0]->getDiscount());
+        $this->assertEquals(0, $items[1]->getDiscount());
+        $this->assertEquals(0, $items[2]->getDiscount());
+    }
+
+
+
+    /**
+     * @group coupon
+     */
+    public function testCartCouponFreeAddonAddedFirst()
+    {
+        $term = new Term(1);
+        $term->trial = -1;
+        $term->old = 14.99;
+        $term->price = 12.99;
+
+        $product = new ProductDomain();
+        $product->id = '.com';
+        $product->title = '.com Registration';
+        $product->billing->addTerm($term);
+
+        $hosting = new ProductSharedHosting();
+        $hosting->id = 23;
+        $hosting->title = 'Premium';
+        $hosting->billing->addTerm($term);
+
+
+        $catalog = $this->getCatalog();
+
+        $item = $catalog->getCartItem($product, array(
+            'domain' => 'example.com',
+        ));
+
+        $item_2 = $catalog->getCartItem($hosting);
+
+        $item_3 = $catalog->getCartItem($product, array(
+            'domain' => 'example-3.com',
+        ));
+
+        $coupons = $this->getCouponsCollection();
+        $coupon = $coupons->getCoupon('BUY_HOSTING_GET_DOMAIN_FREE');
+
+        $cart = $this->getCart();
+        $cart->add($item);
+        $cart->add($item_2);
+        $cart->add($item_3);
+        $coupon->calculateDiscount($cart);
+
+        $items = $cart->all();
+
+        $this->assertEquals(12.99, $items[0]->getDiscount());
+        $this->assertEquals(0, $items[1]->getDiscount());
         $this->assertEquals(0, $items[2]->getDiscount());
     }
 

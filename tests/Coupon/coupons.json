@@ -116,5 +116,17 @@
     },
     "valid_from": null,
     "valid_until": null
+  },
+  {
+    "code": "BUY_HOSTING_GET_DOMAIN_FREE",
+    "type": "FreeAddon",
+    "products": {
+      "23": []
+    },
+    "config": {
+      "addon": ".com"
+    },
+    "valid_from": null,
+    "valid_until": null
   }
 ]
