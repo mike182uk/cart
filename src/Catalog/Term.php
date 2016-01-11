@@ -36,6 +36,11 @@ class Term implements Arrayable
         return $this->price * $this->period;
     }
 
+    public function getPeriod()
+    {
+        return $this->period;
+    }
+
     public function getSave()
     {
         $price = $this->price;

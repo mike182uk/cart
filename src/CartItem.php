@@ -102,6 +102,11 @@ class CartItem implements \ArrayAccess, Arrayable
         return $this->data['product']->billing->terms;
     }
 
+    public function getTerm()
+    {
+        return $this->data['term'];
+    }
+
     public function getClass()
     {
         return strtolower(str_replace('Cart\CartItem', '', get_class($this)));
