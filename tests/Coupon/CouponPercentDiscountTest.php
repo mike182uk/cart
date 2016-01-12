@@ -18,9 +18,8 @@ class CouponPercentDiscountTest extends CartTestCase
     public function testCartCouponPercent()
     {
         $term        = new Term(1);
-        $term->trial = -1;
-        $term->old   = 12;
-        $term->price = 10;
+        $term->setOld(12);
+        $term->setPrice(10);
 
         $product        = new ProductSharedHosting();
         $product->setId(21);
@@ -43,6 +42,4 @@ class CouponPercentDiscountTest extends CartTestCase
         $items = $cart->all();
         $this->assertEquals(2.5, $items[0]->getDiscount());
     }
-
-
 }

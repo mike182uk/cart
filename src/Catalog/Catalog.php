@@ -25,9 +25,9 @@ class Catalog implements Arrayable, \IteratorAggregate, \JsonSerializable
             $billing = new Billing();
             foreach ($p['billing'] as $t) {
                 $term = new Term($t['period']);
-                $term->old = $t['old'];
-                $term->trial = $t['trial'];
-                $term->price = $t['price'];
+                $term->setOld($t['old']);
+                $term->setTrial($t['trial']);
+                $term->setPrice($t['price']);
                 $billing->addTerm($term);
             }
 

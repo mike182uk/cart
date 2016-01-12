@@ -18,9 +18,8 @@ class CartCouponSecondFreeTest extends CartTestCase
     public function testCartCouponSecondFreeMultiple()
     {
         $term        = new Term(1);
-        $term->trial = -1;
-        $term->old   = 14.99;
-        $term->price = 12.99;
+        $term->setOld(14.99);
+        $term->setPrice(12.99);
 
         $product        = new ProductDomain();
         $product->setId('.com');
@@ -78,14 +77,12 @@ class CartCouponSecondFreeTest extends CartTestCase
     public function testCartCouponSecondFreeMultipleTerm()
     {
         $term        = new Term(1);
-        $term->trial = -1;
-        $term->old   = 14.99;
-        $term->price = 12.99;
+        $term->setOld(14.99);
+        $term->setPrice(12.99);
 
         $term2        = new Term(6);
-        $term2->trial = -1;
-        $term2->old   = 14.99;
-        $term2->price = 12.99;
+        $term2->setOld(14.99);
+        $term2->setPrice(12.99);
 
         $product        = new ProductDomain();
         $product->setId('.com');
@@ -147,9 +144,8 @@ class CartCouponSecondFreeTest extends CartTestCase
     public function testCartCouponFreeAddonSingle()
     {
         $term        = new Term(1);
-        $term->trial = -1;
-        $term->old   = 14.99;
-        $term->price = 12.99;
+        $term->setOld(14.99);
+        $term->setPrice(12.99);
 
         $product        = new ProductDomain();
         $product->setId('.com');
@@ -172,7 +168,6 @@ class CartCouponSecondFreeTest extends CartTestCase
 
         $items = $cart->all();
         $this->assertEquals(0, $items[0]->getDiscount());
-
     }
 
     /**
@@ -181,9 +176,8 @@ class CartCouponSecondFreeTest extends CartTestCase
     public function testCartCouponBogoHalf()
     {
         $term        = new Term(1);
-        $term->trial = -1;
-        $term->old   = 12.00;
-        $term->price = 12.00;
+        $term->setOld(12.00);
+        $term->setPrice(12.00);
 
         $product        = new ProductDomain();
         $product->setId('.com');
@@ -216,5 +210,4 @@ class CartCouponSecondFreeTest extends CartTestCase
         $this->assertEquals(6, $items[1]->getDiscount());
         $this->assertEquals(0, $items[2]->getDiscount());
     }
-
 }

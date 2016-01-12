@@ -91,7 +91,6 @@ class CartItem implements \ArrayAccess, Arrayable
 
     public function getSave()
     {
-
         $old   = $this->getTerm()->getOld();
         $price = $this->getTerm()->getPrice();
 
@@ -111,7 +110,7 @@ class CartItem implements \ArrayAccess, Arrayable
 
     public function getSavePercent()
     {
-        if ($this->getSave() != 0){
+        if ($this->getSave() != 0) {
             $old   = $this->getTerm()->getOld();
             $oldForPeriod = $old * $this->getTerm()->getPeriod();
 

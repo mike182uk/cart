@@ -17,15 +17,14 @@ class CartCouponFreeAddonTest extends CartTestCase
     public function testCartCouponFreeAddonAddedFirst()
     {
         $term        = new Term(1);
-        $term->trial = -1;
-        $term->old   = 14.99;
-        $term->price = 12.99;
+        $term->setOld(14.99);
+        $term->setPrice(12.99);
 
 
         $term_ssl        = new Term(1);
-        $term_ssl->trial = 15;
-        $term_ssl->old   = 0;
-        $term_ssl->price = 49.00;
+        $term_ssl->setTrial(15);
+        $term_ssl->setOld(0);
+        $term_ssl->setPrice(49.00);
 
         $product        = new ProductDomain();
         $product->setId('.com');

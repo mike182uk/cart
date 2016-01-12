@@ -17,21 +17,22 @@ class CouponBogoHalfTest extends CartTestCase
      */
     public function testCartCouponBogoHalf()
     {
-        $term        = new Term(1);
-        $term->trial = -1;
-        $term->old   = 12.00;
-        $term->price = 12.00;
+        $term = new Term(1);
+        $term->setOld(12.00);
+        $term->setPrice(12.00);
 
-        $product        = new ProductDomain();
+        $product = new ProductDomain();
         $product->setId('.com');
         $product->setTitle('.com Registration');
         $product->getBilling()->addTerm($term);
 
         $catalog = $this->getCatalog();
+        $catalog->addProduct($product);
 
-        $item   = $catalog->getCartItem($product, [
+        $item = $catalog->getCartItem($product, [
             'domain' => 'example.com',
         ]);
+
         $item_2 = $catalog->getCartItem($product, [
             'domain' => 'example-2.com',
         ]);
@@ -39,13 +40,13 @@ class CouponBogoHalfTest extends CartTestCase
             'domain' => 'example-3.com',
         ]);
 
-        $coupons = $this->getCouponsCollection();
-        $coupon  = $coupons->getCoupon('BUY_ONE_GET_ONE_HALF');
-
         $cart = $this->getCart();
         $cart->add($item);
         $cart->add($item_2);
         $cart->add($item_3);
+
+        $coupons = $this->getCouponsCollection();
+        $coupon = $coupons->getCoupon('BUY_ONE_GET_ONE_HALF');
         $coupon->calculateDiscount($cart);
 
         $items = $cart->all();
@@ -53,5 +54,4 @@ class CouponBogoHalfTest extends CartTestCase
         $this->assertEquals(6, $items[1]->getDiscount());
         $this->assertEquals(0, $items[2]->getDiscount());
     }
-
 }

@@ -6,13 +6,13 @@ use Cart\Arrayable;
 
 class Term implements Arrayable
 {
-    public $period = 1;
+    protected $period = 1;
 
-    public $price = 0.00;
+    protected $price = 0.00;
 
-    public $trial = -1;
+    protected $trial = -1;
 
-    public $old = -1;
+    protected $old = -1;
 
     /**
      * Term constructor.
@@ -41,14 +41,29 @@ class Term implements Arrayable
         return $this->period;
     }
 
+    public function setOld($old)
+    {
+        $this->old = $old;
+    }
+
     public function getOld()
     {
         return $this->old;
     }
 
+    public function setTrial($trial)
+    {
+        $this->trial = $trial;
+    }
+
     public function getTrial()
     {
         return $this->trial;
+    }
+
+    public function setPrice($price)
+    {
+        $this->price = $price;
     }
 
     public function getPrice()

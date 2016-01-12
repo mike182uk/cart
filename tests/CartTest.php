@@ -23,8 +23,7 @@ class CartTest extends PHPUnit_Framework_TestCase
         // test adding a new item
         $cart->add($item);
 
-        foreach($cart as $item)
-        {
+        foreach ($cart as $item) {
             $this->assertInstanceOf('Cart\\CartItem', $item);
         }
     }

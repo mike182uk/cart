@@ -18,9 +18,7 @@ class CouponOverAmountTest extends CartTestCase
     public function testCartOverAmountCouppon()
     {
         $term        = new Term(1);
-        $term->trial = -1;
-        $term->old   = 12;
-        $term->price = 100;
+        $term->setPrice(100);
 
         $product        = new ProductSharedHosting();
         $product->setTitle('Silver');
@@ -40,5 +38,4 @@ class CouponOverAmountTest extends CartTestCase
 
         $this->assertEquals(15, $cart->getDiscount());
     }
-
 }

@@ -274,5 +274,4 @@ class CartItemTest extends CartTestCase
         $this->assertEquals($price - $discount, $item->getPriceWithDiscount());
         $this->assertEquals($savePercent, $item->getSavePercent(), 'percent is bad');
     }
-
 }

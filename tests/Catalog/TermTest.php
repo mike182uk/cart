@@ -13,7 +13,6 @@ class TermTest extends PHPUnit_Framework_TestCase
     public function testString()
     {
         $term = new Term('1');
-        $this->assertEquals(1, $term->period);
+        $this->assertEquals(1, $term->getPeriod());
     }
-
 }

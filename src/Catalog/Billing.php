@@ -24,7 +24,7 @@ class Billing implements Arrayable, \IteratorAggregate
 
     public function addTerm(Term $term)
     {
-        $this->terms[$term->period] = $term;
+        $this->terms[$term->getPeriod()] = $term;
     }
 
     public function getRandomTerm()
@@ -37,7 +37,7 @@ class Billing implements Arrayable, \IteratorAggregate
 
     public function getPriceForTerm(Term $term)
     {
-        return $this->getTerm($term->period)->getTotalPrice();
+        return $this->getTerm($term->getPeriod())->getTotalPrice();
     }
 
     public function toArray()

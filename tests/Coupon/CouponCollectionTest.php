@@ -26,7 +26,7 @@ class CouponCollectionTest extends PHPUnit_Framework_TestCase
     {
         $cart = $this->getCart();
         $coupons = $this->getCouponsCollection();
-        foreach($coupons as $coupon) {
+        foreach ($coupons as $coupon) {
             $coupon->calculateDiscount($cart);
         }
     }
