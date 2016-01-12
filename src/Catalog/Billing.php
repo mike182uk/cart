@@ -22,6 +22,11 @@ class Billing implements Arrayable, \IteratorAggregate
         return $this->terms[$period];
     }
 
+    public function getTerms()
+    {
+        return $this->terms;
+    }
+
     public function addTerm(Term $term)
     {
         $this->terms[$term->getPeriod()] = $term;

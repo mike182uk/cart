@@ -122,7 +122,7 @@ class CartItem implements \ArrayAccess, Arrayable
 
     public function getTerms()
     {
-        return $this->data['product']->billing->terms;
+        return $this->data['product']->getBilling()->getTerms();
     }
 
     /**

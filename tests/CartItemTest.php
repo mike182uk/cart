@@ -268,6 +268,7 @@ class CartItemTest extends CartTestCase
 
         $item->setDiscount($discount);
 
+        $this->assertInternalType('array', $item->getTerms());
         $this->assertEquals($save, $item->getSave(), 'save is bad');
         $this->assertEquals($price, $item->getPrice());
         $this->assertEquals($item->getPrice() - $item->getDiscount(), $item->getPriceWithDiscount());
