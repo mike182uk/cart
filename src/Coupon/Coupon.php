@@ -7,7 +7,7 @@ use Cart\Cart;
 
 class Coupon implements Arrayable
 {
-    private $code;
+    private $code = "";
 
     private $products = array();
 
@@ -18,6 +18,15 @@ class Coupon implements Arrayable
     private $validFrom = null;
 
     private $validUntil = null;
+
+    /**
+     * Coupon constructor.
+     * @param string $code
+     */
+    public function __construct($code = "")
+    {
+        $this->code = $code;
+    }
 
     /**
      * @param string $type
@@ -157,5 +166,10 @@ class Coupon implements Arrayable
         }
 
         return (bool)(strtotime($this->validFrom) < $time && $time < strtotime($this->validUntil));
+    }
+
+    public function __toString()
+    {
+        return $this->code;
     }
 }

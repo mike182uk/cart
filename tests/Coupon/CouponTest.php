@@ -71,4 +71,10 @@ class CouponTest extends CartTestCase
         $this->assertInternalType('boolean', $coupon->isActive());
         $this->assertEquals($expected, $coupon->isActive());
     }
+
+    public function testToString()
+    {
+        $coupon = new Coupon('FRIDAY');
+        $this->assertEquals('FRIDAY', $coupon->__toString());
+    }
 }
