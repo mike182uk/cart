@@ -14,7 +14,11 @@ class CouponAmountDiscount implements CouponInterface
 
         foreach ($cart as &$item) {
             if (empty($products) || in_array($item->getProductId(), $products)) {
-                $item->setDiscount($amount);
+                if($amount > $item->getPrice()) {
+                    $item->setDiscount($item->getPrice());
+                } else {
+                    $item->setDiscount($amount);
+                }
             }
         }
     }
