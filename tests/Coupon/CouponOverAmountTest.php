@@ -23,8 +23,8 @@ class CouponOverAmountTest extends CartTestCase
         $term->price = 100;
 
         $product        = new ProductSharedHosting();
-        $product->title = 'Silver';
-        $product->billing->addTerm($term);
+        $product->setTitle('Silver');
+        $product->getBilling()->addTerm($term);
 
         $catalog = $this->getCatalog();
         $item    = $catalog->getCartItem($product, [

@@ -32,10 +32,10 @@ class Catalog implements Arrayable, \IteratorAggregate, \JsonSerializable
             }
 
             $product = new $p['__class'];
-            $product->id = $p['id'];
-            $product->title = $p['title'];
-            $product->description = $p['description'];
-            $product->billing = $billing;
+            $product->setId($p['id']);
+            $product->setTitle($p['title']);
+            $product->setDescription($p['description']);
+            $product->setBilling($billing);
             $this->addProduct($product);
         }
     }

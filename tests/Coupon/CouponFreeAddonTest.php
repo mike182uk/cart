@@ -28,20 +28,20 @@ class CartCouponFreeAddonTest extends CartTestCase
         $term_ssl->price = 49.00;
 
         $product        = new ProductDomain();
-        $product->id    = '.com';
-        $product->title = '.com Registration';
-        $product->billing->addTerm($term);
+        $product->setId('.com');
+        $product->setTitle('.com Registration');
+        $product->getBilling()->addTerm($term);
 
         $hosting        = new ProductSharedHosting();
-        $hosting->id    = 24;
-        $hosting->title = 'Premium';
-        $hosting->billing->addTerm($term);
+        $hosting->setId(24);
+        $hosting->setTitle('Premium');
+        $hosting->getBilling()->addTerm($term);
 
 
         $ssl        = new ProductSsl();
-        $ssl->id    = 21;
-        $ssl->title = 'SSL Certificate';
-        $ssl->billing->addTerm($term_ssl);
+        $ssl->setId(21);
+        $ssl->setTitle('SSL Certificate');
+        $ssl->getBilling()->addTerm($term_ssl);
 
         $catalog = $this->getCatalog();
 

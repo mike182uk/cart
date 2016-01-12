@@ -23,9 +23,9 @@ class CartCouponSecondFreeTest extends CartTestCase
         $term->price = 12.99;
 
         $product        = new ProductDomain();
-        $product->id    = '.com';
-        $product->title = '.com Registration';
-        $product->billing->addTerm($term);
+        $product->setId('.com');
+        $product->setTitle('.com Registration');
+        $product->getBilling()->addTerm($term);
 
         $catalog = $this->getCatalog();
 
@@ -88,15 +88,15 @@ class CartCouponSecondFreeTest extends CartTestCase
         $term2->price = 12.99;
 
         $product        = new ProductDomain();
-        $product->id    = '.com';
-        $product->title = '.com Registration';
-        $product->billing->addTerm($term);
+        $product->setId('.com');
+        $product->setTitle('.com Registration');
+        $product->getBilling()->addTerm($term);
 
 
         $product2        = new ProductDomain();
-        $product2->id    = '.com';
-        $product2->title = '.com Registration';
-        $product2->billing->addTerm($term2);
+        $product2->setId('.com');
+        $product2->setTitle('.com Registration');
+        $product2->getBilling()->addTerm($term2);
 
         $catalog = $this->getCatalog();
 
@@ -152,9 +152,9 @@ class CartCouponSecondFreeTest extends CartTestCase
         $term->price = 12.99;
 
         $product        = new ProductDomain();
-        $product->id    = '.com';
-        $product->title = '.com Registration';
-        $product->billing->addTerm($term);
+        $product->setId('.com');
+        $product->setTitle('.com Registration');
+        $product->getBilling()->addTerm($term);
 
         $catalog = $this->getCatalog();
 
@@ -186,9 +186,9 @@ class CartCouponSecondFreeTest extends CartTestCase
         $term->price = 12.00;
 
         $product        = new ProductDomain();
-        $product->id    = '.com';
-        $product->title = '.com Registration';
-        $product->billing->addTerm($term);
+        $product->setId('.com');
+        $product->setTitle('.com Registration');
+        $product->getBilling()->addTerm($term);
 
         $catalog = $this->getCatalog();
 

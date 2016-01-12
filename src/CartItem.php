@@ -76,17 +76,17 @@ class CartItem implements \ArrayAccess, Arrayable
 
     public function getProductId()
     {
-        return $this->data['product']->id;
+        return $this->data['product']->getId();
     }
 
     public function getTitle()
     {
-        return $this->data['product']->title;
+        return $this->data['product']->getTitle();
     }
 
     public function getDescription()
     {
-        return $this->data['product']->description;
+        return $this->data['product']->getDescription();
     }
 
     public function getSave()

@@ -23,9 +23,9 @@ class CouponBogoHalfTest extends CartTestCase
         $term->price = 12.00;
 
         $product        = new ProductDomain();
-        $product->id    = '.com';
-        $product->title = '.com Registration';
-        $product->billing->addTerm($term);
+        $product->setId('.com');
+        $product->setTitle('.com Registration');
+        $product->getBilling()->addTerm($term);
 
         $catalog = $this->getCatalog();
 

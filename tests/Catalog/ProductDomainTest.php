@@ -13,9 +13,9 @@ class ProductDomainTest extends PHPUnit_Framework_TestCase
     public function testIsArrayable()
     {
         $p = new ProductDomain();
-        $p->id = 1;
-        $p->title = 'Domain registration';
-        $p->description = 'Domain registration';
+        $p->setId(1);
+        $p->setTitle('Domain registration');
+        $p->setDescription('Domain registration');
 
         $this->assertInternalType('array', $p->toArray());
     }

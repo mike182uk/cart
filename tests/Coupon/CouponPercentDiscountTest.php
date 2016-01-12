@@ -23,9 +23,9 @@ class CouponPercentDiscountTest extends CartTestCase
         $term->price = 10;
 
         $product        = new ProductSharedHosting();
-        $product->id    = 21;
-        $product->title = 'Silver';
-        $product->billing->addTerm($term);
+        $product->setId(21);
+        $product->setTitle('Silver');
+        $product->getBilling()->addTerm($term);
 
         $catalog = $this->getCatalog();
 

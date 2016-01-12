@@ -6,13 +6,13 @@ use Cart\Arrayable;
 
 class Product implements Arrayable
 {
-    public $id;
+    protected $id;
 
-    public $title;
+    protected $title;
 
-    public $description;
+    protected $description;
 
-    public $billing;
+    protected $billing;
 
     protected $group = Group::HOSTING;
 
@@ -23,9 +23,44 @@ class Product implements Arrayable
         $this->billing = new Billing();
     }
 
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
     public function getId()
     {
         return $this->id;
+    }
+
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    public function setBilling(Billing $billing)
+    {
+        $this->billing = $billing;
+    }
+
+    public function getBilling()
+    {
+        return $this->billing;
     }
 
     public function getGroup()

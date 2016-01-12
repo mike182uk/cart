@@ -47,22 +47,22 @@ class CatalogTest extends PHPUnit_Framework_TestCase
     {
         $term = new Term(1);
         $product = new Product();
-        $product->billing->addTerm($term);
+        $product->getBilling()->addTerm($term);
 
         $productDomain = new ProductDomain();
-        $productDomain->billing->addTerm($term);
+        $productDomain->getBilling()->addTerm($term);
 
         $productSharedHosting = new ProductSharedHosting();
-        $productSharedHosting->billing->addTerm($term);
+        $productSharedHosting->getBilling()->addTerm($term);
 
         $productCpanelHosting = new ProductCpanelHosting();
-        $productCpanelHosting->billing->addTerm($term);
+        $productCpanelHosting->getBilling()->addTerm($term);
 
         $productVps = new ProductVps();
-        $productVps->billing->addTerm($term);
+        $productVps->getBilling()->addTerm($term);
 
         $productSsl = new ProductSsl();
-        $productSsl->billing->addTerm($term);
+        $productSsl->getBilling()->addTerm($term);
 
         $catalog = new Catalog();
 
