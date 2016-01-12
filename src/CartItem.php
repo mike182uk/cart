@@ -146,7 +146,7 @@ class CartItem implements \ArrayAccess, Arrayable
     public function getId()
     {
         // keys to ignore in the hashing process
-        $ignoreKeys = array('quantity');
+        $ignoreKeys = array('quantity', 'discount');
 
         // data to use for the hashing process
         $hashData = $this->data;
