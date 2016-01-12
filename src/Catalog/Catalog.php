@@ -3,6 +3,7 @@
 namespace Cart\Catalog;
 
 use Cart\Arrayable;
+use Cart\CartItem;
 
 class Catalog implements Arrayable, \IteratorAggregate, \JsonSerializable
 {
@@ -47,6 +48,11 @@ class Catalog implements Arrayable, \IteratorAggregate, \JsonSerializable
         return $this->products[$id];
     }
 
+    /**
+     * @param Product $product
+     * @param array $data
+     * @return CartItem
+     */
     public function getCartItem(Product $product, $data = array())
     {
         $type = str_replace('Cart\Catalog\Product', '', get_class($product));

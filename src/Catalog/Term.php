@@ -41,32 +41,19 @@ class Term implements Arrayable
         return $this->period;
     }
 
-    public function getSave()
+    public function getOld()
     {
-        $price = $this->price;
-        $old = $this->old;
-        if ($this->hasTrial()) {
-            return $this->price - $this->trial;
-        }
-        if ($old > $price) {
-            return ($old - $price) * $this->period;
-        }
-        return 0;
+        return $this->old;
     }
 
-    public function getSavePercent()
+    public function getTrial()
     {
-        if ($this->hasTrial()) {
-            $price = $this->getTotalPrice();
-            $old = $this->price * $this->period;
-            return 100 - ($price * 100 / $old) ;
-        }
-        if ($this->getSave() != 0) {
-            $price = $this->price;
-            $old = $this->old;
-            return ($old - $price) / $price * 100;
-        }
-        return 0;
+        return $this->trial;
+    }
+
+    public function getPrice()
+    {
+        return $this->price;
     }
 
     public function toArray()

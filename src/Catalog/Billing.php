@@ -40,16 +40,6 @@ class Billing implements Arrayable, \IteratorAggregate
         return $this->getTerm($term->period)->getTotalPrice();
     }
 
-    public function getSaveForTerm(Term $term)
-    {
-        return $this->getTerm($term->period)->getSave();
-    }
-
-    public function getSavePercentForTerm(Term $term)
-    {
-        return $this->getTerm($term->period)->getSavePercent();
-    }
-
     public function toArray()
     {
         return array_map(function (Term $term) {

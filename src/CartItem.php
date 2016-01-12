@@ -2,6 +2,8 @@
 
 namespace Cart;
 
+use Cart\Catalog\Term;
+
 /**
  * @property string $id
  * @property int    $quantity
@@ -89,12 +91,34 @@ class CartItem implements \ArrayAccess, Arrayable
 
     public function getSave()
     {
-        return $this->data['product']->getSaveForTerm($this->data['term']) + $this->getDiscount();
+
+        $old   = $this->getTerm()->getOld();
+        $price = $this->getTerm()->getPrice();
+
+        if ($this->getTerm()->hasTrial()) {
+            $firstYearSave = $this->getTerm()->getOld() - $this->getTerm()->getTrial();
+            $save          = ($old - $price) * ($this->getTerm()->getPeriod() - 1) + $this->getDiscount() + $firstYearSave;
+
+            return $save;
+        }
+
+        if ($old > $price) {
+            return ($old - $price) * $this->getTerm()->getPeriod() + $this->getDiscount();
+        }
+
+        return 0;
     }
 
     public function getSavePercent()
     {
-        return $this->data['product']->getSavePercentForTerm($this->data['term']);
+        if ($this->getSave() != 0){
+            $old   = $this->getTerm()->getOld();
+            $oldForPeriod = $old * $this->getTerm()->getPeriod();
+
+            return ($this->getSave()) * 100 / $oldForPeriod;
+        }
+
+        return 0;
     }
 
     public function getTerms()
@@ -102,6 +126,9 @@ class CartItem implements \ArrayAccess, Arrayable
         return $this->data['product']->billing->terms;
     }
 
+    /**
+     * @return Term
+     */
     public function getTerm()
     {
         return $this->data['term'];
@@ -213,7 +240,7 @@ class CartItem implements \ArrayAccess, Arrayable
      */
     public function getTotalPrice()
     {
-        return (float) ($this->getPrice() + $this->tax) * $this->quantity;
+        return (float) ($this->getPrice() + $this->tax) * $this->quantity - $this->getDiscount();
     }
 
     /**
