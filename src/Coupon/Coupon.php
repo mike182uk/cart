@@ -117,13 +117,16 @@ class Coupon implements Arrayable
         ];
         if (in_array($this->type, $types)) {
             $type = $this->type;
-        } else {
+        }
+        else {
             $type = $types[0];
         }
 
-        $ft   = __NAMESPACE__ . '\\Coupon' . $type;
-        $calc = new $ft($cart);
-        $calc->calculateDiscount($this, $cart);
+        if ($this->isActive()) {
+            $ft   = __NAMESPACE__ . '\\Coupon' . $type;
+            $calc = new $ft($cart);
+            $calc->calculateDiscount($this, $cart);
+        }
     }
 
     public function toArray()
