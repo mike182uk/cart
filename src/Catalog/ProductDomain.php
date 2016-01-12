@@ -12,6 +12,6 @@ class ProductDomain extends Product implements TaxIcannInterface
 
     public function getIcannFee(Term $term)
     {
-        return TaxIcannInterface::ICANN_FEE * $term->period;
+        return TaxIcannInterface::ICANN_FEE * $term->getPeriod();
     }
 }
