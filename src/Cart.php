@@ -217,7 +217,7 @@ class   Cart implements Arrayable, \IteratorAggregate
             array_map(function (CartItem $item) {
                 return $item->getTotalPrice();
             }, $this->items)
-        ) + $this->icann();
+        );
     }
 
     /**

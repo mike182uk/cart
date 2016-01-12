@@ -105,7 +105,7 @@ class CartItem implements \ArrayAccess, Arrayable
             return ($old - $price) * $this->getTerm()->getPeriod() + $this->getDiscount();
         }
 
-        return 0;
+        return $this->getDiscount();
     }
 
     public function getSavePercent()
