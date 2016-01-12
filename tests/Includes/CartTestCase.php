@@ -9,7 +9,7 @@ use Cart\Catalog\ProductSsl;
 use Cart\Catalog\Term;
 use Mockery as m;
 
-abstract class CartCouponTestCase extends PHPUnit_Framework_TestCase
+abstract class CartTestCase extends PHPUnit_Framework_TestCase
 {
     public function tearDown()
     {

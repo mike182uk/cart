@@ -5,7 +5,7 @@ use Cart\Coupon\Coupon;
 use Cart\Coupon\CouponCollection;
 use Mockery as m;
 
-class CouponTest extends CartCouponTestCase
+class CouponTest extends CartTestCase
 {
     public function testIsCouponActiveProvider()
     {

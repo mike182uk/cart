@@ -9,7 +9,7 @@ use Cart\Catalog\ProductSsl;
 use Cart\Catalog\Term;
 use Mockery as m;
 
-class CouponBogoHalfTest extends CartCouponTestCase
+class CouponBogoHalfTest extends CartTestCase
 {
 
     /**

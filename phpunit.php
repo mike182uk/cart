@@ -1,4 +1,4 @@
 <?php
 
 require 'vendor/autoload.php';
-require_once 'tests/includes/CartCouponTestCase.php';
+require_once 'tests/includes/CartTestCase.php';
