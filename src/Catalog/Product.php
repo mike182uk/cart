@@ -88,16 +88,6 @@ class Product implements Arrayable
         return $this->billing->getPriceForTerm($term);
     }
 
-    public function getSaveForTerm(Term $term)
-    {
-        return $this->billing->getSaveForTerm($term);
-    }
-
-    public function getSavePercentForTerm(Term $term)
-    {
-        return $this->billing->getSavePercentForTerm($term);
-    }
-
     public function toArray()
     {
         return array(
