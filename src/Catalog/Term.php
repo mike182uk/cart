@@ -28,6 +28,11 @@ class Term implements Arrayable
         return $this->trial >= 0 && $this->trial != $this->price;
     }
 
+    public function hasOld()
+    {
+        return $this->old > $this->price;
+    }
+
     public function getTotalPrice()
     {
         if ($this->hasTrial()) {
