@@ -40,6 +40,10 @@ class CouponCollection implements Arrayable, \IteratorAggregate, \JsonSerializab
         $this->coupons[] = $coupon;
     }
 
+    /**
+     * @param $code string
+     * @return Coupon
+     */
     public function getCoupon($code)
     {
         foreach ($this->coupons as $item) {

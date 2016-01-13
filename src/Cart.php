@@ -46,6 +46,9 @@ class   Cart implements Arrayable, \IteratorAggregate
         $this->store = $store;
     }
 
+    /**
+     * @return CartItem[] An array of CartItem objects
+     */
     public function getIterator()
     {
         return new \ArrayIterator($this->items);
