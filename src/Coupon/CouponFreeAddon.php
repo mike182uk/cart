@@ -21,7 +21,7 @@ class CouponFreeAddon implements CouponInterface
         }
 
         if ($found) {
-            foreach ($cart->getIterator() as &$item) {
+            foreach ($cart as &$item) {
                 if (array_key_exists($item->getProductId(), $addons) && (empty($addons[$item->getProductId()]) || in_array($item->getTerm()->getPeriod(), $addons[$item->getProductId()]))) {
                     $item->setDiscount($item->getPrice());
                     unset($addons[$item->getProductId()]);
