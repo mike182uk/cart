@@ -252,6 +252,9 @@ class CartItemTest extends CartTestCase
             [
                 27, 37, 37, 50, 100
             ],
+            [
+                21, 0, 0, 49, 100
+            ]
 
 
         ];
