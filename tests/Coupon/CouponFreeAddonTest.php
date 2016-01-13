@@ -16,28 +16,28 @@ class CartCouponFreeAddonTest extends CartTestCase
      */
     public function testCartCouponFreeAddonAddedFirst()
     {
-        $term        = new Term(1);
+        $term = new Term(1);
         $term->setOld(14.99);
         $term->setPrice(12.99);
 
 
-        $term_ssl        = new Term(1);
+        $term_ssl = new Term(1);
         $term_ssl->setTrial(15);
         $term_ssl->setOld(0);
         $term_ssl->setPrice(49.00);
 
-        $product        = new ProductDomain();
+        $product = new ProductDomain();
         $product->setId('.com');
         $product->setTitle('.com Registration');
         $product->getBilling()->addTerm($term);
 
-        $hosting        = new ProductSharedHosting();
+        $hosting = new ProductSharedHosting();
         $hosting->setId(24);
         $hosting->setTitle('Premium');
         $hosting->getBilling()->addTerm($term);
 
 
-        $ssl        = new ProductSsl();
+        $ssl = new ProductSsl();
         $ssl->setId(21);
         $ssl->setTitle('SSL Certificate');
         $ssl->getBilling()->addTerm($term_ssl);

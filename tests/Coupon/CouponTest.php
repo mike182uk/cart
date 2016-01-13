@@ -1,8 +1,11 @@
 <?php
 
 use Cart\Cart;
+use Cart\Catalog\Term;
 use Cart\Coupon\Coupon;
 use Cart\Coupon\CouponCollection;
+use Cart\Catalog\ProductDomain;
+use Cart\Catalog\Catalog;
 use Mockery as m;
 
 class CouponTest extends CartTestCase
@@ -76,5 +79,76 @@ class CouponTest extends CartTestCase
     {
         $coupon = new Coupon('FRIDAY');
         $this->assertEquals('FRIDAY', $coupon->__toString());
+    }
+
+    public function testApplicableProvider()
+    {
+        return
+            [
+                [
+                    1,
+                    [24 => [1, 2]],
+                    true //Period is in defined periods for product
+                ],
+
+                [
+                    1,
+                    [25 => [1, 2]],
+                    false //Period is in defined periods but it should apply to another product
+                ],
+
+                [
+                    3,
+                    [24 => [1, 2]],
+                    false //Period is NOT in defined periods for product
+                ],
+                [
+                    3,
+                    [24 => []],
+                    true  //No defined periods set, all of them should be valid
+                ],
+                [
+                    3,
+                    [24 => []],
+                    true  //No defined periods set, all of them should be valid
+                ],
+                [
+                    3,
+                    [],
+                    true  //No periods and products are set, coupon should apply to everything
+                ],
+
+            ];
+    }
+
+    /**
+     * @dataProvider testApplicableProvider
+     * @group coupon
+     */
+    public function testApplicable($period, $products, $applied)
+    {
+        $term = new Term($period);
+        $term->setPrice(12.00);
+
+        $product = new \Cart\Catalog\Product();
+        $product->setId(24);
+        $product->setTitle('.com Registration');
+        $product->getBilling()->addTerm($term);
+
+        $catalog = new Catalog();
+        $item    = $catalog->getCartItem($product);
+
+        $cart = $this->getCart();
+        $cart->add($item);
+
+        $total = $cart->total();
+
+        $coupon = new Coupon('COUPON');
+        $coupon->setProducts($products);
+        $coupon->setType('PercentDiscount');
+        $coupon->setConfig(['percent' => 50]);
+        $coupon->calculateDiscount($cart);
+
+        $this->assertEquals($total != $cart->total(), $applied);
     }
 }
