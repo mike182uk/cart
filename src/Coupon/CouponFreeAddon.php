@@ -11,8 +11,7 @@ class CouponFreeAddon implements CouponInterface
         $products = $coupon->getProducts();
         $config   = $coupon->getConfig();
         $addons   = $config['addon'];
-
-        $found = false;
+        $found    = false;
 
         foreach ($cart as $item) {
             if ($found == false && array_key_exists($item->getProductId(), $products)) {
@@ -22,13 +21,10 @@ class CouponFreeAddon implements CouponInterface
         }
 
         if ($found) {
-            foreach ($cart as &$item) {
-                if (in_array($item->getProductId(), $addons)) {
+            foreach ($cart->getIterator() as &$item) {
+                if (array_key_exists($item->getProductId(), $addons) && (empty($addons[$item->getProductId()]) || in_array($item->getTerm()->getPeriod(), $addons[$item->getProductId()]))) {
                     $item->setDiscount($item->getPrice());
-
-                    if (($key = array_search($item->getProductId(), $addons)) !== false) {
-                        unset($addons[$key]);
-                    }
+                    unset($addons[$item->getProductId()]);
                 }
             }
         }

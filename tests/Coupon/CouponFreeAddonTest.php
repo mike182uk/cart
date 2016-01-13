@@ -11,17 +11,28 @@ use Mockery as m;
 
 class CartCouponFreeAddonTest extends CartTestCase
 {
+    public function testCartCouponFreeAddonAddedFirstProvicer()
+    {
+        return [
+            [1, 2, true, false],
+            [2, 2, false, false],
+            [2, 1, false, true],
+            [1, 1, true, true],
+        ];
+    }
+
     /**
+     * @dataProvider testCartCouponFreeAddonAddedFirstProvicer
      * @group coupon
      */
-    public function testCartCouponFreeAddonAddedFirst()
+    public function testCartCouponFreeAddonAddedFirst($termDomain, $termSSL, $isDomainFree, $isSSLFree)
     {
-        $term = new Term(1);
+        $term = new Term($termDomain);
         $term->setOld(14.99);
         $term->setPrice(12.99);
 
 
-        $term_ssl = new Term(1);
+        $term_ssl = new Term($termSSL);
         $term_ssl->setTrial(15);
         $term_ssl->setOld(0);
         $term_ssl->setPrice(49.00);
@@ -68,9 +79,12 @@ class CartCouponFreeAddonTest extends CartTestCase
 
         $items = $cart->all();
 
-        $this->assertEquals(12.99, $items[0]->getDiscount());
+        $expectedDomainDiscount = $isDomainFree ? $items[0]->getPrice() : 0;
+        $expectedSSLDiscount    = $isSSLFree ? $items[3]->getPrice() : 0;
+
+        $this->assertEquals($expectedDomainDiscount, $items[0]->getDiscount());
         $this->assertEquals(0, $items[1]->getDiscount());
         $this->assertEquals(0, $items[2]->getDiscount());
-        $this->assertEquals(15, $items[3]->getDiscount());
+        $this->assertEquals($expectedSSLDiscount, $items[3]->getDiscount());
     }
 }

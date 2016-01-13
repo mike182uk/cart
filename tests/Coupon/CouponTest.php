@@ -132,7 +132,6 @@ class CouponTest extends CartTestCase
 
         $product = new \Cart\Catalog\Product();
         $product->setId(24);
-        $product->setTitle('.com Registration');
         $product->getBilling()->addTerm($term);
 
         $catalog = new Catalog();

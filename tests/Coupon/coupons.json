@@ -133,10 +133,14 @@
       "24": []
     },
     "config": {
-      "addon": [
-        ".com",
-        "21"
-      ]
+      "addon": {
+        ".com": [
+          1
+        ],
+        "21": [
+          1
+        ]
+      }
     },
     "valid_from": null,
     "valid_until": null
