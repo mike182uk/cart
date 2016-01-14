@@ -127,6 +127,7 @@ class Coupon implements Arrayable
             'BogoHalf',
             'OverAmount',
             'SecondFree',
+            'FixedPrice'
         ];
         if (in_array($this->type, $types)) {
             $type = $this->type;

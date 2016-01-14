@@ -144,5 +144,15 @@
     },
     "valid_from": null,
     "valid_until": null
+  },
+  {
+    "code": "5_DOLLAR_SALE",
+    "type": "FixedPrice",
+    "products": [],
+    "config": {
+      "price": 5
+    },
+    "valid_from": "",
+    "valid_until": ""
   }
 ]
