@@ -3,11 +3,12 @@
 namespace Cart\Storage;
 
 /**
- * @deprecated use memcached at all times
- * Class MemcacheStore
+ * Use MemcachedStore instead of MemcacheStore in all cases
+ *
+ * Class MemcachedStore
  * @package Cart\Storage
  */
-class MemcacheStore implements Store
+class MemcachedStore implements Store
 {
     /**
      * @var $memcache \Memcache
@@ -16,8 +17,8 @@ class MemcacheStore implements Store
 
     public function __construct($host, $port)
     {
-        $memcache_obj = new \Memcache;
-        $memcache_obj->connect($host, $port);
+        $memcache_obj = new \Memcached;
+        $memcache_obj->addServer($host, $port);
         $this->memcache = $memcache_obj;
     }
 
