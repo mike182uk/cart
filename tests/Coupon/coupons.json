@@ -154,5 +154,19 @@
     },
     "valid_from": "",
     "valid_until": ""
+  },
+  {
+    "code": "1_DOLLAR_HOSTING",
+    "type": "FixedPrice",
+    "products": {
+      "21": [
+        12
+      ]
+    },
+    "config": {
+      "price": 1
+    },
+    "valid_from": "",
+    "valid_until": ""
   }
 ]

@@ -116,7 +116,7 @@ class Coupon implements Arrayable
 
     public function calculateDiscount(Cart $cart)
     {
-        if (!$this->isActive() || !$this->isApplicable($cart)) {
+        if (!$this->isActive()) {
             return;
         }
 
@@ -170,25 +170,6 @@ class Coupon implements Arrayable
         }
 
         return (bool)(strtotime($this->validFrom) < $time && $time < strtotime($this->validUntil));
-    }
-
-    private function isApplicable(Cart $cart)
-    {
-        $applicable = false;
-        $products   = $this->getProducts();
-        if (empty($products)) {
-            return true;
-        }
-        foreach ($cart as $item) {
-            if (array_key_exists($item->getProductId(), $products)) {
-                $couponProductPeriods = $products[$item->getProductId()];
-                if (empty($couponProductPeriods) || in_array($item->getTerm()->getPeriod(), $couponProductPeriods)) {
-                    $applicable = true;
-                }
-            }
-        }
-
-        return $applicable;
     }
 
     public function __toString()

@@ -55,13 +55,13 @@ class CartCouponFreeAddonTest extends CartTestCase
 
         $catalog = $this->getCatalog();
 
-        $item = $catalog->getCartItem($product, [
+        $item = $catalog->getCartItem($product, null, [
             'domain' => 'example.com',
         ]);
 
         $item_hosting = $catalog->getCartItem($hosting);
 
-        $item_3 = $catalog->getCartItem($product, [
+        $item_3 = $catalog->getCartItem($product, null, [
             'domain' => 'example-3.com',
         ]);
 

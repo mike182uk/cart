@@ -6,6 +6,8 @@ use Cart\Cart;
 
 class CouponSecondFree implements CouponInterface
 {
+    use CouponApplicableTrait;
+
     public function calculateDiscount(Coupon $coupon, Cart $cart)
     {
         $products = $coupon->getProducts();
@@ -16,6 +18,10 @@ class CouponSecondFree implements CouponInterface
         $eligibleItems = [];
 
         foreach ($cart as $item) {
+            if (!$this->isApplicable($item, $products)) {
+                continue;
+            }
+
             if (array_key_exists($item->getProductId(), $products)) {
                 $found                = true;
                 $hash                 = $this->getHash($item);

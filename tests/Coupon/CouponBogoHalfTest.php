@@ -29,14 +29,14 @@ class CouponBogoHalfTest extends CartTestCase
         $catalog = $this->getCatalog();
         $catalog->addProduct($product);
 
-        $item = $catalog->getCartItem($product, [
+        $item = $catalog->getCartItem($product, null, [
             'domain' => 'example.com',
         ]);
 
-        $item_2 = $catalog->getCartItem($product, [
+        $item_2 = $catalog->getCartItem($product, null, [
             'domain' => 'example-2.com',
         ]);
-        $item_3 = $catalog->getCartItem($product, [
+        $item_3 = $catalog->getCartItem($product, null, [
             'domain' => 'example-3.com',
         ]);
 

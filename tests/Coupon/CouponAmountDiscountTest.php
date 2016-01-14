@@ -28,7 +28,7 @@ class CartCouponAmountDiscountTest extends CartTestCase
 
         $catalog = $this->getCatalog();
 
-        $item = $catalog->getCartItem($product, [
+        $item = $catalog->getCartItem($product, null, [
             'plan' => 'silver',
         ]);
 
