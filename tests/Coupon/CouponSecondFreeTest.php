@@ -28,23 +28,23 @@ class CartCouponSecondFreeTest extends CartTestCase
 
         $catalog = $this->getCatalog();
 
-        $item   = $catalog->getCartItem($product, [
+        $item   = $catalog->getCartItem($product, null, [
             'domain' => 'example.com',
         ]);
-        $item_2 = $catalog->getCartItem($product, [
+        $item_2 = $catalog->getCartItem($product, null, [
             'domain' => 'example-2.com',
         ]);
-        $item_3 = $catalog->getCartItem($product, [
+        $item_3 = $catalog->getCartItem($product, null, [
             'domain' => 'example-3.com',
         ]);
-        $item_4 = $catalog->getCartItem($product, [
+        $item_4 = $catalog->getCartItem($product, null, [
             'domain' => 'example-4.com',
         ]);
 
-        $item_5 = $catalog->getCartItem($product, [
+        $item_5 = $catalog->getCartItem($product, null, [
             'domain' => 'example-5.com',
         ]);
-        $item_6 = $catalog->getCartItem($product, [
+        $item_6 = $catalog->getCartItem($product, null, [
             'domain' => 'example-6.com',
         ]);
 
@@ -97,23 +97,23 @@ class CartCouponSecondFreeTest extends CartTestCase
 
         $catalog = $this->getCatalog();
 
-        $item   = $catalog->getCartItem($product, [
+        $item   = $catalog->getCartItem($product, null, [
             'domain' => 'example.com',
         ]);
-        $item_2 = $catalog->getCartItem($product, [
+        $item_2 = $catalog->getCartItem($product, null, [
             'domain' => 'example-2.com',
         ]);
-        $item_3 = $catalog->getCartItem($product, [
+        $item_3 = $catalog->getCartItem($product, null, [
             'domain' => 'example-3.com',
         ]);
-        $item_4 = $catalog->getCartItem($product2, [
+        $item_4 = $catalog->getCartItem($product2, null, [
             'domain' => 'example-4.com',
         ]);
 
-        $item_5 = $catalog->getCartItem($product2, [
+        $item_5 = $catalog->getCartItem($product2, null, [
             'domain' => 'example-5.com',
         ]);
-        $item_6 = $catalog->getCartItem($product2, [
+        $item_6 = $catalog->getCartItem($product2, null, [
             'domain' => 'example-6.com',
         ]);
 
@@ -154,7 +154,7 @@ class CartCouponSecondFreeTest extends CartTestCase
 
         $catalog = $this->getCatalog();
 
-        $item = $catalog->getCartItem($product, [
+        $item = $catalog->getCartItem($product, null, [
             'domain' => 'example.com',
         ]);
 
@@ -186,13 +186,13 @@ class CartCouponSecondFreeTest extends CartTestCase
 
         $catalog = $this->getCatalog();
 
-        $item   = $catalog->getCartItem($product, [
+        $item   = $catalog->getCartItem($product, null, [
             'domain' => 'example.com',
         ]);
-        $item_2 = $catalog->getCartItem($product, [
+        $item_2 = $catalog->getCartItem($product, null, [
             'domain' => 'example-2.com',
         ]);
-        $item_3 = $catalog->getCartItem($product, [
+        $item_3 = $catalog->getCartItem($product, null, [
             'domain' => 'example-3.com',
         ]);
 

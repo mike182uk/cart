@@ -25,7 +25,7 @@ class CouponOverAmountTest extends CartTestCase
         $product->getBilling()->addTerm($term);
 
         $catalog = $this->getCatalog();
-        $item    = $catalog->getCartItem($product, [
+        $item    = $catalog->getCartItem($product, null, [
             'plan' => 'silver',
         ]);
 
