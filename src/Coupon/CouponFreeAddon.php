@@ -6,6 +6,8 @@ use Cart\Cart;
 
 class CouponFreeAddon implements CouponInterface
 {
+    use CouponApplicableTrait;
+
     public function calculateDiscount(Coupon $coupon, Cart $cart)
     {
         $products = $coupon->getProducts();
@@ -14,6 +16,10 @@ class CouponFreeAddon implements CouponInterface
         $found    = false;
 
         foreach ($cart as $item) {
+            if (!$this->isApplicable($item, $products)) {
+                continue;
+            }
+
             if ($found == false && array_key_exists($item->getProductId(), $products)) {
                 $found = true;
                 break;

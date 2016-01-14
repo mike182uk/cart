@@ -6,20 +6,20 @@ use Cart\Cart;
 
 class CouponFixedPrice implements CouponInterface
 {
+    use CouponApplicableTrait;
+
     public function calculateDiscount(Coupon $coupon, Cart $cart)
     {
         $products = $coupon->getProducts();
-        $config = $coupon->getConfig();
-        $price = $config['price'];
+        $config   = $coupon->getConfig();
+        $price    = $config['price'];
 
         foreach ($cart as &$item) {
-            $period = $item->getTerm()->getPeriod();
-            if (!empty($products)) {
-                $couponProductPeriods = $products[$item->getProductId()];
-                if (!in_array($period, $couponProductPeriods)) {
-                    continue;
-                }
+            if (!$this->isApplicable($item, $products)) {
+                continue;
             }
+
+            $period = $item->getTerm()->getPeriod();
 
             $priceForPeriod = $price * $period;
             if ($priceForPeriod < $item->getPrice()) {
