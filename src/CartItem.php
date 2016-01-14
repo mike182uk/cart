@@ -2,7 +2,7 @@
 
 namespace Cart;
 
-use Cart\Coupon\Coupon;
+use Cart\Catalog\Term;
 
 /**
  * @property string $id
@@ -29,6 +29,7 @@ class CartItem implements \ArrayAccess, Arrayable
     {
         $defaults = array(
             'quantity' => 1,
+            'discount' => 0.00,
             'price' => 0.00,
             'tax' => 0.00,
         );
@@ -40,14 +41,14 @@ class CartItem implements \ArrayAccess, Arrayable
         }
     }
 
-    public function removeCoupon()
+    public function setDiscount($discount)
     {
-        //@todo
+        $this->data['discount'] = (float) $discount;
     }
 
-    public function applyCoupon(Coupon $coupon)
+    public function getDiscount()
     {
-        //@todo
+        return $this->data['discount'];
     }
 
     public function getPrice()
@@ -56,6 +57,11 @@ class CartItem implements \ArrayAccess, Arrayable
             return $this->price;
         }
         return $this->data['product']->getPriceForTerm($this->data['term']);
+    }
+
+    public function getPriceWithDiscount()
+    {
+        return $this->getPrice() - $this->getDiscount();
     }
 
     public function getIcannFee()
@@ -68,29 +74,67 @@ class CartItem implements \ArrayAccess, Arrayable
         return $this->data['product']->getUnit();
     }
 
+    public function getProductId()
+    {
+        return $this->data['product']->getId();
+    }
+
     public function getTitle()
     {
-        return $this->data['product']->title;
+        return $this->data['product']->getTitle();
     }
 
     public function getDescription()
     {
-        return $this->data['product']->description;
+        return $this->data['product']->getDescription();
     }
 
     public function getSave()
     {
-        return $this->data['product']->getSaveForTerm($this->data['term']);
+        $price = $this->getTerm()->getPrice();
+        $old   = $this->getTerm()->hasOld() ? $this->getTerm()->getOld() : $price;
+
+        if ($this->getTerm()->hasTrial()) {
+            $firstYearSave = $old - $this->getTerm()->getTrial();
+            $save          = ($old - $price) * ($this->getTerm()->getPeriod() - 1) + $this->getDiscount() + $firstYearSave;
+
+            return $save;
+        }
+
+        if ($old > $price) {
+            return ($old - $price) * $this->getTerm()->getPeriod() + $this->getDiscount();
+        }
+
+        return $this->getDiscount();
     }
 
     public function getSavePercent()
     {
-        return $this->data['product']->getSavePercentForTerm($this->data['term']);
+        if ($this->getSave() != 0) {
+            $old          = $this->getTerm()->hasOld() ? $this->getTerm()->getOld() : $this->getTerm()->getPrice();
+            $oldForPeriod = $old * $this->getTerm()->getPeriod();
+
+            if ($oldForPeriod == 0) {
+                return 100;
+            }
+
+            return ($this->getSave()) * 100 / $oldForPeriod;
+        }
+
+        return 0;
     }
 
     public function getTerms()
     {
-        return $this->data['product']->billing->terms;
+        return $this->data['product']->getBilling()->getTerms();
+    }
+
+    /**
+     * @return Term
+     */
+    public function getTerm()
+    {
+        return $this->data['term'];
     }
 
     public function getClass()
@@ -106,7 +150,7 @@ class CartItem implements \ArrayAccess, Arrayable
     public function getId()
     {
         // keys to ignore in the hashing process
-        $ignoreKeys = array('quantity');
+        $ignoreKeys = array('quantity', 'discount');
 
         // data to use for the hashing process
         $hashData = $this->data;
@@ -199,7 +243,7 @@ class CartItem implements \ArrayAccess, Arrayable
      */
     public function getTotalPrice()
     {
-        return (float) ($this->getPrice() + $this->tax) * $this->quantity;
+        return (float) ($this->getPrice() + $this->tax) * $this->quantity - $this->getDiscount();
     }
 
     /**

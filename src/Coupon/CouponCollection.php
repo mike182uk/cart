@@ -13,7 +13,24 @@ class CouponCollection implements Arrayable, \IteratorAggregate, \JsonSerializab
     {
         foreach ($array as $p) {
             $coupon = new Coupon();
-            $coupon->code = $p['code'];
+            $coupon->setCode($p['code']);
+            $coupon->setType($p['type']);
+
+            if (isset($p['products']) && !empty($p['products'])) {
+                $coupon->setProducts($p['products']);
+            }
+            if (isset($p['config']) && !empty($p['config'])) {
+                $coupon->setConfig($p['config']);
+            }
+
+            if (isset($p['valid_from']) && !empty($p['valid_from'])) {
+                $coupon->setValidFrom($p['valid_from']);
+            }
+
+            if (isset($p['valid_until']) && !empty($p['valid_until'])) {
+                $coupon->setValidUntil($p['valid_until']);
+            }
+
             $this->addCoupon($coupon);
         }
     }
@@ -23,10 +40,14 @@ class CouponCollection implements Arrayable, \IteratorAggregate, \JsonSerializab
         $this->coupons[] = $coupon;
     }
 
+    /**
+     * @param $code string
+     * @return Coupon
+     */
     public function getCoupon($code)
     {
         foreach ($this->coupons as $item) {
-            if ($code === $item->code) {
+            if ($code === $item->getCode()) {
                 return $item;
             }
         }
@@ -39,7 +60,7 @@ class CouponCollection implements Arrayable, \IteratorAggregate, \JsonSerializab
         return new \ArrayIterator($this->coupons);
     }
 
-    function jsonSerialize()
+    public function jsonSerialize()
     {
         return $this->toArray();
     }

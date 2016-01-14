@@ -2,7 +2,7 @@
 
 use Cart\CartItem;
 
-class CartItemTest extends PHPUnit_Framework_TestCase
+class CartItemTest extends CartTestCase
 {
     public function testIsArrayable()
     {
@@ -40,10 +40,10 @@ class CartItemTest extends PHPUnit_Framework_TestCase
 
     public function testIssetAndUnsetData()
     {
-        $item = new CartItem(array(
-            'name' => 'foo',
-            'weight' => '10kg',
-        ));
+        $item = new CartItem([
+                                 'name'   => 'foo',
+                                 'weight' => '10kg',
+                             ]);
 
         unset($item['name']);
 
@@ -56,12 +56,12 @@ class CartItemTest extends PHPUnit_Framework_TestCase
 
     public function testConstructorSetsData()
     {
-        $itemData = array(
-            'name' => 'foo',
-            'price' => 10.00,
-            'tax' => 1.00,
+        $itemData = [
+            'name'     => 'foo',
+            'price'    => 10.00,
+            'tax'      => 1.00,
             'quantity' => 5,
-        );
+        ];
 
         $item = new CartItem($itemData);
 
@@ -73,9 +73,9 @@ class CartItemTest extends PHPUnit_Framework_TestCase
 
     public function testConstructorSetsDefaults()
     {
-        $itemData = array(
+        $itemData = [
             'name' => 'foo',
-        );
+        ];
 
         $item = new CartItem($itemData);
 
@@ -109,7 +109,7 @@ class CartItemTest extends PHPUnit_Framework_TestCase
         $item = new CartItem();
 
         $item->price = '10.00';
-        $item->tax = '5.00';
+        $item->tax   = '5.00';
 
         $this->assertTrue(is_float($item->price));
         $this->assertTrue(is_float($item->tax));
@@ -126,7 +126,7 @@ class CartItemTest extends PHPUnit_Framework_TestCase
     {
         $item = new CartItem();
 
-        $newId = $item->set('name', 'foo');
+        $newId  = $item->set('name', 'foo');
         $itemId = $item->id;
 
         $this->assertSame($newId, $itemId);
@@ -137,7 +137,7 @@ class CartItemTest extends PHPUnit_Framework_TestCase
         $item = new CartItem();
 
         $item->price = 10.00;
-        $item->tax = 5.00;
+        $item->tax   = 5.00;
 
         $price = $item->getSinglePrice();
 
@@ -150,7 +150,7 @@ class CartItemTest extends PHPUnit_Framework_TestCase
         $item = new CartItem();
 
         $item->price = 10.00;
-        $item->tax = 5.00;
+        $item->tax   = 5.00;
 
         $price = $item->getSinglePriceExcludingTax();
 
@@ -162,8 +162,8 @@ class CartItemTest extends PHPUnit_Framework_TestCase
     {
         $item = new CartItem();
 
-        $item->price = 10.00;
-        $item->tax = 5.00;
+        $item->price    = 10.00;
+        $item->tax      = 5.00;
         $item->quantity = 2;
 
         $price = $item->getTotalPrice();
@@ -176,8 +176,8 @@ class CartItemTest extends PHPUnit_Framework_TestCase
     {
         $item = new CartItem();
 
-        $item->price = 10.00;
-        $item->tax = 5.00;
+        $item->price    = 10.00;
+        $item->tax      = 5.00;
         $item->quantity = 2;
 
         $price = $item->getTotalPriceExcludingTax();
@@ -191,7 +191,7 @@ class CartItemTest extends PHPUnit_Framework_TestCase
         $item = new CartItem();
 
         $item->quantity = 2;
-        $item->tax = 5.00;
+        $item->tax      = 5.00;
 
         $tax = $item->getTotalTax();
 
@@ -204,11 +204,78 @@ class CartItemTest extends PHPUnit_Framework_TestCase
         $item = new CartItem();
 
         $item->quantity = 2;
-        $item->tax = 5.00;
+        $item->tax      = 5.00;
 
         $tax = $item->getSingleTax();
 
         $this->assertEquals(5.00, $tax);
         $this->assertTrue(is_float($tax));
+    }
+
+    public function testGetSaveProvider()
+    {
+        return [
+            //$productID, $discount, $price, $save, $savePercent
+            [
+                22, 4, 8, 6, 60
+            ],
+            [
+                22, 0, 8, 2, 20
+            ],
+            [
+                22, 8, 8, 10, 100
+            ],
+            [
+                25, 0, 40, 10, 20
+            ],
+            [
+                25, 15, 40, 25, 50
+            ],
+            [
+                25, 40, 40, 50, 100
+            ],
+            [
+                26, 0, 5, 5, 50
+            ],
+            [
+                26, 2, 5, 7, 70
+            ],
+            [
+                26, 5, 5, 10, 100
+            ],
+            [
+                27, 0, 37, 13, 26
+            ],
+            [
+                27, 3, 37, 16, 32
+            ],
+            [
+                27, 37, 37, 50, 100
+            ],
+            [
+                21, 0, 0, 49, 100
+            ]
+
+
+        ];
+    }
+
+    /**
+     * @dataProvider testGetSaveProvider
+     */
+    public function testGetSave($productID, $discount, $price, $save, $savePercent)
+    {
+        $catalog = $this->getCatalog();
+        $product = $catalog->getProduct($productID);
+        $item    = $catalog->getCartItem($product);
+
+        $item->setDiscount($discount);
+
+        $this->assertInternalType('array', $item->getTerms());
+        $this->assertEquals($save, $item->getSave(), 'save is bad');
+        $this->assertEquals($price, $item->getPrice());
+        $this->assertEquals($item->getPrice() - $item->getDiscount(), $item->getPriceWithDiscount());
+        $this->assertEquals($price - $discount, $item->getPriceWithDiscount());
+        $this->assertEquals($savePercent, $item->getSavePercent(), 'percent is bad');
     }
 }

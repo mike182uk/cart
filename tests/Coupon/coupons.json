@@ -1,11 +1,158 @@
 [
-    {
-        "code": "BLACK"
+  {
+    "code": "BLACK",
+    "type": "PercentDiscount",
+    "products": {
+      "21": [
+        1,
+        2,
+        3
+      ],
+      "29": [
+        5,
+        6,
+        7
+      ]
     },
-    {
-        "code": "CYBER"
+    "config": {
+      "percent": 50
     },
-    {
-        "code": "HANUKA"
-    }
+    "valid_from": null,
+    "valid_until": null
+  },
+  {
+    "code": "CYBER",
+    "type": "PercentDiscount",
+    "products": {
+      "21": [
+        1,
+        2,
+        3
+      ],
+      "29": [
+        1,
+        2,
+        3
+      ]
+    },
+    "config": {
+      "percent": 25
+    },
+    "valid_from": null,
+    "valid_until": null
+  },
+  {
+    "code": "HANUKA",
+    "type": "PercentDiscount",
+    "products": {
+      "21": [
+        1,
+        2,
+        3
+      ],
+      "29": [
+        1,
+        2,
+        3
+      ]
+    },
+    "config": {
+      "percent": 30
+    },
+    "valid_from": null,
+    "valid_until": null
+  },
+  {
+    "code": "50_PERCENT_DISCOUNT",
+    "type": "PercentDiscount",
+    "products": [],
+    "config": {
+      "percent": 50
+    },
+    "valid_from": null,
+    "valid_until": null
+  },
+  {
+    "code": "MINUS_TWO",
+    "type": "AmountDiscount",
+    "products": [],
+    "config": {
+      "amount": 2
+    },
+    "valid_from": "",
+    "valid_until": ""
+  },
+  {
+    "code": "BUY_ONE_GET_CLONE",
+    "type": "SecondFree",
+    "products": {
+      ".com": [
+        1,
+        6
+      ],
+      "21": [
+        1,
+        2,
+        3
+      ]
+    },
+    "config": {
+    },
+    "valid_from": null,
+    "valid_until": null
+  },
+  {
+    "code": "BUY_ONE_GET_ONE_HALF",
+    "type": "BogoHalf",
+    "products": {
+      ".com": []
+    },
+    "config": {
+      "addon": [
+        ".com"
+      ]
+    },
+    "valid_from": null,
+    "valid_until": null
+  },
+  {
+    "code": "15_PERCENT_OFF_OVER_30",
+    "type": "OverAmount",
+    "products": [],
+    "config": {
+      "over": 30,
+      "percent": 15
+    },
+    "valid_from": null,
+    "valid_until": null
+  },
+  {
+    "code": "BUY_HOSTING_GET_DOMAIN_AND_SSL_FREE",
+    "type": "FreeAddon",
+    "products": {
+      "24": []
+    },
+    "config": {
+      "addon": {
+        ".com": [
+          1
+        ],
+        "21": [
+          1
+        ]
+      }
+    },
+    "valid_from": null,
+    "valid_until": null
+  },
+  {
+    "code": "5_DOLLAR_SALE",
+    "type": "FixedPrice",
+    "products": [],
+    "config": {
+      "price": 5
+    },
+    "valid_from": "",
+    "valid_until": ""
+  }
 ]

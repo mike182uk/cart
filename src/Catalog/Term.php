@@ -6,13 +6,13 @@ use Cart\Arrayable;
 
 class Term implements Arrayable
 {
-    public $period = 1;
+    protected $period = 1;
 
-    public $price = 0.00;
+    protected $price = 0.00;
 
-    public $trial = 0.00;
+    protected $trial = -1;
 
-    public $old = 0.00;
+    protected $old = -1;
 
     /**
      * Term constructor.
@@ -28,6 +28,11 @@ class Term implements Arrayable
         return $this->trial >= 0 && $this->trial != $this->price;
     }
 
+    public function hasOld()
+    {
+        return $this->old > $this->price;
+    }
+
     public function getTotalPrice()
     {
         if ($this->hasTrial()) {
@@ -36,32 +41,39 @@ class Term implements Arrayable
         return $this->price * $this->period;
     }
 
-    public function getSave()
+    public function getPeriod()
     {
-        $price = $this->price;
-        $old = $this->old;
-        if ($this->hasTrial()) {
-            return $this->price - $this->trial;
-        }
-        if ($old > $price) {
-            return ($old - $price) * $this->period;
-        }
-        return 0;
+        return $this->period;
     }
 
-    public function getSavePercent()
+    public function setOld($old)
     {
-        if ($this->hasTrial()) {
-            $price = $this->getTotalPrice();
-            $old = $this->price * $this->period;
-            return 100 - ($price * 100 / $old) ;
-        }
-        if ($this->getSave() != 0) {
-            $price = $this->price;
-            $old = $this->old;
-            return ($old - $price) / $price * 100;
-        }
-        return 0;
+        $this->old = $old;
+    }
+
+    public function getOld()
+    {
+        return $this->old;
+    }
+
+    public function setTrial($trial)
+    {
+        $this->trial = $trial;
+    }
+
+    public function getTrial()
+    {
+        return $this->trial;
+    }
+
+    public function setPrice($price)
+    {
+        $this->price = $price;
+    }
+
+    public function getPrice()
+    {
+        return $this->price;
     }
 
     public function toArray()

@@ -13,6 +13,62 @@
         },
         "__class": "Cart\\Catalog\\ProductSsl"
     },
+    "22": {
+        "id": 22,
+        "title": "SSL Certificate 2",
+        "description": "Secure website with SSL Certificate",
+        "billing": {
+            "1": {
+                "period": 1,
+                "old": 10,
+                "trial": -1,
+                "price": 8
+            }
+        },
+        "__class": "Cart\\Catalog\\ProductSsl"
+    },
+    "25": {
+        "id": 25,
+        "title": "SSL Certificate 3",
+        "description": "Secure website with SSL Certificate",
+        "billing": {
+            "5": {
+                "period": 5,
+                "old": 10,
+                "trial": -1,
+                "price": 8
+            }
+        },
+        "__class": "Cart\\Catalog\\ProductSsl"
+    },
+    "26": {
+        "id": 26,
+        "title": "SSL Certificate 4",
+        "description": "Secure website with SSL Certificate",
+        "billing": {
+            "1": {
+                "period": 1,
+                "old": 10,
+                "trial": 5,
+                "price": 8
+            }
+        },
+        "__class": "Cart\\Catalog\\ProductSsl"
+    },
+    "27": {
+        "id": 27,
+        "title": "SSL Certificate 5",
+        "description": "Secure website with SSL Certificate",
+        "billing": {
+            "5": {
+                "period": 5,
+                "old": 10,
+                "trial": 5,
+                "price": 8
+            }
+        },
+        "__class": "Cart\\Catalog\\ProductSsl"
+    },
     "29": {
         "id": 29,
         "title": "cPanel Hosting",

@@ -22,32 +22,27 @@ class Billing implements Arrayable, \IteratorAggregate
         return $this->terms[$period];
     }
 
+    public function getTerms()
+    {
+        return $this->terms;
+    }
+
     public function addTerm(Term $term)
     {
-        $this->terms[$term->period] = $term;
+        $this->terms[$term->getPeriod()] = $term;
     }
 
     public function getRandomTerm()
     {
         if (empty($this->terms)) {
-            throw new \Exception('Billing terms are note defined');
+            throw new \Exception('Billing terms are not defined');
         }
         return $this->terms[array_rand($this->terms)];
     }
 
     public function getPriceForTerm(Term $term)
     {
-        return $this->getTerm($term->period)->getTotalPrice();
-    }
-
-    public function getSaveForTerm(Term $term)
-    {
-        return $this->getTerm($term->period)->getSave();
-    }
-
-    public function getSavePercentForTerm(Term $term)
-    {
-        return $this->getTerm($term->period)->getSavePercent();
+        return $this->getTerm($term->getPeriod())->getTotalPrice();
     }
 
     public function toArray()

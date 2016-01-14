@@ -13,20 +13,6 @@ class CartTest extends PHPUnit_Framework_TestCase
         m::close();
     }
 
-    public function testCoupon()
-    {
-        $coupon = new Coupon();
-        $coupon->code = 'BLACK';
-
-        $cart = $this->getCart();
-        $item = new CartItem(array(
-            'name' => 'foo',
-        ));
-        $cart->add($item);
-
-        $cart->applyCoupon($coupon);
-    }
-
     public function testIsIterate()
     {
         $cart = $this->getCart();
@@ -37,8 +23,7 @@ class CartTest extends PHPUnit_Framework_TestCase
         // test adding a new item
         $cart->add($item);
 
-        foreach($cart as $item)
-        {
+        foreach ($cart as $item) {
             $this->assertInstanceOf('Cart\\CartItem', $item);
         }
     }
