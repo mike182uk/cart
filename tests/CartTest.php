@@ -3,6 +3,7 @@
 use Cart\Cart;
 use Cart\CartItem;
 use Cart\CartRestoreException;
+use Cart\Coupon\Coupon;
 use Mockery as m;
 
 class CartTest extends PHPUnit_Framework_TestCase
@@ -10,6 +11,21 @@ class CartTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         m::close();
+    }
+
+    public function testIsIterate()
+    {
+        $cart = $this->getCart();
+        $item = new CartItem(array(
+            'name' => 'foo',
+        ));
+
+        // test adding a new item
+        $cart->add($item);
+
+        foreach ($cart as $item) {
+            $this->assertInstanceOf('Cart\\CartItem', $item);
+        }
     }
 
     public function testIsArrayable()
@@ -317,6 +333,7 @@ class CartTest extends PHPUnit_Framework_TestCase
 
         $storeGetReturn = array(
             'id' => 'foo',
+            'coupon' => null,
             'items' => array(
                 $item1->toArray(),
                 $item2->toArray(),

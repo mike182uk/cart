@@ -4,7 +4,7 @@ namespace Cart;
 
 use Cart\Storage\Store;
 
-class Cart implements Arrayable
+class   Cart implements Arrayable, \IteratorAggregate
 {
     /**
      * The cart id.
@@ -12,6 +12,13 @@ class Cart implements Arrayable
      * @var string
      */
     private $id;
+
+    /**
+     * Discount amount from total amount of the cart
+     *
+     * @var float
+     */
+    private $discount = 0.00;
 
     /**
      * Items in the cart.
@@ -37,6 +44,14 @@ class Cart implements Arrayable
     {
         $this->id = $id;
         $this->store = $store;
+    }
+
+    /**
+     * @return CartItem[] An array of CartItem objects
+     */
+    public function getIterator()
+    {
+        return new \ArrayIterator($this->items);
     }
 
     /**
@@ -209,6 +224,20 @@ class Cart implements Arrayable
     }
 
     /**
+     * Get the cart total savings.
+     *
+     * @return float
+     */
+    public function totalSavings()
+    {
+        return (float) array_sum(
+            array_map(function (CartItem $item) {
+                return $item->getSave();
+            }, $this->items)
+        );
+    }
+
+    /**
      * Get the cart total excluding tax.
      *
      * @return float
@@ -218,6 +247,20 @@ class Cart implements Arrayable
         return (float) array_sum(
             array_map(function (CartItem $item) {
                 return $item->getTotalPriceExcludingTax();
+            }, $this->items)
+        );
+    }
+
+    /**
+     * Get the cart total icann fee.
+     *
+     * @return float
+     */
+    public function icann()
+    {
+        return (float) array_sum(
+            array_map(function (CartItem $item) {
+                return $item->getIcannFee();
             }, $this->items)
         );
     }
@@ -275,7 +318,7 @@ class Cart implements Arrayable
         $this->items = array();
 
         foreach ($data['items'] as $itemArr) {
-            $this->items[] = new CartItem($itemArr);
+            $this->items[] = new $itemArr['__class']($itemArr);
         }
     }
 
@@ -338,5 +381,15 @@ class Cart implements Arrayable
                 return $item->toArray();
             }, $this->items),
         );
+    }
+
+    public function setDiscount($discount)
+    {
+        $this->discount = $discount;
+    }
+
+    public function getDiscount()
+    {
+        return $this->discount;
     }
 }
