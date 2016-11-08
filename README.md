@@ -39,7 +39,7 @@ Add this package as a dependency in your `composer.json`.
 To create a new cart instance you must pass an id and a storage implementation to the cart constructor:
 
 ```php
-use Cart;
+use Cart\Cart;
 use Cart\Storage\SessionStore;
 
 $id = 'cart-01';
