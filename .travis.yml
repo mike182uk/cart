@@ -14,15 +14,14 @@ cache:
   directories:
     - vendor
     - $HOME/.composer/cache
-    - bin
 
 before_script:
   - travis_retry composer self-update
   - travis_retry composer install --no-interaction --prefer-source
 
 script:
-  - bin/php-cs-fixer fix --dry-run --verbose
-  - bin/phpunit --coverage-clover=coverage.clover
+  - ./vendor/bin/php-cs-fixer fix --dry-run --verbose
+  - ./vendor/bin/phpunit --coverage-clover=coverage.clover
 
 after_script:
   - travis_retry wget https://scrutinizer-ci.com/ocular.phar
