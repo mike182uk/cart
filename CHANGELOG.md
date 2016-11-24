@@ -1,14 +1,20 @@
-#Changelog
+# Changelog
 
-##2.2.2
+## 2.2.3
+
+- cart can be restored from an empty state without an exception being thrown
+- use default bin location
+- updated dependencies
+
+## 2.2.2
 
 Modernize project
 
-##2.2.1
+## 2.2.1
 
 Miscellaneous refactorings
 
-##2.2.0
+## 2.2.0
 
 - added `Cart\Store\CookieStore`
 - renamed `Cart\SessionStore` to `Cart\Storage\SessionStore`
@@ -18,7 +24,7 @@ Miscellaneous refactorings
 - fixed scrutinizer recommendations
 - misc comments / code cleanup
 
-##2.1.0
+## 2.1.0
 
 - Renamed `Cart\Store\Native\SessionStore` to `Cart\SessionStore`
 - Added more error checking to `Cart::restore`. `Cart\CartRestoreException` is thrown if the cart state cannot be restored due to:
@@ -34,11 +40,11 @@ Miscellaneous refactorings
 - made `Cart\Cart::total` always return total including tax
 - added `Cart\Cart::totalExcludingTax`
 
-##2.0.0
+## 2.0.0
 
 - Rewrite from the ground up
 
-##1.1.0
+## 1.1.0
 
 - Removed `Cart\Proxy`
 - Remove all static methods from `Cart\Manager`
@@ -47,6 +53,6 @@ Miscellaneous refactorings
 - Refactored how storage implementations work - No restrictions on name our placement of storage driver
 - Misc refactoring + cleaning up
 
-##1.0
+## 1.0
 
 First release
