@@ -339,6 +339,19 @@ class CartTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($cart->has($item2->id));
     }
 
+    public function testEmptyRestore()
+    {
+        $store = m::mock('Cart\Storage\Store');
+        $store
+            ->shouldReceive('get')
+            ->times(1)
+            ->andReturn('');
+
+        $cart = new Cart('foo', $store);
+
+        $cart->restore(); // should not throw exception
+    }
+
     public function testRestoreExceptions()
     {
         $exceptionCounter = 0;
@@ -359,11 +372,11 @@ class CartTest extends PHPUnit_Framework_TestCase
 
         $cart = new Cart('foo', $store);
 
-        for ($i = 1; $i <= 6; $i++) {
+        for ($i = 1; $i <= 6; ++$i) {
             try {
                 $cart->restore();
             } catch (CartRestoreException $e) {
-                $exceptionCounter++;
+                ++$exceptionCounter;
             }
         }
 

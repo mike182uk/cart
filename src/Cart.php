@@ -265,6 +265,10 @@ class Cart implements Arrayable
     {
         $state = $this->store->get($this->id);
 
+        if ($state == '') {
+            return;
+        }
+
         $data = @unserialize($state); // suppress unserializable error
 
         $this->restoreCheckType($data);
