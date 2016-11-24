@@ -1,16 +1,20 @@
-#Contributing
+# Contributing
 
-Contributions are **welcome** and will be fully **credited**.
+Contributions are **welcome!**
 
 Contributions can be made via a Pull Request on [Github](https://github.com/mike182uk/cart).
 
-##Pull Requests
+## Reporting an Issue
 
-- **[PSR-2 Coding Standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)** - [PHP CS Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer) is included as a dev dependency. Make sure you run `bin/php-cs-fixer fix` before committing your code.
+Please report issues via the issue tracker on [Github](https://github.com/mike182uk/cart). For security-related issues, please email the maintainer directly.
+
+## Pull Requests
+
+- **[PSR-2 Coding Standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)** - [PHP CS Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer). Make sure you run `./vendor/bin/php-cs-fixer fix` before committing your code.
 
 - **Add tests where appropriate** - [PHPUnit](https://phpunit.de/)
 
-- **Document any change in behavior** - Make sure the README and any other relevant documentation are kept up-to-date.
+- **Document any change in behaviour** - Make sure the README and any other relevant documentation are kept up-to-date.
 
 - **Create topic branches** - i.e `feature/some-awesome-feature`.
 
@@ -19,8 +23,10 @@ Contributions can be made via a Pull Request on [Github](https://github.com/mike
 - **Send coherent history** - Make sure each individual commit in your pull request is meaningful. If you had to make multiple intermediate commits while developing, please squash them before submitting.
 
 
-##Running Tests
+## Running Tests
+
+You can run all of the tests in the project using:
 
 ```bash
-bin/phpunit
+./vendor/bin/phpunit
 ```
