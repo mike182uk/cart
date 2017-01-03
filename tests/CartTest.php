@@ -43,9 +43,9 @@ class CartTest extends PHPUnit_Framework_TestCase
     public function testAddItem()
     {
         $cart = $this->getCart();
-        $item = new CartItem(array(
+        $item = new CartItem([
             'name' => 'foo',
-        ));
+        ]);
 
         // test adding a new item
         $cart->add($item);
@@ -64,9 +64,9 @@ class CartTest extends PHPUnit_Framework_TestCase
     public function testHasItem()
     {
         $cart = $this->getCart();
-        $item = new CartItem(array(
+        $item = new CartItem([
             'name' => 'foo',
-        ));
+        ]);
         $itemId = $item->id;
 
         $cart->add($item);
@@ -78,9 +78,9 @@ class CartTest extends PHPUnit_Framework_TestCase
     public function testRemoveItem()
     {
         $cart = $this->getCart();
-        $item = new CartItem(array(
+        $item = new CartItem([
             'name' => 'foo',
-        ));
+        ]);
         $itemId = $item->id;
 
         $cart->add($item);
@@ -93,9 +93,9 @@ class CartTest extends PHPUnit_Framework_TestCase
     public function testGetItem()
     {
         $cart = $this->getCart();
-        $item = new CartItem(array(
+        $item = new CartItem([
             'name' => 'foo',
-        ));
+        ]);
         $itemId = $item->id;
 
         $cart->add($item);
@@ -106,9 +106,9 @@ class CartTest extends PHPUnit_Framework_TestCase
     public function testUpdateItem()
     {
         $cart = $this->getCart();
-        $item = new CartItem(array(
+        $item = new CartItem([
             'name' => 'foo',
-        ));
+        ]);
         $itemId = $item->id;
 
         $cart->add($item);
@@ -132,15 +132,15 @@ class CartTest extends PHPUnit_Framework_TestCase
     {
         $cart = $this->getCart();
 
-        $item1 = new CartItem(array(
+        $item1 = new CartItem([
             'name' => 'foo',
             'quantity' => 2,
-        ));
+        ]);
 
-        $item2 = new CartItem(array(
+        $item2 = new CartItem([
             'name' => 'bar',
             'quantity' => 1,
-        ));
+        ]);
 
         $cart->add($item1);
         $cart->add($item2);
@@ -152,15 +152,15 @@ class CartTest extends PHPUnit_Framework_TestCase
     {
         $cart = $this->getCart();
 
-        $item1 = new CartItem(array(
+        $item1 = new CartItem([
             'name' => 'foo',
             'quantity' => 2,
-        ));
+        ]);
 
-        $item2 = new CartItem(array(
+        $item2 = new CartItem([
             'name' => 'bar',
             'quantity' => 1,
-        ));
+        ]);
 
         $cart->add($item1);
         $cart->add($item2);
@@ -172,13 +172,13 @@ class CartTest extends PHPUnit_Framework_TestCase
     {
         $cart = $this->getCart();
 
-        $item1 = new CartItem(array(
+        $item1 = new CartItem([
             'name' => 'foo',
-        ));
+        ]);
 
-        $item2 = new CartItem(array(
+        $item2 = new CartItem([
             'name' => 'bar',
-        ));
+        ]);
 
         $cart->add($item1);
         $cart->add($item2);
@@ -196,13 +196,13 @@ class CartTest extends PHPUnit_Framework_TestCase
 
         $cart = new Cart('foo', $store);
 
-        $item1 = new CartItem(array(
+        $item1 = new CartItem([
             'name' => 'foo',
-        ));
+        ]);
 
-        $item2 = new CartItem(array(
+        $item2 = new CartItem([
             'name' => 'bar',
-        ));
+        ]);
 
         $cart->add($item1);
         $cart->add($item2);
@@ -218,19 +218,19 @@ class CartTest extends PHPUnit_Framework_TestCase
     {
         $cart = $this->getCart();
 
-        $item1 = new CartItem(array(
+        $item1 = new CartItem([
             'name' => 'foo',
             'price' => 10.00,
             'tax' => 5.00,
             'quantity' => 2,
-        ));
+        ]);
 
-        $item2 = new CartItem(array(
+        $item2 = new CartItem([
             'name' => 'bar',
             'price' => 5.00,
             'tax' => 1.00,
             'quantity' => 2,
-        ));
+        ]);
 
         $cart->add($item1);
         $cart->add($item2);
@@ -245,19 +245,19 @@ class CartTest extends PHPUnit_Framework_TestCase
     {
         $cart = $this->getCart();
 
-        $item1 = new CartItem(array(
+        $item1 = new CartItem([
             'name' => 'foo',
             'price' => 10.00,
             'tax' => 5.00,
             'quantity' => 2,
-        ));
+        ]);
 
-        $item2 = new CartItem(array(
+        $item2 = new CartItem([
             'name' => 'bar',
             'price' => 5.00,
             'tax' => 1.00,
             'quantity' => 2,
-        ));
+        ]);
 
         $cart->add($item1);
         $cart->add($item2);
@@ -272,19 +272,19 @@ class CartTest extends PHPUnit_Framework_TestCase
     {
         $cart = $this->getCart();
 
-        $item1 = new CartItem(array(
+        $item1 = new CartItem([
             'name' => 'foo',
             'price' => 10.00,
             'tax' => 5.00,
             'quantity' => 2,
-        ));
+        ]);
 
-        $item2 = new CartItem(array(
+        $item2 = new CartItem([
             'name' => 'bar',
             'price' => 5.00,
             'tax' => 1.00,
             'quantity' => 2,
-        ));
+        ]);
 
         $cart->add($item1);
         $cart->add($item2);
@@ -307,21 +307,21 @@ class CartTest extends PHPUnit_Framework_TestCase
 
     public function testRestore()
     {
-        $item1 = new CartItem(array(
+        $item1 = new CartItem([
             'name' => 'foo',
-        ));
+        ]);
 
-        $item2 = new CartItem(array(
+        $item2 = new CartItem([
             'name' => 'bar',
-        ));
+        ]);
 
-        $storeGetReturn = array(
+        $storeGetReturn = [
             'id' => 'foo',
-            'items' => array(
+            'items' => [
                 $item1->toArray(),
                 $item2->toArray(),
-            ),
-        );
+            ],
+        ];
 
         $store = m::mock('Cart\Storage\Store');
         $store
@@ -364,10 +364,10 @@ class CartTest extends PHPUnit_Framework_TestCase
             ->andReturn(
                 '!foo!', // unserializable
                 serialize('bar'), // not array
-                serialize(array('id' => 'foo')), // missing items
-                serialize(array('items' => array())), // missing id
-                serialize(array('id' => array(), 'items' => array())), // invalid id
-                serialize(array('items' => 'foo', 'id' => 'foo')) // invalid items
+                serialize(['id' => 'foo']), // missing items
+                serialize(['items' => []]), // missing id
+                serialize(['id' => [], 'items' => []]), // invalid id
+                serialize(['items' => 'foo', 'id' => 'foo']) // invalid items
             );
 
         $cart = new Cart('foo', $store);

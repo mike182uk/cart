@@ -9,7 +9,7 @@ class CookieStore implements Store
      */
     public function get($cartId)
     {
-        return isset($_COOKIE[$cartId]) ? $this->decode($_COOKIE[$cartId]) : serialize(array());
+        return isset($_COOKIE[$cartId]) ? $this->decode($_COOKIE[$cartId]) : serialize([]);
     }
 
     /**

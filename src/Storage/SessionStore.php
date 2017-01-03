@@ -9,7 +9,7 @@ class SessionStore implements Store
      */
     public function get($cartId)
     {
-        return isset($_SESSION[$cartId]) ? $_SESSION[$cartId] : serialize(array());
+        return isset($_SESSION[$cartId]) ? $_SESSION[$cartId] : serialize([]);
     }
 
     /**

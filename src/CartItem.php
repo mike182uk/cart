@@ -22,13 +22,13 @@ class CartItem implements \ArrayAccess, Arrayable
      *
      * @param array $data
      */
-    public function __construct(array $data = array())
+    public function __construct(array $data = [])
     {
-        $defaults = array(
+        $defaults = [
             'quantity' => 1,
             'price' => 0.00,
             'tax' => 0.00,
-        );
+        ];
 
         $data = array_merge($defaults, $data);
 
@@ -45,7 +45,7 @@ class CartItem implements \ArrayAccess, Arrayable
     public function getId()
     {
         // keys to ignore in the hashing process
-        $ignoreKeys = array('quantity');
+        $ignoreKeys = ['quantity'];
 
         // data to use for the hashing process
         $hashData = $this->data;
@@ -198,10 +198,10 @@ class CartItem implements \ArrayAccess, Arrayable
      */
     public function toArray()
     {
-        return array(
+        return [
             'id' => $this->getId(),
             'data' => $this->data,
-        );
+        ];
     }
 
     /**

@@ -18,7 +18,7 @@ class Cart implements Arrayable
      *
      * @var CartItem[]
      */
-    private $items = array();
+    private $items = [];
 
     /**
      * Cart storage implementation.
@@ -241,7 +241,7 @@ class Cart implements Arrayable
      */
     public function clear()
     {
-        $this->items = array();
+        $this->items = [];
 
         $this->store->flush($this->id);
     }
@@ -276,7 +276,7 @@ class Cart implements Arrayable
         $this->restoreCheckContentsType($data);
 
         $this->id = $data['id'];
-        $this->items = array();
+        $this->items = [];
 
         foreach ($data['items'] as $itemArr) {
             $this->items[] = new CartItem($itemArr);
@@ -336,11 +336,11 @@ class Cart implements Arrayable
      */
     public function toArray()
     {
-        return array(
+        return [
             'id' => $this->id,
             'items' => array_map(function (CartItem $item) {
                 return $item->toArray();
             }, $this->items),
-        );
+        ];
     }
 }

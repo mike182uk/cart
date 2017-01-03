@@ -40,10 +40,10 @@ class CartItemTest extends PHPUnit_Framework_TestCase
 
     public function testIssetAndUnsetData()
     {
-        $item = new CartItem(array(
+        $item = new CartItem([
             'name' => 'foo',
             'weight' => '10kg',
-        ));
+        ]);
 
         unset($item['name']);
 
@@ -56,12 +56,12 @@ class CartItemTest extends PHPUnit_Framework_TestCase
 
     public function testConstructorSetsData()
     {
-        $itemData = array(
+        $itemData = [
             'name' => 'foo',
             'price' => 10.00,
             'tax' => 1.00,
             'quantity' => 5,
-        );
+        ];
 
         $item = new CartItem($itemData);
 
@@ -73,9 +73,9 @@ class CartItemTest extends PHPUnit_Framework_TestCase
 
     public function testConstructorSetsDefaults()
     {
-        $itemData = array(
+        $itemData = [
             'name' => 'foo',
-        );
+        ];
 
         $item = new CartItem($itemData);
 
