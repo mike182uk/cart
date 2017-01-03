@@ -1,7 +1,9 @@
 # Cart
+
+[![Packagist](https://img.shields.io/packagist/v/mike182uk/cart.svg?style=flat-square)](https://packagist.org/packages/mike182uk/cart)
 [![Build Status](https://img.shields.io/travis/mike182uk/cart.svg?style=flat-square)](http://travis-ci.org/mike182uk/cart)
 [![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/mike182uk/cart.svg?style=flat-square)](https://scrutinizer-ci.com/g/mike182uk/cart/)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/1d82048a-1390-42d5-8605-606541e81c98/mini.png)](https://insight.sensiolabs.com/projects/1d82048a-1390-42d5-8605-606541e81c98)
+[![SensioLabs Insight](https://img.shields.io/sensiolabs/i/1d82048a-1390-42d5-8605-606541e81c98.svg?style=flat-square)](https://insight.sensiolabs.com/projects/1d82048a-1390-42d5-8605-606541e81c98)
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/mike182uk/cart.svg?style=flat-square)](https://scrutinizer-ci.com/g/mike182uk/cart/)
 [![Total Downloads](https://img.shields.io/packagist/dt/mike182uk/cart.svg?style=flat-square)](https://packagist.org/packages/mike182uk/cart)
 [![License](https://img.shields.io/github/license/mike182uk/cart.svg?style=flat-square)](https://packagist.org/packages/mike182uk/cart)
@@ -10,20 +12,12 @@ A flexible and modern shopping cart package.
 
 ## Prerequisites
 
-- PHP >=5.3.0
+- PHP >=5.6.0
 
 ## Installation
 
-### Composer
-
-Add this package as a dependency in your `composer.json`.
-
-```json
-{
-    "require": {
-        "mike182uk/cart": "~2.0"
-    }
-}
+```bash
+composer require mike182uk/cart
 ```
 
 ## Usage
@@ -80,7 +74,7 @@ $cart->remove('e4df90d236966195b49b0f01f5ce360a356bc76b');
 
 #### Update an item in the cart
 
-To update a propery of an item in the cart use the `update` method. You will need to pass the cart item id, the name of the property to update and the new value. This method will return the item id (in case it has changed due to the update).
+To update a property of an item in the cart use the `update` method. You will need to pass the cart item id, the name of the property to update and the new value. This method will return the item id (in case it has changed due to the update).
 
 ```php
 $newId = $cart->update('e4df90d236966195b49b0f01f5ce360a356bc76b', 'price', 959.99);
@@ -209,12 +203,12 @@ $cartData = $cart->toArray();
 Array will be structured like:
 
 ```php
-array(
+[
     'id' => 'cart-01', // cart id
-    'items' => array(
+    'items' => [
         // cart items as array
-    )
-)
+    ]
+]
 ```
 
 ##### getId
@@ -246,10 +240,10 @@ $item->name = 'Macbook Pro';
 $item->sku = 'MBP8GB';
 $item->price = 1200;
 $item->tax = 200;
-$item->options = array(
+$item->options = [
     'ram' => '8 GB',
     'ssd' => '256 GB'
-);
+];
 ```
 
 `Cart\CartItem` implements `ArrayAccess` so properties can be assigned to the cart item as if accessing an array:
@@ -261,25 +255,25 @@ $item['name'] = 'Macbook Pro';
 $item['sku'] = 'MBP8GB';
 $item['price'] = 1200;
 $item['tax'] = 200;
-$item['options'] = array(
+$item['options'] = [
     'ram' => '8 GB',
     'ssd' => '256 GB'
-);
+];
 ```
 
 An array of data can also be passed to the cart item constructor to set the cart item properties:
 
 ```php
-$itemData = array(
+$itemData = [
     'name' => 'Macbook Pro';
     'sku' => 'MBP8GB';
     'price' => 1200;
     'tax' => 200;
-    'options' => array(
+    'options' => [
         'ram' => '8 GB',
         'ssd' => '256 GB'
-    )
-);
+    ]
+];
 
 $item = new CartItem($itemData);
 ```
@@ -419,16 +413,16 @@ $itemArr = $item->toArray();
 Array will be structured like:
 
 ```php
-array(
+[
     'id' => 'e4df90d236966195b49b0f01f5ce360a356bc76b', // cart item unique id
-    'data' => array(
+    'data' => [
         'name' => 'Macbook Pro',
         'sku' => 'MBP8GB',
         'price' => 1200,
 
         // ... other cart item properties
-    )
-)
+    ]
+]
 ```
 
 ### <a id="cart-store"></a>Cart Storage Implementation
@@ -455,7 +449,7 @@ class SessionStore implements Store
      */
     public function get($cartId)
     {
-        return isset($_SESSION[$cartId]) ? $_SESSION[$cartId] : serialize(array());
+        return isset($_SESSION[$cartId]) ? $_SESSION[$cartId] : serialize([]);
     }
 
     /**
