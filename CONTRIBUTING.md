@@ -10,7 +10,7 @@ Please report issues via the issue tracker on [Github](https://github.com/mike18
 
 ## Pull Requests
 
-- **[PSR-2 Coding Standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)** - [PHP CS Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer). Make sure you run `./vendor/bin/php-cs-fixer fix` before committing your code.
+- **[PSR-2 Coding Standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)** - [PHP CS Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer). Make sure you run `composer fix` before committing your code.
 
 - **Add tests where appropriate** - [PHPUnit](https://phpunit.de/)
 
@@ -22,11 +22,10 @@ Please report issues via the issue tracker on [Github](https://github.com/mike18
 
 - **Send coherent history** - Make sure each individual commit in your pull request is meaningful. If you had to make multiple intermediate commits while developing, please squash them before submitting.
 
-
 ## Running Tests
 
 You can run all of the tests in the project using:
 
 ```bash
-./vendor/bin/phpunit
+composer test
 ```

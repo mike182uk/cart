@@ -116,7 +116,7 @@ class CartTest extends PHPUnit_Framework_TestCase
 
         // test Cart::update returns items new id
         $cartItems = PHPUnit_Framework_Assert::readAttribute($cart, 'items');
-        $this->assertSame($newId,  $cartItems[0]->id);
+        $this->assertSame($newId, $cartItems[0]->id);
 
         // test updating a property of the item
         $updatedItem = $cart->get($newId);

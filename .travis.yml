@@ -1,11 +1,9 @@
 language: php
 
 php:
-  - 5.3
-  - 5.4
-  - 5.5
   - 5.6
   - 7.0
+  - 7.1
   - hhvm
 
 sudo: false
@@ -16,15 +14,15 @@ cache:
     - $HOME/.composer/cache
 
 before_script:
-  - travis_retry composer self-update
-  - travis_retry composer install --no-interaction --prefer-source
+  - composer self-update
+  - composer install --no-interaction
 
 script:
-  - ./vendor/bin/php-cs-fixer fix --dry-run --verbose
-  - ./vendor/bin/phpunit --coverage-clover=coverage.clover
+  - composer lint
+  - composer test-coverage
 
 after_script:
-  - travis_retry wget https://scrutinizer-ci.com/ocular.phar
+  - wget https://scrutinizer-ci.com/ocular.phar
   - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
 
 matrix:
