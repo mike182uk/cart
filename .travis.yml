@@ -18,8 +18,8 @@ before_script:
   - composer install --no-interaction
 
 script:
-  - composer lint
-  - composer test-coverage
+  - composer run-script lint
+  - composer run-script test-with-coverage
 
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar

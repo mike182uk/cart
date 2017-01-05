@@ -1,6 +1,7 @@
 {
   "name": "mike182uk/cart",
   "description" : "A flexible and modern shopping cart package",
+  "type": "library",
   "license": "MIT",
   "authors": [
     {
@@ -22,9 +23,9 @@
     }
   },
   "scripts": {
-    "test": "./vendor/bin/phpunit",
-    "test-coverage": "./vendor/bin/phpunit --coverage-clover coverage.clover",
-    "lint": "./vendor/bin/php-cs-fixer fix --dry-run --verbose",
-    "fix": "./vendor/bin/php-cs-fixer fix"
+    "test": "phpunit --verbose --colors=always",
+    "test-with-coverage": "phpunit --verbose --colors=always --coverage-clover coverage.clover",
+    "lint": "php-cs-fixer fix --dry-run --verbose --ansi",
+    "fix": "php-cs-fixer fix --ansi"
   }
 }
