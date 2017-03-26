@@ -171,6 +171,24 @@ class Cart implements Arrayable
     }
 
     /**
+     * Find multiple items with key & value pair
+     *
+     * @param string $key
+     * @param mixed $value
+     *
+     * @return CartItem[]
+     */
+    public function findItems($key, $value){
+        $return_items = array();
+        foreach($this->items as $item){
+            if($value === $item[$key])
+                $return_items[] = $item;
+        }
+
+        return $return_items;
+    }
+
+    /**
      * Get the total number of unique items in the cart.
      *
      * @return int
