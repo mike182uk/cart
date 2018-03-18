@@ -2,9 +2,6 @@
 
 namespace Cart;
 
-use Cart\Cart;
-use Cart\CartItem;
-use Cart\CartRestoreException;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Assert;

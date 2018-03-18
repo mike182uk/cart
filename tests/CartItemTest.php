@@ -2,7 +2,6 @@
 
 namespace Cart;
 
-use Cart\CartItem;
 use PHPUnit\Framework\TestCase;
 
 class CartItemTest extends TestCase
