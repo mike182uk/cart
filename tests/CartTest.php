@@ -1,11 +1,15 @@
 <?php
 
+namespace Cart;
+
 use Cart\Cart;
 use Cart\CartItem;
 use Cart\CartRestoreException;
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Assert;
 
-class CartTest extends PHPUnit_Framework_TestCase
+class CartTest extends TestCase
 {
     public function tearDown()
     {
@@ -37,7 +41,7 @@ class CartTest extends PHPUnit_Framework_TestCase
 
         $store = $cart->getStore();
 
-        $this->assertSame($store, PHPUnit_Framework_Assert::readAttribute($cart, 'store'));
+        $this->assertSame($store, Assert::readAttribute($cart, 'store'));
     }
 
     public function testAddItem()
@@ -49,14 +53,14 @@ class CartTest extends PHPUnit_Framework_TestCase
 
         // test adding a new item
         $cart->add($item);
-        $cartItems = PHPUnit_Framework_Assert::readAttribute($cart, 'items');
+        $cartItems = Assert::readAttribute($cart, 'items');
 
         $this->assertSame($cartItems[0], $item);
 
         // test adding the same item again just increases the quantity of the
         // existing item
         $cart->add($item);
-        $cartItems = PHPUnit_Framework_Assert::readAttribute($cart, 'items');
+        $cartItems = Assert::readAttribute($cart, 'items');
 
         $this->assertSame($cartItems[0]->quantity, 2);
     }
@@ -115,7 +119,7 @@ class CartTest extends PHPUnit_Framework_TestCase
         $newId = $cart->update($itemId, 'name', 'bar');
 
         // test Cart::update returns items new id
-        $cartItems = PHPUnit_Framework_Assert::readAttribute($cart, 'items');
+        $cartItems = Assert::readAttribute($cart, 'items');
         $this->assertSame($newId, $cartItems[0]->id);
 
         // test updating a property of the item
@@ -124,7 +128,7 @@ class CartTest extends PHPUnit_Framework_TestCase
         $this->assertSame($updatedItem->name, 'bar');
 
         // test trying to update a non existent item
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
         $cart->update('foo', 'name', 'bar');
     }
 
@@ -186,7 +190,7 @@ class CartTest extends PHPUnit_Framework_TestCase
         $cartItems = $cart->all();
 
         $this->assertTrue(is_array($cartItems));
-        $this->assertSame($cartItems, PHPUnit_Framework_Assert::readAttribute($cart, 'items'));
+        $this->assertSame($cartItems, Assert::readAttribute($cart, 'items'));
     }
 
     public function testClear()
