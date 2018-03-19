@@ -1,8 +1,10 @@
 <?php
 
-use Cart\CartItem;
+namespace Cart;
 
-class CartItemTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class CartItemTest extends TestCase
 {
     public function testIsArrayable()
     {
@@ -88,7 +90,7 @@ class CartItemTest extends PHPUnit_Framework_TestCase
     {
         $item = new CartItem();
 
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
 
         $item->quantity = 'one';
     }
@@ -97,10 +99,10 @@ class CartItemTest extends PHPUnit_Framework_TestCase
     {
         $item = new CartItem();
 
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
         $item->price = 'ten';
 
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
         $item->tax = 'ten';
     }
 

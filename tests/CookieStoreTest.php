@@ -1,11 +1,14 @@
 <?php
 
+namespace Cart;
+
 use Cart\Storage\CookieStore;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @TODO: write testings for put, get and flush
  */
-class CookieStoreTest extends PHPUnit_Framework_TestCase
+class CookieStoreTest extends TestCase
 {
     public function testEncodeAndDecode()
     {

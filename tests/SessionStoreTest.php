@@ -1,8 +1,11 @@
 <?php
 
-use Cart\Storage\SessionStore;
+namespace Cart;
 
-class SessionStoreTest extends PHPUnit_Framework_TestCase
+use Cart\Storage\SessionStore;
+use PHPUnit\Framework\TestCase;
+
+class SessionStoreTest extends TestCase
 {
     public function testGet()
     {
